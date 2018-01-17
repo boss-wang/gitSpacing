@@ -1,0 +1,98 @@
+$ git push origin master			//把本地master分支的最新修改推送至GitHub
+master分支是主分支，因此要时刻与远程同步；
+
+dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+
+bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
+
+feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
+
+
+①安装git
+	
+	1.自报家门
+		$ git config --global user.name "Your Name"
+		$ git config --global user.email "email@example.com"
+
+	2.创建一个版本库
+		$ mkdir git-dir	//创建目录
+		$ cd git-dir	//进入目录
+		$ pwd			//获得目录绝对路径
+	
+	3.通过git init命令把这个目录变成Git可以管理的仓库
+		$ git init
+	
+	
+②把文件添加到版本库
+
+	1.将文件放到git-dir目录下，用命令git add告诉Git，把文件 添加 到仓库
+		$ git add readme.txt
+		
+	2.用命令git commit告诉Git，把文件 提交 到仓库
+		$ git commit -m "wrote a readme file"
+				
+				/*	-m 后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。
+					commit可以一次提交很多文件，所以你可以多次add不同的文件 如：
+						$ git add file1.txt
+						$ git add file2.txt file3.txt
+						$ git commit -m "add 3 files."
+				*/
+				
+③命令
+	
+	$ git status				//查看工作区的状态
+	$ git diff readme.txt 		//顾名思义就是查看difference，如果git status告诉你有文件被修改过，用git diff可以查看修改内容
+	$ git log [--pretty=oneline]	//查看提交历史
+	$ git reflog					//查看命令历史
+	$ git reset --hard HEAD^		//重设文件版本，上一个版本就是HEAD^，上上一个版本是HEAD^^,100个版本写成HEAD~100
+	$ git reset --hard 3628164		//根据commit_id重设文件版本
+	$ git checkout -- test.txt		//用版本库里的版本替换工作区的版本
+	
+	$ ssh-keygen -t rsa -C "youremail@example.com"	//创建SSH Key
+
+	$ git clone git@github.com:boss-wang/gitSpacing.git		//克隆一个本地库
+	
+	----------分支------------
+	$ git branch			//查看当前分支
+	$ git branch dev		//创建dev分支
+	$ git checkout dev		//切换分支
+	$ git checkout -b dev	//创建+切换分支	
+	$ git merge dev			//合并dev分支到当前分支
+	$ git merge --no-ff -m "merge with no-ff" dev	//--no-ff参数，表示禁用Fast forward
+	$ git branch -d dev		//删除dev分支
+	$ git branch -D dev		//强行删除一个没有被合并过的分支	
+	$ git log --graph		//查看分支合并图
+	
+	$ git stash				//把当前工作现场“储藏”起来
+	$ git stash list		//查看“储藏”的工作现场
+	$ git stash pop			//恢复工作并删除stash内容
+	
+	
+	
+		查看远程库信息，使用git remote -v；
+
+		多人协作的工作模式通常是这样：
+
+		首先，可以试图用git push origin branch-name推送自己的修改；
+
+		如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+		如果合并有冲突，则解决冲突，并在本地提交；
+
+		没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+		如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+	
+	
+	
+命令git push origin <tagname>可以推送一个本地标签；
+
+命令git push origin --tags可以推送全部未推送过的本地标签；
+
+命令git tag -d <tagname>可以删除一个本地标签；
+
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+	
+	
+	
+	
