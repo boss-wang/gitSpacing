@@ -5,22 +5,23 @@ public class Order{
 private int orderId;
 private int clientId;
 private String orderNo;
-private String systemNo;
-private String mawbNo;
-private String hawbNo;
-private String flightNo;
-private String departDate;
-private String arriveDate;
-private String destination;
-private String cargoPiece;
-private Double cargoWeight;
-private Double chargeWeight;
-private Double cargoVolume;
-private int customsNo;
-private int customsStatus;
-private int orderStatus;
-private String updateTime;
-private String remarks;
+private String systemNo;//系统号
+private String mawbNo;//主单号
+private String hawbNo;//分单号
+private String flightNo;//航班号
+private String departDate;//航班日期
+private String arriveDate;//到港日期
+private String destination;//目的港
+private String cargoPiece;//件数
+private Double cargoWeight;//货物重量
+private Double chargeWeight;//计费重量
+private Double cargoVolume;//体积
+private int customsNo;//报关号
+private int customsStatus;//报关单状态（0:未退，1:已退2:已寄）默认为0
+private int orderStatus;//订单状态(0:未操作1:已报关2:已起飞3：已到港)  默认为0
+private String updateTime;//最近修改时间默认为now
+
+private String remarks;//备注
 private int userId;
 
 public int getOrderId(){
