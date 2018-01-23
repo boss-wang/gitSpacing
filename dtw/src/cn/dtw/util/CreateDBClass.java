@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class CreateDBClass {
 	public static void main(String[] args) {
-		String user="root";			//数据库用户名
+		String user="root";			//数据库用户名 
 		String password="1234";		//数据库密码
 		String dbName="dtwmanage";		//数据库名称
 		String packageName="entity";	//准备创建的包名（可修改）
