@@ -1,4 +1,4 @@
-package cn.dtw.dao.Impl;
+package cn.dtw.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
