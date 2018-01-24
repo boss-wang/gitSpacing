@@ -18,11 +18,11 @@ $("#submit").click(function(){
 	}else{
 		$.ajax({
 			type:"post",
-			url:"",
-			data:"",
+			url:"login",
+			data:"userName="+userName+"&password="+password,
 			async:true,
 			success:function(res){
-				
+				alert(res)
 			}
 		});
 	}

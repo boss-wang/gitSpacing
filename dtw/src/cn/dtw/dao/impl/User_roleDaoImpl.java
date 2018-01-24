@@ -14,7 +14,7 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 
 	@Override
 	public boolean addUserRoleById(User user, Role role) {
-		String sql = "insert into user_role (userId,roleId)values(?,?)";
+		String sql = "insert into user_role (userId,roleId) values(?,?)";
 		int res= super.executeUpdate(sql, user.getUserId(),role.getRoleId());
 		if(res>0) {
 			return true;

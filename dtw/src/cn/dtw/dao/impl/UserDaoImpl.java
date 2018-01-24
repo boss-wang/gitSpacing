@@ -20,10 +20,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		try {
 			while(res.next()) {
 				User user = new User();
-				user.setUserId(res.getInt("userId"));
 				user.setUserAccount(res.getString("userAccount"));
+				user.setUserPwd(res.getString("userPwd"));
 				user.setUserName(res.getString("userName"));
 				user.setUserSex(res.getString("userSex"));
+				user.setUserId(res.getInt("userId"));
 				list.add(user);
 			}
 			return list;
@@ -35,15 +36,18 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public User getUserById(User user) {
-		String sql = "select userAccount,userName,userSex from user where userId=? ";
+		String sql = "select * from user where userId=? ";
 	 ResultSet res =super.executeQuery(sql, user.getUserId());
 	 try {
-		res.next();
-		User user2 =  new User();
-		user2.setUserName(res.getString("userName"));
-		user2.setUserSex(res.getString("userSex"));
-		user2.setUserAccount(res.getString("userAccount"));
-		return user2;
+		while(res.next()) {
+			User user2 =  new User();
+			user2.setUserAccount(res.getString("userAccount"));
+			user2.setUserPwd(res.getString("userPwd"));
+			user2.setUserName(res.getString("userName"));
+			user2.setUserSex(res.getString("userSex"));
+			user2.setUserId(res.getInt("userId"));
+			return user2;
+		};
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -52,31 +56,33 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public User getUserByAccount(User user) {
-		String sql = "select userId,userName,userSex from user where userAccount=?";
-	 ResultSet res=	super.executeQuery(sql, user.getUserAccount());
-	 try {
-		res.next();
-		User user2 =  new User();
-		user2.setUserName(res.getString("userName"));
-		user2.setUserSex(res.getString("userSex"));
-		user2.setUserId(res.getInt("userId"));
-		return user2;	 
-			 
+		String sql = "select * from user where userAccount=?";
+		ResultSet res=	super.executeQuery(sql, user.getUserAccount());
+		try {
+			while(res.next()) {
+				User user2 =  new User();
+				user2.setUserAccount(res.getString("userAccount"));
+				user2.setUserPwd(res.getString("userPwd"));
+				user2.setUserName(res.getString("userName"));
+				user2.setUserSex(res.getString("userSex"));
+				user2.setUserId(res.getInt("userId"));
+				return user2;
+		};
 		 
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-		return null;
-	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return null;
+		}
 
 	@Override
 	public boolean updateUserById(User user) {
-		String sql  = "update user set userAccount=?,userName=?,userSex=? where userId=?";
-	int res =	 super.executeUpdate(sql, user.getUserAccount(),user.getUserName(),user.getUserSex(),user.getUserId());
-	if(res>0) {
-		return true;
-	}
-		return false;
-	}
+		String sql  = "update user set userPwd=?,userName=?,userSex=? where userId=?";
+		int res =	 super.executeUpdate(sql, user.getUserPwd(),user.getUserName(),user.getUserSex(),user.getUserId());
+		if(res>0) {
+			return true;
+		}
+			return false;
+		}
 
 }
