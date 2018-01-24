@@ -22,7 +22,13 @@ $("#submit").click(function(){
 			data:"userName="+userName+"&password="+password,
 			async:true,
 			success:function(res){
-				alert(res)
+				if(res==0){
+					$("#tip")[0].innerText="用户名错误";
+				}else if(res==1){
+					$("#tip")[0].innerText="密码错误";
+				}else if(res==2){
+					window.location.href="adminServ";
+				}
 			}
 		});
 	}
