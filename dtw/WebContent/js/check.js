@@ -28,7 +28,7 @@ $("#submit").click(function(){
 			async:true,
 			success:function(res){
 				if(res==0){
-					$("#tip")[0].innerText="用户名错误";
+					$("#tip")[0].innerText="用户名不存在";
 					$("#userName").focus();
 				}else if(res==1){
 					$("#tip")[0].innerText="密码错误";
