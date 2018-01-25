@@ -25,11 +25,12 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 				role.setRoleName(rs.getString("roleName"));
 				list.add(role);
 			}
+			return list;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
+		return null;
 	}
 	
 	//根据id获取角色信息
