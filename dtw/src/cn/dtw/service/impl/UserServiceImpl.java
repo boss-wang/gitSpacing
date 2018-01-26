@@ -1,5 +1,7 @@
 package cn.dtw.service.impl;
 
+import java.util.List;
+
 import cn.dtw.dao.UserDao;
 import cn.dtw.dao.impl.UserDaoImpl;
 import cn.dtw.entity.User;
@@ -12,6 +14,12 @@ public class UserServiceImpl implements UserService {
 	public User getUserByAccount(User user) {
 		User userGet = userDao.getUserByAccount(user);
 		return userGet;
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		List<User> userList = userDao.getAllUser();
+		return userList;
 	}
 
 }
