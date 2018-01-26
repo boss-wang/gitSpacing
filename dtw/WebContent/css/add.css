@@ -1,0 +1,60 @@
+	.mess{
+            		font-size: 18px; 
+            		margin: 20px 0px 0px 300px; 
+            		display: inline-block;
+            		line-height: 30px;
+            		height: 30px;
+            		width: 100px; 
+            		text-align: center;
+            	}
+            	.inpu{
+            		background: rgba(0,0,0,0.2);
+            		margin-left: 0px;
+            		text-indent: 10px;
+            		height: 30px;
+            		width: 240px; 
+            		border: 1px solid rgba(0,0,0,0.35);
+            	}
+            	select{
+            		padding-left: 10px;
+            	}
+            	.tit{
+            		height: 130px;
+            	}
+            	.tit>div{
+            		margin: 20px auto 20px 310px ;
+            	}
+            	.tit-mess{
+            		height: 80px;
+            	}
+            	#addSub{
+            		background: rgba(0,0,0,0.1);
+            		border: 1px solid rgba(0,0,0,0.5);
+            		width: 125px;
+            		height: 30px;
+            		font-size: 15px;
+            		text-align: 30px;
+            		margin: 20px auto 0 320px;
+            	}
+            	#addSub:hover{
+            		background: rgba(0,0,0,0.5);
+            	}
+            	#addRes{
+            		background: rgba(0,0,0,0.1);
+            		border: 1px solid rgba(0,0,0,0.5);
+            		width: 125px;
+            		height: 30px;
+            		font-size: 15px;
+            		text-align: 30px;
+            		margin: 20px auto 0 70px;
+            	}
+            	#addRes:hover{
+            		background: rgba(0,0,0,0.5);
+            	}
+            	.tip{
+            		margin-left: 410px; 
+            		line-height: 30px;
+            	}
+            	#userAccount{
+            		ime-mode: disabled;
+            	}
