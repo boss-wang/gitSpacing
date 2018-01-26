@@ -1,22 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
-	<head>
         <!-- CSS1234 -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/form.css" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
-        <link href="../css/icons.css" rel="stylesheet">
-        <link href="../css/generics.css" rel="stylesheet"> 
         <link rel="stylesheet" href="../css/add.css" />
         
-	</head>
 	<body style="background-color: rgba(0,0,0,0);">
 		  <!-- 以下添加员工 -->
                 <div class="tit">
                     <div class="col-md-3 col-xs-6">
-                        <div class="tile quick-stats">
+                        <div class="tile quick-stats" style="width:325px;">
                             <h3  style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px;">添加员工</h3>
                     	</div>
 					</div>
@@ -65,4 +59,3 @@
 	<script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="../js/add.js" ></script>
 	</body>
-</html>
