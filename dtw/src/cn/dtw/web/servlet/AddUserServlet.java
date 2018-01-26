@@ -19,7 +19,7 @@ public class AddUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	//页面传来的数据：
-	//data:"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex
+	//"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
 
 	}
 
