@@ -42,6 +42,7 @@ public class AddUserServlet extends HttpServlet {
 		user.setUserSex(userSex);
 		role.setRoleId(Integer.parseInt(roleId));
 		us.addUser(user, role);
+	//"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
 	}
 
 }

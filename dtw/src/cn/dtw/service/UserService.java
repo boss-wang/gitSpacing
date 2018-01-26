@@ -1,6 +1,8 @@
 package cn.dtw.service;
 
 import cn.dtw.entity.Role;
+import java.util.List;
+
 import cn.dtw.entity.User;
 
 public interface UserService {
@@ -8,4 +10,6 @@ public interface UserService {
 	public User getUserByAccount(User user);
 	//添加用户账号
 	public int addUser(User user,Role role);
+	//查询所有用户
+	public List<User> getAllUser();
 }

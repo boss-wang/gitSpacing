@@ -14,7 +14,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public List<User> getAllUser() {
-		String sql = "select userId,userAccount,userName,userSex from user ";
+		String sql = "select userId,userAccount,userName,userSex,userPwd from user ";
 		ResultSet res=  super.executeQuery(sql);
 		List<User> list = new ArrayList<User>();
 		

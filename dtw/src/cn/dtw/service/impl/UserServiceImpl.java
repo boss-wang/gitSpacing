@@ -1,5 +1,7 @@
 package cn.dtw.service.impl;
 
+import java.util.List;
+
 import cn.dtw.dao.UserDao;
 import cn.dtw.dao.User_roleDao;
 import cn.dtw.dao.impl.UserDaoImpl;
@@ -28,6 +30,10 @@ public class UserServiceImpl implements UserService {
 		 ur.setRoleId(role.getRoleId());
 		 urd.addUserRoleById(ur);
 		 return 0;
+	}
+	public List<User> getAllUser() {
+		List<User> userList = userDao.getAllUser();
+		return userList;
 	}
 
 }
