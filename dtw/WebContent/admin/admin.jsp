@@ -167,7 +167,7 @@
 			$("#home").load("/dtw/admin/addUser.jsp");
 		})
 		$("#delUser").click(function(){
-			$("#home").load("/dtw/showUser");
+			$("#home").load("/dtw/admin/delUser.jsp");
 		})
 		$("#addOrder").click(function(){
 			$("#home").load("/dtw/admin/addOrder.jsp");
