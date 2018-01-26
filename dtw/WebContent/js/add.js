@@ -1,4 +1,4 @@
-$("#addRes").click(function(){
+		$("#addRes").click(function(){
 			$(".tip").text("");
 			$("#userAccount").focus();
 		});

@@ -61,3 +61,19 @@
 				a:hover{
 					cursor: pointer;
 				}
+				.remarks {
+				height: 70px;
+				width: 240px;
+				color: white;
+				background: rgba(0, 0, 0, 0.2);
+				border: 1px solid rgba(0, 0, 0, 0.35);
+				position: absolute;
+				left: 403.5px;
+				top: 20px;
+			}
+			
+			.line {
+				height: 60px;
+				width: auto;
+				position: relative;
+			}
