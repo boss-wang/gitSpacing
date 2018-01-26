@@ -24,6 +24,8 @@ public class ShowUserServlet extends HttpServlet {
 		//查询员工列表
 		UserService userService = new UserServiceImpl();
 		List<User> userList = userService.getAllUser();
+		req.setAttribute("userList", userList);
+		
 	}
 
 }
