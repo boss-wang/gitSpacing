@@ -14,11 +14,11 @@ public class BaseDao {
 	private static String url;
 	private static String user;
 	private static String password;
-	
+
 	private Connection connection;
 	private ResultSet rs;
 	private PreparedStatement ps;
-	
+
 	static {
 		InputStream in = BaseDao.class.getClassLoader().getResourceAsStream("config.properties");
 		Properties ps = new Properties();
@@ -32,25 +32,25 @@ public class BaseDao {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public boolean getConnection() {
 		try {
-			connection = DriverManager.getConnection(url,user,password);
+			connection = DriverManager.getConnection(url, user, password);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
-	public ResultSet executeQuery(String sql,Object... params) {
-		if(this.getConnection()) {
+
+	public ResultSet executeQuery(String sql, Object... params) {
+		if (this.getConnection()) {
 			try {
 				ps = connection.prepareStatement(sql);
-				for(int i=0;i<params.length;i++) {
-					ps.setObject(i+1, params[i]);
+				for (int i = 0; i < params.length; i++) {
+					ps.setObject(i + 1, params[i]);
 				}
 				rs = ps.executeQuery();
 			} catch (SQLException e) {
@@ -59,13 +59,13 @@ public class BaseDao {
 		}
 		return rs;
 	}
-	
-	public int executeUpdate(String sql,Object... params) {
-		if(this.getConnection()) {
+
+	public int executeUpdate(String sql, Object... params) {
+		if (this.getConnection()) {
 			try {
 				ps = connection.prepareStatement(sql);
-				for(int i=0;i<params.length;i++) {
-					ps.setObject(i+1, params[i]);
+				for (int i = 0; i < params.length; i++) {
+					ps.setObject(i + 1, params[i]);
 				}
 				int rs = ps.executeUpdate();
 				return rs;
@@ -75,31 +75,52 @@ public class BaseDao {
 		}
 		return 0;
 	}
-	
+
+	public int executeUpdateAndReturnId(String sql, Object... params) {
+		if (this.getConnection()) {
+			try {
+				ps = connection.prepareStatement(sql);
+				for (int i = 0; i < params.length; i++) {
+					ps.setObject(i + 1, params[i]);
+				}
+				int rs = ps.executeUpdate();
+				int id=0;
+				ResultSet resultSet = ps.getGeneratedKeys();
+				if (resultSet.next()) {
+					id = resultSet.getInt(1);
+				}
+				return id;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
 	public boolean closeRes() {
 		boolean flag = true;
-		if(rs!=null) {
+		if (rs != null) {
 			try {
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				flag=false;
+				flag = false;
 			}
 		}
-		if(ps!=null) {
+		if (ps != null) {
 			try {
 				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				flag=false;
+				flag = false;
 			}
 		}
-		if(connection!=null) {
+		if (connection != null) {
 			try {
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				flag=false;
+				flag = false;
 			}
 		}
 		return flag;

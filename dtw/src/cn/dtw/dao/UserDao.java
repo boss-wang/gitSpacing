@@ -2,6 +2,7 @@ package cn.dtw.dao;
 
 import java.util.List;
 
+import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
 
 public interface UserDao {
@@ -13,4 +14,6 @@ public interface UserDao {
 	public User getUserByAccount(User user);
 	//通过ID修改用户信息
 	public boolean updateUserById(User user);
+	//添加用户账号 获得创建用户ID
+	public int addUser(User user,Role role);
 }

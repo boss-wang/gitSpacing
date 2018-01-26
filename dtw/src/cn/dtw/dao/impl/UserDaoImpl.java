@@ -7,6 +7,7 @@ import java.util.List;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.UserDao;
+import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
@@ -84,5 +85,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		}
 			return false;
 		}
+	//获得创建用户ID
+	@Override
+	public int addUser(User user,Role role) {
+		// TODO Auto-generated method stub
+		String sql="insert into user(userAccount,userPwd,userName,userSex) values(?,?,?,?)";
+		return super.executeUpdateAndReturnId(sql, user.getUserAccount(),user.getUserPwd(),user.getUserName(),user.getUserSex());
+	}
 
 }

@@ -9,13 +9,14 @@ import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.User_roleDao;
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
+import cn.dtw.entity.User_role;
 
 public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 
 	@Override
-	public boolean addUserRoleById(User user, Role role) {
+	public boolean addUserRoleById(User_role userRole) {
 		String sql = "insert into user_role (userId,roleId) values(?,?)";
-		int res= super.executeUpdate(sql, user.getUserId(),role.getRoleId());
+		int res= super.executeUpdate(sql, userRole.getUserId(),userRole.getRoleId());
 		if(res>0) {
 			return true;
 		}
