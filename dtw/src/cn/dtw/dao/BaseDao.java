@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class BaseDao {
@@ -79,7 +80,7 @@ public class BaseDao {
 	public int executeUpdateAndReturnId(String sql, Object... params) {
 		if (this.getConnection()) {
 			try {
-				ps = connection.prepareStatement(sql);
+				ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				for (int i = 0; i < params.length; i++) {
 					ps.setObject(i + 1, params[i]);
 				}

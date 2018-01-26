@@ -28,7 +28,7 @@ public class AddUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	//页面传来的数据：
-	//data:"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex 
+		//"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId
 		String userAccount=req.getParameter("userAccount");
 		String password=req.getParameter("password");
 		String userName=req.getParameter("userName");
@@ -42,7 +42,6 @@ public class AddUserServlet extends HttpServlet {
 		user.setUserSex(userSex);
 		role.setRoleId(Integer.parseInt(roleId));
 		us.addUser(user, role);
-	//"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
 	}
 
 }
