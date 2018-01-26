@@ -14,6 +14,11 @@
 		<link href="css/icons.css" rel="stylesheet">
 		<link href="css/generics.css" rel="stylesheet">
 		
+<!-- 		<link href="../css/bootstrap.min.css" rel="stylesheet"> -->
+<!--         <link href="css/form.css" rel="stylesheet"> -->
+<!--         <link href="../css/style.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="css/add.css" />
+		
 </head>
 
 
@@ -71,13 +76,13 @@
 					</a>
 					<ul class="list-unstyled menu-item">
 						<li>
-							<a href="form-elements.html">添加员工</a>
+							<a id="addUser">添加员工</a>
 						</li>
 						<li>
-							<a href="form-components.html">修改员工角色</a>
+							<a >修改员工角色</a>
 						</li>
 						<li>
-							<a href="form-examples.html">删除员工</a>
+							<a id="delUser">删除员工</a>
 						</li>
 					</ul>
 				</li>
@@ -154,9 +159,19 @@
 			</ul>
 			
 		</aside>
-		 <iframe src="/dtw/admin/addUser.jsp" style="border: 0px;" width="1300px" height="800px"></iframe>
+		<section id="home"></section>
+		<!--  <iframe src="/dtw/admin/addUser.jsp" style="border: 0px;" width="1300px" height="800px"></iframe> -->
 	</body>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="js/time.js"></script>
 	<script type="text/javascript" src="js/hiddenlist.js" ></script>
+	<script type="text/javascript">
+		
+		$("#addUser").click(function(){
+			$("#home").load("/dtw/admin/addUser.jsp");
+		})
+		$("#delUser").click(function(){
+			$("#home").load("/dtw/showUser");
+		})
+	</script>
 </html>

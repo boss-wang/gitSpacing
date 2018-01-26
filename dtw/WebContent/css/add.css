@@ -58,3 +58,6 @@
             	#userAccount{
             		ime-mode: disabled;
             	}
+				a:hover{
+					cursor: pointer;
+				}

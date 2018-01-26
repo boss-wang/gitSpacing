@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <!-- CSS1234 -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/form.css" rel="stylesheet">
-        <link href="../css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/add.css" />
+
         
 	<body style="background-color: rgba(0,0,0,0);">
 		  <!-- 以下添加员工 -->
