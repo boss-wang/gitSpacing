@@ -29,7 +29,7 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 		int res = super.executeUpdate(sql, user.getUserId());
 		if(res>0) {
 			return true;
-		}
+		} 
 		return false;
 	}
 
