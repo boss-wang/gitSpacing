@@ -13,10 +13,6 @@
 		<link href="css/style.css" rel="stylesheet">
 		<link href="css/icons.css" rel="stylesheet">
 		<link href="css/generics.css" rel="stylesheet">
-		
-<!-- 		<link href="../css/bootstrap.min.css" rel="stylesheet"> -->
-<!--         <link href="css/form.css" rel="stylesheet"> -->
-<!--         <link href="../css/style.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="css/add.css" />
 		
 </head>
@@ -108,7 +104,7 @@
 					</a>
 					<ul class="list-unstyled menu-item">
 						<li>
-							<a href="buttons.html">新建订单</a>
+							<a id="addOrder">新建订单</a>
 						</li>
 						<li>
 							<a href="labels.html">查看所有人订单</a>
@@ -171,7 +167,10 @@
 			$("#home").load("/dtw/admin/addUser.jsp");
 		})
 		$("#delUser").click(function(){
-			$("#home").load("/dtw/showUser");
+			$("#home").load("/dtw/admin/delUser.jsp");
+		})
+		$("#addOrder").click(function(){
+			$("#home").load("/dtw/admin/addOrder.jsp");
 		})
 	</script>
 </html>
