@@ -61,6 +61,8 @@
 				a:hover{
 					cursor: pointer;
 				}
+				
+/*addOrder  */
 				.remarks {
 				height: 70px;
 				width: 240px;
@@ -77,3 +79,29 @@
 				width: auto;
 				position: relative;
 			}
+/*delUser*/
+			 .mess1{
+            		padding: 20px;
+            		font-size: 18px; 
+            		line-height: 30px;
+            		height: 30px;
+            	}	
+            .tit-mess1{
+            		height: 5px;
+            	}
+            
+           	#last{
+           		font-size: 18px; 
+           		
+           	}
+           	#last a{
+           		margin: 20px;
+           		
+           	}
+           	#del{
+           		margin-top:30px ;
+           		border-color: rgba(0,0,0,0.2);
+           	 margin-left:310px ;
+           	 text-align:center; 
+           	 border-collapse:collapse ;
+           	}
