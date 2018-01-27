@@ -75,10 +75,7 @@
 							<a id="addUser">添加员工</a>
 						</li>
 						<li>
-							<a >修改员工角色</a>
-						</li>
-						<li>
-							<a id="delUser">删除员工</a>
+							<a id="updateUser">员工管理</a>
 						</li>
 					</ul>
 				</li>
@@ -88,13 +85,23 @@
 					</a>
 					<ul class="list-unstyled menu-item">
 						<li>
-							<a href="form-elements.html">添加客户</a>
+							<a id="addClient">添加客户</a>
 						</li>
 						<li>
-							<a href="form-components.html">修改客户信息</a>
+							<a id="updateClient">客户管理</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="sa-side-form3" href="">
+						<span class="menu-item">供应商管理</span>
+					</a>
+					<ul class="list-unstyled menu-item">
+						<li>
+							<a id="addSupplier">添加供应商</a>
 						</li>
 						<li>
-							<a href="form-examples.html">删除客户</a>
+							<a id="updateSupplier">供应商管理</a>
 						</li>
 					</ul>
 				</li>
@@ -136,22 +143,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a class="sa-side-form3" href="">
-						<span class="menu-item">供应商管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a href="form-elements.html">添加供应商</a>
-						</li>
-						<li>
-							<a href="form-components.html">修改供应商信息</a>
-						</li>
-						<li>
-							<a href="form-examples.html">删除</a>
-						</li>
-					</ul>
-				</li>
+				
 			</ul>
 			
 		</aside>
@@ -166,11 +158,18 @@
 		$("#addUser").click(function(){
 			$("#home").load("/dtw/admin/addUser.jsp");
 		})
-		$("#delUser").click(function(){
-			$("#home").load("/dtw/admin/delUser.jsp");
+		$("#updateUser").click(function(){
+			$("#home").load("/dtw/admin/updateUser.jsp");
 		})
 		$("#addOrder").click(function(){
 			$("#home").load("/dtw/admin/addOrder.jsp");
 		})
+		$("#addClient").click(function(){
+			$("#home").load("/dtw/admin/addClient.jsp");
+		})
+		$("#updateClient").click(function(){
+			$("#home").load("/dtw/admin/updateClient.jsp");
+		})
 	</script>
+	
 </html>

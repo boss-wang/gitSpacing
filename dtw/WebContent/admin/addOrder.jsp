@@ -108,7 +108,6 @@
 				</div>
 			</div>
 		</form>
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript">
 			$("#addRes").click(function() {
 				$(".tip").text("");

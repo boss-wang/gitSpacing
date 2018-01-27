@@ -105,3 +105,39 @@
            	 text-align:center; 
            	 border-collapse:collapse ;
            	}
+/* updateClient */
+			#clientUpdate{
+				margin-top:30px ;
+           		border-color: rgba(0,0,0,0.2);
+	           	margin-left:310px ;
+	           	text-align:center; 
+	           	width:800px;
+	           	border-collapse:collapse ;
+			}
+			 .mess2{
+           		padding: 10px;
+           		font-size: 14px; 
+           		position: relative;
+           	}
+           	.messdiv{
+           		 display:none;
+           		 position: absolute;
+           		 z-index:10;
+           		 padding-top:5px;
+           		 left: 85px; 
+           		 top: 10px; 
+           		 width:200px;
+           		 height:80px; 
+           		 background-color:rgba(50,83,100,0.7);
+           	}
+           	.messdiv p{
+           		line-height:13px;
+           		text-align:left;
+           		text-indent: 5px;
+           	}
+           	.ccName{
+           		display:block;
+           	}
+           	 .tit-mess3{
+           	 	height:auto;
+           	 }

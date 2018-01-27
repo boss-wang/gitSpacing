@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <body>
-		 <!-- 删除员工 -->
+		 <!-- 修改员工 -->
                 <div class="tit">
-                    <div class="col-md-3 col-xs-6" style="margin-left: 420px;">
+                    <div class="col-md-3 col-xs-6" >
                         <div class="tile quick-stats">
-                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">删除员工</h3>
+                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">员工管理</h3>
                     	</div>
 					</div>
                 </div>
@@ -25,13 +25,16 @@
             		<td class="mess1"></td>
             		<td class="mess1"></td>
             		<td class="mess1"></td>
-            		<td class="mess1"><a href="">删&nbsp;&nbsp;除</a></td>
+            		<td class="mess1"><a class="updateRole" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	<tr id="last"  >
             		<td  colspan="5"><a href="" >首页</a><a href="">上一页</a><a href="">下一页</a><a href="">末页</a></td>
             		
             	</tr> 
         </table>  
-	<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
-	
+	<script type="text/javascript">
+		$(".updateRole").click(function(){
+			$("#home").load("/dtw/admin/updateRole.jsp");
+		})
+	</script>
 	</body>
