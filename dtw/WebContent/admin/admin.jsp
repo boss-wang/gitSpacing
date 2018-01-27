@@ -170,6 +170,12 @@
 		$("#updateClient").click(function(){
 			$("#home").load("/dtw/admin/updateClient.jsp");
 		})
+		$("#addSupplier").click(function(){
+			$("#home").load("/dtw/admin/addSupplier.jsp");
+		})
+		$("#updateSupplier").click(function(){
+			$("#home").load("/dtw/admin/updateSupplier.jsp");
+		})
 	</script>
 	
 </html>

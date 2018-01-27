@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <body>
-		 <!-- 修改客户信息 -->
+		 <!-- 修改供应商信息 -->
                 <div class="tit">
                     <div class="col-md-3 col-xs-6" >
                         <div class="tile quick-stats">
-                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">客户管理</h3>
+                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">供应商管理</h3>
                     	</div>
 					</div>
                 </div>
@@ -14,8 +14,8 @@
             <!-- 表单内容 -->
         <table   border="1"  id="clientUpdate"  >
             	<tr id="" class="tit-mess3">
-            		<td class="mess1"  style="width:150px;">客户公司抬头</td>
-            		<td class="mess1"  style="width:160px;" >客户公司地址</td>
+            		<td class="mess1"  style="width:150px;">供应商公司抬头</td>
+            		<td class="mess1"  style="width:160px;" >供应商公司地址</td>
             		<td class="mess1" style="width:120px;">联系人</td>
             		<td class="mess1" style="width:120px;">联系人操作</td>
             		<td class="mess1" style="width:120px;">操作栏</td>
@@ -39,7 +39,7 @@
 						</div>
             		</td>
             		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+            		<td class="mess2"><a class="updateSupplier" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	
             	<tr  class="tit-mess3">
@@ -60,7 +60,7 @@
 						</div>
             		</td>
             		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+            		<td class="mess2"><a class="updateSupplier" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	
             	
@@ -70,8 +70,8 @@
             	</tr> 
         </table>  
 	<script type="text/javascript">
-		$("body").on("click",".updateClient",function(){
-			$("#home").load("/dtw/admin/updateClientAddress.jsp");
+		$("body").on("click",".updateSupplier",function(){
+			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
 		});
 		$("body").on("mouseover",".ccName",function(){
 			$(this).next().show(200);
