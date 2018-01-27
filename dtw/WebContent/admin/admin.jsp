@@ -107,42 +107,18 @@
 				</li>
 				<li class="dropdown">
 					<a class="sa-side-ui" href="">
-						<span class="menu-item">所有订单管理</span>
+						<span class="menu-item">订单管理</span>
 					</a>
 					<ul class="list-unstyled menu-item">
 						<li>
 							<a id="addOrder">新建订单</a>
 						</li>
 						<li>
-							<a href="labels.html">查看所有人订单</a>
-						</li>
-						<li>
-							<a href="images-icons.html">修改订单</a>
-						</li>
-						<li>
-							<a href="alerts.html">删除订单</a>
+							<a id="showOrder">管理订单</a>
 						</li>
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a class="sa-side-page" href="">
-						<span class="menu-item">本人订单管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a href="list-view.html">新建订单</a>
-						</li>
-						<li>
-							<a href="profile-page.html">查看订单</a>
-						</li>
-						<li>
-							<a href="messages.html">修改订单</a>
-						</li>
-						<li>
-							<a href="login.html">删除订单</a>
-						</li>
-					</ul>
-				</li>
+				
 				
 			</ul>
 			
@@ -175,6 +151,9 @@
 		})
 		$("#updateSupplier").click(function(){
 			$("#home").load("/dtw/admin/updateSupplier.jsp");
+		})
+		$("#showOrder").click(function(){
+			$("#home").load("/dtw/admin/showOrder.jsp");
 		})
 	</script>
 	

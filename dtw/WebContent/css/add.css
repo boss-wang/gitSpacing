@@ -141,3 +141,19 @@
            	 .tit-mess3{
            	 	height:auto;
            	 }
+           	 
+ /* addOrder */
+			#selorder{
+	 			margin-top:30px ;
+           		border-color: rgba(0,0,0,0.2);
+           		margin-left:45px ;
+	           	text-align:center; 
+	           	border-collapse:collapse ;
+	           	padding: 20px;
+           		font-size: 14px; 
+           		line-height: 30px;
+            		
+		 	}
+		 	#selorder tr>td{
+		 		padding: 10px;
+		 	}
