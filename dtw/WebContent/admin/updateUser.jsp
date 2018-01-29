@@ -13,7 +13,7 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1"  id="del"  >
+        <table   border="1"  id="del" style="width:750px;"  >
             	<tr id="" class="tit-mess1">
             		<td class="mess1" >员工账号</td>
             		<td class="mess1" >员工姓名</td>

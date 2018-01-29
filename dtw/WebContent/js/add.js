@@ -36,10 +36,10 @@
 							alert("添加失败");
 						}else if(res==1){
 							alert("用户添加成功，职位未添加");
-							$("#home").load("/dtw/admin/updateUser.jsp");
+							$("#home").load("/dtw/showUser");
 						}else if(res==2){
 							alert("添加成功");
-							$("#home").load("/dtw/admin/updateUser.jsp");
+							$("#home").load("/dtw/showUser");
 						}
 					}
 				})
