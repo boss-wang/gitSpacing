@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.dtw.dao.User_roleDao;
+import cn.dtw.dao.impl.User_roleDaoImpl;
+import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
 import cn.dtw.service.UserService;
 import cn.dtw.service.impl.UserServiceImpl;
@@ -24,10 +27,25 @@ public class ShowUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//查询员工列表
+		String currentpage=req.getParameter("currentpage");
 		UserService userService = new UserServiceImpl();
-		List<User> userList = userService.getAllUser();
+		int rowsize = 5;
+		int totalPage=userService.TotalPage(rowsize);
+		Integer curpage;
+		if(currentpage!=""&&currentpage!=null) {
+			curpage=Integer.parseInt(currentpage)>totalPage?totalPage:Integer.parseInt(currentpage);
+			curpage=Integer.parseInt(currentpage)<=0?1:curpage;
+		}else {
+			curpage=new Integer(1);
+		}
+
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("curpage", curpage);
+		List<User> userList = userService.getAllUser(curpage, rowsize);
+
 		req.setAttribute("userList", userList);
-		System.out.println("f32");
-	}
+		req.getRequestDispatcher("admin/updateUser.jsp").forward(req, resp);
+
+		}
 
 }

@@ -29,11 +29,17 @@
 					data:"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
 					async:true,
 					success:function(res){
-						if(res==0){
+						if(res==3){
 							$("#accountTip").text("账号已经存在");
 							$("#userAccount").focus();
-						}else{
-							window.location.href="userManage";
+						}else if(res==0){
+							alert("添加失败");
+						}else if(res==1){
+							alert("用户添加成功，职位未添加");
+							$("#home").load("/dtw/admin/updateUser.jsp");
+						}else if(res==2){
+							alert("添加成功");
+							$("#home").load("/dtw/admin/updateUser.jsp");
 						}
 					}
 				})

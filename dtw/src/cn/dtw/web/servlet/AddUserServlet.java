@@ -18,7 +18,7 @@ import cn.dtw.service.impl.User_roleServiceImpl;
 
 @WebServlet("/addUser")
 public class AddUserServlet extends HttpServlet {
-	UserService us=new UserServiceImpl();
+	UserService uService=new UserServiceImpl();
 	User_roleService urs=new User_roleServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class AddUserServlet extends HttpServlet {
 	//页面传来的数据：
 		//"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId
 		String userAccount=req.getParameter("userAccount");
-		String password=req.getParameter("password");
+		String password=req.getParameter("userPwd");
 		String userName=req.getParameter("userName");
 		String userSex=req.getParameter("userSex");
 		String roleId=req.getParameter("roleId");
@@ -41,7 +41,15 @@ public class AddUserServlet extends HttpServlet {
 		user.setUserName(userName);
 		user.setUserSex(userSex);
 		role.setRoleId(Integer.parseInt(roleId));
-		us.addUser(user, role);
+		
+		if(uService.getUserByAccount(user)==null) {
+			//添加用户及职位，均成功返回2，用户成功职位失败返回1，失败返回0
+			int rs = uService.addUser(user, role);
+			resp.getWriter().print(rs);
+		}else {
+			resp.getWriter().print(3);	//用户名存在返回3
+		}
+			
 	}
 
 }

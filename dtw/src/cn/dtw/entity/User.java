@@ -1,12 +1,21 @@
 package cn.dtw.entity;
 
+import java.util.List;
+
 public class User{
 private int userId;
 private String userAccount;
 private String userPwd;
 private String userName;
 private String userSex;
+private List<Role> roles;
 
+public List<Role> getRoles() {
+	return roles;
+}
+public void setRoles(List<Role> roles) {
+	this.roles = roles;
+}
 public int getUserId(){
 	return userId;
 }

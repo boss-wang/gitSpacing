@@ -132,10 +132,10 @@
 	<script type="text/javascript">
 		
 		$("#addUser").click(function(){
-			$("#home").load("/dtw/admin/addUser.jsp");
+			$("#home").load("/dtw/gotoaddUser");
 		})
 		$("#updateUser").click(function(){
-			$("#home").load("/dtw/admin/updateUser.jsp");
+			$("#home").load("/dtw/showUser");
 		})
 		$("#addOrder").click(function(){
 			$("#home").load("/dtw/admin/addOrder.jsp");

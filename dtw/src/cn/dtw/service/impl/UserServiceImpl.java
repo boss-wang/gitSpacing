@@ -24,16 +24,40 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int addUser(User user,Role role) {
 		// TODO Auto-generated method stub
-		 int userId=userDao.addUser(user,role);
-		 User_role ur=new User_role();
-		 ur.setUserId(userId);
-		 ur.setRoleId(role.getRoleId());
-		 urd.addUserRoleById(ur);
-		 return 0;
+		 int userId=userDao.addUser(user);
+		 if(userId!=0) {
+			 User_role ur=new User_role();
+			 ur.setUserId(userId);
+			 ur.setRoleId(role.getRoleId());
+			 if(urd.addUserRoleById(ur)) {
+				 return 2;		//用户及其职位均添加成功
+			 };
+			 return 1;			//用户添加成功，职位添加失败
+		 }
+		 return 0;				//添加失败
 	}
+	
 	public List<User> getAllUser() {
 		List<User> userList = userDao.getAllUser();
 		return userList;
+	}
+
+	@Override
+	public List<User> getAllUser(int currentpage, int rowsize) {
+		int startPage = (currentpage-1)*rowsize;
+		return userDao.getAllUser(startPage, rowsize);
+	}
+
+	@Override
+	public int TotalPage(int rowsize) {
+		int totalPage=0;
+		int alltotal=userDao.getAllTotal();
+		if((alltotal%rowsize)==0) {
+			totalPage=(alltotal/rowsize);
+		}else if(alltotal%rowsize!=0) {
+			totalPage=(alltotal/rowsize)+1;
+		}
+		return totalPage;
 	}
 
 }

@@ -34,7 +34,7 @@
 		</form>
 		<script type="text/javascript">
 			$("#addRes").click(function(){
-				$("#home").load("/dtw/admin/updateUser.jsp");
+				$("#home").load("/dtw/showUser");
 			});
 		</script>
 	</body>

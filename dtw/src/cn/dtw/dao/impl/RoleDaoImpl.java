@@ -33,21 +33,20 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return null;
 	}
 	
-	//根据id获取角色信息
+	//根据id获取职位信息
 	@Override
 	public Role getRoleById(int roleid) {
 		// TODO Auto-generated method stub
 		String sql="select * from role where roleId=?";
 		ResultSet rs=super.executeQuery(sql,roleid);
 		try {
-			while(rs.next()) {
+			if(rs.next()) {
 				Role role=new Role();
 				role.setRoleId(rs.getInt("roleId"));
 				role.setRoleName(rs.getString("roleName"));
 				return role;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

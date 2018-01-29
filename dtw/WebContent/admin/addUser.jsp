@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <!-- CSS1234 -->
 
         
@@ -41,9 +42,9 @@
 				<div id="" class="tit-mess">
  					<span class="mess">职&nbsp;&nbsp;&nbsp;位</span>
  						<select id="roleId" class="inpu" name="roleId">
- 							<option value="1">管理员</option>
- 							<option value="2">主管</option>
- 							<option value="3" selected="selected">员工</option>
+ 							<c:forEach var="role" items="${rolelist }">
+ 								<option value="${role.roleId }">${role.roleName }</option>
+ 							</c:forEach>
  						</select>
 				</div> 
 				<div id="" class="tit-mess">

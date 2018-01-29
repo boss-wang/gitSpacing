@@ -28,7 +28,7 @@ public class GotoAddUserServlet extends HttpServlet {
 		List<Role> list=new ArrayList<Role>();
 		list=rs.getAllRole();
 		req.setAttribute("rolelist", list);
-		req.getRequestDispatcher("addUser.html").forward(req, resp);
+		req.getRequestDispatcher("admin/addUser.jsp").forward(req, resp);
 	}
 	
 }

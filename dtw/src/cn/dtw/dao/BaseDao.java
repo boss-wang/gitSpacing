@@ -10,6 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class BaseDao {
 	private static String classDriverName;
 	private static String url;
@@ -29,6 +34,8 @@ public class BaseDao {
 			url = ps.getProperty("url");
 			user = ps.getProperty("user");
 			password = ps.getProperty("password");
+			
+		
 			Class.forName(classDriverName);
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -37,14 +44,37 @@ public class BaseDao {
 	}
 
 	public boolean getConnection() {
+		
+		
 		try {
 			connection = DriverManager.getConnection(url, user, password);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
-	}
+		return false;
+		/*	Context cxt=null;
+			try {
+				cxt = new InitialContext();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}	
+			DataSource ds=null;
+			try {
+				ds = (DataSource)cxt.lookup("java:comp/env/jdbc/new");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection = ds.getConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;*/
+			
+		}
+	
 
 	public ResultSet executeQuery(String sql, Object... params) {
 		if (this.getConnection()) {

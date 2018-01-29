@@ -7,6 +7,7 @@ import java.util.List;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.UserDao;
+import cn.dtw.dao.User_roleDao;
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
 
@@ -14,7 +15,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public List<User> getAllUser() {
-		String sql = "select userId,userAccount,userName,userSex,userPwd from user ";
+		String sql = "select userId,userAccount,userName,userSex,userPwd from user where userStatus=1 ";
 		ResultSet res=  super.executeQuery(sql);
 		List<User> list = new ArrayList<User>();
 		
@@ -26,6 +27,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				user.setUserName(res.getString("userName"));
 				user.setUserSex(res.getString("userSex"));
 				user.setUserId(res.getInt("userId"));
+				//获得用户的职位信息
+				User_roleDao userRoleDao = new User_roleDaoImpl();
+				List<Role> roleList = userRoleDao.getRoleIdByUserId(user);
+				user.setRoles(roleList);
+				
 				list.add(user);
 			}
 			return list;
@@ -87,10 +93,54 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		}
 	//获得创建用户ID
 	@Override
-	public int addUser(User user,Role role) {
-		// TODO Auto-generated method stub
-		String sql="insert into user(userAccount,userPwd,userName,userSex) values(?,?,?,?)";
+	public int addUser(User user) {
+		String sql="insert into user(userAccount,userPwd,userName,userSex,userStatus) values(?,?,?,?,1)";
 		return super.executeUpdateAndReturnId(sql, user.getUserAccount(),user.getUserPwd(),user.getUserName(),user.getUserSex());
+	}
+	//分页
+	@Override
+	public List<User> getAllUser(int start, int rowsize) {
+		User_roleDao userRoleDao = new User_roleDaoImpl();
+		String sql = "select * from user where userStatus=1 limit ?,?";
+		ResultSet res=  super.executeQuery(sql,start,rowsize);
+		List<User> list = new ArrayList<User>();
+		try {
+			while(res.next()) {
+				User user = new User();
+				user.setUserId(res.getInt("userId"));
+				user.setUserAccount(res.getString("userAccount"));
+				user.setUserPwd(res.getString("userPwd"));
+				user.setUserName(res.getString("userName"));
+				user.setUserSex(res.getString("userSex"));
+				//获得用户的职位信息
+				List<Role> roleList = userRoleDao.getRoleIdByUserId(user);
+				user.setRoles(roleList);
+				
+				list.add(user);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public int getAllTotal() {
+		String sql = "select count(*) as count from user where userStatus=1 ";
+		ResultSet res= super.executeQuery(sql);
+		int count = 0;
+		try {
+			while(res.next()) {
+				count=res.getInt("count");
+			}
+			return count;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

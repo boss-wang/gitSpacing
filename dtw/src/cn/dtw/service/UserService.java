@@ -12,4 +12,8 @@ public interface UserService {
 	public int addUser(User user,Role role);
 	//查询所有用户
 	public List<User> getAllUser();
+	//获得分页数据
+	public List<User> getAllUser(int currentpage,int rowsize);
+	//总页数
+	public int TotalPage(int rowsize);
 }
