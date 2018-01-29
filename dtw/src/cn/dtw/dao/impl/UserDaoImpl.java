@@ -107,7 +107,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	@Override
 	public List<User> getAllUser(int start, int rowsize) {
 		User_roleDao userRoleDao = new User_roleDaoImpl();
-		String sql = "select * from user where userStatus=1 limit ?,?";
+		String sql = "select * from user where userStatus=1 order by userId desc limit ?,?";
 		ResultSet res=  super.executeQuery(sql,start,rowsize);
 		List<User> list = new ArrayList<User>();
 		try {

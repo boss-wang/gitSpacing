@@ -23,6 +23,8 @@ public class DeleteUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId=req.getParameter("userId");
+		//2：用户及其职位均删除成功 //1：用户删除成功，职位删除失败 //0：删除失败
 		int count=us.deleteUser(Integer.parseInt(userId));
+		resp.getWriter().print(count);
 	}
 }

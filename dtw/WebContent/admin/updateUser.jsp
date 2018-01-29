@@ -30,7 +30,7 @@
 	            		<td class="mess1">
 	            			<c:forEach var="role" items="${user.roles }">${role.roleName } </c:forEach>
 	            		</td>
-	            		<td class="mess1"><a class="updateRole" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+	            		<td class="mess1"><a class="updateRole" modifyId="${user.userName }">修改</a>&nbsp;&nbsp;<a class="deleteUser" delId="${user.userId }">删除</a></td>
             		</tr> 
             	</c:forEach>
             	
@@ -60,6 +60,29 @@
 			var curpage = ${totalPage};
 			$("#home").load("/dtw/showUser?currentpage="+curpage);
 		})
-		
+		$("#del").on("click",".deleteUser",function(){
+			if(confirm("确定删除该用户?")){
+				var curpage = ${totalPage};
+				var userId = $(this).attr("delId");
+				$.ajax({
+					type:"post",
+					url:"deleteUser",
+					data:"userId="+userId,
+					async:true,
+					success:function(res){
+						if(res==2){
+							alert("删除成功！");
+							$("#home").load("/dtw/showUser","currentpage="+curpage);
+						}else if(res==1){
+							alert("用户已删除，职位删除失败");
+							$("#home").load("/dtw/showUser?currentpage="+curpage);
+						}else if(res==0){
+							alert("删除失败");
+						}
+					}
+				})
+			}
+			
+		})
 	</script>
 	</body>

@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
 	//删除员工账号
 	@Override
 	public int deleteUser(int userId) {
-		// TODO Auto-generated method stub
 		int count=userDao.deleteUser(userId);
 		if(count!=0) {
 			User_role ur=new User_role();
@@ -73,6 +72,7 @@ public class UserServiceImpl implements UserService {
 			return 1;	//用户删除成功，职位删除失败
 		}
 		return 0;	//删除失败
+		
 	}
 
 }
