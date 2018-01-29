@@ -26,6 +26,7 @@ public class Role_powerDaoImpl extends BaseDao implements Role_powerDao {
 				power.setPowerName(rs.getString("powerName"));
 				list.add(power);
 			}
+			super.closeRes();
 			return list;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

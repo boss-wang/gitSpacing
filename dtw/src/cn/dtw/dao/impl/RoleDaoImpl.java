@@ -25,6 +25,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 				role.setRoleName(rs.getString("roleName"));
 				list.add(role);
 			}
+			super.closeRes();
 			return list;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -44,6 +45,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 				Role role=new Role();
 				role.setRoleId(rs.getInt("roleId"));
 				role.setRoleName(rs.getString("roleName"));
+				super.closeRes();
 				return role;
 			}
 		} catch (SQLException e) {

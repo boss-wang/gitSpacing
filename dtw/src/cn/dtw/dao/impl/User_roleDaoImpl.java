@@ -19,6 +19,7 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 	public boolean addUserRoleById(User_role userRole) {
 		String sql = "insert into user_role (userId,roleId) values(?,?)";
 		int res= super.executeUpdate(sql, userRole.getUserId(),userRole.getRoleId());
+		super.closeRes();
 		if(res>0) {
 			return true;
 		}
@@ -29,6 +30,7 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 	public boolean delUserRoleById(User user, Role role) {
 		String sql="Delete from user_role where userId=?";
 		int res = super.executeUpdate(sql, user.getUserId());
+		super.closeRes();
 		if(res>0) {
 			return true;
 		} 

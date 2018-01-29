@@ -54,6 +54,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			user2.setUserName(res.getString("userName"));
 			user2.setUserSex(res.getString("userSex"));
 			user2.setUserId(res.getInt("userId"));
+			super.closeRes();
 			return user2;
 		};
 	} catch (SQLException e) {
@@ -74,6 +75,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				user2.setUserName(res.getString("userName"));
 				user2.setUserSex(res.getString("userSex"));
 				user2.setUserId(res.getInt("userId"));
+				super.closeRes();
 				return user2;
 		};
 		 
@@ -87,6 +89,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	public boolean updateUserById(User user) {
 		String sql  = "update user set userPwd=?,userName=?,userSex=? where userId=?";
 		int res =	 super.executeUpdate(sql, user.getUserPwd(),user.getUserName(),user.getUserSex(),user.getUserId());
+		super.closeRes();
 		if(res>0) {
 			return true;
 		}
@@ -96,7 +99,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	@Override
 	public int addUser(User user) {
 		String sql="insert into user(userAccount,userPwd,userName,userSex,userStatus) values(?,?,?,?,1)";
-		return super.executeUpdateAndReturnId(sql, user.getUserAccount(),user.getUserPwd(),user.getUserName(),user.getUserSex());
+		int id = super.executeUpdateAndReturnId(sql, user.getUserAccount(),user.getUserPwd(),user.getUserName(),user.getUserSex());
+		super.closeRes();
+		return id;
 	}
 	//分页
 	@Override
@@ -136,6 +141,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			while(res.next()) {
 				count=res.getInt("count");
 			}
+			super.closeRes();
 			return count;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
