@@ -29,7 +29,7 @@ public class ShowUserServlet extends HttpServlet {
 		//查询员工列表
 		String currentpage=req.getParameter("currentpage");
 		UserService userService = new UserServiceImpl();
-		int rowsize = 5;
+		int rowsize = 4;
 		int totalPage=userService.TotalPage(rowsize);
 		Integer curpage;
 		if(currentpage!=""&&currentpage!=null) {

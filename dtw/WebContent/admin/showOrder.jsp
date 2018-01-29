@@ -3,7 +3,7 @@
 <!-- 订单管理 -->
 
 	<div style="width: 1700px;">
-		 	<div class="tit">
+		 	<div class="tit" style="padding-left:350px">
                  <div class="col-md-3 col-xs-6" >
                     <div class="tile quick-stats">
                           <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px;width:323px; ">订单管理</h3>
