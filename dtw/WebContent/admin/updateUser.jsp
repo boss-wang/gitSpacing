@@ -62,7 +62,7 @@
 		})
 		$("#del").on("click",".deleteUser",function(){
 			if(confirm("确定删除该用户?")){
-				var curpage = ${totalPage};
+				var curpage = ${curpage };
 				var userId = $(this).attr("delId");
 				$.ajax({
 					type:"post",
@@ -72,7 +72,7 @@
 					success:function(res){
 						if(res==2){
 							alert("删除成功！");
-							$("#home").load("/dtw/showUser","currentpage="+curpage);
+							$("#home").load("/dtw/showUser?currentpage="+curpage);
 						}else if(res==1){
 							alert("用户已删除，职位删除失败");
 							$("#home").load("/dtw/showUser?currentpage="+curpage);
