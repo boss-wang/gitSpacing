@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
 		 <!-- 修改客户信息 -->
                 <div class="tit">
@@ -20,49 +20,29 @@
             		<td class="mess1" style="width:120px;">联系人操作</td>
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
-            	
+            	<c:forEach var="client" items="${list }">
             	<tr  class="tit-mess3">
-            		<td class="mess2">江苏打你分飞鸟分发氨基藕粉</td>
-            		<td class="mess2">分爱分评价哦叫分解机房内傲娇密封风机分泌垃圾 飞丰来讲ife丰满来减肥分泌哦分爱浪费金额i 额!!!∑(ﾟДﾟノ)ノ</td>
+            		<td class="mess2">${client.clientName }</td>
+            		<td class="mess2">${client.clientAddress }</td>
+            		
             		<td class="mess2">
-            			<a class="ccName">赵振</a>
+            		<c:forEach var="clientcontact" items="${client.clientContactlist}">
+            			<a class="ccName">${clientcontact.clientContactName}</a>
             			<div class="messdiv">
-							<p>电话：182737373</p>
-							<p>邮箱：2828929@11.com</p>
-							<p>Q Q：fejifeij</p>
+							<p>电话：${clientcontact.clientContactTel}</p>
+							<c:if test="${clientcontact.clientContactEmail!=null }">
+							<p>邮箱：${clientcontact.clientContactEmail}</p>
+							</c:if>
+							<c:if test="${clientcontact.clientContactQQ!=null }">
+							<p>Q Q：${clientcontact.clientContactQQ}</p>
+							</c:if>
 						</div>
-						<a class="ccName">赵振</a>
-						<div class="messdiv">
-							<p>电话：100000</p>
-							<p>邮箱：2828929@11.com</p>
-							<p>Q Q：fejifeij</p>
-						</div>
+						</c:forEach>
             		</td>
             		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
             		<td class="mess2"><a class="updateClient" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
-            	
-            	<tr  class="tit-mess3">
-            		<td class="mess2">江苏打你分飞鸟分发氨基藕粉</td>
-            		<td class="mess2">分爱分评价哦叫分解机房内傲娇密封风机分泌垃圾 飞丰来讲ife丰满来减肥分泌哦分爱浪费金额i 额!!!∑(ﾟДﾟノ)ノ</td>
-            		<td class="mess2">
-            			<a class="ccName">赵振</a>
-            			<div class="messdiv">
-							<p>电话：182737373</p>
-							<p>邮箱：2828929@11.com</p>
-							<p>Q Q：fejifeij</p>
-						</div>
-						<a class="ccName">赵振</a>
-						<div class="messdiv">
-							<p>电话：100000</p>
-							<p>邮箱：2828929@11.com</p>
-							<p>Q Q：fejifeij</p>
-						</div>
-            		</td>
-            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
-            	</tr> 
-            	
+            	</c:forEach>
             	
             	<tr id="last" style="height:50px;">
             		<td  colspan="5"><a href="" >首页</a><a href="">上一页</a><a href="">下一页</a><a href="">末页</a></td>

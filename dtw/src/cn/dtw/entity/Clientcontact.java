@@ -3,9 +3,9 @@ package cn.dtw.entity;
 public class Clientcontact{
 private int clientContactId;
 private String clientContactName;
-private int ClientContactTel;
-private String ClientContactEmail;
-private String ClientContactQQ;
+private String clientContactTel;
+private String clientContactEmail;
+private String clientContactQQ;
 
 public int getClientContactId(){
 	return clientContactId;
@@ -21,29 +21,26 @@ public String getClientContactName(){
 public void setClientContactName(String clientContactName){
 	this.clientContactName=clientContactName;
 }
+public String getClientContactTel() {
+	return clientContactTel;
+}
+public void setClientContactTel(String clientContactTel) {
+	this.clientContactTel = clientContactTel;
+}
+public String getClientContactEmail() {
+	return clientContactEmail;
+}
+public void setClientContactEmail(String clientContactEmail) {
+	this.clientContactEmail = clientContactEmail;
+}
+public String getClientContactQQ() {
+	return clientContactQQ;
+}
+public void setClientContactQQ(String clientContactQQ) {
+	this.clientContactQQ = clientContactQQ;
+}
 
 
-public int getClientContactTel(){
-	return ClientContactTel;
-}
-public void setClientContactTel(int ClientContactTel){
-	this.ClientContactTel=ClientContactTel;
-}
 
-
-public String getClientContactEmail(){
-	return ClientContactEmail;
-}
-public void setClientContactEmail(String ClientContactEmail){
-	this.ClientContactEmail=ClientContactEmail;
-}
-
-
-public String getClientContactQQ(){
-	return ClientContactQQ;
-}
-public void setClientContactQQ(String ClientContactQQ){
-	this.ClientContactQQ=ClientContactQQ;
-}
 
 }
