@@ -14,5 +14,10 @@ public class User_roleServiceImpl implements User_roleService {
 		// TODO Auto-generated method stub
 		return urd.addUserRoleById(userRole);
 	}
+	@Override
+	public boolean delUserRoleById(User_role userRole) {
+		// TODO Auto-generated method stub
+		return urd.delUserRoleById(userRole);
+	}
 
 }

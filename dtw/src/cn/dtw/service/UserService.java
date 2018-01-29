@@ -16,4 +16,6 @@ public interface UserService {
 	public List<User> getAllUser(int currentpage,int rowsize);
 	//总页数
 	public int TotalPage(int rowsize);
+	//删除员工账号
+	public int deleteUser(int userId);
 }

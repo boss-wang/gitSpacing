@@ -149,5 +149,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		}
 		return 0;
 	}
+//删除员工账号
+	@Override
+	public int deleteUser(int userId) {
+		// TODO Auto-generated method stub
+		String sql="delete from user where userId=?";
+		return super.executeUpdate(sql, userId);
+	}
 
 }

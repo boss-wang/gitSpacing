@@ -20,4 +20,6 @@ public interface UserDao {
 	public List<User> getAllUser(int start,int rowsize);
 	//总数
 	public int getAllTotal();
+	//删除员工账号
+	public int deleteUser(int userId);
 }

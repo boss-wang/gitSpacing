@@ -27,9 +27,9 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 	}
 
 	@Override
-	public boolean delUserRoleById(User user, Role role) {
+	public boolean delUserRoleById(User_role userRole) {
 		String sql="Delete from user_role where userId=?";
-		int res = super.executeUpdate(sql, user.getUserId());
+		int res = super.executeUpdate(sql, userRole.getUserId());
 		super.closeRes();
 		if(res>0) {
 			return true;

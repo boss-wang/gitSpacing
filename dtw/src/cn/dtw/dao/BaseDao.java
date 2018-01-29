@@ -106,7 +106,7 @@ public class BaseDao {
 		}
 		return 0;
 	}
-
+//返回id方法
 	public int executeUpdateAndReturnId(String sql, Object... params) {
 		if (this.getConnection()) {
 			try {
