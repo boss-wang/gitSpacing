@@ -47,7 +47,7 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 				role.setRoleName(res.getString("roleName"));
 				list.add(role);
 			}
-
+			super.closeRes();
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();

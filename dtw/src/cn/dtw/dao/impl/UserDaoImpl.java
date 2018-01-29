@@ -34,6 +34,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				
 				list.add(user);
 			}
+			super.closeRes();
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,7 +119,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				
 				list.add(user);
 			}
-			
+			super.closeRes();
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
