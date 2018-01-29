@@ -79,5 +79,8 @@
 		$("body").on("mouseout",".ccName",function(){
 			$(this).next().hide(200);
 		});
+		$("body").on("click",".addCC",function(){
+			$("#home").load("/dtw/addClientContact");
+		})
 	</script>
 	</body>
