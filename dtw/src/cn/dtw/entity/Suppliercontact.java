@@ -3,7 +3,7 @@ package cn.dtw.entity;
 public class Suppliercontact{
 private int supplierContactId;
 private String supplierContactName;
-private int supplierContactTel;
+private String supplierContactTel;
 private String supplierContactEmail;
 private String supplierContactQQ;
 
@@ -21,16 +21,12 @@ public String getSupplierContactName(){
 public void setSupplierContactName(String supplierContactName){
 	this.supplierContactName=supplierContactName;
 }
-
-
-public int getSupplierContactTel(){
+public String getSupplierContactTel() {
 	return supplierContactTel;
 }
-public void setSupplierContactTel(int supplierContactTel){
-	this.supplierContactTel=supplierContactTel;
+public void setSupplierContactTel(String supplierContactTel) {
+	this.supplierContactTel = supplierContactTel;
 }
-
-
 public String getSupplierContactEmail(){
 	return supplierContactEmail;
 }
