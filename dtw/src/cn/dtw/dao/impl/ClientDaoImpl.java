@@ -66,4 +66,49 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		return null;
 	}
 
+
+
+	@Override
+	public List<Client> getAllClient(int startPage, int rowsize) {
+		String sql ="select * from client limit ?,?";
+		ResultSet res= super.executeQuery(sql, startPage,rowsize);
+		List<Client> list = new ArrayList<Client>();
+
+		try {
+			while(res.next()) {
+				Client client = new Client();
+				client.setClientId(res.getInt("clientId"));
+				client.setClientName(res.getString("clientName"));
+				client.setClientAddress(res.getString("clientAddress"));
+				List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
+				clientContactList=this.getClientcontact(client);
+				client.setClientContactlist(clientContactList);
+				list.add(client);
+			}
+			super.closeRes();
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+
+	@Override
+	public int getAllTotalClient() {
+		String sql ="select count(*) as count from client ";
+		ResultSet res=	super.executeQuery(sql);
+		int count=0;
+		try {
+			while(res.next()) {
+				count=res.getInt("count");
+			}
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 }

@@ -12,7 +12,8 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1"  id="clientUpdate"  >
+        <table   border="1"  id="clientUpdate" style=" width:970px ;height:350px" >
+       
             	<tr id="" class="tit-mess3">
             		<td class="mess1"  style="width:150px;">客户公司抬头</td>
             		<td class="mess1"  style="width:160px;" >客户公司地址</td>
@@ -40,18 +41,20 @@
 						</c:forEach>
             		</td>
             		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+            		<td class="mess2"><a class="updateClient" addId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	</c:forEach>
             	
             	<tr id="last" style="height:50px;">
-            		<td  colspan="5"><a href="" >首页</a><a href="">上一页</a><a href="">下一页</a><a href="">末页</a></td>
+            		<td  colspan="5"><a id="firstPage" >首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
             		
             	</tr> 
         </table>  
 	<script type="text/javascript">
-		$("body").on("click",".updateClient",function(){
-			$("#home").load("/dtw/admin/updateClientAddress.jsp");
+		$("#clientUpdate").on("click",".updateClient",function(){
+			var curpage = ${curpage};
+			
+			$("#home").load("/dtw/admin/updateClientAddress.jsp?currentpage="+curpage);
 		});
 		$("body").on("mouseover",".ccName",function(){
 			$(this).next().show(200);
@@ -61,6 +64,22 @@
 		});
 		$("body").on("click",".addCC",function(){
 			$("#home").load("/dtw/addClientContact");
+		})
+		$("#prePage").click(function(){
+			var curpage = ${curpage-1 };
+			$("#home").load("/dtw/showClient?currentpage="+curpage);
+		})
+		$("#nextPage").click(function(){
+			var curpage = ${curpage+1 };
+			$("#home").load("/dtw/showClient?currentpage="+curpage);
+		})
+		$("#firstPage").click(function(){
+			var curpage = 1;
+			$("#home").load("/dtw/showClient?currentpage="+curpage);
+		})
+		$("#lastPage").click(function(){
+			var curpage = ${totalPage};
+			$("#home").load("/dtw/showClient?currentpage="+curpage);
 		})
 	</script>
 	</body>

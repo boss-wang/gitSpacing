@@ -23,7 +23,20 @@ public class ShowClientServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Client> list= clientserv.getAllClient();
+		String currentpage=req.getParameter("currentpage");
+		int rowsize = 3;
+		int totalPage=clientserv.getAllTotalPage(rowsize);
+		Integer curpage;
+		if(currentpage!=""&&currentpage!=null) {
+			curpage=Integer.parseInt(currentpage)>totalPage?totalPage:Integer.parseInt(currentpage);
+			curpage=Integer.parseInt(currentpage)<=0?1:curpage;
+		}else {
+			curpage=new Integer(1);
+		}
+
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("curpage", curpage);
+		 List<Client> list=clientserv.getAllClient(curpage, rowsize);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("admin/updateClient.jsp").forward(req, resp);
 	}

@@ -13,5 +13,22 @@ public class ClientServiceImpl implements ClientService {
 	public List<Client> getAllClient() {
 		return clientDao.getAllClient();
 	}
+	@Override
+	public List<Client> getAllClient(int currentPage, int rowsize) {
+		int startPage = (currentPage-1)*rowsize;
+		
+		return clientDao.getAllClient(startPage, rowsize);
+	}
+	@Override
+	public int getAllTotalPage(int rowsize) {
+		int totalPage=0;
+		int alltotal=clientDao.getAllTotalClient();
+		if((alltotal%rowsize)==0) {
+			totalPage=(alltotal/rowsize);
+		}else if(alltotal%rowsize!=0) {
+			totalPage=(alltotal/rowsize)+1;
+		}
+		return totalPage;
+	}
 
 }

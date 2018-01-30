@@ -30,7 +30,7 @@
 	            		<td class="mess1">
 	            			<c:forEach var="role" items="${user.roles }">${role.roleName } </c:forEach>
 	            		</td>
-	            		<td class="mess1"><a class="updateRole" modifyId="${user.userName }">修改</a>&nbsp;&nbsp;<a class="deleteUser" delId="${user.userId }">删除</a></td>
+	            		<td class="mess1"><a class="updateRole" modifyId="${user.userId }">修改</a>&nbsp;&nbsp;<a class="deleteUser" delId="${user.userId }">删除</a></td>
             		</tr> 
             	</c:forEach>
             	

@@ -32,7 +32,8 @@
         
 	<script type="text/javascript">
 		$("#addRes").click(function(){
-			$("#home").load("/dtw/admin/updateClient.jsp");
+			var curpage = ${param.currentpage};
+			$("#home").load("/dtw/showClient?currentpage="+curpage);
 		});
 		$("#addSub").click(function(){
 			$(".tip").text("");

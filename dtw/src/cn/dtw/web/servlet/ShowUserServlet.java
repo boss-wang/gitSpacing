@@ -18,6 +18,7 @@ import cn.dtw.service.impl.UserServiceImpl;
 
 @WebServlet("/showUser")
 public class ShowUserServlet extends HttpServlet {
+	private UserService userService = new UserServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +29,6 @@ public class ShowUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//查询员工列表
 		String currentpage=req.getParameter("currentpage");
-		UserService userService = new UserServiceImpl();
 		int rowsize = 4;
 		int totalPage=userService.TotalPage(rowsize);
 		Integer curpage;
