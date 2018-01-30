@@ -101,9 +101,9 @@
            	#del{
            		margin-top:30px ;
            		border-color: rgba(0,0,0,0.2);
-           	 margin-left:310px ;
-           	 text-align:center; 
-           	 border-collapse:collapse ;
+	           	margin-left:310px ;
+	           	text-align:center; 
+	           	border-collapse:collapse ;
            	}
 /* updateClient */
 			#clientUpdate{
@@ -157,3 +157,20 @@
 		 	#selorder tr>td{
 		 		padding: 10px;
 		 	}
+/* updateRole */
+			
+			.mess3{
+            		padding: 20px;
+            		font-size: 18px; 
+            		line-height: 30px;
+            		height: 30px;
+            		width: 160px;
+            }	
+			#upd{
+            		margin-top:30px ;
+            		border-color: rgba(0,0,0,0.2);
+            	 margin-left:310px ;
+            	 text-align:center; 
+            	 border-collapse:collapse ;
+            	}
+		

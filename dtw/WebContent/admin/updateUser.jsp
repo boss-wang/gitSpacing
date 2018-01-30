@@ -42,7 +42,7 @@
         </table>  
 	<script type="text/javascript">
 		$(".updateRole").click(function(){
-			$("#home").load("/dtw/admin/updateRole.jsp");
+			$("#home").load("/dtw/admin/updateUserRole.jsp");
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };
