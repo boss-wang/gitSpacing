@@ -11,12 +11,11 @@ public class User_roleServiceImpl implements User_roleService {
 	User_roleDao urd=new User_roleDaoImpl();
 	@Override
 	public boolean addUserRoleById(User_role userRole) {
-		// TODO Auto-generated method stub
 		return urd.addUserRoleById(userRole);
 	}
+	
 	@Override
 	public boolean delUserRoleById(User_role userRole) {
-		// TODO Auto-generated method stub
 		return urd.delUserRoleById(userRole);
 	}
 

@@ -12,14 +12,12 @@ public class RoleServiceImpl implements RoleService {
 	//获取角色信息
 	@Override
 	public List<Role> getAllRole() {
-		// TODO Auto-generated method stub
 		return rd.getAllRole();
 	}
+	
 	//根据id获取角色信息
-
 	@Override
 	public Role getRoleById(int roleid) {
-		// TODO Auto-generated method stub
 		return rd.getRoleById(roleid);
 	}
 }

@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addUser(User user,Role role) {
-		// TODO Auto-generated method stub
 		 int userId=userDao.addUser(user);
 		 if(userId!=0) {
 			 User_role ur=new User_role();

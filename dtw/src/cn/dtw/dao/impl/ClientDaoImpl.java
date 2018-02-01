@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.ClientDao;
 import cn.dtw.entity.Client;
@@ -13,102 +16,54 @@ import cn.dtw.entity.Clientcontact;
 
 public class ClientDaoImpl extends BaseDao implements ClientDao {
 
+	//查询所有客户
 	@Override
 	public List<Client> getAllClient() {
-		String sql = "SELECT * FROM client  ";
-		ResultSet res=	super.executeQuery(sql);
-		List<Client> list = new ArrayList<Client>();
-		try {
-			while(res.next()) {
-				Client client = new Client();
-				client.setClientId(res.getInt("clientId"));
-				client.setClientName(res.getString("clientName"));
-				client.setClientAddress(res.getString("clientAddress"));
-				List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
-				clientContactList=this.getClientcontact(client);
-				client.setClientContactlist(clientContactList);
-				list.add(client);
-			}
-			super.closeRes();
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		String sql = "SELECT * FROM client";
+		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql);
+		List<Client> clientList = new ArrayList<Client>();
+		for(Client client:list) {
+			//添加客户联系人信息
+			List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
+			clientContactList=this.getClientcontact(client);
+			client.setClientContactlist(clientContactList);
+			clientList.add(client);
 		}
-		return null;
+		return clientList;
 	}
 	
 
-
+	//根据客户id查询客户的联系人信息
 	@Override
 	public List<Clientcontact> getClientcontact(Client client) {
 		String sql = "select  clientContactName,ClientContactTel,ClientContactEmail,ClientContactQQ FROM client_clientcontact,clientcontact WHERE  client_clientcontact.clientContactId=clientcontact.clientContactId AND client_clientcontact.clientId=? ";
-		ResultSet res= super.executeQuery(sql, client.getClientId());
-		List<Clientcontact> list = new ArrayList<Clientcontact>();
-		try {
-			while(res.next()){
-				Clientcontact clientcontact =  new Clientcontact();
-				clientcontact.setClientContactName(res.getString("clientContactName"));
-				clientcontact.setClientContactTel(res.getString("ClientContactTel"));
-				if(res.getString("ClientContactEmail")!=null&&!res.getString("ClientContactEmail").equals("")) {
-					clientcontact.setClientContactEmail(res.getString("ClientContactEmail"));
-				}
-				if(res.getString("ClientContactQQ")!=null&&!res.getString("ClientContactEmail").equals("")) {
-					clientcontact.setClientContactQQ(res.getString("ClientContactQQ"));
-				}
-				list.add(clientcontact);
-				
-			}
-			super.closeRes();
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, client.getClientId());
 	}
 
 
-
+	//分页查询客户信息
 	@Override
 	public List<Client> getAllClient(int startPage, int rowsize) {
 		String sql ="select * from client limit ?,?";
-		ResultSet res= super.executeQuery(sql, startPage,rowsize);
-		List<Client> list = new ArrayList<Client>();
-
-		try {
-			while(res.next()) {
-				Client client = new Client();
-				client.setClientId(res.getInt("clientId"));
-				client.setClientName(res.getString("clientName"));
-				client.setClientAddress(res.getString("clientAddress"));
-				List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
-				clientContactList=this.getClientcontact(client);
-				client.setClientContactlist(clientContactList);
-				list.add(client);
-			}
-			super.closeRes();
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,startPage,rowsize);
+		List<Client> clientList = new ArrayList<Client>();
+		for(Client client:list) {
+			//添加客户联系人信息
+			List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
+			clientContactList=this.getClientcontact(client);
+			client.setClientContactlist(clientContactList);
+			clientList.add(client);
 		}
-		return null;
+		return clientList;
 	}
 
 
-
+	//查询所有客户记录条数
 	@Override
 	public int getAllTotalClient() {
-		String sql ="select count(*) as count from client ";
-		ResultSet res=	super.executeQuery(sql);
-		int count=0;
-		try {
-			while(res.next()) {
-				count=res.getInt("count");
-			}
-			return count;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		String sql ="select count(1) as count from client ";
+		Long total = (Long)super.executeOneColumn(new ScalarHandler("count"), sql);
+		return total.intValue();
 	}
 
 }
