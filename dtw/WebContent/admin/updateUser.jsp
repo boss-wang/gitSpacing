@@ -41,8 +41,9 @@
             	</tr> 
         </table>  
 	<script type="text/javascript">
-		$(".updateRole").click(function(){
-			$("#home").load("/dtw/admin/updateUserRole.jsp");
+		$("#del").on("click",".updateRole",function(){	
+			var userId = $(this).attr("modifyId");
+			$("#home").load("showUserRole?userId="+userId);
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };

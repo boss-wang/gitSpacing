@@ -25,8 +25,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public User getUserById(User user) {
+		User_roleDao userRoleDao = new User_roleDaoImpl();
 		String sql = "select * from user where userId=? ";
-		return super.executeOneRow(new BeanHandler<User>(User.class), sql, user.getUserId());
+		User userGet = super.executeOneRow(new BeanHandler<User>(User.class), sql, user.getUserId());
+		List<Role> roleList = userRoleDao.getRoleByUserId(userGet);
+		userGet.setRoles(roleList);
+		return userGet;
 	}
 
 	@Override
@@ -57,7 +61,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		List<User> userList = new ArrayList<User>();
 		for(User user:list) {
 			//获得用户的职位信息
-			List<Role> roleList = userRoleDao.getRoleIdByUserId(user);
+			List<Role> roleList = userRoleDao.getRoleByUserId(user);
 			user.setRoles(roleList);
 			userList.add(user);
 		}

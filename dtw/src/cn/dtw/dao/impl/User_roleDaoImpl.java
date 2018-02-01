@@ -32,9 +32,16 @@ public class User_roleDaoImpl extends BaseDao implements User_roleDao {
 	}
 	//通过用户ID获得其角色ID
 	@Override
-	public List<Role> getRoleIdByUserId(User user) {
+	public List<Role> getRoleByUserId(User user) {
 		String sql ="select role.roleId as roleId,roleName from user_role,role where user_role.roleId=role.roleId and userId=?";
 		return super.executeQuery(new BeanListHandler<Role>(Role.class), sql, user.getUserId());
+	}
+	//删除单个角色
+	@Override
+	public boolean delSingleUserRole(User_role userRole) {
+		String sql="Delete from user_role where userId=? and roleId=?";
+		int res = super.executeUpdate(sql, userRole.getUserId(),userRole.getRoleId());
+		return res>0?true:false;
 	}
 
 }
