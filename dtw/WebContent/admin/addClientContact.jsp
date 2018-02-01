@@ -16,22 +16,22 @@
         <form action=" " method="post">
             <div >
             	<div  class="tit-mess">
-            		<span class="mess">联系人姓名:</span>
+            		<span class="mess">姓&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
             		<input id="userAccount" class="inpu" name="contactName" placeholder="姓名" /><span style="margin-left: 10px;">*</span>
             		<p id="accountTip" class="tip"></p>
             	</div> 
             	<div class="tit-mess">
-            		<span class="mess">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</span>
+            		<span class="mess">电&nbsp;&nbsp;&nbsp;&nbsp;话:</span>
  				 	<input id="userPwd" class="inpu"  name="telephone" placeholder="电话" /><span style="margin-left: 10px;">*</span>
  					<p id="pwdTip" class="tip"></p>
             	</div> 
  				<div id="" class="tit-mess">
- 					<span class="mess">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</span>
+ 					<span class="mess">邮&nbsp;&nbsp;&nbsp;&nbsp;箱:</span>
  				 	<input id="email" class="inpu" name="email" placeholder="邮箱" />
  					<p id="emailTip" class="tip"></p>
  				</div> 
  				<div id="" class="tit-mess">
- 					<span class="mess">Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q:</span>
+ 					<span class="mess">Q&nbsp;&nbsp;&nbsp;&nbsp;Q:</span>
  				 	<input id="qq" class="inpu" name="qq" placeholder="QQ" />
  					<p id="QQTip" class="tip"></p>
  				</div> 
