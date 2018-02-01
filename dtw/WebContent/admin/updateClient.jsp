@@ -53,8 +53,8 @@
 	<script type="text/javascript">
 		$("#clientUpdate").on("click",".updateClient",function(){
 			var curpage = ${curpage};
-			
-			$("#home").load("/dtw/admin/updateClientAddress.jsp?currentpage="+curpage);
+			var clientId = $(this).attr("addId");
+			$("#home").load("gotoUpdateClient?currentpage="+curpage+"&clientId="+clientId);
 		});
 		$("body").on("mouseover",".ccName",function(){
 			$(this).next().show(200);

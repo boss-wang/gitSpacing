@@ -2,7 +2,7 @@
 	<named-config name="webApp">
 		<!-- 配置连接信息 -->
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql://localhost:3306/dtwmanage?characterEncoding=utf8</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/dtwmanage?useSSL=true&amp;characterEncoding=utf8</property>
 		<property name="password">1234</property>
 		<property name="user">root</property>
 		

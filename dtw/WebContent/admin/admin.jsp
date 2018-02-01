@@ -62,12 +62,12 @@
 			
 			<ul class="list-unstyled side-menu">
 				    <li class="active">
-                        <a class="sa-side-home" href="">
+                        <a class="sa-side-home" href="" >
                             <span class="menu-item">主界面</span>
                         </a>
                     </li>
 				<li class="dropdown">
-					<a class="sa-side-form" href="">
+					<a class="sa-side-form" >
 						<span class="menu-item">员工管理</span>
 					</a>
 					<ul class="list-unstyled menu-item">
@@ -80,7 +80,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="sa-side-form2" href="">
+					<a class="sa-side-form2" >
 						<span class="menu-item">客户管理</span>
 					</a>
 					<ul class="list-unstyled menu-item">
@@ -93,7 +93,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="sa-side-form3" href="">
+					<a class="sa-side-form3" >
 						<span class="menu-item">供应商管理</span>
 					</a>
 					<ul class="list-unstyled menu-item">
@@ -106,7 +106,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="sa-side-ui" href="">
+					<a class="sa-side-ui" >
 						<span class="menu-item">订单管理</span>
 					</a>
 					<ul class="list-unstyled menu-item">
@@ -132,10 +132,10 @@
 	<script type="text/javascript">
 		
 		$("#addUser").click(function(){
-			$("#home").load("/dtw/gotoaddUser");
+			$("#home").load("gotoaddUser");
 		})
 		$("#updateUser").click(function(){
-			$("#home").load("/dtw/showUser");
+			$("#home").load("showUser");
 		})
 		$("#addOrder").click(function(){
 			$("#home").load("/dtw/admin/addOrder.jsp");
@@ -144,7 +144,7 @@
 			$("#home").load("/dtw/admin/addClient.jsp");
 		})
 		$("#updateClient").click(function(){
-			$("#home").load("/dtw/showClient");
+			$("#home").load("showClient");
 		})
 		$("#addSupplier").click(function(){
 			$("#home").load("/dtw/admin/addSupplier.jsp");

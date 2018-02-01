@@ -30,5 +30,13 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return totalPage;
 	}
+	@Override
+	public Client getClienttext(Client client) {
+		return clientDao.getClienttext(client);
+	}
+	@Override
+	public int getResultById(Client client) {
+		return clientDao.getResultById(client);
+	}
 
 }

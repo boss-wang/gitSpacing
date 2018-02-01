@@ -1919,9 +1919,7 @@ a.list-group-item.active > .badge,
         background: rgba(0,0,0,0.5);
     }
     
-    #sidebar .side-menu > li > a {
-        width: 100%;
-    }
+   
     
     .side-menu .menu-item {
         position: absolute;

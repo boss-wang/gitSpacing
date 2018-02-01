@@ -12,18 +12,18 @@
                 <hr class="whiter"/>
             <!-- 表单内容 -->
         <form action="aaa" method="post" style="position:relative;top:50px">
-            <div id="">
-            	<div id="" class="tit-mess">
+            <div >
+            	<div  class="tit-mess">
             		<span class="mess">客&nbsp;&nbsp;&nbsp;户</span>
-            		<input id="clientName" class="inpu" name="clientName" placeholder="公司抬头" /><span style="margin-left: 10px;">*</span>
+            		<input id="clientName" class="inpu" name="clientName" placeholder="公司抬头" value=${clientText.clientName } /><span style="margin-left: 10px;">*</span>
             		<p id="nameTip" class="tip"></p>
             	</div> 
             	<div class="tit-mess">
             		<span class="mess">地&nbsp;&nbsp;&nbsp;址</span>
- 				 	<textarea id="clientAddress" class="inpu" style="height: 50px;position:relative;top:18px" name="clientAddress" placeholder="公司地址" /></textarea><span style="margin-left: 10px;">*</span>
+ 				 	<textarea id="clientAddress" class="inpu" style="height: 50px;position:relative;top:18px" name="clientAddress" placeholder="公司地址" >${clientText.clientAddress }</textarea><span style="margin-left: 10px;">*</span>
  					<p id="addressTip" class="tip"></p>
             	</div> 
-				<div id="" class="tit-mess">
+				<div  class="tit-mess">
 					<input id="addSub" class="mess" type="button" value="确认修改"/>
 					<input id="addRes" class="mess" type="button" value="放弃修改"/>
 				</div>
@@ -32,7 +32,7 @@
         
 	<script type="text/javascript">
 		$("#addRes").click(function(){
-			var curpage = ${param.currentpage};
+			var curpage = ${currentpage};
 			$("#home").load("/dtw/showClient?currentpage="+curpage);
 		});
 		$("#addSub").click(function(){
@@ -47,17 +47,19 @@
 				$("#AddressTip").text("地址不能为空");
 				$("#clientAddress").focus();
 			}else{
+				var curpage = ${currentpage};
+				var clientId =${clientText.clientId };
 				$.ajax({
 					type:"post",
-					url:"",
-					data:"clientName="+clientName+"&clientAddress="+clientAddress,
+					url:"updateClient",
+					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&clientId="+clientId,
 					async:true,
 					success:function(res){
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#clientName").focus();
 						}else{
-							$("#home").load("");
+							$("#home").load("/dtw/showClient?currentpage="+curpage);
 						}
 					}
 				})

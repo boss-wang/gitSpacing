@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -66,4 +67,26 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		return total.intValue();
 	}
 
+
+	@Override
+	public Client getClienttext(Client client) {
+		String sql ="select * from client where clientId=?";
+		return super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientId());
+	}
+
+
+	@Override
+	public int getResultById(Client client) {
+		String sql = "select * from client where clientId!=? and clientName=? ";
+		Client clien= super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientId(),client.getClientName());
+		
+		if(clien==null) {
+			String insertsql = "update  client set clientName=?,clientAddress=? where clientId=? ";
+			super.executeUpdate(insertsql, client.getClientName(),client.getClientAddress(),client.getClientId());
+			return 1;
+		}else {
+			return 0;
+		}
+		
+	}
 }
