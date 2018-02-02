@@ -26,7 +26,7 @@
 	            		<td class="mess2">${supplier.supplierAddress }</td>
 	            		<td class="mess2">
 	            			<c:forEach var="contact" items="${supplier.supplierContacts }">
-	            				<div class="ccName"><a>${contact.supplierContactName }</a>
+	            				<div class="ccName"><a class="nameContent">${contact.supplierContactName }</a>
 		            				<div class="messdiv">
 										<p>电话：${contact.supplierContactTel }</p>
 										<p>邮箱：${contact.supplierContactEmail }</p>
@@ -55,9 +55,11 @@
 		});
 		$("body").on("mouseover",".ccName",function(){
 			$(this).find(".messdiv").show();
+			$(this).find(".nameContent").css("color","yellow");
 		});
 		$("body").on("mouseout",".ccName",function(){
 			$(this).find(".messdiv").hide();
+			$(this).find(".nameContent").css("color","white");
 		});
 		$("#firstPage").click(function(){
 			$("#home").load("showSupplier?currentPage=1");
