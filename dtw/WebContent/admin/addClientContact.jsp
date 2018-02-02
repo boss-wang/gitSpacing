@@ -64,7 +64,18 @@
 				$("#emailTip").text("邮箱格式不对");
 				$("#email").focus();
 			}else{
-				alert("ok");
+				var clientId =$(this).attr("addId");
+				$.ajax({
+					type:"post",
+					url:"addClientContact",
+					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email,
+					success:function(res){
+						alert("联系人添加成功")
+						var currentpage=${param.currentpage};
+						$("#home").load("showClient?currentpage="+currentpage);
+					}
+					
+				})
 			}
 			}else{
 				var clientId =$(this).attr("addId");

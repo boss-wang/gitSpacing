@@ -10,7 +10,7 @@ function getdate() {
 	if(min<10){
 		min="0"+m.getMinutes();
 	}
-	n.innerText = m.getFullYear() + "-" + m.getMonth() + 1 + "-" + m.getDate() + " " + hour+ ":" + min;
+	n.innerText = m.getFullYear() + "-"+(m.getMonth()+1)+"-" + m.getDate() + " " + hour+ ":" + min;
 	if(m.getSeconds()<10){
 		h.innerText=":0"+m.getSeconds();
 	}else{

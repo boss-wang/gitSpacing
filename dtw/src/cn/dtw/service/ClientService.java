@@ -15,5 +15,6 @@ public interface ClientService {
 		public List<Client> getAllClient(int currentPage,int rowsize);
 	//总页数	
 		public int getAllTotalPage(int rowsize);
-
+	//添加客户(返回0 有重名)
+		int addClient(Client client);
 }

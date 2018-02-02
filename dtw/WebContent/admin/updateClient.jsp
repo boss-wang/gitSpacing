@@ -14,7 +14,7 @@
             <!-- 表单内容 -->
         <table   border="1"  id="clientUpdate" style=" width:970px ;height:350px" >
        
-            	<tr id="" class="tit-mess3">
+            	<tr  class="tit-mess3">
             		<td class="mess1"  style="width:150px;">客户公司抬头</td>
             		<td class="mess1"  style="width:160px;" >客户公司地址</td>
             		<td class="mess1" style="width:120px;">联系人</td>
@@ -22,7 +22,7 @@
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
             	<c:forEach var="client" items="${list }">
-            	<tr  class="tit-mess3">
+            	<tr  class="tit-mess3"  style=" height:40px">
             		<td class="mess2">${client.clientName }</td>
             		<td class="mess2">${client.clientAddress }</td>
             		

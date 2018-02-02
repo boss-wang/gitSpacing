@@ -15,6 +15,9 @@ public interface ClientDao {
 	//根据公司id查询除此之外的公司信息,决定是否插入
 	int getResultById(Client client);
 	
+	//先查询是否有重名，再添加客户
+	int addClient(Client client);
+	
 	
 	//获取所有客户公司信息
 	List<Client> getAllClient();
