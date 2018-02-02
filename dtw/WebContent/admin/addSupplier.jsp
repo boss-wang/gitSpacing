@@ -21,7 +21,7 @@
             	<div class="tit-mess">
             		<span class="mess">地&nbsp;&nbsp;&nbsp;址</span>
  				 	<textarea id="supplierAddress" class="inpu" style="height: 50px;position:relative;top:18px" name="supplierAddress" placeholder="公司地址" /></textarea><span style="margin-left: 10px;">*</span>
- 					<p id="addressTip" class="tip"></p>
+ 					<p id="addressTip" class="tip" style="margin-top:8px;"></p>
             	</div> 
 				<div id="" class="tit-mess">
 					<input id="addSub" class="mess" type="button" value="确认添加"/>
@@ -44,20 +44,22 @@
 				$("#nameTip").text("公司名不能为空");
 				$("#supplierName").focus();
 			}else if(supplierAddress==""||supplierAddress==null){
-				$("#AddressTip").text("地址不能为空");
+				$("#addressTip").text("地址不能为空");
 				$("#supplierAddress").focus();
 			}else{
 				$.ajax({
 					type:"post",
-					url:"",
+					url:"addSupplier",
 					data:"supplierName="+supplierName+"&supplierAddress="+supplierAddress,
 					async:true,
 					success:function(res){
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#supplierName").focus();
-						}else{
-							$("#home").load("");
+						}else if(res==2){
+							alert("添加失败");
+						}else if(res==1){
+							alert("添加成功");
 						}
 					}
 				})

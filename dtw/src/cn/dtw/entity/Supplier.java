@@ -1,10 +1,20 @@
 package cn.dtw.entity;
 
+import java.util.List;
+
 public class Supplier{
 private int supplierId;
 private String supplierName;
 private String supplierAddress;
+private List<Suppliercontact> supplierContacts;
 
+
+public List<Suppliercontact> getSupplierContacts() {
+	return supplierContacts;
+}
+public void setSupplierContacts(List<Suppliercontact> supplierContacts) {
+	this.supplierContacts = supplierContacts;
+}
 public int getSupplierId(){
 	return supplierId;
 }
