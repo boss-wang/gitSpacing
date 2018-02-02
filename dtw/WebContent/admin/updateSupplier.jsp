@@ -26,11 +26,12 @@
 	            		<td class="mess2">${supplier.supplierAddress }</td>
 	            		<td class="mess2">
 	            			<c:forEach var="contact" items="${supplier.supplierContacts }">
-	            				<a class="ccName">${contact.supplierContactName }</a>
-	            				<div class="messdiv">
-									<p>电话：${contact.supplierContactTel }</p>
-									<p>邮箱：${contact.supplierContactEmail }</p>
-									<p>Q Q：${contact.supplierContactQQ }</p>
+	            				<div class="ccName"><a>${contact.supplierContactName }</a>
+		            				<div class="messdiv">
+										<p>电话：${contact.supplierContactTel }</p>
+										<p>邮箱：${contact.supplierContactEmail }</p>
+										<p>Q Q：${contact.supplierContactQQ }</p>
+									</div>
 								</div>
 	            			</c:forEach>
 	            		</td>
@@ -53,10 +54,10 @@
 			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
 		});
 		$("body").on("mouseover",".ccName",function(){
-			$(this).next().show(200);
+			$(this).find(".messdiv").show();
 		});
 		$("body").on("mouseout",".ccName",function(){
-			$(this).next().hide(200);
+			$(this).find(".messdiv").hide();
 		});
 		$("#firstPage").click(function(){
 			$("#home").load("showSupplier?currentPage=1");
