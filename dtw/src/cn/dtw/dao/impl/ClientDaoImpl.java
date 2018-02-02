@@ -37,7 +37,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//根据客户id查询客户的联系人信息
 	@Override
 	public List<Clientcontact> getClientcontact(Client client) {
-		String sql = "select  clientContactName,ClientContactTel,ClientContactEmail,ClientContactQQ FROM client_clientcontact,clientcontact WHERE  client_clientcontact.clientContactId=clientcontact.clientContactId AND client_clientcontact.clientId=? ";
+		String sql = "select client_clientcontact.clientContactId,clientContactName,ClientContactTel,ClientContactEmail,ClientContactQQ FROM client_clientcontact,clientcontact WHERE  client_clientcontact.clientContactId=clientcontact.clientContactId AND client_clientcontact.clientId=? ";
 		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, client.getClientId());
 	}
 

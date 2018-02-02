@@ -28,7 +28,7 @@
             		
             		<td class="mess2">
             		<c:forEach var="clientcontact" items="${client.clientContactlist}">
-            			<div class="ccName"><a>${clientcontact.clientContactName}</a>
+            			<div class="ccName"><a class="nameContent">${clientcontact.clientContactName}</a>
             			<div class="messdiv">
 							<p>电话：${clientcontact.clientContactTel}</p>
 							<c:if test="${clientcontact.clientContactEmail!=null&&clientcontact.clientContactEmail!='' }">
@@ -37,7 +37,7 @@
 							<c:if test="${clientcontact.clientContactQQ!=null&&clientcontact.clientContactQQ!='' }">
 							<p>Q Q：${clientcontact.clientContactQQ}</p>
 							</c:if>
-							<input type="button" value="删除" style="position:absolute; top:50px;background-color:white;color:black" />
+							<input type="button" delId="${clientcontact.clientContactId }" id="delContact" value="删除" style="position:absolute; top:50px;background-color:white;color:black" />
 						</div>
 						</div>
 						</c:forEach>
@@ -59,12 +59,19 @@
 			$("#home").load("gotoUpdateClient?currentpage="+curpage+"&clientId="+clientId);
 		});
 		$("#clientUpdate").on("mouseover",".ccName",function(){
+			$(this).find(".nameContent").css("color","yellow");
 			$(this).find(".messdiv").show();
 		});
 		$("#clientUpdate").on("mouseout",".ccName",function(){
+			$(this).find(".nameContent").css("color","white");
+
 			$(this).find(".messdiv").hide();
 		});
 		
+		$("#clientUpdate").on("click","#delContact",function(){
+			var delId = $(this).attr("delId");
+			alert(delId);
+		});
 		$("#clientUpdate").on("click",".addCC",function(){
 			var curpage = ${curpage};
 			var clientId = $(this).attr("addId");
