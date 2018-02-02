@@ -150,7 +150,7 @@
 			$("#home").load("/dtw/admin/addSupplier.jsp");
 		})
 		$("#updateSupplier").click(function(){
-			$("#home").load("/dtw/admin/updateSupplier.jsp");
+			$("#home").load("showSupplier");
 		})
 		$("#showOrder").click(function(){
 			$("#home").load("/dtw/admin/showOrder.jsp");
