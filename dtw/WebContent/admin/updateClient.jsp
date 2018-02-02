@@ -31,17 +31,17 @@
             			<a class="ccName">${clientcontact.clientContactName}</a>
             			<div class="messdiv">
 							<p>电话：${clientcontact.clientContactTel}</p>
-							<c:if test="${clientcontact.clientContactEmail!=null }">
+							<c:if test="${clientcontact.clientContactEmail!=null&&clientcontact.clientContactEmail!='' }">
 							<p>邮箱：${clientcontact.clientContactEmail}</p>
 							</c:if>
-							<c:if test="${clientcontact.clientContactQQ!=null }">
+							<c:if test="${clientcontact.clientContactQQ!=null&&clientcontact.clientContactQQ!='' }">
 							<p>Q Q：${clientcontact.clientContactQQ}</p>
 							</c:if>
 						</div>
 						</c:forEach>
             		</td>
-            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" addId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+            		<td class="mess2"><a class="addCC" addId="${client.clientId }" addName="${client.clientName }">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
+            		<td class="mess2"><a class="updateClient" updateId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	</c:forEach>
             	
@@ -53,7 +53,7 @@
 	<script type="text/javascript">
 		$("#clientUpdate").on("click",".updateClient",function(){
 			var curpage = ${curpage};
-			var clientId = $(this).attr("addId");
+			var clientId = $(this).attr("updateId");
 			$("#home").load("gotoUpdateClient?currentpage="+curpage+"&clientId="+clientId);
 		});
 		$("body").on("mouseover",".ccName",function(){
@@ -62,8 +62,11 @@
 		$("body").on("mouseout",".ccName",function(){
 			$(this).next().hide(200);
 		});
-		$("body").on("click",".addCC",function(){
-			$("#home").load("/dtw/addClientContact");
+		$("#clientUpdate").on("click",".addCC",function(){
+			var curpage = ${curpage};
+			var clientId = $(this).attr("addId");
+			var clientName =$(this).attr("addName");
+			$("#home").load("/dtw/admin/addClientContact.jsp?clientId="+clientId+"&clientName="+clientName+"&currentpage="+curpage);
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };

@@ -7,7 +7,7 @@
                 <div class="tit">
                     <div class="col-md-3 col-xs-6">
                         <div class="tile quick-stats">
-                            <h3  style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">客户公司名</h3>
+                            <h4  style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">${param.clientName}</h4>
                     	</div>
 					</div>
                 </div>
@@ -25,20 +25,20 @@
  				 	<input id="userPwd" class="inpu"  name="telephone" placeholder="电话" /><span style="margin-left: 10px;">*</span>
  					<p id="pwdTip" class="tip"></p>
             	</div> 
- 				<div id="" class="tit-mess">
+ 				<div  class="tit-mess">
  					<span class="mess">邮&nbsp;&nbsp;&nbsp;&nbsp;箱:</span>
  				 	<input id="email" class="inpu" name="email" placeholder="邮箱" />
  					<p id="emailTip" class="tip"></p>
  				</div> 
- 				<div id="" class="tit-mess">
+ 				<div  class="tit-mess">
  					<span class="mess">Q&nbsp;&nbsp;&nbsp;&nbsp;Q:</span>
  				 	<input id="qq" class="inpu" name="qq" placeholder="QQ" />
  					<p id="QQTip" class="tip"></p>
  				</div> 
 				
-				<div id="" class="tit-mess">
-					<input id="addSub" class="mess" type="button" value="确认添加"/>
-					<input id="addRes" class="mess" type="reset" value="重新填写"/>
+				<div  class="tit-mess">
+					<input id="addSub" class="mess" type="button" addId="${param.clientId}"  value="确认添加" />
+					<input id="addRes" class="mess" type="button" value="放弃添加"/>
 				</div>
             </div>
      		
@@ -46,6 +46,8 @@
 	</body>
 	<script>
 		$("#addSub").click(function(){
+			
+			var qq =$("#qq").val();
 			$(".tip").text("");
 			var userAccount = $("#userAccount").val();
 			var userPwd = $("#userPwd").val();
@@ -65,8 +67,23 @@
 				alert("ok");
 			}
 			}else{
-				alert("ok");
+				var clientId =$(this).attr("addId");
+				$.ajax({
+					type:"post",
+					url:"addClientContact",
+					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email,
+					success:function(res){
+						alert("联系人添加成功")
+						var currentpage=${param.currentpage};
+						$("#home").load("showClient?currentpage="+currentpage);
+					}
+					
+				})
 			}
 			
-		})
+		});
+		$("#addRes").click(function(){
+			var currentpage=${param.currentpage};
+			$("#home").load("showClient?currentpage="+currentpage);
+		});
 	</script>
