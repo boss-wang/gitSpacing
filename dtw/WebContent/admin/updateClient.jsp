@@ -38,9 +38,10 @@
 							<p>Q Q：${clientcontact.clientContactQQ}</p>
 							</c:if>
 						</div>
+						
 						</c:forEach>
             		</td>
-            		<td class="mess2"><a class="addCC" addId="${client.clientId }" addName="${client.clientName }">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
+            		<td class="mess2"><a class="addCC" addId="${client.clientId }" addName="${client.clientName }">增加</a></td>
             		<td class="mess2"><a class="updateClient" updateId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	</c:forEach>
@@ -56,12 +57,10 @@
 			var clientId = $(this).attr("updateId");
 			$("#home").load("gotoUpdateClient?currentpage="+curpage+"&clientId="+clientId);
 		});
-		$("body").on("mouseover",".ccName",function(){
-			$(this).next().show(200);
+		$("#clientUpdate").on("click",".ccName",function(){
+			$(this).next().toggle();
 		});
-		$("body").on("mouseout",".ccName",function(){
-			$(this).next().hide(200);
-		});
+		
 		$("#clientUpdate").on("click",".addCC",function(){
 			var curpage = ${curpage};
 			var clientId = $(this).attr("addId");
