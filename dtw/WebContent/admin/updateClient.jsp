@@ -14,7 +14,7 @@
             <!-- 表单内容 -->
         <table   border="1"  id="clientUpdate" style=" width:970px ;height:350px" >
        
-            	<tr id="" class="tit-mess3">
+            	<tr  class="tit-mess3">
             		<td class="mess1"  style="width:150px;">客户公司抬头</td>
             		<td class="mess1"  style="width:160px;" >客户公司地址</td>
             		<td class="mess1" style="width:120px;">联系人</td>
@@ -22,7 +22,7 @@
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
             	<c:forEach var="client" items="${list }">
-            	<tr  class="tit-mess3">
+            	<tr  class="tit-mess3"  style=" height:40px">
             		<td class="mess2">${client.clientName }</td>
             		<td class="mess2">${client.clientAddress }</td>
             		
@@ -31,17 +31,17 @@
             			<a class="ccName">${clientcontact.clientContactName}</a>
             			<div class="messdiv">
 							<p>电话：${clientcontact.clientContactTel}</p>
-							<c:if test="${clientcontact.clientContactEmail!=null }">
+							<c:if test="${clientcontact.clientContactEmail!=null&&clientcontact.clientContactEmail!='' }">
 							<p>邮箱：${clientcontact.clientContactEmail}</p>
 							</c:if>
-							<c:if test="${clientcontact.clientContactQQ!=null }">
+							<c:if test="${clientcontact.clientContactQQ!=null&&clientcontact.clientContactQQ!='' }">
 							<p>Q Q：${clientcontact.clientContactQQ}</p>
 							</c:if>
 						</div>
 						</c:forEach>
             		</td>
-            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
-            		<td class="mess2"><a class="updateClient" addId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+            		<td class="mess2"><a class="addCC" addId="${client.clientId }" addName="${client.clientName }">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
+            		<td class="mess2"><a class="updateClient" updateId="${client.clientId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             	</tr> 
             	</c:forEach>
             	
@@ -53,7 +53,7 @@
 	<script type="text/javascript">
 		$("#clientUpdate").on("click",".updateClient",function(){
 			var curpage = ${curpage};
-			var clientId = $(this).attr("addId");
+			var clientId = $(this).attr("updateId");
 			$("#home").load("gotoUpdateClient?currentpage="+curpage+"&clientId="+clientId);
 		});
 		$("body").on("mouseover",".ccName",function(){
@@ -62,8 +62,11 @@
 		$("body").on("mouseout",".ccName",function(){
 			$(this).next().hide(200);
 		});
-		$("body").on("click",".addCC",function(){
-			$("#home").load("/dtw/addClientContact");
+		$("#clientUpdate").on("click",".addCC",function(){
+			var curpage = ${curpage};
+			var clientId = $(this).attr("addId");
+			var clientName =$(this).attr("addName");
+			$("#home").load("/dtw/admin/addClientContact.jsp?clientId="+clientId+"&clientName="+clientName+"&currentpage="+curpage);
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };

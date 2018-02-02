@@ -49,7 +49,7 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"",
+					url:"addclient",
 					data:"clientName="+clientName+"&clientAddress="+clientAddress,
 					async:true,
 					success:function(res){
@@ -57,7 +57,7 @@
 							$("#nameTip").text("公司名已经存在");
 							$("#clientName").focus();
 						}else{
-							$("#home").load("");
+							$("#home").load("showClient");
 						}
 					}
 				})

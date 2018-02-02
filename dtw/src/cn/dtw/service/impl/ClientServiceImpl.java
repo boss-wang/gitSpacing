@@ -38,5 +38,10 @@ public class ClientServiceImpl implements ClientService {
 	public int getResultById(Client client) {
 		return clientDao.getResultById(client);
 	}
+	@Override
+	public int addClient(Client client) {
+		
+		return clientDao.addClient(client);
+	}
 
 }

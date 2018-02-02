@@ -89,4 +89,18 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		}
 		
 	}
+
+	//添加客户
+	@Override
+	public int addClient(Client client) {
+		String  sql="select * from client where clientName=? ";
+		Client clien= super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
+		if(clien==null) {
+			String insertsql = "insert into client (clientName,clientAddress)values(?,?)";
+			return super.executeUpdate(insertsql, client.getClientName(),client.getClientAddress());
+		}else {
+			return 0;
+		}
+		
+	}
 }
