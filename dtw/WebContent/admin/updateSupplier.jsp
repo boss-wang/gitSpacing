@@ -17,7 +17,7 @@
             		<td class="mess1"  style="width:150px;">供应商公司抬头</td>
             		<td class="mess1"  style="width:160px;" >供应商公司地址</td>
             		<td class="mess1" style="width:120px;">联系人</td>
-            		<td class="mess1" style="width:120px;">联系人操作</td>
+            		<td class="mess1" style="width:120px;">添加联系人</td>
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
             	<c:forEach var="supplier" items="${supplierList }">
@@ -31,11 +31,15 @@
 										<p>电话：${contact.supplierContactTel }</p>
 										<p>邮箱：${contact.supplierContactEmail }</p>
 										<p>Q Q：${contact.supplierContactQQ }</p>
+										<p>
+											<a class="ccOperation modifyCC">修改</a>
+											<a class="ccOperation delCC" supplierId="${supplier.supplierId }" contactId="${contact.supplierContactId }">删除</a>
+										</p>
 									</div>
 								</div>
 	            			</c:forEach>
 	            		</td>
-	            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a>&nbsp;&nbsp;<a class="delCC" modifyId="ls">删除</a></td>
+	            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a></td>
 	            		<td class="mess2"><a class="updateSupplier" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             		</tr> 
             	</c:forEach>
@@ -50,14 +54,33 @@
             	</tr> 
         </table>  
 	<script type="text/javascript">
-		$("body").on("click",".updateSupplier",function(){
+		$("#clientUpdate").on("click",".delCC",function(){
+			var supplierId = $(this).attr("supplierId");
+			var contactId = $(this).attr("contactId");
+			var thisEle = $(this);
+			if(confirm("确认删除？")){
+				$.ajax({
+					type:"post",
+					url:"delSupplierContact",
+					data:"supplierId="+supplierId+"&contactId="+contactId,
+					success:function(res){
+						if(res==1){
+							thisEle.parents(".ccName").remove();
+						}else{
+							alert("删除失败");
+						}
+					}
+				})
+			}
+		});
+		$("#clientUpdate").on("click",".updateSupplier",function(){
 			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
 		});
-		$("body").on("mouseover",".ccName",function(){
+		$("#clientUpdate").on("mouseover",".ccName",function(){
 			$(this).find(".messdiv").show();
 			$(this).find(".nameContent").css("color","yellow");
 		});
-		$("body").on("mouseout",".ccName",function(){
+		$("#clientUpdate").on("mouseout",".ccName",function(){
 			$(this).find(".messdiv").hide();
 			$(this).find(".nameContent").css("color","white");
 		});

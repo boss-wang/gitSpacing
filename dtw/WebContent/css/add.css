@@ -123,11 +123,11 @@
            		 display:none;
            		 position: absolute;
            		 z-index:10;
-           		 padding-top:5px;
+           		 padding:8px 10px;
            		 left: 100px; 
            		 top: 0px; 
            		 width:260px;
-           		 height:80px; 
+           		 height:105px; 
            		 background-color:rgba(50,83,100,0.7);
            	}
            	.messdiv p{
@@ -169,8 +169,18 @@
 			#upd{
             		margin-top:30px ;
             		border-color: rgba(0,0,0,0.2);
-            	 margin-left:310px ;
-            	 text-align:center; 
-            	 border-collapse:collapse ;
+	            	margin-left:310px ;
+	            	text-align:center; 
+	            	border-collapse:collapse ;
             	}
-		
+/* updateSupplier */
+			.ccOperation{
+				display:inline-block;
+				text-align:center;
+				font-size:15px;
+				line-height:20px;
+				width:80px;
+				height:20px;
+				margin-left:20px;
+				background:rgba(160,100,200,0.6);
+			}

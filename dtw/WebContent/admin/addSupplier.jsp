@@ -59,7 +59,7 @@
 						}else if(res==2){
 							alert("添加失败");
 						}else if(res==1){
-							alert("添加成功");
+							$("#home").load("showSupplier");
 						}
 					}
 				})
