@@ -139,13 +139,13 @@
 			var currentPage = ${currentPage };
 			var supplierId = $(this).attr("modifyId");
 			var supplierName =$(this).attr("supplierName");
-			$("#home").load("admin/addSupplierContact.jsp?supplierName="+supplierName+"&supplierId="+supplierId+"&currentPage="+currentPage);
+			$("#home").load("admin/addSupplierContact.jsp?supplierId="+supplierId+"&currentPage="+currentPage+"&supplierName="+supplierName);
 		});
-		
+		//修改供应商信息
 		$("#clientUpdate").on("click",".updateSupplier",function(){
 			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
 		});
-		
+		//控制显示联系人信息
 		$("#clientUpdate").on("mouseover",".ccName",function(){
 			$(this).find(".messdiv").show();
 			$(this).find(".nameContent").css("color","yellow");
@@ -154,6 +154,7 @@
 			$(this).find(".messdiv").hide();
 			$(this).find(".nameContent").css("color","white");
 		});
+		//分页
 		$("#firstPage").click(function(){
 			$("#home").load("showSupplier?currentPage=1");
 		})
