@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	.messdiv input{
+		background-color:rgba(0,0,0,0.7);
+		display:inline-block;
+		border:none;
+	}
+</style>
 <body>
 		 <!-- 修改供应商信息 -->
                 <div class="tit">
@@ -26,20 +33,20 @@
 	            		<td class="mess2">${supplier.supplierAddress }</td>
 	            		<td class="mess2">
 	            			<c:forEach var="contact" items="${supplier.supplierContacts }">
-	            				<div class="ccName"><a class="nameContent">${contact.supplierContactName }</a>
+	            				<div class="ccName"><a class="nameContent" contactId="${contact.supplierContactId }" >${contact.supplierContactName }</a>
 		            				<div class="messdiv">
 										<p>电话：${contact.supplierContactTel }</p>
 										<p>邮箱：${contact.supplierContactEmail }</p>
 										<p>Q Q：${contact.supplierContactQQ }</p>
 										<p>
-											<a class="ccOperation modifyCC">修改</a>
+											<a class="ccOperation modifyCC" tel="${contact.supplierContactTel }" email="${contact.supplierContactEmail }" qq="${contact.supplierContactQQ }">修改</a>
 											<a class="ccOperation delCC" supplierId="${supplier.supplierId }" contactId="${contact.supplierContactId }">删除</a>
 										</p>
 									</div>
 								</div>
 	            			</c:forEach>
 	            		</td>
-	            		<td class="mess2"><a class="addCC" modifyId="ls">增加</a></td>
+	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">增加</a></td>
 	            		<td class="mess2"><a class="updateSupplier" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             		</tr> 
             	</c:forEach>
@@ -70,12 +77,55 @@
 							alert("删除失败");
 						}
 					}
-				})
+				});
 			}
 		});
+		//修改联系人
+		$("#clientUpdate").on("click",".modifyCC",function(){
+			var messdiv = $(this).parents(".messdiv");
+			var oldContent = messdiv.children();
+			var tel = $(this).attr("tel");
+			var email = $(this).attr("email");
+			var qq = $(this).attr("qq");
+			var newContent = $('<p>电话：<input value='+tel+'></p><p>邮箱：<input value='+email+'></p><p>Q Q：<input value='+qq+'></p><p><a class="ccOperation saveCC"}">保存</a><a class="ccOperation giveUp">取消</a></p>')
+			messdiv.empty();
+			messdiv.append(newContent);
+			$(".giveUp").click(function(){
+				
+			})
+		});
+		//保存联系人修改
+		$("#clientUpdate").on("click",".saveCC",function(){
+			var parent = $(this).parents(".ccName");
+			var contactId = parent.find(".nameContent").attr("contactId");
+			var tel = parent.find("input").eq(0).val();
+			var email = parent.find("input").eq(1).val();
+			var qq = parent.find("input").eq(2).val();
+			$.ajax({
+				type:"post",
+				url:"modifySupplierContact",
+				data:"contactId="+contactId+"&tel="+tel+"&email="+email+"&qq="+qq,
+				success:function(res){
+					if(res==1){
+						
+					}else{
+						alert("修改失败");
+					}
+				}
+			});
+		});
+		
+		$("#clientUpdate").on("click",".addCC",function(){
+			var currentPage = ${currentPage };
+			var contactId = $(this).attr("contactId");
+			var supplierName =$(this).attr("supplierName");
+			$("#home").load("modifySupplierContact?supplierName="+supplierName+"&contactId="+contactId+"&currentPage="+currentPage);
+		});
+		
 		$("#clientUpdate").on("click",".updateSupplier",function(){
 			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
 		});
+		
 		$("#clientUpdate").on("mouseover",".ccName",function(){
 			$(this).find(".messdiv").show();
 			$(this).find(".nameContent").css("color","yellow");

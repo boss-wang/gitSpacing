@@ -5,6 +5,7 @@ import cn.dtw.dao.SuppliercontactDao;
 import cn.dtw.dao.impl.Supplier_contactDaoImpl;
 import cn.dtw.dao.impl.SuppliercontactDaoImpl;
 import cn.dtw.entity.Supplier_suppliercontact;
+import cn.dtw.entity.Suppliercontact;
 import cn.dtw.service.Supplier_contactService;
 
 public class Supplier_contactServiceImpl implements Supplier_contactService {
@@ -20,6 +21,18 @@ public class Supplier_contactServiceImpl implements Supplier_contactService {
 			}
 		}
 		return rs;
+	}
+	//添加供应商联系人,成功返回1，失败返回0
+	@Override
+	public int addSupplierContact(Supplier_suppliercontact supplier_Contact, Suppliercontact suppliercontact) {
+		int contactId = supplierContactDao.addSupplierContact(suppliercontact);
+		if(contactId>0) {
+			supplier_Contact.setSupplierContactId(contactId);
+			if(supplier_contactDao.addSupplierContact(supplier_Contact)) {
+				return 1;
+			};
+		}
+		return 0;
 	}
 
 }

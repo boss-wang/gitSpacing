@@ -28,4 +28,10 @@ public class Supplier_contactDaoImpl extends BaseDao implements Supplier_contact
 		String sql = "delete from supplier_suppliercontact where supplierContactId=? and supplierId=?";
 		return super.executeUpdate(sql, suppler_Contact.getSupplierContactId(),suppler_Contact.getSupplierId())>0?true:false;
 	}
+	//添加供应商联系人
+	@Override
+	public boolean addSupplierContact(Supplier_suppliercontact suppler_Contact) {
+		String sql = "insert into supplier_suppliercontact(supplierContactId,supplierId) values(?,?)";
+		return super.executeUpdate(sql, suppler_Contact.getSupplierContactId(),suppler_Contact.getSupplierId())>0?true:false;
+	}
 }
