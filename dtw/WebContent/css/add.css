@@ -184,3 +184,15 @@
 				margin-left:20px;
 				background:rgba(160,100,200,0.6);
 			}
+			.emailTip{
+				display:none; 
+				text-align:center;
+				border-radius:25px;
+				line-height:20px;
+				height:20px;
+				width:130px;
+				background:rgba(233,104,107,0.6); 
+				position:absolute; 
+				top:40px;
+				left:130px;
+			}

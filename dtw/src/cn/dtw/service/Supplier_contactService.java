@@ -8,4 +8,6 @@ public interface Supplier_contactService {
 	public int delSupplierContact(Supplier_suppliercontact suppler_Contact);
 	//添加供应商联系人 成功返回1，失败返回0
 	public int addSupplierContact(Supplier_suppliercontact supplier_Contact,Suppliercontact suppliercontact);
+	//修改联系人
+	public int updateSupplierContact(Suppliercontact suppliercontact);
 }

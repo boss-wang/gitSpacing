@@ -34,5 +34,13 @@ public class Supplier_contactServiceImpl implements Supplier_contactService {
 		}
 		return 0;
 	}
+	//修改联系人
+	@Override
+	public int updateSupplierContact(Suppliercontact suppliercontact) {
+		if(supplierContactDao.updateSupplierContact(suppliercontact)) {
+			return 1;
+		}
+		return 0;
+	}
 
 }

@@ -82,18 +82,23 @@
 		});
 		//修改联系人
 		$("#clientUpdate").on("click",".modifyCC",function(){
-			var messdiv = $(this).parents(".messdiv");
-			var oldContent = messdiv.children();
-			var tel = $(this).attr("tel");
-			var email = $(this).attr("email");
-			var qq = $(this).attr("qq");
-			var newContent = $('<p>电话：<input value='+tel+'></p><p>邮箱：<input value='+email+'></p><p>Q Q：<input value='+qq+'></p><p><a class="ccOperation saveCC"}">保存</a><a class="ccOperation giveUp">取消</a></p>')
-			messdiv.empty();
-			messdiv.append(newContent);
-			$(".giveUp").click(function(){
+			if($("#clientUpdate").find("input").length>1){
+				alert("还有未保存的修改，请先保存");
+			}else{
+				var messdiv = $(this).parents(".messdiv");
+				var oldContent = messdiv.children();
+				var tel = $(this).attr("tel");
+				var email = $(this).attr("email");
+				var qq = $(this).attr("qq");
+				var newContent = $('<p>电话：<input value='+tel+'></p><p>邮箱：<input class="email" value='+email+'></p><p>Q Q：<input value='+qq+'></p><p><a class="ccOperation saveCC"}">保存</a><a class="ccOperation giveUp">取消</a></p><div class="emailTip"></div>');
 				messdiv.empty();
-				messdiv.append(oldContent);
-			})
+				messdiv.append(newContent);
+				$(".messdiv").on("click",".giveUp",function(){
+					messdiv.empty();
+					messdiv.append(oldContent);
+				});
+			}
+		
 		});
 		//保存联系人修改
 		$("#clientUpdate").on("click",".saveCC",function(){
@@ -102,18 +107,31 @@
 			var tel = parent.find("input").eq(0).val();
 			var email = parent.find("input").eq(1).val();
 			var qq = parent.find("input").eq(2).val();
-			$.ajax({
-				type:"post",
-				url:"modifySupplierContact",
-				data:"contactId="+contactId+"&tel="+tel+"&email="+email+"&qq="+qq,
-				success:function(res){
-					if(res==1){
-						
-					}else{
-						alert("修改失败");
+			
+			var reg=new RegExp("^\\w+@\\w+(\\.[a-zA-Z]{2,3}){1,2}$")
+			if(email!==""&&email!=null&&!reg.test(email)){
+				$(".emailTip").text("邮箱格式不正确");
+				$(".emailTip").fadeIn(200);
+				$(".email").focus();
+				setTimeout(function(){
+					$(".emailTip").fadeOut(2000);
+				},1000);
+			}else{
+				$.ajax({
+					type:"post",
+					url:"modifySupplierContact",
+					data:"contactId="+contactId+"&tel="+tel+"&email="+email+"&qq="+qq,
+					success:function(res){
+						if(res==1){
+							var currentPage = ${currentPage };
+							$("#home").load("showSupplier?currentPage="+currentPage);
+						}else{
+							alert("修改失败");
+						}
 					}
-				}
-			});
+				});
+			}
+			
 		});
 		
 		$("#clientUpdate").on("click",".addCC",function(){

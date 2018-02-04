@@ -19,5 +19,11 @@ public class SuppliercontactDaoImpl extends BaseDao implements SuppliercontactDa
 		String sql = "insert into suppliercontact(supplierContactEmail,supplierContactName,supplierContactQQ,supplierContactTel) values(?,?,?,?)";
 		return super.executeUpdateAndReturnId(sql, suppliercontact.getSupplierContactEmail(),suppliercontact.getSupplierContactName(),suppliercontact.getSupplierContactQQ(),suppliercontact.getSupplierContactTel());
 	}
+	//修改联系人
+	@Override
+	public boolean updateSupplierContact(Suppliercontact suppliercontact) {
+		String sql = "update suppliercontact set supplierContactEmail=?,supplierContactQQ=?,supplierContactTel=? where supplierContactId=?";
+		return super.executeUpdate(sql, suppliercontact.getSupplierContactEmail(),suppliercontact.getSupplierContactQQ(),suppliercontact.getSupplierContactTel(),suppliercontact.getSupplierContactId())>0?true:false;
+	}
 
 }
