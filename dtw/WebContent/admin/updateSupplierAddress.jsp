@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<body>
 		  <!-- 修改供应商 -->
                 <div class="tit">
@@ -15,12 +16,12 @@
             <div id="">
             	<div id="" class="tit-mess">
             		<span class="mess">供&nbsp;应&nbsp;商</span>
-            		<input id="supplierName" class="inpu" name="supplierName" placeholder="公司抬头" /><span style="margin-left: 10px;">*</span>
+            		<input id="supplierName" class="inpu" name="supplierName" placeholder="公司抬头" value="${supplier.supplierName }" /><span style="margin-left: 10px;">*</span>
             		<p id="nameTip" class="tip"></p>
             	</div> 
             	<div class="tit-mess">
             		<span class="mess">地&nbsp;&nbsp;&nbsp;址</span>
- 				 	<textarea id="supplierAddress" class="inpu" style="height: 50px;position:relative;top:18px" name="supplierAddress" placeholder="公司地址" /></textarea><span style="margin-left: 10px;">*</span>
+ 				 	<textarea id="supplierAddress" class="inpu" style="height: 50px;position:relative;top:18px" name="clientAddress" placeholder="公司地址" >${supplier.supplierAddress }</textarea> <span style="margin-left: 10px;">*</span>
  					<p id="addressTip" class="tip"></p>
             	</div> 
 				<div id="" class="tit-mess">
@@ -32,31 +33,35 @@
         
 	<script type="text/javascript">
 		$("#addRes").click(function(){
-			$("#home").load("/dtw/admin/updateSupplier.jsp");
+			var currentPage = ${currentPage };
+			$("#home").load("showSupplier?currentPage="+currentPage);
 		});
 		$("#addSub").click(function(){
 			$(".tip").text("");
-			
+			var currentPage = ${currentPage };
+			var supplierId = ${supplier.supplierId };
 			var supplierName = $("#supplierName").val();
 			var supplierAddress = $("#supplierAddress").val();
 			if(supplierName==""||supplierName==null){
 				$("#nameTip").text("公司名不能为空");
 				$("#supplierName").focus();
 			}else if(supplierAddress==""||supplierAddress==null){
-				$("#AddressTip").text("地址不能为空");
+				$("#addressTip").text("地址不能为空");
 				$("#supplierAddress").focus();
 			}else{
 				$.ajax({
 					type:"post",
-					url:"",
-					data:"supplierName="+supplierName+"&supplierAddress="+supplierAddress,
+					url:"updateSupplier",
+					data:"supplierId="+supplierId+"&supplierName="+supplierName+"&supplierAddress="+supplierAddress,
 					async:true,
 					success:function(res){
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#supplierName").focus();
+						}else if(res==1){
+							$("#home").load("showSupplier?currentPage="+currentPage);
 						}else{
-							$("#home").load("");
+							alert("修改失败");
 						}
 					}
 				})

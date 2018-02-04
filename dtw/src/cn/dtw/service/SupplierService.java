@@ -13,4 +13,8 @@ public interface SupplierService {
 	public List<Supplier> getPageSupplier(int page,int pageSize);
 	//获得总记录条数
 	public int getTotalRowOfSupplier();
+	//通过id获得供应商信息
+	public Supplier getSupplierById(Supplier supplier);
+	//修改供应商,若公司名存在则返回0，若修改失败返回2，修改成功返回1
+	public int updateSupplier(Supplier supplier);
 }

@@ -13,4 +13,10 @@ public interface SupplierDao {
 	public List<Supplier> getPageSupplier(int startRow,int pageSize);
 	//获得总记录条数
 	public int getTotalRowOfSupplier();
+	//通过id查询供应商信息
+	public Supplier getSupplierById(Supplier supplier);
+	//查询除本身外，是否有重名的供应商,没有返回true，有则返回false
+	public boolean isExistSupplier(Supplier supplier);
+	//修改供应商
+	public boolean updateSupplier(Supplier supplier);
 }

@@ -43,5 +43,21 @@ public class SupplierServiceImpl implements SupplierService {
 	public int getTotalRowOfSupplier() {
 		return suDao.getTotalRowOfSupplier();
 	}
+	//通过id查询供应商信息
+	@Override
+	public Supplier getSupplierById(Supplier supplier) {
+		return suDao.getSupplierById(supplier);
+	}
+	//修改供应商,若公司名存在则返回0，若修改失败返回2，修改成功返回1
+	@Override
+	public int updateSupplier(Supplier supplier) {
+		if(suDao.isExistSupplier(supplier)) {
+			if(suDao.updateSupplier(supplier)) {
+				return 1;
+			}
+			return 2;
+		};
+		return 0;
+	}
 
 }

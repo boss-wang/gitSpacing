@@ -9,7 +9,7 @@
 	}
 </style>
 <body>
-		 <!-- 修改供应商信息 -->
+		 <!-- 供应商管理 -->
                 <div class="tit">
                     <div class="col-md-3 col-xs-6" >
                         <div class="tile quick-stats">
@@ -47,7 +47,7 @@
 	            			</c:forEach>
 	            		</td>
 	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">增加</a></td>
-	            		<td class="mess2"><a class="updateSupplier" modifyId="ls">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+	            		<td class="mess2"><a class="updateSupplier" modifyId="${supplier.supplierId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
             		</tr> 
             	</c:forEach>
             	
@@ -143,7 +143,9 @@
 		});
 		//修改供应商信息
 		$("#clientUpdate").on("click",".updateSupplier",function(){
-			$("#home").load("/dtw/admin/updateSupplierAddress.jsp");
+			var currentPage = ${currentPage };
+			var supplierId = $(this).attr("modifyId");
+			$("#home").load("gotoUpdateSupplier?currentPage="+currentPage+"&supplierId="+supplierId);
 		});
 		//控制显示联系人信息
 		$("#clientUpdate").on("mouseover",".ccName",function(){

@@ -37,5 +37,24 @@ public class SupplierDaoImpl extends BaseDao implements SupplierDao {
 		Long rs =  (Long)super.executeOneColumn(new ScalarHandler("count"), sql);
 		return rs.intValue();
 	}
+	//通过id获得供应商信息
+	@Override
+	public Supplier getSupplierById(Supplier supplier) {
+		String sql = "select * from supplier where supplierId=?";
+		return super.executeOneRow(new BeanHandler<Supplier>(Supplier.class), sql, supplier.getSupplierId());
+	}
+	//查询除本身外，是否有重名的供应商,没有返回true，有则返回false
+	@Override
+	public boolean isExistSupplier(Supplier supplier) {
+		String sql = "select supplierName from supplier where supplierId!=? and supplierName=?";
+		Object rs = super.executeOneColumn(new ScalarHandler("supplierName"), sql,supplier.getSupplierId(), supplier.getSupplierName());
+		return rs==null?true:false;
+	}
+	//修改供应商
+	@Override
+	public boolean updateSupplier(Supplier supplier) {
+		String sql = "update supplier set supplierName=?,supplierAddress=? where supplierId=?";
+		return super.executeUpdate(sql, supplier.getSupplierName(),supplier.getSupplierAddress(),supplier.getSupplierId())>0?true:false;
+	}
 
 }
