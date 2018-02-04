@@ -61,6 +61,7 @@
             	</tr> 
         </table>  
 	<script type="text/javascript">
+	//删除联系人
 		$("#clientUpdate").on("click",".delCC",function(){
 			var supplierId = $(this).attr("supplierId");
 			var contactId = $(this).attr("contactId");
@@ -133,12 +134,12 @@
 			}
 			
 		});
-		
+		//增加联系人
 		$("#clientUpdate").on("click",".addCC",function(){
 			var currentPage = ${currentPage };
-			var contactId = $(this).attr("contactId");
+			var supplierId = $(this).attr("modifyId");
 			var supplierName =$(this).attr("supplierName");
-			$("#home").load("modifySupplierContact?supplierName="+supplierName+"&contactId="+contactId+"&currentPage="+currentPage);
+			$("#home").load("admin/addSupplierContact.jsp?supplierName="+supplierName+"&supplierId="+supplierId+"&currentPage="+currentPage);
 		});
 		
 		$("#clientUpdate").on("click",".updateSupplier",function(){
