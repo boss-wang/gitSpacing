@@ -91,7 +91,8 @@
 			messdiv.empty();
 			messdiv.append(newContent);
 			$(".giveUp").click(function(){
-				
+				messdiv.empty();
+				messdiv.append(oldContent);
 			})
 		});
 		//保存联系人修改
