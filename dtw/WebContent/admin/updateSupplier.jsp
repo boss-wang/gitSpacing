@@ -47,7 +47,7 @@
 	            			</c:forEach>
 	            		</td>
 	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">增加</a></td>
-	            		<td class="mess2"><a class="updateSupplier" modifyId="${supplier.supplierId }">修改</a>&nbsp;&nbsp;<a href="">删除</a></td>
+	            		<td class="mess2"><a class="updateSupplier" modifyId="${supplier.supplierId }">修改</a>&nbsp;&nbsp;<a class="delSupplier" modifyId="${supplier.supplierId }">删除</a></td>
             		</tr> 
             	</c:forEach>
             	
@@ -146,6 +146,26 @@
 			var currentPage = ${currentPage };
 			var supplierId = $(this).attr("modifyId");
 			$("#home").load("gotoUpdateSupplier?currentPage="+currentPage+"&supplierId="+supplierId);
+		});
+		//删除供应商
+		$("#clientUpdate").on("click",".delSupplier",function(){
+			if(confirm("确认删除？")){
+				var currentPage = ${currentPage };
+				var supplierId = $(this).attr("modifyId");
+				$.ajax({
+					url:"delSupplier",
+					type:"post",
+					data:"supplierId="+supplierId,
+					success:function(res){
+						if(res==1){
+							alert("删除成功");
+							$("#home").load("showSupplier?currentPage="+currentPage);
+						}else{
+							alert("删除失败");
+						}
+					}
+				});
+			}
 		});
 		//控制显示联系人信息
 		$("#clientUpdate").on("mouseover",".ccName",function(){

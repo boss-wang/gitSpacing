@@ -8,8 +8,10 @@ import cn.dtw.dao.Supplier_contactDao;
 import cn.dtw.dao.impl.SupplierDaoImpl;
 import cn.dtw.dao.impl.Supplier_contactDaoImpl;
 import cn.dtw.entity.Supplier;
+import cn.dtw.entity.Supplier_suppliercontact;
 import cn.dtw.entity.Suppliercontact;
 import cn.dtw.service.SupplierService;
+import cn.dtw.service.Supplier_contactService;
 
 public class SupplierServiceImpl implements SupplierService {
 	SupplierDao suDao = new SupplierDaoImpl();
@@ -58,6 +60,22 @@ public class SupplierServiceImpl implements SupplierService {
 			return 2;
 		};
 		return 0;
+	}
+	//删除供应商，及其联系人
+	@Override
+	public int delSupplier(Supplier supplier) {
+		Supplier_contactService su_conService = new Supplier_contactServiceImpl();
+		Supplier_suppliercontact suppler_Contact;
+		//查出此供应商所有联系人，并删除
+		List<Suppliercontact> suContactList = su_contDao.getSupplierContactBySupplierId(supplier);
+		for(Suppliercontact supContact:suContactList) {
+			suppler_Contact = new Supplier_suppliercontact();
+			suppler_Contact.setSupplierContactId(supContact.getSupplierContactId());
+			suppler_Contact.setSupplierId(supplier.getSupplierId());
+			su_conService.delSupplierContact(suppler_Contact);
+		}
+		suDao.delSupplier(supplier);
+		return 1;
 	}
 
 }

@@ -56,5 +56,11 @@ public class SupplierDaoImpl extends BaseDao implements SupplierDao {
 		String sql = "update supplier set supplierName=?,supplierAddress=? where supplierId=?";
 		return super.executeUpdate(sql, supplier.getSupplierName(),supplier.getSupplierAddress(),supplier.getSupplierId())>0?true:false;
 	}
+	//删除供应商
+	@Override
+	public boolean delSupplier(Supplier supplier) {
+		String sql = "delete from supplier where supplierId=?";
+		return super.executeUpdate(sql, supplier.getSupplierId())>0?true:false;
+	}
 
 }

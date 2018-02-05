@@ -19,4 +19,6 @@ public interface SupplierDao {
 	public boolean isExistSupplier(Supplier supplier);
 	//修改供应商
 	public boolean updateSupplier(Supplier supplier);
+	//删除供应商
+	public boolean delSupplier(Supplier supplier);
 }

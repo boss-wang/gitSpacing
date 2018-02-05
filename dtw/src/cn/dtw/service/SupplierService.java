@@ -17,4 +17,6 @@ public interface SupplierService {
 	public Supplier getSupplierById(Supplier supplier);
 	//修改供应商,若公司名存在则返回0，若修改失败返回2，修改成功返回1
 	public int updateSupplier(Supplier supplier);
+	//删除供应商，及其联系人
+	public int delSupplier(Supplier supplier);
 }
