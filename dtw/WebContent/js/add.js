@@ -38,8 +38,12 @@
 							alert("用户添加成功，职位未添加");
 							$("#home").load("/dtw/showUser");
 						}else if(res==2){
-							alert("添加成功");
+							$(".homeTip").text("用户添加成功");
+							$(".homeTip").show(200);
 							$("#home").load("/dtw/showUser");
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
 						}
 					}
 				})

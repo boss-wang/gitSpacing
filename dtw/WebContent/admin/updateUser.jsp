@@ -47,11 +47,28 @@
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };
-			$("#home").load("/dtw/showUser?currentpage="+curpage);
+			if(curpage==0){
+				$(".homeTip").text("已经是第一页了");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
+			}else{
+				$("#home").load("/dtw/showUser?currentpage="+curpage);
+			}
 		})
 		$("#nextPage").click(function(){
 			var curpage = ${curpage+1 };
-			$("#home").load("/dtw/showUser?currentpage="+curpage);
+			var totalPage = ${totalPage }+1;
+			if(totalPage==curpage){
+				$(".homeTip").text("已经是最后一页了");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
+			}else{
+				$("#home").load("/dtw/showUser?currentpage="+curpage);
+			}
 		})
 		$("#firstPage").click(function(){
 			var curpage = 1;
@@ -72,8 +89,12 @@
 					async:true,
 					success:function(res){
 						if(res==2){
-							alert("删除成功！");
+							$(".homeTip").text("删除成功");
+							$(".homeTip").show(200);
 							$("#home").load("/dtw/showUser?currentpage="+curpage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
 						}else if(res==1){
 							alert("用户已删除，职位删除失败");
 							$("#home").load("/dtw/showUser?currentpage="+curpage);

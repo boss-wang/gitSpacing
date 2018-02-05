@@ -70,7 +70,12 @@
 					success:function(res){
 						if(res==1){
 							var currentPage=${param.currentPage};
+							$(".homeTip").text("添加成功！");
+							$(".homeTip").show(200);
 							$("#home").load("showSupplier?currentPage="+currentPage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
 						}else{
 							alert("添加失败");
 						}

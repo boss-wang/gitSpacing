@@ -39,7 +39,7 @@
 										<p>邮箱：${contact.supplierContactEmail }</p>
 										<p>Q Q：${contact.supplierContactQQ }</p>
 										<p>
-											<a class="ccOperation modifyCC" tel="${contact.supplierContactTel }" email="${contact.supplierContactEmail }" qq="${contact.supplierContactQQ }">修改</a>
+											<a class="ccOperation modifyCC" modName="${contact.supplierContactName }" tel="${contact.supplierContactTel }"  email="${contact.supplierContactEmail }" qq="${contact.supplierContactQQ }">修改</a>
 											<a class="ccOperation delCC" supplierId="${supplier.supplierId }" contactId="${contact.supplierContactId }">删除</a>
 										</p>
 									</div>
@@ -82,10 +82,16 @@
 			}
 		});
 		//修改联系人
+		var modeName;
 		$("#clientUpdate").on("click",".modifyCC",function(){
 			if($("#clientUpdate").find("input").length>1){
-				alert("还有未保存的修改，请先保存");
+				$(".homeTip").text("正在修改`"+modeName+"`");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1500);
+				},1000);
 			}else{
+				modeName = $(this).attr("modName");
 				var messdiv = $(this).parents(".messdiv");
 				var oldContent = messdiv.children();
 				var tel = $(this).attr("tel");
@@ -158,8 +164,12 @@
 					data:"supplierId="+supplierId,
 					success:function(res){
 						if(res==1){
-							alert("删除成功");
+							$(".homeTip").text("删除成功！");
+							$(".homeTip").show(200);
 							$("#home").load("showSupplier?currentPage="+currentPage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1500);
+							},1500);
 						}else{
 							alert("删除失败");
 						}
@@ -186,11 +196,29 @@
 		})
 		$("#prePage").click(function(){
 			var currentPage = ${currentPage }-1;
-			$("#home").load("showSupplier?currentPage="+currentPage);
+			if(currentPage==0){
+				$(".homeTip").text("已经是第一页了");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
+			}else{
+				$("#home").load("showSupplier?currentPage="+currentPage);
+			}
 		})
 		$("#nextPage").click(function(){
+			var totalPage = ${totalPage }+1;
 			var currentPage = ${currentPage }+1;
-			$("#home").load("showSupplier?currentPage="+currentPage);
+			if(totalPage==currentPage){
+					$(".homeTip").text("已经是最后一页了");
+					$(".homeTip").show(200);
+					setTimeout(function(){
+						$(".homeTip").fadeOut(1000);
+					},1000);
+			}else{
+				$("#home").load("showSupplier?currentPage="+currentPage);
+			}
+
 		})
 	</script>
 	</body>

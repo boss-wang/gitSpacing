@@ -67,7 +67,11 @@
 				for(var i=0;i<$(".delRole").length;i++){
 					if($(".delRole").eq(i).attr("delId")==roleId){
 						hasRole = true;
-						alert("此用户已经拥有该职位，请勿重复添加");
+						$(".homeTip").text("请勿重复添加该职位");
+						$(".homeTip").show(200);
+						setTimeout(function(){
+							$(".homeTip").fadeOut(1000);
+						},1000);
 						break;
 					}
 				}
@@ -78,8 +82,12 @@
 						data:"roleId="+roleId+"&userId="+userId,
 						success:function(res){
 							if(res==1){
-								alert("添加成功！");
+								$(".homeTip").text("添加成功！");
+								$(".homeTip").show(200);
 								$("#home").load("showUserRole?userId="+userId);
+								setTimeout(function(){
+									$(".homeTip").fadeOut(1000);
+								},1000);
 							}else if(res==0){
 								alert("添加失败！");
 							}
@@ -90,7 +98,11 @@
 			
 			$("#del").on("click",".delRole",function(){
 				if($(".delRole").length<=1){
-					alert("员工至少有一个职位");
+					$(".homeTip").text("员工至少有一个职位");
+					$(".homeTip").show(200);
+					setTimeout(function(){
+						$(".homeTip").fadeOut(1000);
+					},1000);
 				}else if(confirm("确认删除？")){
 					var roleId = $(this).attr("delId");
 					var userId = ${user.userId };
@@ -100,8 +112,12 @@
 						data:"roleId="+roleId+"&userId="+userId,
 						success:function(res){
 							if(res==1){
-								alert("删除成功！");
+								$(".homeTip").text("删除成功");
+								$(".homeTip").show(200);
 								$("#home").load("showUserRole?userId="+userId);
+								setTimeout(function(){
+									$(".homeTip").fadeOut(1000);
+								},1000);
 							}else if(res==0){
 								alert("删除失败！");
 							}

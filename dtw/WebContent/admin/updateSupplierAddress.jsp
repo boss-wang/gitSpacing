@@ -59,7 +59,12 @@
 							$("#nameTip").text("公司名已经存在");
 							$("#supplierName").focus();
 						}else if(res==1){
+							$(".homeTip").text("修改成功");
+							$(".homeTip").show(200);
 							$("#home").load("showSupplier?currentPage="+currentPage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
 						}else{
 							alert("修改失败");
 						}
