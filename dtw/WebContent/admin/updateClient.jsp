@@ -96,11 +96,28 @@
 				})
 		$("#prePage").click(function() {
 			var curpage = ${curpage - 1};
+			if(curpage==0){
+				$(".homeTip").text("已经是第一页了");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
+			}else{
 			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			}
 		})
 		$("#nextPage").click(function() {
 			var curpage = ${curpage + 1};
+			var totalPage = ${totalPage }+1;
+			if(totalPage==curpage){
+				$(".homeTip").text("已经是最后一页了");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
+			}else{
 			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			}
 		})
 		$("#firstPage").click(function() {
 			var curpage = 1;
