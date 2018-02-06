@@ -12,12 +12,11 @@
                 </div>
                 <hr class="whiter"/>
 		<!-- 表单内容 -->
-		<form action="aaa" method="post">
 			<div >
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">客&nbsp;&nbsp;&nbsp;&nbsp;户</span>
-						<input id="client" class="inpu" name="clientId" placeholder="客户公司抬头"/>
+						<input id="clientName" class="inpu" placeholder="客户公司抬头"/>
 						<p  class="tip"> </p>
 					</div>
 						<span class="mess"style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
@@ -107,8 +106,20 @@
 					<input id="addRes" class="mess" type="reset" value="重新填写" />
 				</div>
 			</div>
-		</form>
 		<script type="text/javascript">
+			$("#clientName").keyup(function(){
+				var clientName = $(this).val();
+				$.ajax({
+					url:"order.do",
+					type:"post",
+					data:"mn=findClient&clientName="+clientName,
+					success:function(res){
+						
+					}
+				})
+			})
+		
+		
 			$("#addRes").click(function() {
 				$(".tip").text("");
 				$("#client").focus();
