@@ -33,7 +33,7 @@
 	<script type="text/javascript">
 		$("#addRes").click(function(){
 			var curpage = ${currentpage};
-			$("#home").load("/dtw/showClient?currentpage="+curpage);
+			$("#home").load("/dtw/client.do?mn=showClient&currentpage="+curpage);
 		});
 		$("#addSub").click(function(){
 			$(".tip").text("");
@@ -51,15 +51,15 @@
 				var clientId =${clientText.clientId };
 				$.ajax({
 					type:"post",
-					url:"updateClient",
-					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&clientId="+clientId,
+					url:"client.do",
+					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&clientId="+clientId+"&mn=updateClient",
 					async:true,
 					success:function(res){
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#clientName").focus();
 						}else{
-							$("#home").load("/dtw/showClient?currentpage="+curpage);
+							$("#home").load("/dtw/client.do?&mn=showClient&currentpage="+curpage);
 						}
 					}
 				})

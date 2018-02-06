@@ -144,7 +144,7 @@
 			$("#home").load("/dtw/admin/addClient.jsp");
 		})
 		$("#updateClient").click(function(){
-			$("#home").load("showClient");
+			$("#home").load("client.do?mn=showClient");
 		})
 		$("#addSupplier").click(function(){
 			$("#home").load("admin/addSupplier.jsp");

@@ -67,12 +67,12 @@
 				var clientId =$(this).attr("addId");
 				$.ajax({
 					type:"post",
-					url:"addClientContact",
-					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email,
+					url:"client.do",
+					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email+"&mn=addClientContact",
 					success:function(res){
 						alert("联系人添加成功")
 						var currentpage=${param.currentpage};
-						$("#home").load("showClient?currentpage="+currentpage);
+						$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
 					}
 					
 				})
@@ -81,12 +81,12 @@
 				var clientId =$(this).attr("addId");
 				$.ajax({
 					type:"post",
-					url:"addClientContact",
-					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email,
+					url:"client.do",
+					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email+"&mn=addClientContact",
 					success:function(res){
 						alert("联系人添加成功")
 						var currentpage=${param.currentpage};
-						$("#home").load("showClient?currentpage="+currentpage);
+						$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
 					}
 					
 				})
@@ -95,6 +95,6 @@
 		});
 		$("#addRes").click(function(){
 			var currentpage=${param.currentpage};
-			$("#home").load("showClient?currentpage="+currentpage);
+			$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
 		});
 	</script>

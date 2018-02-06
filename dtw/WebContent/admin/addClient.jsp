@@ -49,15 +49,15 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"addclient",
-					data:"clientName="+clientName+"&clientAddress="+clientAddress,
+					url:"client.do",
+					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&mn=addClient",
 					async:true,
 					success:function(res){
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#clientName").focus();
 						}else{
-							$("#home").load("showClient");
+							$("#home").load("client.do?mn=showClient");
 						}
 					}
 				})
