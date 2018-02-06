@@ -49,8 +49,8 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"addSupplier",
-					data:"supplierName="+supplierName+"&supplierAddress="+supplierAddress,
+					url:"supplier.do",
+					data:"mn=addSupplier&supplierName="+supplierName+"&supplierAddress="+supplierAddress,
 					async:true,
 					success:function(res){
 						if(res==0){
@@ -59,7 +59,12 @@
 						}else if(res==2){
 							alert("添加失败");
 						}else if(res==1){
-							$("#home").load("showSupplier");
+							$(".homeTip").text("添加成功");
+							$(".homeTip").show(200);
+							$("#home").load("supplier.do?mn=showSupplier");
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
 						}
 					}
 				})

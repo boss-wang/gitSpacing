@@ -25,8 +25,8 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"addUser",
-					data:"userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
+					url:"user.do",
+					data:"mn=addUser&userAccount="+userAccount+"&userPwd="+userPwd+"&userName="+userName+"&userSex="+userSex+"&roleId="+roleId,
 					async:true,
 					success:function(res){
 						if(res==3){
@@ -36,11 +36,11 @@
 							alert("添加失败");
 						}else if(res==1){
 							alert("用户添加成功，职位未添加");
-							$("#home").load("/dtw/showUser");
+							$("#home").load("user.do?mn=showUser");
 						}else if(res==2){
 							$(".homeTip").text("用户添加成功");
 							$(".homeTip").show(200);
-							$("#home").load("/dtw/showUser");
+							$("#home").load("user.do?mn=showUser");
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
 							},1000);

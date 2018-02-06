@@ -60,6 +60,7 @@
 
 		
 		<script type="text/javascript">
+			var currentpage = ${param.curpage };
 			$(".addRole").click(function(){
 				var roleId = $(".sele").val();
 				var userId = ${user.userId };
@@ -77,14 +78,14 @@
 				}
 				if(!hasRole){
 					$.ajax({
-						url:"addUserRole",
+						url:"user.do",
 						type:"post",
-						data:"roleId="+roleId+"&userId="+userId,
+						data:"mn=addRole&roleId="+roleId+"&userId="+userId,
 						success:function(res){
 							if(res==1){
 								$(".homeTip").text("添加成功！");
 								$(".homeTip").show(200);
-								$("#home").load("showUserRole?userId="+userId);
+								$("#home").load("user.do?mn=goUpdateRole&userId="+userId+"&curpage="+currentpage);
 								setTimeout(function(){
 									$(".homeTip").fadeOut(1000);
 								},1000);
@@ -107,14 +108,14 @@
 					var roleId = $(this).attr("delId");
 					var userId = ${user.userId };
 					$.ajax({
-						url:"delUserRole",
+						url:"user.do",
 						type:"post",
-						data:"roleId="+roleId+"&userId="+userId,
+						data:"mn=delRole&roleId="+roleId+"&userId="+userId,
 						success:function(res){
 							if(res==1){
 								$(".homeTip").text("删除成功");
 								$(".homeTip").show(200);
-								$("#home").load("showUserRole?userId="+userId);
+								$("#home").load("user.do?mn=goUpdateRole&userId="+userId+"&curpage="+currentpage);
 								setTimeout(function(){
 									$(".homeTip").fadeOut(1000);
 								},1000);
@@ -128,7 +129,7 @@
 			})
 		
 			$("#addRes").click(function(){
-				$("#home").load("/dtw/showUser");
+				$("#home").load("user.do?mn=showUser&currentpage="+currentpage);
 			});
 			
 		</script>

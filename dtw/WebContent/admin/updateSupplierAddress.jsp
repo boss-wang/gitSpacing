@@ -34,7 +34,7 @@
 	<script type="text/javascript">
 		$("#addRes").click(function(){
 			var currentPage = ${currentPage };
-			$("#home").load("showSupplier?currentPage="+currentPage);
+			$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 		});
 		$("#addSub").click(function(){
 			$(".tip").text("");
@@ -51,8 +51,8 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"updateSupplier",
-					data:"supplierId="+supplierId+"&supplierName="+supplierName+"&supplierAddress="+supplierAddress,
+					url:"supplier.do",
+					data:"mn=updateSupplier&supplierId="+supplierId+"&supplierName="+supplierName+"&supplierAddress="+supplierAddress,
 					async:true,
 					success:function(res){
 						if(res==0){
@@ -61,7 +61,7 @@
 						}else if(res==1){
 							$(".homeTip").text("修改成功");
 							$(".homeTip").show(200);
-							$("#home").load("showSupplier?currentPage="+currentPage);
+							$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
 							},1000);

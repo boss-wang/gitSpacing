@@ -65,14 +65,14 @@
 				var supplierId =$(this).attr("addId");
 				$.ajax({
 					type:"post",
-					url:"addSupplierContact",
-					data:"supplierId="+supplierId+"&contactName="+contactName+"&telephone="+telephone+"&qq="+qq+"&email="+email,
+					url:"supplier.do",
+					data:"mn=addContact&supplierId="+supplierId+"&contactName="+contactName+"&telephone="+telephone+"&qq="+qq+"&email="+email,
 					success:function(res){
 						if(res==1){
 							var currentPage=${param.currentPage};
 							$(".homeTip").text("添加成功！");
 							$(".homeTip").show(200);
-							$("#home").load("showSupplier?currentPage="+currentPage);
+							$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
 							},1000);
@@ -86,6 +86,6 @@
 		});
 		$("#addRes").click(function(){
 			var currentPage=${param.currentPage };
-			$("#home").load("showSupplier?currentPage="+currentPage);
+			$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 		});
 	</script>

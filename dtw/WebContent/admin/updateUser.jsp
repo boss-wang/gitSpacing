@@ -42,8 +42,9 @@
         </table>  
 	<script type="text/javascript">
 		$("#del").on("click",".updateRole",function(){	
+			var curpage = ${curpage };
 			var userId = $(this).attr("modifyId");
-			$("#home").load("showUserRole?userId="+userId);
+			$("#home").load("user.do?mn=goUpdateRole&userId="+userId+"&curpage="+curpage);
 		})
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };
@@ -54,7 +55,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("/dtw/showUser?currentpage="+curpage);
+				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 			}
 		})
 		$("#nextPage").click(function(){
@@ -67,16 +68,16 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("/dtw/showUser?currentpage="+curpage);
+				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 			}
 		})
 		$("#firstPage").click(function(){
 			var curpage = 1;
-			$("#home").load("/dtw/showUser?currentpage="+curpage);
+			$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 		})
 		$("#lastPage").click(function(){
 			var curpage = ${totalPage};
-			$("#home").load("/dtw/showUser?currentpage="+curpage);
+			$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 		})
 		$("#del").on("click",".deleteUser",function(){
 			if(confirm("确定删除该用户?")){
@@ -84,20 +85,20 @@
 				var userId = $(this).attr("delId");
 				$.ajax({
 					type:"post",
-					url:"deleteUser",
-					data:"userId="+userId,
+					url:"user.do",
+					data:"mn=delUser&userId="+userId,
 					async:true,
 					success:function(res){
 						if(res==2){
 							$(".homeTip").text("删除成功");
 							$(".homeTip").show(200);
-							$("#home").load("/dtw/showUser?currentpage="+curpage);
+							$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
 							},1000);
 						}else if(res==1){
 							alert("用户已删除，职位删除失败");
-							$("#home").load("/dtw/showUser?currentpage="+curpage);
+							$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 						}else if(res==0){
 							alert("删除失败");
 						}

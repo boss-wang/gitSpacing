@@ -69,8 +69,8 @@
 			if(confirm("确认删除？")){
 				$.ajax({
 					type:"post",
-					url:"delSupplierContact",
-					data:"supplierId="+supplierId+"&contactId="+contactId,
+					url:"supplier.do",
+					data:"mn=delContact&supplierId="+supplierId+"&contactId="+contactId,
 					success:function(res){
 						if(res==1){
 							thisEle.parents(".ccName").remove();
@@ -126,12 +126,12 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"modifySupplierContact",
-					data:"contactId="+contactId+"&tel="+tel+"&email="+email+"&qq="+qq,
+					url:"supplier.do",
+					data:"mn=updateContact&contactId="+contactId+"&tel="+tel+"&email="+email+"&qq="+qq,
 					success:function(res){
 						if(res==1){
 							var currentPage = ${currentPage };
-							$("#home").load("showSupplier?currentPage="+currentPage);
+							$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 						}else{
 							alert("修改失败");
 						}
@@ -151,7 +151,7 @@
 		$("#clientUpdate").on("click",".updateSupplier",function(){
 			var currentPage = ${currentPage };
 			var supplierId = $(this).attr("modifyId");
-			$("#home").load("gotoUpdateSupplier?currentPage="+currentPage+"&supplierId="+supplierId);
+			$("#home").load("supplier.do?mn=goUpdateSullier&currentPage="+currentPage+"&supplierId="+supplierId);
 		});
 		//删除供应商
 		$("#clientUpdate").on("click",".delSupplier",function(){
@@ -159,14 +159,14 @@
 				var currentPage = ${currentPage };
 				var supplierId = $(this).attr("modifyId");
 				$.ajax({
-					url:"delSupplier",
+					url:"supplier.do",
 					type:"post",
-					data:"supplierId="+supplierId,
+					data:"mn=delSupplier&supplierId="+supplierId,
 					success:function(res){
 						if(res==1){
 							$(".homeTip").text("删除成功！");
 							$(".homeTip").show(200);
-							$("#home").load("showSupplier?currentPage="+currentPage);
+							$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1500);
 							},1500);
@@ -188,11 +188,11 @@
 		});
 		//分页
 		$("#firstPage").click(function(){
-			$("#home").load("showSupplier?currentPage=1");
+			$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
 		})
 		$("#lastPage").click(function(){
 			var totalPage = ${totalPage };
-			$("#home").load("showSupplier?currentPage="+totalPage);
+			$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
 		})
 		$("#prePage").click(function(){
 			var currentPage = ${currentPage }-1;
@@ -203,7 +203,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("showSupplier?currentPage="+currentPage);
+				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 			}
 		})
 		$("#nextPage").click(function(){
@@ -216,7 +216,7 @@
 						$(".homeTip").fadeOut(1000);
 					},1000);
 			}else{
-				$("#home").load("showSupplier?currentPage="+currentPage);
+				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 			}
 
 		})

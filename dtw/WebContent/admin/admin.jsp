@@ -132,10 +132,10 @@
 	<script type="text/javascript">
 		
 		$("#addUser").click(function(){
-			$("#home").load("gotoaddUser");
+			$("#home").load("user.do","mn=goAddUser");
 		})
 		$("#updateUser").click(function(){
-			$("#home").load("showUser");
+			$("#home").load("user.do","mn=showUser");
 		})
 		$("#addOrder").click(function(){
 			$("#home").load("/dtw/admin/addOrder.jsp");
@@ -147,10 +147,10 @@
 			$("#home").load("showClient");
 		})
 		$("#addSupplier").click(function(){
-			$("#home").load("/dtw/admin/addSupplier.jsp");
+			$("#home").load("admin/addSupplier.jsp");
 		})
 		$("#updateSupplier").click(function(){
-			$("#home").load("showSupplier");
+			$("#home").load("supplier.do","mn=showSupplier");
 		})
 		$("#showOrder").click(function(){
 			$("#home").load("/dtw/admin/showOrder.jsp");
