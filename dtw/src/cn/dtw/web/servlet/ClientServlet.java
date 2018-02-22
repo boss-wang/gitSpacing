@@ -1,12 +1,15 @@
 package cn.dtw.web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Client_clientcontact;
@@ -17,7 +20,8 @@ import cn.dtw.service.impl.ClientContactServiceImpl;
 import cn.dtw.service.impl.ClientServiceImpl;
 @WebServlet("/client.do")
 public class ClientServlet extends BaseServlet {
-	
+
+	private static final long serialVersionUID = 5220831272599122755L;
 	private ClientService clientserv = new ClientServiceImpl(); 
 	private ClientService serv = new ClientServiceImpl();
 	private ClientContactService clientconserv = new ClientContactServiceImpl();
@@ -122,6 +126,26 @@ public class ClientServlet extends BaseServlet {
 		int back=clientserv.deleClient(client);
 		resp.getWriter().print(back);
 	}
-
+	//模糊查询客户名
+	protected void findClient(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String clientName = req.getParameter("clientName");
+		List<Client> clientList = clientserv.getClientByName(clientName);
+		String clientJson = JSON.toJSONString(clientList);
+		PrintWriter out = resp.getWriter();
+		out.print(clientJson);
+		out.close();
+	}
+	//查询客户名是否存在
+	protected void checkClient(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String clientName = req.getParameter("clientName");
+		Client client = new Client();
+		client.setClientName(clientName);
+		Client clientGet = clientserv.getClientByName(client);
+		if(clientGet==null) {
+			resp.getWriter().print(0);
+		}else{
+			resp.getWriter().print(clientGet.getClientId());
+		};
+	}
 		
 }

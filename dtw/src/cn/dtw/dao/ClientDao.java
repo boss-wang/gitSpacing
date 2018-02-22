@@ -18,7 +18,6 @@ public interface ClientDao {
 	//先查询是否有重名，再添加客户
 	int addClient(Client client);
 	
-	
 	//获取所有客户公司信息
 	List<Client> getAllClient();
 	
@@ -32,5 +31,7 @@ public interface ClientDao {
 	public List<Client> getClientByName(String clientName);
 	//删除客户
 	int deleClientById(Client client);
+	//根据公司名查询客户信息
+	public Client getClientByName(Client client);
 	
 }

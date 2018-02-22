@@ -13,11 +13,12 @@
                 <hr class="whiter"/>
 		<!-- 表单内容 -->
 			<div >
-			<form>
+			<form id="frm">
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">客&nbsp;&nbsp;&nbsp;&nbsp;户</span>
-						<input id="clientName" name="clientName" class="inpu" placeholder="客户公司抬头"/>
+						<input id="clientName" class="inpu" placeholder="客户公司抬头"/><p id="clientTip" class="tip"></p>
+						<input type="hidden" id="clientId" name="clientId" />
 						<div class="findClient"></div>
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
@@ -75,6 +76,14 @@
 							</c:forEach>
 						</select><span style="margin-left: 10px;display: inline-block;position: absolute;left: 1095px;top: 30px;">*</span>
 				</div>
+				<div class="line">
+					<div  class="tit-mess" style="display: inline-block;">
+						<span class="mess">报关单号</span>
+						<input class="inpu" id="customsNo" name="customsNo" placeholder="报关单号" />
+					</div>
+						<!-- <span class="mess" style="display: inline-block; position: absolute; left: 450px;">主&nbsp;&nbsp;单&nbsp;&nbsp;号</span>
+						<input class="inpu" id="mawbNo" name="mawbNo" placeholder="主单号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/> -->
+				</div>
 				<div class="line" style="height: 80px;">
 					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">订单状态</span>
@@ -102,7 +111,7 @@
 				var clientName = $(this).val();
 				if(clientName!=""&&clientName!=null){
 					$.ajax({
-						url:"order.do",
+						url:"client.do",
 						type:"post",
 						data:"mn=findClient&clientName="+clientName,
 						success:function(res){
@@ -148,7 +157,29 @@
 						$(".homeTip").fadeOut(1000);
 					},1000);
 				}else{
-					
+					$.ajax({
+						"url":"client.do",
+						"type":"post",
+						"data":"mn=checkClient&clientName="+clientName,
+						"success":function(res){
+							if(res==0){
+								$("#clientTip").text("不存在此公司，请先添加");
+							}else{
+								var userId = ${user.userId };
+								$("#clientTip").text("");
+								$("#clientId").val(res);
+								var content = $("#frm").serialize();
+								$.ajax({
+									"url":"order.do",
+									"type":"post",
+									"data":"mn=addOrder&userId="+userId+"&"+content,
+									"success":function(res){
+										
+									}
+								});
+							}
+						}
+					});
 				}
 			});
 		</script>

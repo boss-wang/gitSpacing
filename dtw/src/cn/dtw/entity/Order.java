@@ -16,7 +16,7 @@ private String cargoPiece;//件数
 private Double cargoWeight;//货物重量
 private Double chargeWeight;//计费重量
 private Double cargoVolume;//体积
-private int customsNo;//报关号
+private String customsNo;//报关号
 private int customsStatus;//报关单状态（0:未退，1:已退2:已寄）默认为0
 private int statusId;//订单状态  默认为0
 private String updateTime;//最近修改时间默认为now
@@ -136,10 +136,10 @@ public void setCargoVolume(Double cargoVolume){
 }
 
 
-public int getCustomsNo(){
+public String getCustomsNo(){
 	return customsNo;
 }
-public void setCustomsNo(int customsNo){
+public void setCustomsNo(String customsNo){
 	this.customsNo=customsNo;
 }
 

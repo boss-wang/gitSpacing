@@ -21,4 +21,6 @@ public interface ClientService {
 		public List<Client> getClientByName(String clientName);
 	//删除客户
 		int deleClient(Client client);
+	//根据公司名查询客户信息
+		public Client getClientByName(Client client);
 }

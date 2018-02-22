@@ -1,7 +1,5 @@
 package cn.dtw.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +10,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.ClientDao;
 import cn.dtw.entity.Client;
-import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
 
 public class ClientDaoImpl extends BaseDao implements ClientDao {
@@ -116,5 +113,12 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	public int deleClientById(Client client) {
 		String sql  ="delete from client where clientId = ?";
 		return super.executeUpdate(sql, client.getClientId());
+	}
+
+	//根据公司名查询客户信息
+	@Override
+	public Client getClientByName(Client client) {
+		String  sql="select * from client where clientName=? ";
+		return super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
 	}
 }

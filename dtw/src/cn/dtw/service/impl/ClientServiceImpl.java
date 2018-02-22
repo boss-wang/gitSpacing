@@ -63,5 +63,10 @@ public class ClientServiceImpl implements ClientService {
 		
 		return m;
 	}
+	//根据公司名查询客户信息
+	@Override
+	public Client getClientByName(Client client) {
+		return clientDao.getClientByName(client);
+	}
 
 }
