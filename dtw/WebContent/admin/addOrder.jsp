@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body  style="background-color: rgba(0,0,0,0);">
 		<!-- 添加订单 -->
 		<div class="tit">
@@ -109,15 +109,21 @@
 		<script type="text/javascript">
 			$("#clientName").keyup(function(){
 				var clientName = $(this).val();
-				$.ajax({
-					url:"order.do",
-					type:"post",
-					data:"mn=findClient&clientName="+clientName,
-					success:function(res){
-						
-					}
-				})
-			})
+				if(clientName!=""&&clientName!=null){
+					alert(clientName);
+					$.ajax({
+						url:"order.do",
+						type:"post",
+						data:"mn=findClient&clientName="+clientName,
+						success:function(res){
+							var clientJson = JSON.parse(res);
+							for(var i=0;i<clientJson.length;i++){
+								alert(clientJson[i].clientName);
+							}
+						}
+					});
+				}
+			});
 		
 		
 			$("#addRes").click(function() {
@@ -127,6 +133,6 @@
 			$("#addSub").click(function() {
 				$(".tip").text("");
 
-			})
+			});
 		</script>
 	</body>

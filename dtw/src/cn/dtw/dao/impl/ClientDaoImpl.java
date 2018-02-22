@@ -103,4 +103,11 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		}
 		
 	}
+
+	//模糊查询客户公司名
+	@Override
+	public List<Client> getClientByName(String clientName) {
+		String sql = "select * from client where clientName like concat('%',?,'%')";
+		return super.executeQuery(new BeanListHandler<Client>(Client.class), sql, clientName);
+	}
 }

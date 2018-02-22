@@ -27,4 +27,7 @@ public interface ClientDao {
 	
 	//客户总数
 	public int getAllTotalClient();
+	
+	//模糊查询客户公司名
+	public List<Client> getClientByName(String clientName);
 }

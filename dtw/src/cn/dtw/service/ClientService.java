@@ -17,4 +17,6 @@ public interface ClientService {
 		public int getAllTotalPage(int rowsize);
 	//添加客户(返回0 有重名)
 		int addClient(Client client);
+	//模糊查询客户公司名
+		public List<Client> getClientByName(String clientName);
 }

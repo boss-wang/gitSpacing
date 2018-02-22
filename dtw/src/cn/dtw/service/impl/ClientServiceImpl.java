@@ -43,5 +43,10 @@ public class ClientServiceImpl implements ClientService {
 		
 		return clientDao.addClient(client);
 	}
+	//模糊查询客户名
+	@Override
+	public List<Client> getClientByName(String clientName) {
+		return clientDao.getClientByName(clientName);
+	}
 
 }
