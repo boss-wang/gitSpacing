@@ -74,7 +74,7 @@ public class OrderServlet extends BaseServlet {
 		order.setStatusId(orderStatus);
 		order.setSystemNo(systemNo);
 		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd ");
 		order.setUpdateTime(formater.format(date));
 		order.setUserId(userId);
 		System.out.println(userId);
