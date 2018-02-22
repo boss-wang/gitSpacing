@@ -13,104 +13,94 @@
                 <hr class="whiter"/>
 		<!-- 表单内容 -->
 			<div >
+			<form>
 				<div class="line">
-					<div  class="tit-mess" style="display: inline-block;">
+					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">客&nbsp;&nbsp;&nbsp;&nbsp;户</span>
-						<input id="clientName" class="inpu" placeholder="客户公司抬头"/>
-						<p  class="tip"> </p>
+						<input id="clientName" name="clientName" class="inpu" placeholder="客户公司抬头"/>
+						<div class="findClient"></div>
 					</div>
-						<span class="mess"style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
-						<input  class="inpu" type="password" name="orderNo" placeholder="业务编号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p  class="tip"></p>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
+						<input  class="inpu" id="orderNo" name="orderNo" placeholder="业务编号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/><span style="margin-left: 460px;">*</span>
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">系&nbsp;&nbsp;统&nbsp;&nbsp;号</span>
-						<input class="inpu" name="systemNo" placeholder="系统号" />
-						<p  class="tip"></p>
+						<input class="inpu" id="systemNo" name="systemNo" placeholder="系统号" />
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">主&nbsp;&nbsp;单&nbsp;&nbsp;号</span>
-						<input class="inpu" name="mawbNo" placeholder="主单号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p class="tip"></p>
+						<input class="inpu" id="mawbNo" name="mawbNo" placeholder="主单号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">分&nbsp;&nbsp;单&nbsp;&nbsp;号</span>
-						<input class="inpu" name="hawbNo" placeholder="分单号" />
-						<p  class="tip"></p>
+						<input class="inpu" id="hawbNo" name="hawbNo" placeholder="分单号" />
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">航&nbsp;&nbsp;班&nbsp;&nbsp;号</span>
-						<input  class="inpu" name="flightNo" placeholder="航班号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p  class="tip"></p>
+						<input  class="inpu" id="flightNo" name="flightNo" placeholder="航班号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">航班日期</span>
-						<input  class="inpu" name="departDate" type="date" />
-						<p  class="tip"></p>
+						<input  class="inpu" id="departDate" name="departDate" type="date" />
 					</div>				
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">到港日期</span>
-						<input  class="inpu" name="arriveDate" type="date" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p class="tip"></p>				
+						<input  class="inpu" id="arriveDate" name="arriveDate" type="date" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">目&nbsp;&nbsp;的&nbsp;&nbsp;港</span>
-						<input  class="inpu" name="destination" placeholder="目的港" />
-						<p  class="tip"></p>
+						<input  class="inpu" id="destination" name="destination" placeholder="目的港" />
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">货物件数</span>
-						<input  class="inpu" type="cargoPiece" name="userPwd" placeholder="货物件数" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p  class="tip"></p>
+						<input  class="inpu" id="cargoPieces" name="cargoPieces" placeholder="货物件数" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">货物重量</span>
-						<input class="inpu" type="cargoWeight" name="userPwd" placeholder="货物重量" />
-						<p class="tip"></p>
+						<input class="inpu" id="cargoWeight" name="cargoWeight" placeholder="货物重量" />
 					</div>	
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">计费重量</span>
-						<input class="inpu" type="chargeWeight" name="userPwd" placeholder="计费重量" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
-						<p class="tip"></p>
+						<input class="inpu" id="chargeWeight" name="chargeWeight" placeholder="计费重量" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">货物体积</span>
-						<input  class="inpu" type="cargoVolume" name="userPwd" placeholder="货物体积" />
-						<p class="tip"></p>
+						<input  class="inpu" id="cargoVolume" name="cargoVolume" placeholder="货物体积" />
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">报关单状态</span>
-						<select  class="inpu" name="customsNo" style="display: inline-block; position: absolute; left: 854px;top: 23px;">
-							<option value="0">未退</option>
-							<option value="1">已退</option>
-							<option value="2">已寄</option>
+						<select  class="inpu" id="customsStatus" name="customsStatus" style="display: inline-block; position: absolute; left: 854px;top: 23px;">
+							<c:forEach var="customsStatus" items="${customsStatusList }">
+								<option value="${customsStatus.id }">${customsStatus.description }</option>
+							</c:forEach>
 						</select><span style="margin-left: 10px;display: inline-block;position: absolute;left: 1095px;top: 30px;">*</span>
 				</div>
 				<div class="line" style="height: 80px;">
 					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">订单状态</span>
-						<select  class="inpu" name="orderStatus">
-							<option value="0">未操作</option>
-							<option value="1">已报关</option>
-							<option value="2">已起飞</option>
-							<option value="3">已到港</option>
+						<select  class="inpu" id="orderStatus" name="orderStatus">
+							<c:forEach var="status" items="${statusList }">
+								<option value="${status.statusId }">${status.statusDescription }</option>
+							</c:forEach>
 						</select><span style="margin-left: 10px;">*</span>
 					</div>
 					<div class="tit-mess" style="display: inline-block; position: absolute; left: 450px;">
 						<span class="mess" style="position: absolute;">备注内容</span>
-						<textarea class="remarks" name="remarks" style=" height:30px;"></textarea>
+						<textarea class="remarks" id="remarks" name="remarks" style=" height:30px;"></textarea>
 					</div>
 				</div>
 				<div  class="tit-mess"style="position: relative; left: 230px;top: 20px;">
 					<input id="addSub" class="mess" type="button" value="确认添加" />
 					<input id="addRes" class="mess" type="reset" value="重新填写" />
 				</div>
+			</form>
 			</div>
 		<script type="text/javascript">
+			
 			$("#clientName").keyup(function(){
+				$(".findClient").empty();
 				var clientName = $(this).val();
 				if(clientName!=""&&clientName!=null){
-					alert(clientName);
 					$.ajax({
 						url:"order.do",
 						type:"post",
@@ -118,21 +108,48 @@
 						success:function(res){
 							var clientJson = JSON.parse(res);
 							for(var i=0;i<clientJson.length;i++){
-								alert(clientJson[i].clientName);
+								var holder = $('<a class="holder">'+clientJson[i].clientName+'</a>');
+								$(".findClient").append(holder);
 							}
 						}
 					});
 				}
 			});
-		
-		
+			$(".findClient").on("click",".holder",function(){
+				var name = $(this).text();
+				$("#clientName").val(name);
+				$(".findClient").empty();
+			});
+			$("#clientName").blur(function(){
+				setTimeout(function(){
+					$(".findClient").empty();
+				},150);
+			});
 			$("#addRes").click(function() {
 				$(".tip").text("");
 				$("#client").focus();
 			});
 			$("#addSub").click(function() {
 				$(".tip").text("");
-
+				var clientName = $("#clientName").val();
+				var orderNo = $("#orderNo").val();
+				if(orderNo==""||orderNo==null){
+					$(".homeTip").text("请输入业务编号");
+					$(".homeTip").show(200);
+					$("#orderNo").focus();
+					setTimeout(function(){
+						$(".homeTip").fadeOut(1000);
+					},1000);
+				}else if(clientName==""||clientName==null){
+					$(".homeTip").text("请输入客户抬头");
+					$(".homeTip").show(200);
+					$("#clientName").focus();
+					setTimeout(function(){
+						$(".homeTip").fadeOut(1000);
+					},1000);
+				}else{
+					
+				}
 			});
 		</script>
 	</body>

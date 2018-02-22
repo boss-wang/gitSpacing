@@ -18,7 +18,7 @@ private Double chargeWeight;//计费重量
 private Double cargoVolume;//体积
 private int customsNo;//报关号
 private int customsStatus;//报关单状态（0:未退，1:已退2:已寄）默认为0
-private int orderStatus;//订单状态(0:未操作1:已报关2:已起飞3：已到港)  默认为0
+private int statusId;//订单状态  默认为0
 private String updateTime;//最近修改时间默认为now
 
 private String remarks;//备注
@@ -152,11 +152,11 @@ public void setCustomsStatus(int customsStatus){
 }
 
 
-public int getOrderStatus(){
-	return orderStatus;
+public int getStatusId(){
+	return statusId;
 }
-public void setOrderStatus(int orderStatus){
-	this.orderStatus=orderStatus;
+public void setStatusId(int statusId){
+	this.statusId=statusId;
 }
 
 

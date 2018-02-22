@@ -138,7 +138,7 @@
 			$("#home").load("user.do","mn=showUser");
 		})
 		$("#addOrder").click(function(){
-			$("#home").load("/dtw/admin/addOrder.jsp");
+			$("#home").load("order.do","mn=goAddOrder");
 		})
 		$("#addClient").click(function(){
 			$("#home").load("/dtw/admin/addClient.jsp");
