@@ -58,8 +58,15 @@
 						if(res==0){
 							$("#nameTip").text("公司名已经存在");
 							$("#clientName").focus();
-						}else{
+						}else if(res==1){
+							$(".homeTip").text("修改成功");
+							$(".homeTip").show(200);
 							$("#home").load("/dtw/client.do?&mn=showClient&currentpage="+curpage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
+						}else{
+							alert("修改失败");
 						}
 					}
 				})

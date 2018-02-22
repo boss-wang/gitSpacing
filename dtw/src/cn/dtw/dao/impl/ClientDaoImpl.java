@@ -110,4 +110,11 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		String sql = "select * from client where clientName like concat('%',?,'%')";
 		return super.executeQuery(new BeanListHandler<Client>(Client.class), sql, clientName);
 	}
+
+	//删除客户
+	@Override
+	public int deleClientById(Client client) {
+		String sql  ="delete from client where clientId = ?";
+		return super.executeUpdate(sql, client.getClientId());
+	}
 }

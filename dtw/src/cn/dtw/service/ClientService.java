@@ -19,4 +19,6 @@ public interface ClientService {
 		int addClient(Client client);
 	//模糊查询客户公司名
 		public List<Client> getClientByName(String clientName);
+	//删除客户
+		int deleClient(Client client);
 }

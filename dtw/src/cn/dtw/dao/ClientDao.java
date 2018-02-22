@@ -30,4 +30,7 @@ public interface ClientDao {
 	
 	//模糊查询客户公司名
 	public List<Client> getClientByName(String clientName);
+	//删除客户
+	int deleClientById(Client client);
+	
 }

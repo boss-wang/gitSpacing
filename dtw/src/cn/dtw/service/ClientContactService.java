@@ -1,5 +1,6 @@
 package cn.dtw.service;
 
+import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
 
 public interface ClientContactService {
@@ -7,4 +8,8 @@ public interface ClientContactService {
 		int addClientContact(Clientcontact clientcontact);
 		//添加联系人id和对应公司id
 		int addClientidAndClientContactId(int clientId,int contactId);
+		//修改联系人
+		int updateClientContact(Clientcontact clientcontact);
+		//删除联系人
+		int deleClientContact(Client_clientcontact client_clientcontact);
 }

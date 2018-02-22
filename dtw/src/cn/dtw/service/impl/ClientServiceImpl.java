@@ -3,12 +3,15 @@ package cn.dtw.service.impl;
 import java.util.List;
 
 import cn.dtw.dao.ClientDao;
+import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.dao.impl.ClientDaoImpl;
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.service.ClientService;
 
 public class ClientServiceImpl implements ClientService {
 	private ClientDao clientDao = new ClientDaoImpl();
+	private ClientContactDaoImpl clientContact = new ClientContactDaoImpl();
 	@Override
 	public List<Client> getAllClient() {
 		return clientDao.getAllClient();
@@ -47,6 +50,18 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public List<Client> getClientByName(String clientName) {
 		return clientDao.getClientByName(clientName);
+	}
+	@Override
+	public int deleClient(Client client) {
+		int m=clientDao.deleClientById(client);
+		List<Client_clientcontact> list= clientContact.getAllContactIdByClientId(client);
+		for(Client_clientcontact contactId:list) {
+			clientContact.deleClientContact(contactId);
+			contactId.setClientId(client.getClientId());
+			clientContact.deleClientIdAndClientContactId(contactId);
+		}
+		
+		return m;
 	}
 
 }

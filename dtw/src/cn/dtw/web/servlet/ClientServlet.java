@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.service.ClientContactService;
 import cn.dtw.service.ClientService;
@@ -89,4 +90,38 @@ public class ClientServlet extends BaseServlet {
 		clientconserv.addClientidAndClientContactId(clientsId, contactId);
 		 resp.getWriter().print(clientsId);
 	}
+	//修改联系人
+	protected void updateContact(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String contactId=req.getParameter("contactId");
+		String tel=req.getParameter("tel");
+		String email=req.getParameter("email");
+		String qq=req.getParameter("qq");
+		Clientcontact clientContact  = new Clientcontact();
+		clientContact.setClientContactId(Integer.parseInt(contactId));
+		clientContact.setClientContactTel(tel);
+		clientContact.setClientContactEmail(email);
+		clientContact.setClientContactQQ(qq);
+		int back= clientconserv.updateClientContact(clientContact);
+		resp.getWriter().print(back);
+	}
+	//删除联系人
+	protected void deleContact(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String clientId =req.getParameter("clientId");
+		String contactId=req.getParameter("contactId");
+		Client_clientcontact client_contact = new Client_clientcontact();
+		client_contact.setClientId(Integer.parseInt(clientId));
+		client_contact.setClientContactId(Integer.parseInt(contactId));
+		int back =clientconserv.deleClientContact(client_contact);
+		resp.getWriter().print(back);
+	}
+	//删除客户
+	protected void delclient(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String clientId=req.getParameter("clientId");
+		Client client = new Client();
+		client.setClientId(Integer.parseInt(clientId));
+		int back=clientserv.deleClient(client);
+		resp.getWriter().print(back);
+	}
+
+		
 }

@@ -59,8 +59,7 @@
 			}else if(userPwd==""||userPwd==null){
 				$("#pwdTip").text("电话不能为空");
 				$("#userPwd").focus();
-			}else if(email!==""&&email!=null){
-			if(!reg.test(email)){
+			}else if(email!==""&&email!=null&&!reg.test(email)){
 				$("#emailTip").text("邮箱格式不对");
 				$("#email").focus();
 			}else{
@@ -70,23 +69,17 @@
 					url:"client.do",
 					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email+"&mn=addClientContact",
 					success:function(res){
-						alert("联系人添加成功")
-						var currentpage=${param.currentpage};
-						$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
-					}
-					
-				})
-			}
-			}else{
-				var clientId =$(this).attr("addId");
-				$.ajax({
-					type:"post",
-					url:"client.do",
-					data:"clientId="+clientId+"&userAccount="+userAccount+"&userPwd="+userPwd+"&qq="+qq+"&email="+email+"&mn=addClientContact",
-					success:function(res){
-						alert("联系人添加成功")
-						var currentpage=${param.currentpage};
-						$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
+						if(res==1){
+							$(".homeTip").text("添加成功");
+							$(".homeTip").show(200);
+							var currentpage=${param.currentpage};
+							$("#home").load("client.do?&mn=showClient&currentpage="+currentpage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
+						}else{
+							alert("添加失败");
+						}
 					}
 					
 				})
