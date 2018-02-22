@@ -21,7 +21,7 @@
 <body id="skin-blur-blue">
 		<header id="header" class="media">
 			<a id="menu-toggle"></a>
-			<a class="logo pull-left" href="">昵称</a>
+			<a class="logo pull-left" href="">${user.userName}</a>
 
 			<div class="media-body">
 				<div class="media" id="top-menu">
@@ -41,10 +41,9 @@
 
 			<!-- 头像-->
 			<div class="side-widgets overflow">
-				<!-- Profile Menu -->
 				<div class="text-center s-widget m-b-25 dropdown" id="profile-menu">
 					<a href="" data-toggle="dropdown">
-						<img class="profile-pic animated" src="img/profile-pic.jpg" alt="">
+						<img class="profile-pic animated" src="${user.showPicPath}" title="点击修改" alt="">
 					</a>
 				</div>
 				<!-- 职位描述 -->

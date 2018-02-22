@@ -20,4 +20,5 @@ public interface UserService {
 	public int deleteUser(int userId);
 	//通过Id获取用户信息
 	public User getUserById(User user);
+
 }
