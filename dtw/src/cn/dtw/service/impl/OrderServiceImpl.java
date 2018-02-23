@@ -53,5 +53,15 @@ public class OrderServiceImpl implements OrderService {
 	public int getOrderCount(User user) {
 		return orderDao.getOrderCount(user);
 	}
+	//通过id查询订单信息
+	@Override
+	public Order getOrderById(int id) {
+		return orderDao.getOrderById(id);
+	}
+	//修改订单
+	@Override
+	public boolean updateOrder(Order order) {
+		return orderDao.updateOrder(order);
+	}
 
 }

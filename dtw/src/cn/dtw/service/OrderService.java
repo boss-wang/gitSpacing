@@ -21,4 +21,8 @@ public interface OrderService {
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
 	//查询订单数量
 	public int getOrderCount(User user);
+	//通过id查询订单信息
+	public Order getOrderById(int id);
+	//修改订单
+	public boolean updateOrder(Order order);
 }

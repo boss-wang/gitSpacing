@@ -35,6 +35,21 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("termsList", termsList);
 		req.getRequestDispatcher("/admin/addOrder.jsp").forward(req, resp);
 	}
+	//跳转修改订单页面
+	protected void goUpdateOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		int currentPage = Integer.parseInt(req.getParameter("currentPage"));
+		Order order = orderService.getOrderById(orderId);
+		List<OrderStatus> statusList = orderService.getAllStatus();
+		List<CustomsStatus> customsStatusList = orderService.getAllCustomsStatus();
+		List<Terms> termsList = orderService.getAllTerms();
+		req.setAttribute("statusList", statusList);
+		req.setAttribute("customsStatusList", customsStatusList);
+		req.setAttribute("termsList", termsList);
+		req.setAttribute("order", order);
+		req.setAttribute("currentPage", currentPage);
+		req.getRequestDispatcher("/admin/updateOrder.jsp").forward(req, resp);
+	}
 	//显示订单列表
 	protected void showOrders(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
@@ -105,11 +120,66 @@ public class OrderServlet extends BaseServlet {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		order.setUpdateTime(formater.format(date));
 		order.setUserId(userId);
-		System.out.println(order.getArriveDate()+order.getCargoPiece()+order.getCargoVolume()+
-				order.getCargoWeight()+order.getChargeWeight()+order.getClientId()+order.getCustomsNo()+order.getCustomsStatus()+order.getDepartDate()+order.getDestination()+
-				order.getFlightNo()+order.getHawbNo()+order.getMawbNo()+order.getOrderNo()+order.getRemarks()+order.getStatusId()+order.getSystemNo()+order.getUpdateTime()+order.getUserId());
 		PrintWriter out = resp.getWriter();
 		if(orderService.addOrder(order)) {
+			out.print(1);
+		}else{
+			out.print(0);
+		};
+		out.close();
+	}
+	//修改订单
+	protected void updateOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		String clientIdStr = req.getParameter("clientId");
+		int clientId = Integer.parseInt(clientIdStr);
+		String orderNo = req.getParameter("orderNo");
+		String systemNo = req.getParameter("systemNo");
+		String mawbNo = req.getParameter("mawbNo");
+		String hawbNo = req.getParameter("hawbNo");
+		String flightNo = req.getParameter("flightNo");
+		String departDate = req.getParameter("departDate");
+		departDate = departDate==""?null:departDate;
+		String arriveDate = req.getParameter("arriveDate");
+		arriveDate = arriveDate==""?null:arriveDate;
+		String destination = req.getParameter("destination");
+		String cargoPieces = req.getParameter("cargoPieces");
+		String cargoWeightStr = req.getParameter("cargoWeight");
+		Double cargoWeight = cargoWeightStr==""?null:Double.parseDouble(cargoWeightStr);
+		String chargeWeightStr = req.getParameter("chargeWeight");
+		Double chargeWeight = chargeWeightStr==""?null:Double.parseDouble(chargeWeightStr);
+		String cargoVolumeStr = req.getParameter("cargoVolume");
+		Double cargoVolume = cargoVolumeStr==""?null:Double.parseDouble(cargoVolumeStr);
+		int customsStatus = Integer.parseInt(req.getParameter("customsStatus"));
+		String customsNo = req.getParameter("customsNo");
+		int orderStatus = Integer.parseInt(req.getParameter("orderStatus"));
+		String remarks = req.getParameter("remarks");
+		int termsId = Integer.parseInt(req.getParameter("terms"));
+		Order order = new Order();
+		order.setOrderId(orderId);
+		order.setArriveDate(arriveDate);
+		order.setCargoPiece(cargoPieces);
+		order.setCargoVolume(cargoVolume);
+		order.setCargoWeight(cargoWeight);
+		order.setChargeWeight(chargeWeight);
+		order.setClientId(clientId);
+		order.setCustomsNo(customsNo);
+		order.setCustomsStatus(customsStatus);
+		order.setDepartDate(departDate);
+		order.setDestination(destination);
+		order.setFlightNo(flightNo);
+		order.setHawbNo(hawbNo);
+		order.setMawbNo(mawbNo);
+		order.setOrderNo(orderNo);
+		order.setRemarks(remarks);
+		order.setStatusId(orderStatus);
+		order.setSystemNo(systemNo);
+		order.setTermsId(termsId);
+		Date date = new Date();
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		order.setUpdateTime(formater.format(date));
+		PrintWriter out = resp.getWriter();
+		if(orderService.updateOrder(order)) {
 			out.print(1);
 		}else{
 			out.print(0);

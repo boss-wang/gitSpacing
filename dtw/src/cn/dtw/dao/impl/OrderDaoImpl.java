@@ -3,6 +3,7 @@ package cn.dtw.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -16,7 +17,10 @@ import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
 
 public class OrderDaoImpl extends BaseDao implements OrderDao {
-	
+	private ClientDao clientDao = new ClientDaoImpl();
+	private CustomsStatusDao cusStatusDao = new CustomsStatusDaoImpl();
+	private OrderStatusDao orderStatusDao = new OrderStatusDaoImpl();
+	private TermsDao termsDao = new TermsDaoImpl();
 	//添加订单
 	@Override
 	public boolean addOrder(Order order) {
@@ -32,10 +36,6 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "select * from `order` where userId=? order by orderId desc limit ?,?";
 		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql, user.getUserId(),startRow,pageSize);
 		List<Order> orderList = new ArrayList<Order>();
-		ClientDao clientDao = new ClientDaoImpl();
-		CustomsStatusDao cusStatusDao = new CustomsStatusDaoImpl();
-		OrderStatusDao orderStatusDao = new OrderStatusDaoImpl();
-		TermsDao termsDao = new TermsDaoImpl();
 		for(Order order:list) {
 			order.setClient(clientDao.getClient(order));
 			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
@@ -51,6 +51,28 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "select count(1) as count from `order` where userId=?";
 		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql, user.getUserId());
 		return rs.intValue();
+	}
+	//通过id查询订单信息
+	@Override
+	public Order getOrderById(int id) {
+		String sql = "select * from `order` where orderId=?";
+		Order order = super.executeOneRow(new BeanHandler<Order>(Order.class), sql, id);
+		order.setClient(clientDao.getClient(order));
+		order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
+		order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
+		order.setTerms(termsDao.getTermsById(order));
+		return order;
+	}
+	//修改订单
+	@Override
+	public boolean updateOrder(Order order) {
+		String sql = "update `order` set arriveDate=?,cargoPiece=?,cargoVolume=?,"
+				+ "cargoWeight=?,chargeWeight=?,clientId=?,customsNo=?,customsStatus=?,"
+				+ "departDate=?,destination=?,flightNo=?,hawbNo=?,mawbNo=?,orderNo=?,"
+				+ "remarks=?,statusId=?,systemNo=?,updateTime=?,termsId=? where orderId=?";
+		return super.executeUpdate(sql, order.getArriveDate(),order.getCargoPiece(),order.getCargoVolume(),
+				order.getCargoWeight(),order.getChargeWeight(),order.getClientId(),order.getCustomsNo(),order.getCustomsStatus(),order.getDepartDate(),order.getDestination(),
+				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getOrderNo(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getTermsId(),order.getOrderId())>0?true:false;
 	}
 
 }

@@ -38,6 +38,7 @@
 		 		<td>贸易条款</td>
 		 		<td>应收</td>
 		 		<td>应付</td>
+		 		<td>操作栏</td>
 		 	</tr>
 		 	<c:forEach var="order" items="${orderList }">
 		 		<tr>
@@ -60,8 +61,9 @@
 			 		<td>${fn:substring(order.updateTime, 0, 19) }</td>
 			 		<td>${order.remarks }</td>
 			 		<td>${order.terms.code }</td>
-			 		<td><a href="">查看应收</a></td>
-			 		<td><a href="">查看应付</a></td>
+			 		<td><a>查看应收</a></td>
+			 		<td><a>查看应付</a></td>
+			 		<td><a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a>删除</a></td>
 		 		</tr>
 		 	</c:forEach>
 		 	
@@ -71,14 +73,21 @@
 		 </table>
 	</div>
 	<script>
+	//修改订单
+	$("#selorder").on("click",".updateOrder",function(){
+		var orderId = $(this).attr("modifyId");
+		var currentPage = ${currentPage };
+		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId);
+	});
+	
 	//分页
 	$("#firstPage").click(function(){
 		$("#home").load("order.do?mn=showOrders&currentPage=1");
-	})
+	});
 	$("#lastPage").click(function(){
 		var totalPage = ${totalPage };
 		$("#home").load("order.do?mn=showOrders&currentPage="+totalPage);
-	})
+	});
 	$("#prePage").click(function(){
 		var currentPage = ${currentPage }-1;
 		if(currentPage==0){
@@ -90,7 +99,7 @@
 		}else{
 			$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
 		}
-	})
+	});
 	$("#nextPage").click(function(){
 		var totalPage = ${totalPage }+1;
 		var currentPage = ${currentPage }+1;
