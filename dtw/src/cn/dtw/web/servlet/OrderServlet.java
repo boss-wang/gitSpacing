@@ -1,6 +1,7 @@
 package cn.dtw.web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
+import cn.dtw.entity.Terms;
 import cn.dtw.service.OrderService;
 import cn.dtw.service.impl.OrderServiceImpl;
 
@@ -26,13 +28,15 @@ public class OrderServlet extends BaseServlet {
 	protected void goAddOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<OrderStatus> statusList = orderService.getAllStatus();
 		List<CustomsStatus> customsStatusList = orderService.getAllCustomsStatus();
+		List<Terms> termsList = orderService.getAllTerms();
 		req.setAttribute("statusList", statusList);
 		req.setAttribute("customsStatusList", customsStatusList);
+		req.setAttribute("termsList", termsList);
 		req.getRequestDispatcher("/admin/addOrder.jsp").forward(req, resp);
 	}
 	
 	//添加订单
-	protected void addOrder(HttpServletRequest req, HttpServletResponse resp) {
+	protected void addOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int userId = Integer.parseInt(req.getParameter("userId"));
 		String clientIdStr = req.getParameter("clientId");
 		int clientId = Integer.parseInt(clientIdStr);
@@ -42,19 +46,22 @@ public class OrderServlet extends BaseServlet {
 		String hawbNo = req.getParameter("hawbNo");
 		String flightNo = req.getParameter("flightNo");
 		String departDate = req.getParameter("departDate");
+		departDate = departDate==""?null:departDate;
 		String arriveDate = req.getParameter("arriveDate");
+		arriveDate = arriveDate==""?null:arriveDate;
 		String destination = req.getParameter("destination");
 		String cargoPieces = req.getParameter("cargoPieces");
 		String cargoWeightStr = req.getParameter("cargoWeight");
-		double cargoWeight = cargoWeightStr==""?0:Double.parseDouble(cargoWeightStr);
+		Double cargoWeight = cargoWeightStr==""?null:Double.parseDouble(cargoWeightStr);
 		String chargeWeightStr = req.getParameter("chargeWeight");
-		double chargeWeight = chargeWeightStr==""?0:Double.parseDouble(chargeWeightStr);
+		Double chargeWeight = chargeWeightStr==""?null:Double.parseDouble(chargeWeightStr);
 		String cargoVolumeStr = req.getParameter("cargoVolume");
-		double cargoVolume = cargoVolumeStr==""?0:Double.parseDouble(cargoVolumeStr);
+		Double cargoVolume = cargoVolumeStr==""?null:Double.parseDouble(cargoVolumeStr);
 		int customsStatus = Integer.parseInt(req.getParameter("customsStatus"));
 		String customsNo = req.getParameter("customsNo");
 		int orderStatus = Integer.parseInt(req.getParameter("orderStatus"));
 		String remarks = req.getParameter("remarks");
+		int termsId = Integer.parseInt(req.getParameter("terms"));
 		Order order = new Order();
 		order.setArriveDate(arriveDate);
 		order.setCargoPiece(cargoPieces);
@@ -73,12 +80,21 @@ public class OrderServlet extends BaseServlet {
 		order.setRemarks(remarks);
 		order.setStatusId(orderStatus);
 		order.setSystemNo(systemNo);
+		order.setTermsId(termsId);
 		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd ");
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		order.setUpdateTime(formater.format(date));
 		order.setUserId(userId);
-		System.out.println(userId);
-		System.out.println(order.getUpdateTime());
+		System.out.println(order.getArriveDate()+order.getCargoPiece()+order.getCargoVolume()+
+				order.getCargoWeight()+order.getChargeWeight()+order.getClientId()+order.getCustomsNo()+order.getCustomsStatus()+order.getDepartDate()+order.getDestination()+
+				order.getFlightNo()+order.getHawbNo()+order.getMawbNo()+order.getOrderNo()+order.getRemarks()+order.getStatusId()+order.getSystemNo()+order.getUpdateTime()+order.getUserId());
+		PrintWriter out = resp.getWriter();
+		if(orderService.addOrder(order)) {
+			out.print(1);
+		}else{
+			out.print(0);
+		};
+		out.close();
 	}
 	
 }

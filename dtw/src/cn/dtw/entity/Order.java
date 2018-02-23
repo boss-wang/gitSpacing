@@ -20,8 +20,15 @@ private String customsNo;//报关号
 private int customsStatus;//报关单状态（0:未退，1:已退2:已寄）默认为0
 private int statusId;//订单状态  默认为0
 private String updateTime;//最近修改时间默认为now
-
+private int termsId; //贸易条款
 private String remarks;//备注
+
+public int getTermsId() {
+	return termsId;
+}
+public void setTermsId(int termsId) {
+	this.termsId = termsId;
+}
 private int userId;
 
 public int getOrderId(){

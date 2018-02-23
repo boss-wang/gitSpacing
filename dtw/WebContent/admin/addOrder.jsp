@@ -78,14 +78,6 @@
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
-						<span class="mess">报关单号</span>
-						<input class="inpu" id="customsNo" name="customsNo" placeholder="报关单号" />
-					</div>
-						<!-- <span class="mess" style="display: inline-block; position: absolute; left: 450px;">主&nbsp;&nbsp;单&nbsp;&nbsp;号</span>
-						<input class="inpu" id="mawbNo" name="mawbNo" placeholder="主单号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/> -->
-				</div>
-				<div class="line" style="height: 80px;">
-					<div  class="tit-mess" style="display: inline-block;">
 						<span class="mess">订单状态</span>
 						<select  class="inpu" id="orderStatus" name="orderStatus">
 							<c:forEach var="status" items="${statusList }">
@@ -93,10 +85,20 @@
 							</c:forEach>
 						</select><span style="margin-left: 10px;">*</span>
 					</div>
-					<div class="tit-mess" style="display: inline-block; position: absolute; left: 450px;">
-						<span class="mess" style="position: absolute;">备注内容</span>
-						<textarea class="remarks" id="remarks" name="remarks" style=" height:30px;"></textarea>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">报关单号</span>
+						<input class="inpu" id="customsNo" name="customsNo" placeholder="报关单号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
+				</div>
+				<div class="line" style="height: 80px;">
+					<div  class="tit-mess" style="display: inline-block;">
+						<span class="mess">贸易条款</span>
+						<select  class="inpu" id="terms" name="terms">
+							<c:forEach var="terms" items="${termsList }">
+								<option value="${terms.id }">${terms.code }</option>
+							</c:forEach>
+						</select>
 					</div>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">备注内容</span>
+						<textarea class="remarks" id="remarks" name="remarks" style=" height:30px;"></textarea>
 				</div>
 				<div  class="tit-mess"style="position: relative; left: 230px;top: 20px;">
 					<input id="addSub" class="mess" type="button" value="确认添加" />
@@ -174,7 +176,11 @@
 									"type":"post",
 									"data":"mn=addOrder&userId="+userId+"&"+content,
 									"success":function(res){
-										
+										if(res==1){
+											alert("添加成功");
+										}else if(res==0){
+											alert("添加失败");
+										}
 									}
 								});
 							}
