@@ -86,5 +86,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.getAllPicPathById(user);
 	}
 
+	@Override
+	public int updateHeadPic(User user, UserHeadSculpture userHeadSculpture) {
+		return userDao.updateHeadPic(user, userHeadSculpture);
+	}
+
 
 }

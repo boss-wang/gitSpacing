@@ -26,4 +26,6 @@ public interface UserDao {
 	
 	//根据用户id获取所有头像路径
 	List<UserHeadSculpture> getAllPicPathById(User user);
+	//根据用户id和图片id修改头像
+	int updateHeadPic(User user,UserHeadSculpture userHeadSculpture);
 }

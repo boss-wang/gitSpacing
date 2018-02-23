@@ -24,7 +24,7 @@
 <body id="skin-blur-blue">
 		<header id="header" class="media">
 			<a id="menu-toggle"></a>
-			<a class="logo pull-left" href="">${user.userName}</a>
+			<a class="logo pull-left" >${user.userName}</a>
 
 			<div class="media-body">
 				<div class="media" id="top-menu">
@@ -45,7 +45,7 @@
 			<!-- 头像-->
 			<div class="side-widgets overflow">
 				<div class="text-center s-widget m-b-25 dropdown" id="profile-menu">
-						<img class="profile-pic animated"  src="${user.showPicPath}" title="点击修改" alt="">
+						<img class="profile-pic animated"  id="headimg" src="${user.showPicPath}" title="点击修改" alt="">
 					
 				</div>
 				<!-- 职位描述 -->
@@ -158,11 +158,18 @@
 		$("#showOrder").click(function(){
 			$("#home").load("order.do","mn=showOrders");
 		})
+		
 		$("#profile-menu").click(function(){
-		var userid = ${user.userId};
-		$("#headpics").show();
-		$("#headpics").load("user.do?mn=showAllHeadPic&userid="+userid);
+			var userid = ${user.userId};
+			$("#headpics").show();
+			$("#headpics").load("user.do?mn=showAllHeadPic&userid="+userid);
+			$("#headpics").on("click","#backhide",function(){
+				$("#headpics").hide();
+				
+			})
 		})
+		
+
 	</script>
 	
 </html>

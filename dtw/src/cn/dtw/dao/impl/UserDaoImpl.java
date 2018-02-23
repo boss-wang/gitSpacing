@@ -87,5 +87,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		String sql = "select * from userheadsculpture where userId=?";
 		return super.executeQuery(new BeanListHandler<UserHeadSculpture>(UserHeadSculpture.class), sql, user.getUserId());
 	}
+	//更新头像
+	@Override
+	public int updateHeadPic(User user, UserHeadSculpture userHeadSculpture) {
+		String sql="update user set showPicPath=? where userId=? ";
+		return super.executeUpdate(sql,userHeadSculpture.getPicturePath(),user.getUserId());
+	}
 
 }

@@ -23,4 +23,6 @@ public interface UserService {
 	public User getUserById(User user);
 	//通过id获取所有头像
 	List<UserHeadSculpture> getAllPicPathById(User user);
+	//根据用户id和图片id修改头像
+	int updateHeadPic(User user,UserHeadSculpture userHeadSculpture);
 }

@@ -158,6 +158,7 @@ public class UserServlet extends BaseServlet {
 			}
 			resp.getWriter().print(rs);
 		}
+		//显示拥有的头像
 		protected void showAllHeadPic(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String userid = req.getParameter("userid");
 			User user = new User();
@@ -165,5 +166,21 @@ public class UserServlet extends BaseServlet {
 			List<UserHeadSculpture> list= userService.getAllPicPathById(user);
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("admin/headSculpture.jsp").forward(req, resp);
+		}
+		//修改头像
+		protected void updateHeadPic(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String picId =req.getParameter("picId");
+			String userId=req.getParameter("userId");
+			String picpath=req.getParameter("picpath");
+			User user = new User();
+			user.setUserId(Integer.parseInt(userId));
+			UserHeadSculpture userhead = new UserHeadSculpture();
+			userhead.setId(Integer.parseInt(picId));
+			userhead.setPicturePath(picpath);
+			int back= userService.updateHeadPic(user, userhead);
+			req.getSession().removeAttribute("user");
+			User userDB= userService.getUserById(user);
+			req.getSession().setAttribute("user", userDB);
+			resp.getWriter().print(back);
 		}
 }
