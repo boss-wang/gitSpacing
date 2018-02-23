@@ -16,6 +16,7 @@ import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Terms;
+import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
 import cn.dtw.service.impl.OrderServiceImpl;
 
@@ -34,7 +35,26 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("termsList", termsList);
 		req.getRequestDispatcher("/admin/addOrder.jsp").forward(req, resp);
 	}
-	
+	//显示订单列表
+	protected void showOrders(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String curPage = req.getParameter("currentPage");
+		int currentPage;
+		User user = (User)req.getSession().getAttribute("user");
+		int totalRow = orderService.getOrderCount(user);
+		int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+		if(curPage==null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(curPage);
+			currentPage = currentPage<1?1:currentPage;
+			currentPage = currentPage>totalPage?totalPage:currentPage;
+		}
+		List<Order> orderList = orderService.getOrderList(user, currentPage, 10);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("orderList", orderList);
+		req.getRequestDispatcher("/admin/showOrder.jsp").forward(req, resp);
+	}
 	//添加订单
 	protected void addOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int userId = Integer.parseInt(req.getParameter("userId"));

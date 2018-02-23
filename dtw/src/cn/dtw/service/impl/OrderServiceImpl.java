@@ -14,6 +14,7 @@ import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Terms;
+import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
@@ -40,6 +41,17 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Terms> getAllTerms() {
 		return termsDao.getAllTerms();
+	}
+	//查询订单列表
+	@Override
+	public List<Order> getOrderList(User user, int curPage, int pageSize) {
+		int startRow = (curPage-1)*pageSize;
+		return orderDao.getOrderList(user, startRow, pageSize);
+	}
+	//查询订单数量
+	@Override
+	public int getOrderCount(User user) {
+		return orderDao.getOrderCount(user);
 	}
 
 }

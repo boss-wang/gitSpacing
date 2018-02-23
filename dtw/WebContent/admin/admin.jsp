@@ -156,7 +156,7 @@
 			$("#home").load("supplier.do","mn=showSupplier");
 		})
 		$("#showOrder").click(function(){
-			$("#home").load("/dtw/admin/showOrder.jsp");
+			$("#home").load("order.do","mn=showOrders");
 		})
 		$("#profile-menu").click(function(){
 		var userid = ${user.userId};
