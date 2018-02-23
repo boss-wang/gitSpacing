@@ -8,8 +8,16 @@ private String userAccount;
 private String userPwd;
 private String userName;
 private String userSex;
+private String showPicPath;
 private List<Role> roles;
 
+
+public String getShowPicPath() {
+	return showPicPath;
+}
+public void setShowPicPath(String showPicPath) {
+	this.showPicPath = showPicPath;
+}
 public List<Role> getRoles() {
 	return roles;
 }

@@ -22,4 +22,6 @@ public interface UserDao {
 	public int getAllTotal();
 	//删除员工账号
 	public int deleteUser(int userId);
+	
+	//根据用户id获取所有头像路径
 }
