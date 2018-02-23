@@ -22,7 +22,36 @@ private int statusId;//订单状态  默认为0
 private String updateTime;//最近修改时间默认为now
 private int termsId; //贸易条款
 private String remarks;//备注
+private Client client;
+private CustomsStatus cusStatus;
+private OrderStatus orderStatus;
+private Terms terms;
 
+
+public Terms getTerms() {
+	return terms;
+}
+public void setTerms(Terms terms) {
+	this.terms = terms;
+}
+public OrderStatus getOrderStatus() {
+	return orderStatus;
+}
+public void setOrderStatus(OrderStatus orderStatus) {
+	this.orderStatus = orderStatus;
+}
+public CustomsStatus getCusStatus() {
+	return cusStatus;
+}
+public void setCusStatus(CustomsStatus cusStatus) {
+	this.cusStatus = cusStatus;
+}
+public Client getClient() {
+	return client;
+}
+public void setClient(Client client) {
+	this.client = client;
+}
 public int getTermsId() {
 	return termsId;
 }

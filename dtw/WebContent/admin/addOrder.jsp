@@ -177,7 +177,12 @@
 									"data":"mn=addOrder&userId="+userId+"&"+content,
 									"success":function(res){
 										if(res==1){
-											alert("添加成功");
+											$(".homeTip").text("添加成功！");
+											$(".homeTip").show(200);
+											$("#home").load("order.do","mn=showOrders");
+											setTimeout(function(){
+												$(".homeTip").fadeOut(1000);
+											},1000);
 										}else if(res==0){
 											alert("添加失败");
 										}

@@ -1,12 +1,17 @@
 package cn.dtw.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
+import cn.dtw.dao.ClientDao;
+import cn.dtw.dao.CustomsStatusDao;
 import cn.dtw.dao.OrderDao;
+import cn.dtw.dao.OrderStatusDao;
+import cn.dtw.dao.TermsDao;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
 
@@ -25,7 +30,20 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	@Override
 	public List<Order> getOrderList(User user,int startRow,int pageSize) {
 		String sql = "select * from `order` where userId=? order by orderId desc limit ?,?";
-		return super.executeQuery(new BeanListHandler<Order>(Order.class), sql, user.getUserId(),startRow,pageSize);
+		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql, user.getUserId(),startRow,pageSize);
+		List<Order> orderList = new ArrayList<Order>();
+		ClientDao clientDao = new ClientDaoImpl();
+		CustomsStatusDao cusStatusDao = new CustomsStatusDaoImpl();
+		OrderStatusDao orderStatusDao = new OrderStatusDaoImpl();
+		TermsDao termsDao = new TermsDaoImpl();
+		for(Order order:list) {
+			order.setClient(clientDao.getClient(order));
+			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
+			order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
+			order.setTerms(termsDao.getTermsById(order));
+			orderList.add(order);
+		}
+		return orderList;
 	}
 	//查询订单条数
 	@Override

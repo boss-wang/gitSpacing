@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Order;
 
 public interface ClientDao {
 	//根据客户公司id获取联系人信息
@@ -11,6 +12,9 @@ public interface ClientDao {
 	
 	//根据客户公司id获取公司信息
 	Client getClienttext(Client client);
+			
+	//根据客户公司id获取公司信息(订单)
+	Client getClient(Order order);
 	
 	//根据公司id查询除此之外的公司信息,决定是否插入
 	int getResultById(Client client);
