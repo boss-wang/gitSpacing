@@ -14,6 +14,7 @@ import cn.dtw.dao.UserDao;
 import cn.dtw.dao.User_roleDao;
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
+import cn.dtw.entity.UserHeadSculpture;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
 
@@ -79,6 +80,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	public int deleteUser(int userId) {
 		String sql="delete from user where userId=?";
 		return super.executeUpdate(sql, userId);
+	}
+	//获得所有头像路径
+	@Override
+	public List<UserHeadSculpture> getAllPicPathById(User user) {
+		String sql = "select * from userheadsculpture where userId=?";
+		return super.executeQuery(new BeanListHandler<UserHeadSculpture>(UserHeadSculpture.class), sql, user.getUserId());
 	}
 
 }

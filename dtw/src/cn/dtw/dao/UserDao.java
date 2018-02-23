@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
+import cn.dtw.entity.UserHeadSculpture;
 
 public interface UserDao {
 	//获取所有用户信息
@@ -24,4 +25,5 @@ public interface UserDao {
 	public int deleteUser(int userId);
 	
 	//根据用户id获取所有头像路径
+	List<UserHeadSculpture> getAllPicPathById(User user);
 }

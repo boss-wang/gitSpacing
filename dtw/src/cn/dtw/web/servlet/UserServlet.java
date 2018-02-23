@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
+import cn.dtw.entity.UserHeadSculpture;
 import cn.dtw.entity.User_role;
 import cn.dtw.service.RoleService;
 import cn.dtw.service.UserService;
@@ -156,5 +157,13 @@ public class UserServlet extends BaseServlet {
 				}
 			}
 			resp.getWriter().print(rs);
+		}
+		protected void showAllHeadPic(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String userid = req.getParameter("userid");
+			User user = new User();
+			user.setUserId(Integer.parseInt(userid));
+			List<UserHeadSculpture> list= userService.getAllPicPathById(user);
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("admin/headSculpture.jsp").forward(req, resp);
 		}
 }

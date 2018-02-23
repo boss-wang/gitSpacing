@@ -4,6 +4,7 @@ import cn.dtw.entity.Role;
 import java.util.List;
 
 import cn.dtw.entity.User;
+import cn.dtw.entity.UserHeadSculpture;
 
 public interface UserService {
 	//查询账户是否存在，存在则将用户信息返回
@@ -20,5 +21,6 @@ public interface UserService {
 	public int deleteUser(int userId);
 	//通过Id获取用户信息
 	public User getUserById(User user);
-
+	//通过id获取所有头像
+	List<UserHeadSculpture> getAllPicPathById(User user);
 }

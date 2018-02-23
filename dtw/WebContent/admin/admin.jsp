@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
+   <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,9 +45,8 @@
 			<!-- 头像-->
 			<div class="side-widgets overflow">
 				<div class="text-center s-widget m-b-25 dropdown" id="profile-menu">
-					<a href="" data-toggle="dropdown">
-						<img class="profile-pic animated" src="${user.showPicPath}" title="点击修改" alt="">
-					</a>
+						<img class="profile-pic animated"  src="${user.showPicPath}" title="点击修改" alt="">
+					
 				</div>
 				<!-- 职位描述 -->
 				<div class="s-widget m-b-25">
@@ -57,6 +59,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<!-- Side Menu -->
 			
 			<ul class="list-unstyled side-menu">
@@ -122,6 +125,7 @@
 			</ul>
 			
 		</aside>
+		<div id="headpics"></div>
 		<section id="home"></section>
 		<div class="homeTip"></div>
 	</body>
@@ -153,6 +157,11 @@
 		})
 		$("#showOrder").click(function(){
 			$("#home").load("/dtw/admin/showOrder.jsp");
+		})
+		$("#profile-menu").click(function(){
+		var userid = ${user.userId};
+		$("#headpics").show();
+		$("#headpics").load("user.do?mn=showAllHeadPic&userid="+userid);
 		})
 	</script>
 	

@@ -8,6 +8,7 @@ import cn.dtw.dao.impl.UserDaoImpl;
 import cn.dtw.dao.impl.User_roleDaoImpl;
 import cn.dtw.entity.Role;
 import cn.dtw.entity.User;
+import cn.dtw.entity.UserHeadSculpture;
 import cn.dtw.entity.User_role;
 import cn.dtw.service.UserService;
 
@@ -77,6 +78,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(User user) {
 		return userDao.getUserById(user);
+	}
+	//获取所有头像
+	@Override
+	public List<UserHeadSculpture> getAllPicPathById(User user) {
+		
+		return userDao.getAllPicPathById(user);
 	}
 
 
