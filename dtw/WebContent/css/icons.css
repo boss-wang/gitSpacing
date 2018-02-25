@@ -26,12 +26,11 @@
     width: 44px;
     height: 44px;
 }
-.sa-side-home { background-image: url(../img/小房子.jpg); background-size:contain ;}
-.sa-side-form { background-image: url(../img/员工管理.jpg); background-size: contain ;  }
-.sa-side-form2 { background-image: url(../img/客户管理.jpg); background-size: contain;  }
-.sa-side-form3 { background-image: url(../img/飞机.jpg); background-size: contain;  }
-.sa-side-ui { background-image: url(../img/所有订单管理.jpg); background-size: contain;}
-.sa-side-page { background-image: url(../img/本人订单管理.jpg); background-size: contain; }
+.sa-side-home { background-image: url(../img/home.jpg); background-size:contain ;}
+.sa-side-form { background-image: url(../img/usermanage.jpg); background-size: contain ;  }
+.sa-side-form2 { background-image: url(../img/clientmanage.jpg); background-size: contain;  }
+.sa-side-form3 { background-image: url(../img/suppliermanage.jpg); background-size: contain;  }
+.sa-side-ui { background-image: url(../img/allordermanage.jpg); background-size: contain;}
 .sa-side-chart { background-image: url(../img/icon/chart.png); }
 .sa-side-photos { background-image: url(../img/icon/photos.png); }
 

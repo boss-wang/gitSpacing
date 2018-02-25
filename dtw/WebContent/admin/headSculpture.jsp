@@ -121,11 +121,8 @@
 							},1000);
 						}else if(res==1){
 							$("#headpics").hide();
-							$(".homeTip").text("上传成功");
-							$(".homeTip").show(500);
-							setTimeout(function(){
-								$(".homeTip").fadeOut(1000);
-							},1000);
+							$("#profile-menu").click();
+							
 						}
 					}
 					})

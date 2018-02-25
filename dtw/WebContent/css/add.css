@@ -253,4 +253,31 @@
 		cursor:pointer;
 		border:1px red solid;
 		}
+/*home*/
+		#homesection{
+			margin:0px 300px;
+		}
 		
+		#homesection tr:nth-child(odd) td{
+		display:inline-block;
+		margin:20px;
+		border-radius:70px;
+		background-color:#DADADA;
+		
+		}
+		
+		#homesection tr:nth-child(even) td{
+		position:relative;
+		left:-90px;
+		text-align: center;
+		}
+		#homesection img{
+		margin:10px;
+			display:inline-block;
+			border-radius:50px;
+			width:100px;
+		}
+		#homesection tr:nth-child(odd) td:hover{
+		cursor:pointer;
+		background-color:blue;
+		}		
