@@ -196,7 +196,6 @@ public class UserServlet extends BaseServlet {
 			String  fileName =time+".jpg";
 			imageData = imageData.substring(imageData.indexOf(",")+1);
 			imageData=	imageData.replaceAll(" ", "+");
-			ImageUtil.generateImage(imageData,"C:/Users/jay/git/gitSpacing/dtw/WebContent/img/headsculpture/"+fileName);
 			ImageUtil.generateImage(imageData,path+"/headsculpture/"+fileName);
 
 			String userId=req.getParameter("userId");
