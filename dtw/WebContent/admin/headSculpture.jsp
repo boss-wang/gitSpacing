@@ -112,9 +112,9 @@
 					type:"post",
 					data:"imagedate="+e.target.result+"&userId="+userId,
 					success:function(res){
-						if(res==0){
+						if(res!=1){
 							$("#headpics").hide();
-							$(".homeTip").text("上传失败");
+							$(".homeTip").text("上传失败,图片格式不兼容");
 							$(".homeTip").show(200);
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
