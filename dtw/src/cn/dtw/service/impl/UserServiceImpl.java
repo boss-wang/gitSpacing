@@ -90,6 +90,11 @@ public class UserServiceImpl implements UserService {
 	public int updateHeadPic(User user, UserHeadSculpture userHeadSculpture) {
 		return userDao.updateHeadPic(user, userHeadSculpture);
 	}
+	//上传头像
+	@Override
+	public int addUserHeadPic(UserHeadSculpture userHeadSculpture) {
+		return userDao.addUserHeadPic(userHeadSculpture);
+	}
 
 
 }

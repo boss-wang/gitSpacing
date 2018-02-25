@@ -3,6 +3,7 @@ package cn.dtw.web.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import cn.dtw.service.User_roleService;
 import cn.dtw.service.impl.RoleServiceImpl;
 import cn.dtw.service.impl.UserServiceImpl;
 import cn.dtw.service.impl.User_roleServiceImpl;
+import cn.dtw.util.ImageUtil;
 
 @WebServlet("/user.do")
 public class UserServlet extends BaseServlet {
@@ -165,6 +167,7 @@ public class UserServlet extends BaseServlet {
 			user.setUserId(Integer.parseInt(userid));
 			List<UserHeadSculpture> list= userService.getAllPicPathById(user);
 			req.setAttribute("list", list);
+			req.setAttribute("size", list.size());
 			req.getRequestDispatcher("admin/headSculpture.jsp").forward(req, resp);
 		}
 		//修改头像
@@ -181,6 +184,26 @@ public class UserServlet extends BaseServlet {
 			req.getSession().removeAttribute("user");
 			User userDB= userService.getUserById(user);
 			req.getSession().setAttribute("user", userDB);
+			resp.getWriter().print(back);
+		}
+		//上传头像
+		protected void sendPic(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String path=req.getSession().getServletContext().getRealPath("img");
+			String  imageData = req.getParameter("imagedate");
+			 String basePath = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";  
+			Date date = new Date();
+			long time = date.getTime();
+			String  fileName =time+".jpg";
+			imageData = imageData.substring(imageData.indexOf(",")+1);
+			imageData=	imageData.replaceAll(" ", "+");
+			ImageUtil.generateImage(imageData,"C:/Users/jay/git/gitSpacing/dtw/WebContent/img/headsculpture/"+fileName);
+			ImageUtil.generateImage(imageData,path+"/headsculpture/"+fileName);
+
+			String userId=req.getParameter("userId");
+			UserHeadSculpture userhead = new UserHeadSculpture();
+			userhead.setUserId(Integer.parseInt(userId));
+			userhead.setPicturePath("img/headsculpture/"+fileName);
+			int back= userService.addUserHeadPic(userhead);
 			resp.getWriter().print(back);
 		}
 }

@@ -72,7 +72,7 @@
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">报关单状态</span>
 						<select  class="inpu" id="customsStatus" name="customsStatus" style="display: inline-block; position: absolute; left: 854px;top: 23px;">
 							<c:forEach var="customsStatus" items="${customsStatusList }">
-								<option value="${customsStatus.id }" <c:if test="${customsStatus.id==order.customsStatus }">selected="selected"</c:if>>${customsStatus.description }</option>
+								<option value="${customsStatus.id }"  <c:if test="${customsStatus.id==order.customsStatus }"> selected="selected" </c:if> > ${customsStatus.description } </option>
 							</c:forEach>
 						</select><span style="margin-left: 10px;display: inline-block;position: absolute;left: 1095px;top: 30px;">*</span>
 				</div>

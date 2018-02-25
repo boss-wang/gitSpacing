@@ -93,5 +93,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		String sql="update user set showPicPath=? where userId=? ";
 		return super.executeUpdate(sql,userHeadSculpture.getPicturePath(),user.getUserId());
 	}
+	//添加头像
+	@Override
+	public int addUserHeadPic(UserHeadSculpture userHeadSculpture) {
+		String sql ="insert into userheadsculpture (userId,picturepath) values(?,?)";
+		return super.executeUpdate(sql, userHeadSculpture.getUserId(),userHeadSculpture.getPicturePath());
+	}
 
 }

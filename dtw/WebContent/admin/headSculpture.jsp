@@ -40,72 +40,28 @@
     </style>
 <body>
 <div  id="pics">
-	<table>
-		<c:forEach  var="headsc"  items="${list }" varStatus="n" step="3" >
-		<tr>
-		<c:if test="${n.index==0 }">
-		<c:forEach  var="headsc"  items="${list }" varStatus="m"  >
+	<table id="tabhead">
+		<% 
+		Object obj= request.getAttribute("size");
+		int m = (Integer)obj;
+		int row=0;
+		if(m%3==0){
+			row=m/3;
+		}else if(m%3!=0){
+			row=m/3+1;
+		}
+		for(int i =0;i<row;i++){
+			%>
+			<tr>
 			
-				<c:if test="${m.index==0 }">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-				<c:if test="${m.index==1}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-					<c:if test="${m.index==2}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
+			<c:forEach  var="headsc"  items="${list }"  begin="<%=i*3 %>" end="<%=i*3+2 %>" >
+			<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
+			</c:forEach>
 			
-		</c:forEach>
-		</c:if>
-		<c:if test="${n.index==3 }">
-		<c:forEach  var="headsc"  items="${list }" varStatus="m"  >
-			
-				<c:if test="${m.index==3 }">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-				<c:if test="${m.index==4}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-					<c:if test="${m.index==5}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-			
-		</c:forEach>
-		</c:if>
-		<c:if test="${n.index==6 }">
-		<c:forEach  var="headsc"  items="${list }" varStatus="m"  >
-			
-				<c:if test="${m.index==6 }">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-				<c:if test="${m.index==7}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-					<c:if test="${m.index==8}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-			
-		</c:forEach>
-		</c:if>
-		<c:if test="${n.index==9 }">
-		<c:forEach  var="headsc"  items="${list }" varStatus="m"  >
-			
-				<c:if test="${m.index==9 }">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-				<c:if test="${m.index==10}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-					<c:if test="${m.index==11}">
-					<td><img alt="" src="${headsc.picturePath }" picId="${headsc.id }"></td>
-					</c:if>
-			
-		</c:forEach>
-		</c:if>
-		</tr>
-		</c:forEach>
-		
+			</tr>
+			<%
+		}
+		%>
 
 	</table>
 	</div>
@@ -145,17 +101,32 @@
 	})
 	
 	$("#sendpic").change(function(){
+		var userId =${user.userId};
 			if(window.FileReader){
 				var fr= new FileReader();
 				fr.readAsDataURL(this.files[0]);
 				
 				fr.onloadend=(function(e){
 					$.ajax({
-					url:"",
+					url:"user.do?mn=sendPic",
 					type:"post",
-					data:"imagedate="+e.target.result,
+					data:"imagedate="+e.target.result+"&userId="+userId,
 					success:function(res){
-					
+						if(res==0){
+							$("#headpics").hide();
+							$(".homeTip").text("上传失败");
+							$(".homeTip").show(200);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
+						}else if(res==1){
+							$("#headpics").hide();
+							$(".homeTip").text("上传成功");
+							$(".homeTip").show(500);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
+						}
 					}
 					})
 				})
