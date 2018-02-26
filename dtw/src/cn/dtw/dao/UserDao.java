@@ -15,6 +15,7 @@ public interface UserDao {
 	public User getUserByAccount(User user);
 	//通过ID修改用户信息
 	public boolean updateUserById(User user);
+
 	//添加用户账号 获得创建用户ID
 	public int addUser(User user);
 	//分页

@@ -39,7 +39,8 @@ public class LoginServlet extends HttpServlet {
 			resp.getWriter().print(1);
 		}else {
 			//登录成功,session中保存用户信息
-			req.getSession().setAttribute("user", userDB);
+			User user2 = userService.getUserById(userDB);
+			req.getSession().setAttribute("user", user2);
 			resp.getWriter().print(2);
 		}
 	}

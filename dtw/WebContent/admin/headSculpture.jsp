@@ -129,7 +129,12 @@
 				})
 				
 			}else{
-				alert("浏览器不支持")
+				$("#headpics").hide();
+				$(".homeTip").text("不支持此文件类型");
+				$(".homeTip").show(200);
+				setTimeout(function(){
+					$(".homeTip").fadeOut(1000);
+				},1000);
 			}
 		})
 </script>
