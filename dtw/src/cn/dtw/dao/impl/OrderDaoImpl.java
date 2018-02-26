@@ -74,5 +74,11 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 				order.getCargoWeight(),order.getChargeWeight(),order.getClientId(),order.getCustomsNo(),order.getCustomsStatus(),order.getDepartDate(),order.getDestination(),
 				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getOrderNo(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getTermsId(),order.getOrderId())>0?true:false;
 	}
+	//查询业务编号是否存在
+	@Override
+	public Order getOrderByOrderNo(Order order) {
+		String sql = "select * from `order` where orderNo=?";
+		return super.executeOneRow(new BeanHandler<Order>(Order.class), sql, order.getOrderNo());
+	}
 
 }

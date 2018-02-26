@@ -5,6 +5,7 @@ import java.util.List;
 import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
+import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 
@@ -25,4 +26,9 @@ public interface OrderService {
 	public Order getOrderById(int id);
 	//修改订单
 	public boolean updateOrder(Order order);
+	//通过业务编号查询订单信息
+	public Order getOrderByOrderNo(Order order);
+	//添加应收
+	public boolean addOrderCost(Order_cost orderCost);
+	
 }

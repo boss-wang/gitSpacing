@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	.rightTip{
+		margin-left: 860px; 
+        line-height: 30px;
+        margin-top:-28px;
+	}
+</style>
 <body  style="background-color: rgba(0,0,0,0);">
 		<!-- 添加订单 -->
 		<div class="tit">
@@ -17,12 +24,12 @@
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">客&nbsp;&nbsp;&nbsp;&nbsp;户</span>
-						<input id="clientName" class="inpu" placeholder="客户公司抬头"/><p id="clientTip" class="tip"></p>
+						<input id="clientName" class="inpu" placeholder="客户公司抬头"/><span style="margin-left: 10px;">*</span><p id="clientTip" class="tip"></p>
 						<input type="hidden" id="clientId" name="clientId" />
 						<div class="findClient"></div>
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
-						<input  class="inpu" id="orderNo" name="orderNo" placeholder="业务编号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/><span style="margin-left: 460px;">*</span>
+						<input  class="inpu" id="orderNo" name="orderNo" placeholder="业务编号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/><span style="margin-left: 440px;">*</span><p id="orderNoTip" class="rightTip"></p>
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
@@ -142,22 +149,15 @@
 			});
 			$("#addSub").click(function() {
 				$(".tip").text("");
+				$(".rightTip").text("");
 				var clientName = $("#clientName").val();
 				var orderNo = $("#orderNo").val();
-				if(orderNo==""||orderNo==null){
-					$(".homeTip").text("请输入业务编号");
-					$(".homeTip").show(200);
-					$("#orderNo").focus();
-					setTimeout(function(){
-						$(".homeTip").fadeOut(1000);
-					},1000);
-				}else if(clientName==""||clientName==null){
-					$(".homeTip").text("请输入客户抬头");
-					$(".homeTip").show(200);
+				if(clientName==""||clientName==null){
+					$("#clientTip").text("请输入客户抬头");
 					$("#clientName").focus();
-					setTimeout(function(){
-						$(".homeTip").fadeOut(1000);
-					},1000);
+				}else if(orderNo==""||orderNo==null){
+					$("#orderNoTip").text("请输入业务编号");
+					$("#orderNo").focus();
 				}else{
 					$.ajax({
 						"url":"client.do",
@@ -176,7 +176,10 @@
 									"type":"post",
 									"data":"mn=addOrder&userId="+userId+"&"+content,
 									"success":function(res){
-										if(res==1){
+										if(res==2){
+											$("#orderNoTip").text("该编号已经存在，请重新填写");
+											$("#orderNo").focus();
+										}else if(res==1){
 											$(".homeTip").text("添加成功！");
 											$(".homeTip").show(200);
 											$("#home").load("order.do","mn=showOrders");

@@ -5,14 +5,17 @@ import java.util.List;
 import cn.dtw.dao.CustomsStatusDao;
 import cn.dtw.dao.OrderDao;
 import cn.dtw.dao.OrderStatusDao;
+import cn.dtw.dao.Order_costDao;
 import cn.dtw.dao.TermsDao;
 import cn.dtw.dao.impl.CustomsStatusDaoImpl;
 import cn.dtw.dao.impl.OrderDaoImpl;
 import cn.dtw.dao.impl.OrderStatusDaoImpl;
+import cn.dtw.dao.impl.Order_costDaoImpl;
 import cn.dtw.dao.impl.TermsDaoImpl;
 import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
+import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
@@ -22,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	private CustomsStatusDao customsStatusDao = new CustomsStatusDaoImpl();
 	private OrderDao orderDao = new OrderDaoImpl();
 	private TermsDao termsDao = new TermsDaoImpl();
+	private Order_costDao orderCostDao = new Order_costDaoImpl();
 	//查询状态列表
 	@Override
 	public List<OrderStatus> getAllStatus() {
@@ -62,6 +66,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public boolean updateOrder(Order order) {
 		return orderDao.updateOrder(order);
+	}
+	//通过业务编号查询订单信息
+	@Override
+	public Order getOrderByOrderNo(Order order) {
+		return orderDao.getOrderByOrderNo(order);
+	}
+	//添加应收
+	@Override
+	public boolean addOrderCost(Order_cost orderCost) {
+		return orderCostDao.addOrderCost(orderCost);
 	}
 
 }

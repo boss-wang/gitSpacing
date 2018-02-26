@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!-- 订单管理 -->
 
-	<div style="width: 2200px;">
+	<div style="width: 2500px;">
 		 	<div class="tit" style="padding-left:350px">
                  <div class="col-md-3 col-xs-6" >
                     <div class="tile quick-stats">
@@ -37,7 +37,9 @@
 		 		<td>备注内容</td>
 		 		<td>贸易条款</td>
 		 		<td>应收</td>
+		 		<td>新增应收</td>
 		 		<td>应付</td>
+		 		<td>新增应付</td>
 		 		<td>操作栏</td>
 		 	</tr>
 		 	<c:forEach var="order" items="${orderList }">
@@ -62,7 +64,9 @@
 			 		<td>${order.remarks }</td>
 			 		<td>${order.terms.code }</td>
 			 		<td><a>查看应收</a></td>
+			 		<td><a class="addCost" orderId="${order.orderId }">添加</a></td>
 			 		<td><a>查看应付</a></td>
+			 		<td><a>添加</a></td>
 			 		<td><a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a>删除</a></td>
 		 		</tr>
 		 	</c:forEach>
@@ -79,7 +83,12 @@
 		var currentPage = ${currentPage };
 		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId);
 	});
-	
+	//添加应收
+	$("#selorder").on("click",".addCost",function(){
+		var orderId = $(this).attr("orderId");
+		var currentPage = ${currentPage };
+		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId);
+	});
 	//分页
 	$("#firstPage").click(function(){
 		$("#home").load("order.do?mn=showOrders&currentPage=1");

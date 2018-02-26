@@ -11,13 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
+import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
+import cn.dtw.service.CostStatusService;
 import cn.dtw.service.OrderService;
+import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
 
 @WebServlet("/order.do")
@@ -25,6 +28,7 @@ public class OrderServlet extends BaseServlet {
 	
 	private static final long serialVersionUID = 5444940774766260440L;
 	private OrderService orderService = new OrderServiceImpl();
+	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	//跳转添加订单页面
 	protected void goAddOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<OrderStatus> statusList = orderService.getAllStatus();
@@ -49,6 +53,37 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("order", order);
 		req.setAttribute("currentPage", currentPage);
 		req.getRequestDispatcher("/admin/updateOrder.jsp").forward(req, resp);
+	}
+	//跳转添加应收页面
+	protected void goAddCost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		int currentPage = Integer.parseInt(req.getParameter("currentPage"));
+		Order order = orderService.getOrderById(orderId);
+		List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
+		req.setAttribute("order", order);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("costStatusList", costStatusList);
+		req.getRequestDispatcher("/admin/addCost.jsp").forward(req, resp);
+	}
+	//添加应收
+	protected void addCost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		int clientId = Integer.parseInt(req.getParameter("clientId"));
+		Double cost = Double.parseDouble(req.getParameter("cost"));
+		String invoiceNo = req.getParameter("invoiceNo");
+		int costStatus = Integer.parseInt(req.getParameter("costStatus"));
+		Order_cost orderCost = new Order_cost();
+		orderCost.setClientId(clientId);
+		orderCost.setCost(cost);
+		orderCost.setCostStatus(costStatus);
+		orderCost.setInvoiceNo(invoiceNo);
+		orderCost.setOrderId(orderId);
+		if(orderService.addOrderCost(orderCost)) {
+			resp.getWriter().print(1);
+		}else{
+			resp.getWriter().print(0);
+		};
+		resp.getWriter().close();
 	}
 	//显示订单列表
 	protected void showOrders(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -121,7 +156,9 @@ public class OrderServlet extends BaseServlet {
 		order.setUpdateTime(formater.format(date));
 		order.setUserId(userId);
 		PrintWriter out = resp.getWriter();
-		if(orderService.addOrder(order)) {
+		if(orderService.getOrderByOrderNo(order)!=null) {
+			out.print(2);
+		}else if(orderService.addOrder(order)) {
 			out.print(1);
 		}else{
 			out.print(0);

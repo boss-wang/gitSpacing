@@ -1,5 +1,6 @@
 package cn.dtw.entity;
 
+import java.util.List;
 
 public class Order{
 private int orderId;
@@ -26,8 +27,15 @@ private Client client;
 private CustomsStatus cusStatus;
 private OrderStatus orderStatus;
 private Terms terms;
+private List<Order_cost> orderCostList;
 
 
+public List<Order_cost> getOrderCostList() {
+	return orderCostList;
+}
+public void setOrderCostList(List<Order_cost> orderCostList) {
+	this.orderCostList = orderCostList;
+}
 public Terms getTerms() {
 	return terms;
 }
