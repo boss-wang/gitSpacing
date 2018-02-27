@@ -1,0 +1,92 @@
+.footer{
+			position: relative;
+			top: 100px;
+			text-align: center;
+		}
+		
+		#form-main{
+			border-top: solid gainsboro;
+		}
+		.logo-title{
+			font-family: "微软雅黑";
+			font-size: larger;
+			position: relative;
+			top: -20px;
+			display: inline-block;
+		}
+		.have-account{
+			position: relative;
+			right: -550px;
+			display: inline-block;
+		}
+		#logo{
+			display: inline-block;
+			width: 200px;
+		}
+		.form-item{
+			border: 1px solid gainsboro;
+			width: 350px;
+			height: 50px;
+			position: relative;
+			left: 300px;
+			margin: 20px;
+		}
+		#form-phone{
+			position: relative;
+			left: 15px;
+		}
+		.form-item-phone img{
+			position: relative;
+			left: 30px;
+		}
+		label{
+			line-height: 50px;
+			vertical-align: middle;
+			margin: 10px;
+		}
+		input{
+			display: inline-block;
+			width:210px ;
+			height: 25px;
+			border: none;
+			outline: none;
+		}
+		#getPhoneCode{
+			background-color:gainsboro;
+			line-height: 45px;
+			width:90px;
+			height: 49px;
+			position: relative;
+			left:260px;
+			top: -49px;
+		}
+		.btn-register{
+			border: none;
+			background-color: orangered;
+			color: white;
+			font: "微软雅黑";
+			position: relative;
+			left: 320px;
+			width: 350px;
+			height: 40px;
+		}
+		.i-status{
+			display: none;
+			vertical-align: middle;
+			border-radius:13px ;
+			width: 25px;
+		}
+		.input-tip{
+			color: red;
+		}
+		.orPhone{
+			position: relative;
+			left: 280px;
+			color: blue;
+			font-size: 3px;
+		}
+		.orPhone:hover{
+			cursor: pointer;
+			text-decoration: underline;
+			color:blue;
+		}
