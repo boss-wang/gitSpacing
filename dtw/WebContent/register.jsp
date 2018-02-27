@@ -29,23 +29,28 @@
 							<input id="form-account"  name="regName" class="field" autocomplete="off" maxlength="20" required="required" placeholder="4-12个字符（英文,下划线,数字）" type="text">
 							<img class="i-status" src="img/right.png" >
 							<div class="input-tip">
-							<span></span>
+								<span></span>
+							</div>
 						</div>
-						</div>
-						
-						<div class="form-item" style="z-index: 12;">
-							<label>设 置 密 码</label>
 
-							<input name="pwd" id="form-pwd" class="field" maxlength="20"  required="required"  placeholder="至少8个字符（英文,下划线,数字）" type="password">
-							<img class="i-status" src="img/right.png" >
-							<div class="capslock-tip tips" style="display: none;">大写已开启<b class="arrow"></b><b class="arrow-inner"></b></div>
-							<div class="capslock-tip tips" style="display: none;background-color: aliceblue;">大写已开启<b class="arrow"></b><b class="arrow-inner"></b></div>
-							<div class="input-tip">
-							<span></span>
-						</div>
-						</div>
-						
-						<div class="form-item" style="z-index: 12;">
+				<div class="form-item" style="z-index: 12;">
+					<label>设 置 密 码</label> <input name="pwd" id="form-pwd"
+						class="field" maxlength="20" required="required"
+						placeholder="至少8个字符（英文,下划线,数字）" type="password"> <img
+						class="i-status" src="img/right.png">
+					<div class="capslock-tip tips" style="display: none;">
+						大写已开启<b class="arrow"></b><b class="arrow-inner"></b>
+					</div>
+					<div class="capslock-tip tips"
+						style="display: none; background-color: aliceblue;">
+						大写已开启<b class="arrow"></b><b class="arrow-inner"></b>
+					</div>
+					<div class="input-tip">
+						<span></span>
+					</div>
+				</div>
+
+				<div class="form-item" style="z-index: 12;">
 							<label>确 认 密 码</label>
 
 							<input name="pwdRepeat" id="form-equalTopwd" class="field"  required="required"  placeholder="请再次输入密码" maxlength="20" type="password">
@@ -56,10 +61,10 @@
 							<span class="orPhone">
 								邮 箱 验证
 							</span>
-						</div>
+				</div>
 						
-							<div class="item-email-wrap" style="display: none;">
-							<div class="form-item">
+				<div class="item-email-wrap" style="display: none;">
+				<div class="form-item">
 								<label>邮 箱 验 证</label>
 								<input name="email" id="form-email" class="field ignore"    placeholder="建议使用常用邮箱" type="text">
 								<img class="i-status" src="img/right.png" >
@@ -80,7 +85,6 @@
 							
 						</div>
 						
-						</div>
 
 						<div class="form-item form-item-phonecode">
 							<label>手机验证码</label>
