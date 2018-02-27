@@ -32,7 +32,7 @@
 				<div class="nav" id="menu">
 					<ul id="nav">
 						<li class="mainlevel active">
-							<a title="首页" href="index.html" class="menu">首页</a>
+							<a title="首页" href="index.jsp" class="menu">首页</a>
 						</li>
 						<li class="mainlevel">
 							<a title="关于大田" href="" class="menu">关于大田</a>
