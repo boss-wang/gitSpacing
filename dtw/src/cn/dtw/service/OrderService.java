@@ -37,4 +37,6 @@ public interface OrderService {
 	public boolean delCost(Order_cost orderCost);
 	//添加应付
 	public boolean addOrderPay(Order_pay orderPay);
+	//删除应付
+	public boolean delPay(Order_pay orderPay);
 }

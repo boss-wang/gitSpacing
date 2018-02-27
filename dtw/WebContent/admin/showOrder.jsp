@@ -199,8 +199,8 @@
 										</c:forEach>
 									</p>
 									<p>
-										<a class="ccOperation modifyCost" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a> 
-										<a class="ccOperation delCost">删除</a>
+										<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a> 
+										<a class="ccOperation delPay">删除</a>
 									</p>
 								</div>
 								
@@ -318,7 +318,31 @@
 		$("#selorder").find(".contactDiv").not(using).hide();
 		using.toggle();
 	});
-	
+	//删除应付
+	$("#selorder").on("click",".delPay",function(){
+		if(confirm("确认删除？")){
+			var parent = $(this).parents(".ssName");
+			var payId = parent.find(".nameContent").attr("payId");
+			$.ajax({
+				type:"post",
+				url:"order.do",
+				data:"mn=delPay&payId="+payId,
+				success:function(res){
+					if(res==1){
+						var currentPage = ${currentPage };
+						$(".homeTip").text("删除成功");
+						$(".homeTip").show(200);
+						parent.remove();
+						setTimeout(function(){
+							$(".homeTip").fadeOut(1500);
+						},1000);
+					}else{
+						alert("删除失败");
+					}
+				}
+			});
+		}
+	});
 	//删除应收
 	$("#selorder").on("click",".delCost",function(){
 		if(confirm("确认删除？")){

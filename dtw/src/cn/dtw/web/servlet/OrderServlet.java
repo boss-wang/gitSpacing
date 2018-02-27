@@ -293,4 +293,16 @@ public class OrderServlet extends BaseServlet {
 		}
 		resp.getWriter().close();
 	}
+	//删除应付
+	protected void delPay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int payId = Integer.parseInt(req.getParameter("payId"));
+		Order_pay orderPay = new Order_pay();
+		orderPay.setId(payId);
+		if(orderService.delPay(orderPay)) {
+			resp.getWriter().print(1);
+		}else {
+			resp.getWriter().print(0);
+		}
+		resp.getWriter().close();
+	}
 }

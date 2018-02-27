@@ -13,6 +13,6 @@ public interface Order_payDao {
 	public List<Order_pay> getPayByOrderId(Order order);
 //	//修改应付
 //	public boolean updatePay(Order_pay orderPay);
-//	//删除应付
-//	public boolean delPay(Order_pay orderPay);
+	//删除应付
+	public boolean delPay(Order_pay orderPay);
 }

@@ -96,5 +96,10 @@ public class OrderServiceImpl implements OrderService {
 	public boolean addOrderPay(Order_pay orderPay) {
 		return orderPayDao.addOrderPay(orderPay);
 	}
+	//删除应付
+	@Override
+	public boolean delPay(Order_pay orderPay) {
+		return orderPayDao.delPay(orderPay);
+	}
 
 }
