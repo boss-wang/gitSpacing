@@ -5,9 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 public class ImageUtil {
 
@@ -24,10 +24,10 @@ public class ImageUtil {
 	public static boolean generateImage(String imgStr, String path) {
 		if (imgStr == null)
 			return false;
-		BASE64Decoder decoder = new BASE64Decoder();
+		Decoder decoder = Base64.getDecoder();
 		try {
 			//// 解密
-			byte[] b = decoder.decodeBuffer(imgStr);
+			byte[] b = decoder.decode(imgStr);
 			//处理数据
 			for (int i = 0; i < b.length; ++i) {
 				if (b[i] < 0) {
@@ -62,8 +62,8 @@ public class ImageUtil {
 	        e.printStackTrace();
 	    }
 	 // 加密
-	    BASE64Encoder encoder = new BASE64Encoder();
-	    return encoder.encode(data);
+	    Encoder encoder = Base64.getEncoder();
+	    return encoder.encodeToString(data);
 	}
 	
 	public static void main(String[] args) {
