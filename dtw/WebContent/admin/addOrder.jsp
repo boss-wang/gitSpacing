@@ -50,10 +50,10 @@
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
 						<span class="mess">航班日期</span>
-						<input  class="inpu" id="departDate" name="departDate" type="date" />
+						<input  class="inpu" id="departDate" name="departDate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" />
 					</div>				
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">到港日期</span>
-						<input  class="inpu" id="arriveDate" name="arriveDate" type="date" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
+						<input  class="inpu" id="arriveDate" name="arriveDate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
@@ -113,6 +113,8 @@
 				</div>
 			</form>
 			</div>
+			
+		<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript">
 			
 			$("#clientName").keyup(function(){
