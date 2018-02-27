@@ -149,11 +149,9 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a href="" target="_blank" title="智享分销">智享分销</a></dt>
-						<dt><a href="" target="_blank" title="智享电商">智享电商</a></dt>
-						<dt><a href="" target="_blank" title="智享门到门">智享门到门</a></dt>
-						<dt><a href="" target="_blank" title="冷链物流">冷链物流</a></dt>
-						<dt><a href="" target="_blank" title="国际物流">国际物流</a></dt>
+						<dt><a href="" target="_blank" title="快速下单">快速下单</a></dt>
+						<dt><a href="" target="_blank" title="订单追踪">订单追踪</a></dt>
+						
 					</dl>
 				</div>
 				<div class="cont last">
