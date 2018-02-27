@@ -6,7 +6,14 @@ private String loginName;
 private String loginPwd;
 private String tel;
 private String email;
+private int statusId;
 
+public int getStatusId() {
+	return statusId;
+}
+public void setStatusId(int statusId) {
+	this.statusId = statusId;
+}
 public int getId(){
 	return id;
 }
