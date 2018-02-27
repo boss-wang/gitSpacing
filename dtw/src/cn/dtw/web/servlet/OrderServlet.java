@@ -16,6 +16,7 @@ import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Order_cost;
+import cn.dtw.entity.Order_pay;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
@@ -54,6 +55,17 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("currentPage", currentPage);
 		req.getRequestDispatcher("/admin/updateOrder.jsp").forward(req, resp);
 	}
+	//跳转添加应付页面
+		protected void goAddPay(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			int orderId = Integer.parseInt(req.getParameter("orderId"));
+			int currentPage = Integer.parseInt(req.getParameter("currentPage"));
+			Order order = orderService.getOrderById(orderId);
+			List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
+			req.setAttribute("order", order);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("costStatusList", costStatusList);
+			req.getRequestDispatcher("/admin/addPay.jsp").forward(req, resp);
+		}
 	//跳转添加应收页面
 	protected void goAddCost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
@@ -65,6 +77,32 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("costStatusList", costStatusList);
 		req.getRequestDispatcher("/admin/addCost.jsp").forward(req, resp);
 	}
+	//添加应付
+		protected void addPay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			int orderId = Integer.parseInt(req.getParameter("orderId"));
+			int supplierId = Integer.parseInt(req.getParameter("supplierId"));
+			String unitPriceStr = req.getParameter("unitPrice");
+			String otherPriceStr = req.getParameter("otherPrice");
+			Double unitPrice = unitPriceStr==""?null:Double.parseDouble(unitPriceStr);
+			Double otherPrice = otherPriceStr==""?null:Double.parseDouble(otherPriceStr);
+			Double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
+			String invoiceNo = req.getParameter("invoiceNo");
+			int payStatus = Integer.parseInt(req.getParameter("costStatus"));
+			Order_pay orderPay = new Order_pay();
+			orderPay.setInvoiceNo(invoiceNo);
+			orderPay.setOrderId(orderId);
+			orderPay.setOtherPrice(otherPrice);
+			orderPay.setPayStatus(payStatus);
+			orderPay.setSupplierId(supplierId);
+			orderPay.setTotalPrice(totalPrice);
+			orderPay.setUnitPrice(unitPrice);
+			if(orderService.addOrderPay(orderPay)) {
+				resp.getWriter().print(1);
+			}else{
+				resp.getWriter().print(0);
+			};
+			resp.getWriter().close();
+		}
 	//添加应收
 	protected void addCost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
@@ -100,9 +138,11 @@ public class OrderServlet extends BaseServlet {
 			currentPage = currentPage>totalPage?totalPage:currentPage;
 		}
 		List<Order> orderList = orderService.getOrderList(user, currentPage, 10);
+		List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("orderList", orderList);
+		req.setAttribute("costStatusList", costStatusList);
 		req.getRequestDispatcher("/admin/showOrder.jsp").forward(req, resp);
 	}
 	//添加订单
@@ -223,5 +263,34 @@ public class OrderServlet extends BaseServlet {
 		};
 		out.close();
 	}
-	
+	//修改应收
+	protected void updateCost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int costId = Integer.parseInt(req.getParameter("costId"));
+		Double cost = Double.parseDouble(req.getParameter("cost"));
+		String invoiceNo = req.getParameter("invoiceNo");
+		int costStatus = Integer.parseInt(req.getParameter("costStatus"));
+		Order_cost orderCost = new Order_cost();
+		orderCost.setId(costId);
+		orderCost.setCost(cost);
+		orderCost.setInvoiceNo(invoiceNo);
+		orderCost.setCostStatus(costStatus);
+		if(orderService.updateCost(orderCost)) {
+			resp.getWriter().print(1);
+		}else {
+			resp.getWriter().print(0);
+		}
+		resp.getWriter().close();
+	}
+	//删除应收
+	protected void delCost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int costId = Integer.parseInt(req.getParameter("costId"));
+		Order_cost orderCost = new Order_cost();
+		orderCost.setId(costId);
+		if(orderService.delCost(orderCost)) {
+			resp.getWriter().print(1);
+		}else {
+			resp.getWriter().print(0);
+		}
+		resp.getWriter().close();
+	}
 }

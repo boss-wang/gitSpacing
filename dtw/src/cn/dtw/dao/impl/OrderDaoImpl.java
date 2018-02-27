@@ -12,6 +12,8 @@ import cn.dtw.dao.ClientDao;
 import cn.dtw.dao.CustomsStatusDao;
 import cn.dtw.dao.OrderDao;
 import cn.dtw.dao.OrderStatusDao;
+import cn.dtw.dao.Order_costDao;
+import cn.dtw.dao.Order_payDao;
 import cn.dtw.dao.TermsDao;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
@@ -21,6 +23,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	private CustomsStatusDao cusStatusDao = new CustomsStatusDaoImpl();
 	private OrderStatusDao orderStatusDao = new OrderStatusDaoImpl();
 	private TermsDao termsDao = new TermsDaoImpl();
+	private Order_costDao orderCostDao = new Order_costDaoImpl();
+	private Order_payDao orderPayDao = new Order_payDaoImpl();
 	//添加订单
 	@Override
 	public boolean addOrder(Order order) {
@@ -41,6 +45,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
 			order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
 			order.setTerms(termsDao.getTermsById(order));
+			order.setOrderCostList(orderCostDao.getCostByOrderId(order));
+			order.setOrderPayList(orderPayDao.getPayByOrderId(order));
 			orderList.add(order);
 		}
 		return orderList;
@@ -61,6 +67,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
 		order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
 		order.setTerms(termsDao.getTermsById(order));
+		order.setOrderCostList(orderCostDao.getCostByOrderId(order));
 		return order;
 	}
 	//修改订单

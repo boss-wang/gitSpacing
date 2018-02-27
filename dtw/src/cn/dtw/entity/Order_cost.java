@@ -7,7 +7,14 @@ private int clientId;
 private Double cost;
 private String invoiceNo;
 private int costStatus;
+private Client client;
 
+public Client getClient() {
+	return client;
+}
+public void setClient(Client client) {
+	this.client = client;
+}
 public int getId(){
 	return id;
 }

@@ -1,6 +1,7 @@
 package cn.dtw.web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Supplier;
 import cn.dtw.entity.Supplier_suppliercontact;
 import cn.dtw.entity.Suppliercontact;
@@ -140,5 +144,25 @@ public class SupplierServlet extends BaseServlet {
 			int rs = suService.updateSupplier(supplier);
 			resp.getWriter().print(rs);
 		}
-
+		//模糊查询供应商名
+		protected void findSupplier(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String supplierName = req.getParameter("supplierName");
+			List<Supplier> supplierList = suService.getSupplierByName(supplierName);
+			String supplierJson = JSON.toJSONString(supplierList);
+			PrintWriter out = resp.getWriter();
+			out.print(supplierJson);
+			out.close();
+		}
+		//查询供应商是否存在
+		protected void checkSupplier(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			String supplierName = req.getParameter("supplierName");
+			Supplier supplier = new Supplier();
+			supplier.setSupplierName(supplierName);
+			Supplier supplierGet = suService.getSupplierByName(supplier);
+			if(supplierGet==null) {
+				resp.getWriter().print(0);
+			}else{
+				resp.getWriter().print(supplierGet.getSupplierId());
+			};
+		}
 }

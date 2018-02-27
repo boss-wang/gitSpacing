@@ -66,7 +66,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 
 
 
-
+	//修改客户公司名和地址
 	@Override
 	public int getResultById(Client client) {
 		String sql = "select * from client where clientId!=? and clientName=? ";
@@ -128,6 +128,10 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	@Override
 	public Client getClienttext(Client client) {
 		String sql ="select * from client where clientId=?";
-		return super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientId());
+		Client clientGet = super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientId());
+		//添加客户联系人信息
+		List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
+		clientGet.setClientContactlist(clientContactList);
+		return clientGet;
 	}
 }

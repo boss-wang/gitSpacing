@@ -24,12 +24,19 @@ private String updateTime;//最近修改时间默认为now
 private int termsId; //贸易条款
 private String remarks;//备注
 private Client client;
-private CustomsStatus cusStatus;
-private OrderStatus orderStatus;
-private Terms terms;
-private List<Order_cost> orderCostList;
+private CustomsStatus cusStatus;	//报关状态
+private OrderStatus orderStatus;	//订单状态
+private Terms terms;		//贸易条款
+private List<Order_cost> orderCostList;		//应收列表
+private List<Order_pay> orderPayList;	//应付列表
 
 
+public List<Order_pay> getOrderPayList() {
+	return orderPayList;
+}
+public void setOrderPayList(List<Order_pay> orderPayList) {
+	this.orderPayList = orderPayList;
+}
 public List<Order_cost> getOrderCostList() {
 	return orderCostList;
 }

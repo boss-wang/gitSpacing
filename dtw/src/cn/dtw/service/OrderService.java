@@ -6,6 +6,7 @@ import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Order_cost;
+import cn.dtw.entity.Order_pay;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 
@@ -30,5 +31,10 @@ public interface OrderService {
 	public Order getOrderByOrderNo(Order order);
 	//添加应收
 	public boolean addOrderCost(Order_cost orderCost);
-	
+	//修改应收
+	public boolean updateCost(Order_cost orderCost);
+	//删除应收
+	public boolean delCost(Order_cost orderCost);
+	//添加应付
+	public boolean addOrderPay(Order_pay orderPay);
 }

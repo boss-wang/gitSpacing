@@ -19,4 +19,6 @@ public interface SupplierService {
 	public int updateSupplier(Supplier supplier);
 	//删除供应商，及其联系人
 	public int delSupplier(Supplier supplier);
+	//模糊查询供应商公司名
+	public List<Supplier> getSupplierByName(String SupplierName);
 }

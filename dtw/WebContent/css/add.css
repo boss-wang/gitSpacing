@@ -145,10 +145,10 @@
            		 position: absolute;
            		 z-index:10;
            		 padding:8px 10px;
-           		 left: 100px; 
+           		 left: -250px; 
            		 top: 0px; 
            		 width:260px;
-           		 height:105px; 
+           		 height:150px; 
            		 background-color:rgba(50,83,100,0.7);
            	}
            	.messdiv p{
@@ -204,6 +204,7 @@
 				width:80px;
 				height:20px;
 				margin-left:20px;
+				margin-top:15px;
 				background:rgba(160,100,200,0.6);
 			}
 			.emailTip{

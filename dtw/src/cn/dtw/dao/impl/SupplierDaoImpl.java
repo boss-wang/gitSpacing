@@ -8,9 +8,12 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.SupplierDao;
+import cn.dtw.dao.Supplier_contactDao;
 import cn.dtw.entity.Supplier;
+import cn.dtw.entity.Suppliercontact;
 
 public class SupplierDaoImpl extends BaseDao implements SupplierDao {
+	Supplier_contactDao su_contDao = new Supplier_contactDaoImpl();
 	//通过公司名查询公司信息
 	@Override
 	public Supplier getSupplierByName(Supplier supplier) {
@@ -41,7 +44,10 @@ public class SupplierDaoImpl extends BaseDao implements SupplierDao {
 	@Override
 	public Supplier getSupplierById(Supplier supplier) {
 		String sql = "select * from supplier where supplierId=?";
-		return super.executeOneRow(new BeanHandler<Supplier>(Supplier.class), sql, supplier.getSupplierId());
+		Supplier supplierGet = super.executeOneRow(new BeanHandler<Supplier>(Supplier.class), sql, supplier.getSupplierId());
+		List<Suppliercontact> contacts = su_contDao.getSupplierContactBySupplierId(supplierGet);
+		supplierGet.setSupplierContacts(contacts);
+		return supplierGet;
 	}
 	//查询除本身外，是否有重名的供应商,没有返回true，有则返回false
 	@Override
@@ -61,6 +67,12 @@ public class SupplierDaoImpl extends BaseDao implements SupplierDao {
 	public boolean delSupplier(Supplier supplier) {
 		String sql = "delete from supplier where supplierId=?";
 		return super.executeUpdate(sql, supplier.getSupplierId())>0?true:false;
+	}
+	//模糊查询供应商公司名
+	@Override
+	public List<Supplier> getSupplierByName(String SupplierName) {
+		String sql = "select * from supplier where supplierName like concat('%',?,'%')";
+		return super.executeQuery(new BeanListHandler<Supplier>(Supplier.class), sql, SupplierName);
 	}
 
 }

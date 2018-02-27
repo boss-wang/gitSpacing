@@ -6,16 +6,19 @@ import cn.dtw.dao.CustomsStatusDao;
 import cn.dtw.dao.OrderDao;
 import cn.dtw.dao.OrderStatusDao;
 import cn.dtw.dao.Order_costDao;
+import cn.dtw.dao.Order_payDao;
 import cn.dtw.dao.TermsDao;
 import cn.dtw.dao.impl.CustomsStatusDaoImpl;
 import cn.dtw.dao.impl.OrderDaoImpl;
 import cn.dtw.dao.impl.OrderStatusDaoImpl;
 import cn.dtw.dao.impl.Order_costDaoImpl;
+import cn.dtw.dao.impl.Order_payDaoImpl;
 import cn.dtw.dao.impl.TermsDaoImpl;
 import cn.dtw.entity.CustomsStatus;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Order_cost;
+import cn.dtw.entity.Order_pay;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
@@ -26,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao = new OrderDaoImpl();
 	private TermsDao termsDao = new TermsDaoImpl();
 	private Order_costDao orderCostDao = new Order_costDaoImpl();
+	private Order_payDao orderPayDao = new Order_payDaoImpl();
 	//查询状态列表
 	@Override
 	public List<OrderStatus> getAllStatus() {
@@ -76,6 +80,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public boolean addOrderCost(Order_cost orderCost) {
 		return orderCostDao.addOrderCost(orderCost);
+	}
+	//修改应收
+	@Override
+	public boolean updateCost(Order_cost orderCost) {
+		return orderCostDao.updateCost(orderCost);
+	}
+	//删除应收
+	@Override
+	public boolean delCost(Order_cost orderCost) {
+		return orderCostDao.delCost(orderCost);
+	}
+	//添加应付
+	@Override
+	public boolean addOrderPay(Order_pay orderPay) {
+		return orderPayDao.addOrderPay(orderPay);
 	}
 
 }

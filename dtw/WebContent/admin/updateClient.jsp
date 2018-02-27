@@ -77,7 +77,6 @@
 		});
 		$("#clientUpdate").on("mouseout", ".ccName", function() {
 			$(this).find(".nameContent").css("color", "white");
-
 			$(this).find(".messdiv").hide();
 		});
 
@@ -131,6 +130,7 @@
 			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
 		})
 		//修改联系人
+		var modeName;
 		$("#clientUpdate").on("click",".modifyCC",function(){
 			if($("#clientUpdate").find("input").length>1){
 				$(".homeTip").text("正在修改`"+modeName+"`");

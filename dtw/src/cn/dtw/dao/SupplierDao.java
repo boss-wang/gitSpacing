@@ -2,6 +2,7 @@ package cn.dtw.dao;
 
 import java.util.List;
 
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Supplier;
 
 public interface SupplierDao {
@@ -21,4 +22,6 @@ public interface SupplierDao {
 	public boolean updateSupplier(Supplier supplier);
 	//删除供应商
 	public boolean delSupplier(Supplier supplier);
+	//模糊查询供应商公司名
+	public List<Supplier> getSupplierByName(String SupplierName);
 }

@@ -9,7 +9,14 @@ private Double otherPrice;
 private Double totalPrice;
 private String invoiceNo;
 private int payStatus;
+private Supplier supplier;
 
+public Supplier getSupplier() {
+	return supplier;
+}
+public void setSupplier(Supplier supplier) {
+	this.supplier = supplier;
+}
 public int getId(){
 	return id;
 }

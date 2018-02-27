@@ -77,5 +77,10 @@ public class SupplierServiceImpl implements SupplierService {
 		suDao.delSupplier(supplier);
 		return 1;
 	}
+	//模糊查询供应商公司名
+	@Override
+	public List<Supplier> getSupplierByName(String SupplierName) {
+		return suDao.getSupplierByName(SupplierName);
+	}
 
 }
