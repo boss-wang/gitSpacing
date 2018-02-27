@@ -49,8 +49,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	//获得创建用户ID
 	@Override
 	public int addUser(User user) {
-		String sql="insert into user(userAccount,userPwd,userName,userSex,userStatus) values(?,?,?,?,1)";
+		String sql="insert into user(userAccount,userPwd,userName,userSex,userStatus,showPicPath) values(?,?,?,?,1,'img/headsculpture/view.jpg')";
 		int id = super.executeUpdateAndReturnId(sql, user.getUserAccount(),user.getUserPwd(),user.getUserName(),user.getUserSex());
+		String sql2 ="insert into userheadsculpture (userId,picturepath) values(?,?)";
+		 super.executeUpdate(sql2, id,"img/headsculpture/view.jpg");
 		return id;
 	}
 	//分页查询用户
