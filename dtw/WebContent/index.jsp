@@ -68,8 +68,9 @@
 						</li>
 						<li class="mainlevel">
 							<a title="登陆" href="login.jsp" class="menu">登陆</a>
-							<a title="" href="register.jsp">/注册</a>
+								<a title="" href="register.jsp">/注册</a>
 						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -171,14 +172,13 @@
 			</div>
 		</div>
 		<!--news end-->
-		</div>
 		<!--index-contact-bg end-->
 		<div class="bottom">
 			<div class="container clearfix">
 				<div class="bottom-link">
 					客服电话:400-626-1166
 					<br />
-					<a href="" target="_blank" title="大田集团办公平台">大田集团办公平台</a>
+					<a href="adminIndex.html" target="_blank" title="大田集团办公平台">大田集团办公平台</a>
 					|
 					<a href="" target="_blank" title="华田集团官网">华田集团官网</a>
 					|
