@@ -65,23 +65,35 @@ $(function(){
 					$("#getPhoneCode").click(function(){
 						if(reg.test($("#form-phone").val())){
 						$("#getPhoneCode").attr("disabled","disabled");
-						//此处利用ajax发送验证码
-						/*
-						 * 
-						 * 代码区
-						 * 
-						 */
-						var m = 60;
-						function getdate() {
-							m--;
-							$("#getPhoneCode").text("已发送("+m+")");
-							if(m==0){
-								clearInterval(flag);
-								$("#getPhoneCode").removeAttr("disabled");
-								$("#getPhoneCode").text("获取验证码");
+						$.ajax({
+							url:"custlogin.do?mn=sendMessage",
+							data:"phoneNumber="+$("#form-phone").val(),
+							type:"post",
+							success:function(res){
+								var m = 60;
+								function getdate() {
+									m--;
+									$("#getPhoneCode").text("已发送("+m+")");
+									if(m==0){
+										clearInterval(flag);
+										$("#getPhoneCode").removeAttr("disabled");
+										$("#getPhoneCode").text("获取验证码");
+									}
+								}
+								var flag=setInterval(getdate,1000);
+								function removeSession(){$.ajax({
+									url:"custlogin.do?mn=deleCode",
+									data:"",
+									type:"post",
+									success:function(res){
+										
+									}
+								})
 							}
-						}
-						var flag=setInterval(getdate,1000);
+								setTimeout(removeSession,60*1000);
+							}
+						})
+						
 						}
 					})
 					
@@ -95,12 +107,26 @@ $(function(){
 						}
 						
 					})		
-				//手机验证码
-				var phonecode= $("#phoneCode").val();
-				
 			
+				
+				
+				//手机验证码
 					$("form").submit(function(){
+						var phonecode= $("#phoneCode").val();
 						if(isright1==true&&isright2==true&&isright3==true&&isright4==true){
+							$.ajax({
+								url:"custlogin.do?mn=islogin",
+								data:"phonecode="+phonecode+"&loginName="+$("#form-account").val()+"&loginPwd="+$("#form-pwd").val()+"&tel="+$("#form-phone").val()+"&email="+$('#form-email').val(),
+								type:"post",
+								success:function(res){
+									if(res==1){
+										alert("ok");
+										
+									}else{
+										$("#form-phone").siblings(".input-tip").text("验证码错误");
+									}
+								}
+							})
 							/*if(phonecode==发送的验证码){
 								此处添加ajax请求发送用户信息完成服务器注册，跳转界面
 							}else{
@@ -110,7 +136,6 @@ $(function(){
 							
 							return false;
 						}else{
-							alert("no");
 							return false;
 						}
 						

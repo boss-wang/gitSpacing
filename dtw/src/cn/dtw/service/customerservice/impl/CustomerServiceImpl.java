@@ -9,7 +9,6 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerDao customerDao = new CustomerDaoImpl();
 	@Override
 	public int addCustomer(Customer customer) {
-		// TODO Auto-generated method stub
 		return customerDao.addCustomer(customer);
 	}
 

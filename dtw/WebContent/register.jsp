@@ -38,13 +38,7 @@
 						class="field" maxlength="20" required="required"
 						placeholder="至少8个字符（英文,下划线,数字）" type="password"> <img
 						class="i-status" src="img/right.png">
-					<div class="capslock-tip tips" style="display: none;">
-						大写已开启<b class="arrow"></b><b class="arrow-inner"></b>
-					</div>
-					<div class="capslock-tip tips"
-						style="display: none; background-color: aliceblue;">
-						大写已开启<b class="arrow"></b><b class="arrow-inner"></b>
-					</div>
+					
 					<div class="input-tip">
 						<span></span>
 					</div>
