@@ -8,7 +8,15 @@ private Double cost;
 private String invoiceNo;
 private int costStatus;
 private Client client;
+private Order order;	//保存订单详细信息
 
+
+public Order getOrder() {
+	return order;
+}
+public void setOrder(Order order) {
+	this.order = order;
+}
 public Client getClient() {
 	return client;
 }
