@@ -49,8 +49,10 @@ public class CustomerServiceImpl implements CustomerService {
 			return cust2;
 		}else if(cust3!=null) {
 			return cust3;
+		}else {
+			return null;
 		}
-		return null;
+		
 	}
 
 }

@@ -162,7 +162,7 @@ public class SDKDemo {
 			// 设置手机号码 此处只能设置一个手机号码
 			message.setMobile(phoneNumber);
 			// 设置内容
-			message.setContent("您的注册验证码是"+contentCode+"，在10分钟内输入有效。如非本人操作请忽略此短信。");
+			message.setContent("您的注册验证码是"+contentCode+"，在1分钟内输入有效。如非本人操作请忽略此短信。");
 			// 设置扩展号
 			message.setExno("11");
 			// 用户自定义流水编号

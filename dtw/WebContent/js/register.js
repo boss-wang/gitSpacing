@@ -1,4 +1,6 @@
 $(function(){
+			var m = 60;
+			var flag;
 			var isright1=false;
 			var isright2=false;
 			var isright3=false;
@@ -13,9 +15,23 @@ $(function(){
 				$(this).siblings(".input-tip").text("格式错误");
 				isright1=false;
 			}else{
-				$(this).siblings(".input-tip").text("");
-				$(this).siblings(".i-status").show();
-				isright1=true;
+				$.ajax({
+					url:"custlogin.do?mn=isrepeat",
+					data:"loginName="+value,
+					type:"post",
+					success:function(res){
+						if(res==1){
+							$("#form-account").siblings(".input-tip").text("");
+							$("#form-account").siblings(".i-status").show();
+							isright1=true;
+						}else{
+							$("#form-account").siblings(".i-status").hide();
+							$("#form-account").siblings(".input-tip").text("用户名存在");
+							isright1=false;
+						}
+					}
+				})
+				
 			}
 			
 			})
@@ -48,58 +64,97 @@ $(function(){
 					isright3=true;
 			}
 			
-			})
-					$("#form-phone").blur(function(){
-					var value=$(this).val();
+			});
+			function checkTel(){
+				var value=$("#form-phone").val();
+		
+				var reg=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+			if(!reg.test(value)){
+				$("#form-phone").siblings(".i-status").hide();
+				$("#form-phone").siblings(".input-tip").text("手机号格式错误");
+				isright4=false;
+			}else{
+				$.ajax({
+					url:"custlogin.do?mn=isrepeat",
+					data:"tel="+value,
+					type:"post",
+					success:function(res){
+						if(res==1){
+							$("#form-phone").siblings(".input-tip").text("");
+							$("#form-phone").siblings(".i-status").show();
+							isright4=true;
+						}else{
+							$("#form-phone").siblings(".i-status").hide();
+							$("#form-phone").siblings(".input-tip").text("手机号已存在");
+							isright4=false;
+						}
+					}
+				});
+				
+
 			
+				
+		}
+		
+		}
+					$("#form-phone").blur(checkTel);
+			
+				$("#getPhoneCode").click(function(){
+					var value=$("#form-phone").val();
 					var reg=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 				if(!reg.test(value)){
-					$(this).siblings(".i-status").hide();
-					$(this).siblings(".input-tip").text("手机号格式错误");
+					$("#form-phone").siblings(".i-status").hide();
+					$("#form-phone").siblings(".input-tip").text("手机号格式错误");
 					isright4=false;
 				}else{
-					$(this).siblings(".input-tip").text("");
-					$(this).siblings(".i-status").show();
-					isright4=true;
-					
-					$("#getPhoneCode").click(function(){
-						if(reg.test($("#form-phone").val())){
+					$.ajax({
+						url:"custlogin.do?mn=isrepeat",
+						data:"tel="+value,
+						type:"post",
+						success:function(res){
+							if(res==1){
+								$("#form-phone").siblings(".input-tip").text("");
+								$("#form-phone").siblings(".i-status").show();
+								isright4=true;
+							}else{
+								$("#form-phone").siblings(".i-status").hide();
+								$("#form-phone").siblings(".input-tip").text("手机号已存在");
+								isright4=false;
+							}
+						}
+					});
+			}
+						if(isright4==true){
 						$("#getPhoneCode").attr("disabled","disabled");
 						$.ajax({
 							url:"custlogin.do?mn=sendMessage",
 							data:"phoneNumber="+$("#form-phone").val(),
 							type:"post",
 							success:function(res){
-								var m = 60;
-								function getdate() {
-									m--;
-									$("#getPhoneCode").text("已发送("+m+")");
-									if(m==0){
-										clearInterval(flag);
-										$("#getPhoneCode").removeAttr("disabled");
-										$("#getPhoneCode").text("获取验证码");
-									}
-								}
-								var flag=setInterval(getdate,1000);
-								function removeSession(){$.ajax({
-									url:"custlogin.do?mn=deleCode",
-									data:"",
-									type:"post",
-									success:function(res){
-										
-									}
-								})
-							}
+								m = 60;
+								flag=setInterval(getdate,1000);
 								setTimeout(removeSession,60*1000);
 							}
 						})
 						
 						}
 					})
-					
+			function removeSession(){
+				$.ajax({
+				url:"custlogin.do?mn=deleCode",
+				data:"",
+				type:"post"
+				});
 			}
-			
-			})
+			function getdate() {
+				m--;
+				$("#getPhoneCode").text("已发送("+m+")");
+				if(m==0){
+					clearInterval(flag);
+					$("#getPhoneCode").removeAttr("disabled");
+					$("#getPhoneCode").text("获取验证码");
+				}
+			}
 			$("#getPhoneCode").click(function(){
 				var value=$("#form-phone").val();
 						if(value==null||value==''){
@@ -121,7 +176,14 @@ $(function(){
 								type:"post",
 								success:function(res){
 									if(res==1){
-										alert("ok");
+										$.ajax({
+											url:"custlogin.do?mn=customerlogin",
+											data:"loginName="+$("#form-account").val()+"&paswd="+$("#form-pwd").val(),
+											type:"post",
+											success:function(res){
+													window.location.href="index.jsp";
+											}
+										})
 										
 									}else{
 										$("#form-phone").siblings(".input-tip").text("验证码错误");
