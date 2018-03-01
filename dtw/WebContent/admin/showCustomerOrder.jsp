@@ -97,7 +97,7 @@
 		 	<div class="tit" style="padding-left:350px">
                  <div class="col-md-3 col-xs-6" >
                     <div class="tile quick-stats">
-                          <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px;width:323px; ">订单管理</h3>
+                          <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px;width:323px; ">客户自助下单</h3>
                   	</div>
 				</div>
            	</div>
@@ -108,6 +108,7 @@
 		 	<tr >
 		 		<td>客户名</td>
 		 		<td>业务编号</td>
+		 		<td>联系人</td>
 		 		<td>系统号</td>
 		 		<td>主单号</td>
 		 		<td>分单号</td>
@@ -136,6 +137,16 @@
 		 		<tr>
 			 		<td>${order.client.clientName }</td>
 			 		<td>${order.orderNo }</td>
+			 		<td>
+			 			<div class="ccName">
+			 				<a class="nameContent">${order.clientcontact.clientContactName}</a>
+							<div class="messdiv">
+								<p>电话：${order.clientcontact.clientContactTel}</p>
+								<p>邮箱：${order.clientcontact.clientContactEmail}</p>
+								<p>Q Q：${order.clientcontact.clientContactQQ}</p>
+							</div>
+						</div>
+					</td>
 			 		<td>${order.systemNo }</td>
 			 		<td>${order.mawbNo }</td>
 			 		<td>${order.hawbNo }</td>
@@ -234,27 +245,27 @@
 	$("#selorder").on("click",".updateOrder",function(){
 		var orderId = $(this).attr("modifyId");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders");
+		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
 	});
 	//添加应收
 	$("#selorder").on("click",".addCost",function(){
 		var orderId = $(this).attr("orderId");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders");
+		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
 	});
 	//添加应付
 	$("#selorder").on("click",".addPay",function(){
 		var orderId = $(this).attr("orderId");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders");
+		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
 	});
 	//分页
 	$("#firstPage").click(function(){
-		$("#home").load("order.do?mn=showOrders&currentPage=1");
+		$("#home").load("custorder.do?mn=showCustomerOrders&currentPage=1");
 	});
 	$("#lastPage").click(function(){
 		var totalPage = ${totalPage };
-		$("#home").load("order.do?mn=showOrders&currentPage="+totalPage);
+		$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+totalPage);
 	});
 	$("#prePage").click(function(){
 		var currentPage = ${currentPage }-1;
@@ -265,7 +276,7 @@
 				$(".homeTip").fadeOut(1000);
 			},1000);
 		}else{
-			$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
 		}
 	});
 	$("#nextPage").click(function(){
@@ -278,7 +289,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 		}else{
-			$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
 		}
 
 	});
@@ -429,7 +440,7 @@
 				success:function(res){
 					if(res==1){
 						var currentPage = ${currentPage };
-						$("#home").load("order.do","mn=showOrders&currentPage="+currentPage);
+						$("#home").load("custorder.do","mn=showCustomerOrders&currentPage="+currentPage);
 					}else{
 						alert("修改失败");
 					}
@@ -438,4 +449,5 @@
 		}
 		
 	});
+
 	</script>

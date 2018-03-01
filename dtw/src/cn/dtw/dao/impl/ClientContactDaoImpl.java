@@ -2,6 +2,7 @@ package cn.dtw.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.dtw.dao.BaseDao;
@@ -49,6 +50,12 @@ public class ClientContactDaoImpl extends BaseDao implements ClientContactDao {
 		String sql = "select clientContactId from client_clientcontact where clientId=? ";
 		return super.executeQuery(new BeanListHandler<Client_clientcontact>(Client_clientcontact.class), sql, client.getClientId());
 		
+	}
+	//通过id获取联系人信息
+	@Override
+	public Clientcontact getClientContactById(int id) {
+		String sql = "select * from clientcontact where clientContactId=?";
+		return super.executeOneRow(new BeanHandler<Clientcontact>(Clientcontact.class), sql, id);
 	}
 	
 }

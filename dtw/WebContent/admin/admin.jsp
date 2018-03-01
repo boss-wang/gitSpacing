@@ -127,6 +127,9 @@
 								<li>
 									<a id="showOrder">管理订单</a>
 								</li>
+								<li>
+									<a id="showCustomerOrder">散客订单</a>
+								</li>
 							</ul>
 						</li>
 					</c:if>
@@ -175,44 +178,46 @@
 	<script type="text/javascript">
 		$("#mhonme").click(function(){
 			$("#home").load("/dtw/admin/home.jsp");
-		})
+		});
 		$("#addUser").click(function(){
 			$("#home").load("user.do","mn=goAddUser");
-		})
-		
+		});
 		$("#updateUser").click(function(){
 			$("#home").load("user.do","mn=showUser");
-		})
+		});
 		$("#usermanage").click(function(){
 			$("#home").load("user.do","mn=showUser");
-		})
+		});
 		$("#addOrder").click(function(){
 			$("#home").load("order.do","mn=goAddOrder");
-		})
+		});
 		$("#addClient").click(function(){
 			$("#home").load("/dtw/admin/addClient.jsp");
-		})
+		});
 		$("#updateClient").click(function(){
 			$("#home").load("client.do?mn=showClient");
-		})
+		});
 		$("#clientmanage").click(function(){
 			$("#home").load("client.do?mn=showClient");
-		})
+		});
 		$("#addSupplier").click(function(){
 			$("#home").load("admin/addSupplier.jsp");
-		})
+		});
 		$("#updateSupplier").click(function(){
 			$("#home").load("supplier.do","mn=showSupplier");
-		})
+		});
 		$("#suppliermanage").click(function(){
 			$("#home").load("supplier.do","mn=showSupplier");
-		})
+		});
 		$("#showOrder").click(function(){
 			$("#home").load("order.do","mn=showOrders");
-		})
+		});
 		$("#allordermanage").click(function(){
 			$("#home").load("order.do","mn=showOrders");
-		})
+		});
+		$("#showCustomerOrder").click(function(){
+			$("#home").load("custorder.do","mn=showCustomerOrders");
+		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};
 			$("#headpics").show();
