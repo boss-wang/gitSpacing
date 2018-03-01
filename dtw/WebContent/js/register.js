@@ -110,8 +110,9 @@ $(function(){
 			
 				
 				
-				//手机验证码
+				
 					$("form").submit(function(){
+						//手机验证码
 						var phonecode= $("#phoneCode").val();
 						if(isright1==true&&isright2==true&&isright3==true&&isright4==true){
 							$.ajax({
@@ -127,12 +128,7 @@ $(function(){
 									}
 								}
 							})
-							/*if(phonecode==发送的验证码){
-								此处添加ajax请求发送用户信息完成服务器注册，跳转界面
-							}else{
-								$("#form-phone").siblings(".input-tip").text("验证码错误");
-							}
-							*/
+						
 							
 							return false;
 						}else{

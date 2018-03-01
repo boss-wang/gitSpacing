@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+	#delesession:hover{
+	cursor: pointer;
+	color:blue;
+	}
+
+</style>
 <head>
 		<title>大田物流集团</title>
 		<meta charset="utf-8">
@@ -59,11 +67,16 @@
 								</li>
 							</ul>
 						</li>
-						<li class="mainlevel">
+					<c:if test="${customer==null }"><li class="mainlevel">
 							<a title="登陆" href="login.jsp" class="menu">登陆</a>
 								<a title="" href="register.jsp">/注册</a>
 						</li>
-						
+						</c:if>
+						<c:if test="${customer!=null }">
+						<li class="mainlevel" style="font-size: 15px; position:relative;top:30px;" >
+							${customer.loginName}<span id="delesession" style="display:inline;float: none;">/注销</span>
+						</li>
+						</c:if>	
 					</ul>
 				</div>
 			</div>
@@ -217,10 +230,17 @@
 		<!-- 自定义javascript框架区 ends -->
 		<script type="text/javascript">
 			$("#newsCenter").click(function(){
+				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
 			});
 			$("#tradeNews").click(function(){
+				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
 			});
+			$("#delesession").click(function(){
+				<%
+				request.getSession().removeAttribute("customer");
+				%>
+			})
 		</script>
 </html>

@@ -61,4 +61,20 @@ public class CustomerLoginServlet extends BaseServlet {
 	protected void deleCode(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().removeAttribute("contentCode");
 	}
+	//登录
+	protected void customerlogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String loginName=req.getParameter("loginName");
+		String paswd=req.getParameter("paswd");
+		Customer customer = new Customer();
+		customer.setLoginName(loginName);
+		customer.setEmail(loginName);
+		customer.setTel(loginName);
+		customer.setLoginPwd(paswd);
+		int back= cusService.loginCustomer(customer);
+		if(back==1) {
+			Customer cust = cusService.getCustomer(customer);
+			req.getSession().setAttribute("customer", cust);
+		}
+		resp.getWriter().print(back);
+	}
 }
