@@ -67,7 +67,7 @@
 									<a title="行业新闻" id="tradeNews">行业新闻</a>
 								</li>
 								<li>
-									<a title="帮助支持" href="serviceTerms.html">帮助支持</a>
+									<a title="帮助支持" id="serviceTerms">帮助支持</a>
 								</li>
 							</ul>
 						</li>
@@ -240,6 +240,10 @@
 			$("#tradeNews").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
+			});
+			$("#serviceTerms").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("serviceTerms.html");
 			});
 			$("#delesession").click(function(){
 				<%
