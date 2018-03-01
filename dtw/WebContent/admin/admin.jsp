@@ -147,23 +147,15 @@
 		<table id="homesection">
 			
 			<tr>
-				<td id="usermanage" ><img src="img/usermanage.jpg"></td>
-				<td id="clientmanage"><img src="img/clientmanage.jpg"></td>
+				<td id="usermanage" ><img src="img/usermanage.jpg" title="员工管理"></td>
+				<td id="clientmanage"><img src="img/clientmanage.jpg" title="客户管理"></td>
 				
 			</tr>
 			<tr>
-				<td ><span>员工管理</span></td>
-				<td style="left:-120px" ><span>客户管理</span></td>
+				<td id="suppliermanage"><img src="img/suppliermanage.jpg" title="供应商管理"></td>
+				<td id="allordermanage"><img src="img/allordermanage.jpg" title="所有订单管理"></td>
 			</tr>
-			<tr>
-				<td id="suppliermanage"><img src="img/suppliermanage.jpg"></td>
-				<td id="allordermanage"><img src="img/allordermanage.jpg"></td>
-			</tr>
-			<tr>
-				
-				<td><span>供应商管理</span></td>
-				<td style="left:-120px" ><span>所有订单管理</span></td>
-			</tr>
+			
 		</table>
 		</section>
 		<div class="homeTip"></div>
