@@ -12,6 +12,7 @@ private String hawbNo;//分单号
 private String flightNo;//航班号
 private String departDate;//航班日期
 private String arriveDate;//到港日期
+private String loadingPort;//起运港
 private String destination;//目的港
 private String cargoPiece;//件数
 private Double cargoWeight;//货物重量
@@ -31,6 +32,12 @@ private List<Order_cost> orderCostList;		//应收列表
 private List<Order_pay> orderPayList;	//应付列表
 
 
+public String getLoadingPort() {
+	return loadingPort;
+}
+public void setLoadingPort(String loadingPort) {
+	this.loadingPort = loadingPort;
+}
 public List<Order_pay> getOrderPayList() {
 	return orderPayList;
 }
