@@ -71,59 +71,66 @@
                             <span class="menu-item">主界面</span>
                         </a>
                     </li>
-				<li class="dropdown">
-					<a class="sa-side-form" >
-						<span class="menu-item">员工管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a id="addUser">添加员工</a>
+                 <c:forEach var="role" items="${user.roles }">
+					<c:if test="${role.roleName=='管理员' }">
+						<li class="dropdown">
+							<a class="sa-side-form" >
+								<span class="menu-item">员工管理</span>
+							</a>
+							<ul class="list-unstyled menu-item">
+								<li>
+									<a id="addUser">添加员工</a>
+								</li>
+								<li>
+									<a id="updateUser">员工管理</a>
+								</li>
+							</ul>
 						</li>
-						<li>
-							<a id="updateUser">员工管理</a>
+					</c:if>
+					<c:if test="${role.roleName=='主管' }">
+						<li class="dropdown">
+							<a class="sa-side-form2" >
+								<span class="menu-item">客户管理</span>
+							</a>
+							<ul class="list-unstyled menu-item">
+								<li>
+									<a id="addClient">添加客户</a>
+								</li>
+								<li>
+									<a id="updateClient">客户管理</a>
+								</li>
+							</ul>
 						</li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="sa-side-form2" >
-						<span class="menu-item">客户管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a id="addClient">添加客户</a>
+						<li class="dropdown">
+							<a class="sa-side-form3" >
+								<span class="menu-item">供应商管理</span>
+							</a>
+							<ul class="list-unstyled menu-item">
+								<li>
+									<a id="addSupplier">添加供应商</a>
+								</li>
+								<li>
+									<a id="updateSupplier">供应商管理</a>
+								</li>
+							</ul>
 						</li>
-						<li>
-							<a id="updateClient">客户管理</a>
+					</c:if>
+					<c:if test="${role.roleName=='员工' }">
+						<li class="dropdown">
+							<a class="sa-side-ui" >
+								<span class="menu-item">订单管理</span>
+							</a>
+							<ul class="list-unstyled menu-item">
+								<li>
+									<a id="addOrder">新建订单</a>
+								</li>
+								<li>
+									<a id="showOrder">管理订单</a>
+								</li>
+							</ul>
 						</li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="sa-side-form3" >
-						<span class="menu-item">供应商管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a id="addSupplier">添加供应商</a>
-						</li>
-						<li>
-							<a id="updateSupplier">供应商管理</a>
-						</li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="sa-side-ui" >
-						<span class="menu-item">订单管理</span>
-					</a>
-					<ul class="list-unstyled menu-item">
-						<li>
-							<a id="addOrder">新建订单</a>
-						</li>
-						<li>
-							<a id="showOrder">管理订单</a>
-						</li>
-					</ul>
-				</li>
-				
+					</c:if>
+				 </c:forEach> 
 				
 			</ul>
 			
@@ -138,6 +145,7 @@
 					</div>
                 </div>
 		<table id="homesection">
+			
 			<tr>
 				<td id="usermanage" ><img src="img/usermanage.jpg"></td>
 				<td id="clientmanage"><img src="img/clientmanage.jpg"></td>
