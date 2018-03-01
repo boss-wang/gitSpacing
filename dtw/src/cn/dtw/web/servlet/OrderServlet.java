@@ -151,9 +151,9 @@ public class OrderServlet extends BaseServlet {
 		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = formater.format(date);
-		String orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*200);
+		String orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
 		while(orderService.getOrderByOrderNo(order)!=null) {
-			orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*200);
+			orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
 			order.setOrderNo(orderNo);
 		}
 		String loadingPort = req.getParameter("loadingPort");

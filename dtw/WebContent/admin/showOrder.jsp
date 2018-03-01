@@ -93,7 +93,7 @@
 </style>
 <!-- 订单管理 -->
 
-	<div style="width: 2500px;">
+	<div style="width: 3000px;">
 		 	<div class="tit" style="padding-left:350px">
                  <div class="col-md-3 col-xs-6" >
                     <div class="tile quick-stats">
