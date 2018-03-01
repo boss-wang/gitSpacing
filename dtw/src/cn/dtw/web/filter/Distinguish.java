@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+@WebFilter("/adminServ")
 public class Distinguish  implements Filter {
 
 	@Override
@@ -21,17 +23,14 @@ public class Distinguish  implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println(111111);
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		Object obj= req.getSession().getAttribute("user");
 		if(obj==null) {
-			System.out.println(222222);
-			req.getRequestDispatcher("/index.html").forward(request, response);
-			System.out.println(333333);
+			resp.sendRedirect("adminIndex.html");
+		}else {
+			chain.doFilter(req, resp);
 		}
-		chain.doFilter(req, resp);
-		
 	}
 
 	@Override
