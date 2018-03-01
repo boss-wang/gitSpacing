@@ -82,6 +82,7 @@ a {
 a:hover {
 	text-decoration: underline;
 	color: #ff9900;
+	cursor:pointer;
 }
 
 .center {
