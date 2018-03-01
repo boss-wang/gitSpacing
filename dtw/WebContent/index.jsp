@@ -253,7 +253,14 @@
 			})
 			$("#selectorder").click(function(){
 				window.location.href="#abstract";
-				$("#homeDiv").load("showMyOrder.jsp");
+				if(${customer.statusId==1}){
+					$("#homeDiv").load("bangdinggongsi.jsp");
+				}else if(${customer.statusId==3}){
+					$("#homeDiv").load("showMyOrder.jsp");
+				}else if(${customer.statusId==2}){
+					alert("您绑定的公司正在审核中，通过即可下单");
+				}
+				
 			});
 			$("#compyprofile").click(function(){
 				window.location.href="#abstract";

@@ -9,57 +9,6 @@
 
 
 	<body>
-		<div id="header">
-			<div class="container clearfix">
-				<div class="logo">
-					<a href="#"></a>
-				</div>
-				<div class="nav" id="menu">
-					<ul id="nav">
-						<li class="mainlevel active">
-							<a title="首页" href="homepage.html" class="menu">首页</a>
-						</li>
-						<li class="mainlevel">
-							<a title="关于大田" href="" class="menu">关于大田</a>
-							<ul style="display: none;">
-								<li>
-									<a title="公司简介" href="#abstract">公司简介</a>
-								</li>
-
-							</ul>
-						</li>
-						<li class="mainlevel">
-							<a title="服务项目" href="" class="menu">服务项目</a>
-							<ul style="display: none;">
-								<li>
-									<a title="城际快运" href="">快速下单</a>
-								</li>
-								<li>
-									<a title="贸易物流" href="">订单追踪</a>
-								</li>
-
-							</ul>
-						</li>
-						<li class="mainlevel">
-							<a title="新闻中心" href="tradeNews.html" class="menu">新闻中心</a>
-							<ul style="display: none;">
-								<li>
-									<a title="行业新闻" href="tradeNews.html">行业新闻</a>
-								</li>
-								<li>
-									<a title="帮助支持" href="serviceTerms.html">帮助支持</a>
-								</li>
-							</ul>
-						</li>
-						<li class="mainlevel">
-							<a title="登陆/注册" href="" class="menu">登陆/注册</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!--header end-->
-
 		<a name="abstract"></a>
 		<div class="index-about">
 			<div class="container">

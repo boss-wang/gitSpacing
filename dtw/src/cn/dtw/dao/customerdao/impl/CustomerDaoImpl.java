@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	
@@ -36,6 +37,11 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		return super.executeOneRow(new BeanHandler<Customer>(Customer.class), sql,  customer.getTel());
 	}
 	//根据下单人id查询客户公司id
-
+	@Override
+	public Customer_client getClientBycust(Customer customer) {
+		String sql="select * from customer_client where customerId=?";
+		return super.executeOneRow(new BeanHandler<Customer_client>(Customer_client.class), sql, customer.getId());
+	}
+	
 	
 }

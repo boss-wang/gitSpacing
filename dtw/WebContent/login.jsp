@@ -61,8 +61,7 @@
 				type:"post",
 				success:function(res){
 					if(res==1){
-						window.location.href="<%=basePath%>
-	index.jsp";
+						window.location.href="<%=basePath%>index.jsp";
 											} else if (res == 2) {
 												$("#prompt").text("密码错误");
 											} else if (res == 0) {
