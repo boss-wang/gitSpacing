@@ -43,7 +43,7 @@
 							<a title="关于大田" href="" class="menu">关于大田</a>
 							<ul style="display: none;">
 								<li>
-									<a title="公司简介" href="#abstract">公司简介</a>
+									<a title="公司简介" href="#abstract" id="compyprofile">公司简介</a>
 								</li>
 								
 							</ul>
@@ -52,7 +52,7 @@
 							<a title="服务项目" href="" class="menu">服务项目</a>
 							<ul style="display: none;">
 								<li>
-									<a title="城际快运" href="">快速下单</a>
+									<a title="城际快运" id="cost">快速下单</a>
 								</li>
 								<li>
 									<a title="贸易物流" href="">订单追踪</a>
@@ -124,7 +124,7 @@
 		<div class="index-about" id="homeDiv" >
 			<div class="container">
 				<div class="index-title">
-					<a href="#"  title="公司简介">公司简介</a>
+					<a id="compy"  title="公司简介">公司简介</a>
 				</div>
 				<div class="cont">
 
@@ -247,5 +247,13 @@
 				%>
 				window.location.href="<%=basePath%>index.jsp";
 			})
+			$("#cost").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("showMyOrder.jsp");
+			});
+			$("#compyprofile").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("companyprofile.jsp");
+			});
 		</script>
 </html>
