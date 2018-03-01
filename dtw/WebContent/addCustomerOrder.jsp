@@ -120,7 +120,7 @@
 					<form action="" method="">
 					<div class="tit-mess">
 					<span class="mess">发货时间</span>
-					<input  class="inpu" name="" type="datetime-local" />
+					<input  class="inpu" name="" type="datetime-local" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
 					<span class="mess">发货地点</span>
 					<input  class="inpu" name="" placeholder="发货地点" />
 					</div>
@@ -251,7 +251,7 @@
 			</div>
 		</div>
 		<!--row end-->
-
+		<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
 	</body>
 
 </html>

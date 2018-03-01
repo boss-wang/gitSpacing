@@ -147,10 +147,19 @@ public class OrderServlet extends BaseServlet {
 	}
 	//添加订单
 	protected void addOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Order order = new Order();
+		Date date = new Date();
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = formater.format(date);
+		String orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
+		while(orderService.getOrderByOrderNo(order)!=null) {
+			orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
+			order.setOrderNo(orderNo);
+		}
+		String loadingPort = req.getParameter("loadingPort");
 		int userId = Integer.parseInt(req.getParameter("userId"));
 		String clientIdStr = req.getParameter("clientId");
 		int clientId = Integer.parseInt(clientIdStr);
-		String orderNo = req.getParameter("orderNo");
 		String systemNo = req.getParameter("systemNo");
 		String mawbNo = req.getParameter("mawbNo");
 		String hawbNo = req.getParameter("hawbNo");
@@ -172,7 +181,7 @@ public class OrderServlet extends BaseServlet {
 		int orderStatus = Integer.parseInt(req.getParameter("orderStatus"));
 		String remarks = req.getParameter("remarks");
 		int termsId = Integer.parseInt(req.getParameter("terms"));
-		Order order = new Order();
+		
 		order.setArriveDate(arriveDate);
 		order.setCargoPiece(cargoPieces);
 		order.setCargoVolume(cargoVolume);
@@ -191,14 +200,12 @@ public class OrderServlet extends BaseServlet {
 		order.setStatusId(orderStatus);
 		order.setSystemNo(systemNo);
 		order.setTermsId(termsId);
-		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		order.setUpdateTime(formater.format(date));
+		order.setUpdateTime(now);
 		order.setUserId(userId);
+		order.setLoadingPort(loadingPort);
+
 		PrintWriter out = resp.getWriter();
-		if(orderService.getOrderByOrderNo(order)!=null) {
-			out.print(2);
-		}else if(orderService.addOrder(order)) {
+		if(orderService.addOrder(order)) {
 			out.print(1);
 		}else{
 			out.print(0);
@@ -210,7 +217,7 @@ public class OrderServlet extends BaseServlet {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
 		String clientIdStr = req.getParameter("clientId");
 		int clientId = Integer.parseInt(clientIdStr);
-		String orderNo = req.getParameter("orderNo");
+		String loadingPort = req.getParameter("loadingPort");
 		String systemNo = req.getParameter("systemNo");
 		String mawbNo = req.getParameter("mawbNo");
 		String hawbNo = req.getParameter("hawbNo");
@@ -247,11 +254,11 @@ public class OrderServlet extends BaseServlet {
 		order.setFlightNo(flightNo);
 		order.setHawbNo(hawbNo);
 		order.setMawbNo(mawbNo);
-		order.setOrderNo(orderNo);
 		order.setRemarks(remarks);
 		order.setStatusId(orderStatus);
 		order.setSystemNo(systemNo);
 		order.setTermsId(termsId);
+		order.setLoadingPort(loadingPort);
 		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		order.setUpdateTime(formater.format(date));

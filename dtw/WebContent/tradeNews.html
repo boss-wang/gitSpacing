@@ -51,12 +51,12 @@
 				</div>
 				<div class="pages">
 					<div>
-						<a disabled="disabled">首页</a>&nbsp;&nbsp;
-						<a disabled="disabled">上一页</a>&nbsp;&nbsp;1&nbsp;&nbsp;
+						<a id="list_first">首页</a>&nbsp;&nbsp;
+						<a id="list_pre">上一页</a>&nbsp;&nbsp;1&nbsp;&nbsp;
 						<a id='list_2'>2</a>&nbsp;&nbsp;
 						<a id='list_3'>3</a>&nbsp;&nbsp;
-						<a id='list_2'>下一页</a>&nbsp;&nbsp;
-						<a id='list_3'>尾页</a>
+						<a id='list_next'>下一页</a>&nbsp;&nbsp;
+						<a id='list_last'>尾页</a>
 					</div>
 
 				</div>
@@ -120,12 +120,14 @@
 				$("#homeDiv").load("news/news12.html");
 			});
 			
-			
-			$("#list_2").click(function(){
-				$("#homeDiv").load("list_2.html");
+			$("#list_first").click(function(){
+				$("#homeDiv").load("tradeNews.html");
 			});
 			
-			$("#list_3").click(function(){
+			$("#list_2,#list_next").click(function(){
+				$("#homeDiv").load("list_2.html");
+			});
+			$("#list_3,#list_last").click(function(){
 				$("#homeDiv").load("list_3.html");
 			});
 			

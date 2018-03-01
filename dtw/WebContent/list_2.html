@@ -6,6 +6,8 @@
 					<a id="homepage" title="首页">首页</a>
 					<span>></span>
 					<a id="tradeNews" title="新闻中心">新闻中心</a>
+					<span>></span>
+                	<a id="tradeNews" title="行业新闻">行业新闻</a>
 				</div>
 				<div class="a-list">
 					<ul>
@@ -50,12 +52,12 @@
 				<div class="pages">
 					<!--MvcPager 1.5 for ASP.NET MVC 3.0 © 2009-2011 Webdiyer (http://www.webdiyer.com)-->
 					<div>
-						<a id='list_1'>首页</a>&nbsp;&nbsp;
-						<a id='list_1'>上一页</a>&nbsp;&nbsp;
+						<a id='list_first'>首页</a>&nbsp;&nbsp;
+						<a id='list_pre'>上一页</a>&nbsp;&nbsp;
 						<a id='list_1'>1</a>&nbsp;&nbsp;2&nbsp;&nbsp;
 						<a id='list_3'>3</a>&nbsp;&nbsp;
-						<a id='list_3'>下一页</a>&nbsp;&nbsp;
-						<a id='list_3'>尾页</a>
+						<a id='list_next'>下一页</a>&nbsp;&nbsp;
+						<a id='list_last'>尾页</a>
 					</div>
 					<!--MvcPager 1.5 for ASP.NET MVC 3.0 © 2009-2011 Webdiyer (http://www.webdiyer.com)-->
 
@@ -121,14 +123,14 @@
 			});
 			
 			
-			$("#list_1").click(function(){
-				$("#homeDiv").load("list_1.html");
+			$("#list_first,#list_pre,#list_1").click(function(){
+				$("#homeDiv").load("tradeNews.html");
 			});
-			
-			$("#list_3").click(function(){
+
+			$("#list_next,#list_last,#list_3").click(function(){
 				$("#homeDiv").load("list_3.html");
 			});
-			
+
 		
 		</script>
 

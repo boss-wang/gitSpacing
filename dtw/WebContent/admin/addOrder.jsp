@@ -28,8 +28,8 @@
 						<input type="hidden" id="clientId" name="clientId" />
 						<div class="findClient"></div>
 					</div>
-						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
-						<input  class="inpu" id="orderNo" name="orderNo" placeholder="业务编号" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/><span style="margin-left: 440px;">*</span><p id="orderNoTip" class="rightTip"></p>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">起运港</span>
+						<input  class="inpu" id="loadingPort" name="loadingPort" placeholder="起运港" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
@@ -157,9 +157,6 @@
 				if(clientName==""||clientName==null){
 					$("#clientTip").text("请输入客户抬头");
 					$("#clientName").focus();
-				}else if(orderNo==""||orderNo==null){
-					$("#orderNoTip").text("请输入业务编号");
-					$("#orderNo").focus();
 				}else{
 					$.ajax({
 						"url":"client.do",
@@ -178,10 +175,7 @@
 									"type":"post",
 									"data":"mn=addOrder&userId="+userId+"&"+content,
 									"success":function(res){
-										if(res==2){
-											$("#orderNoTip").text("该编号已经存在，请重新填写");
-											$("#orderNo").focus();
-										}else if(res==1){
+										if(res==1){
 											$(".homeTip").text("添加成功！");
 											$(".homeTip").show(200);
 											$("#home").load("order.do","mn=showOrders");

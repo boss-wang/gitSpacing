@@ -28,11 +28,11 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	//添加订单
 	@Override
 	public boolean addOrder(Order order) {
-		String sql = "insert into `order`(arriveDate,cargoPiece,cargoVolume,cargoWeight,chargeWeight,clientId,customsNo,customsStatus,departDate,destination,flightNo,hawbNo,mawbNo,orderNo,remarks,statusId,systemNo,updateTime,userId,termsId) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into `order`(arriveDate,cargoPiece,cargoVolume,cargoWeight,chargeWeight,clientId,customsNo,customsStatus,departDate,destination,flightNo,hawbNo,mawbNo,orderNo,remarks,statusId,systemNo,updateTime,userId,termsId,loadingPort) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		return super.executeUpdate(sql, order.getArriveDate(),order.getCargoPiece(),order.getCargoVolume(),
 				order.getCargoWeight(),order.getChargeWeight(),order.getClientId(),order.getCustomsNo(),order.getCustomsStatus(),order.getDepartDate(),order.getDestination(),
-				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getOrderNo(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getUserId(),order.getTermsId())>0?true:false;
+				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getOrderNo(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getUserId(),order.getTermsId(),order.getLoadingPort())>0?true:false;
 	}
 	//查询订单列表
 	@Override
@@ -75,11 +75,11 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	public boolean updateOrder(Order order) {
 		String sql = "update `order` set arriveDate=?,cargoPiece=?,cargoVolume=?,"
 				+ "cargoWeight=?,chargeWeight=?,clientId=?,customsNo=?,customsStatus=?,"
-				+ "departDate=?,destination=?,flightNo=?,hawbNo=?,mawbNo=?,orderNo=?,"
+				+ "departDate=?,destination=?,flightNo=?,hawbNo=?,mawbNo=?,loadingPort=?,"
 				+ "remarks=?,statusId=?,systemNo=?,updateTime=?,termsId=? where orderId=?";
 		return super.executeUpdate(sql, order.getArriveDate(),order.getCargoPiece(),order.getCargoVolume(),
 				order.getCargoWeight(),order.getChargeWeight(),order.getClientId(),order.getCustomsNo(),order.getCustomsStatus(),order.getDepartDate(),order.getDestination(),
-				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getOrderNo(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getTermsId(),order.getOrderId())>0?true:false;
+				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getLoadingPort(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getTermsId(),order.getOrderId())>0?true:false;
 	}
 	//查询业务编号是否存在
 	@Override
