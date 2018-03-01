@@ -52,7 +52,7 @@
 							<a title="新闻中心" id="newsCenter" class="menu">新闻中心</a>
 							<ul style="display: none;">
 								<li>
-									<a title="行业新闻" href="tradeNews.html">行业新闻</a>
+									<a title="行业新闻" id="tradeNews">行业新闻</a>
 								</li>
 								<li>
 									<a title="帮助支持" href="serviceTerms.html">帮助支持</a>
@@ -217,6 +217,9 @@
 		<!-- 自定义javascript框架区 ends -->
 		<script type="text/javascript">
 			$("#newsCenter").click(function(){
+				$("#homeDiv").load("tradeNews.html");
+			});
+			$("#tradeNews").click(function(){
 				$("#homeDiv").load("tradeNews.html");
 			});
 		</script>
