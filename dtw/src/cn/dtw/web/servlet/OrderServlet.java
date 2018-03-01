@@ -147,10 +147,14 @@ public class OrderServlet extends BaseServlet {
 	}
 	//添加订单
 	protected void addOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Date date = new Date();
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = formater.format(date);
+		String orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*200);
+//		String orderNo = req.getParameter("orderNo");
 		int userId = Integer.parseInt(req.getParameter("userId"));
 		String clientIdStr = req.getParameter("clientId");
 		int clientId = Integer.parseInt(clientIdStr);
-		String orderNo = req.getParameter("orderNo");
 		String systemNo = req.getParameter("systemNo");
 		String mawbNo = req.getParameter("mawbNo");
 		String hawbNo = req.getParameter("hawbNo");
@@ -191,14 +195,15 @@ public class OrderServlet extends BaseServlet {
 		order.setStatusId(orderStatus);
 		order.setSystemNo(systemNo);
 		order.setTermsId(termsId);
-		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		order.setUpdateTime(formater.format(date));
+		order.setUpdateTime(now);
 		order.setUserId(userId);
+		
+		while(orderService.getOrderByOrderNo(order)!=null) {
+			orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*200);
+			order.setOrderNo(orderNo);
+		}
 		PrintWriter out = resp.getWriter();
-		if(orderService.getOrderByOrderNo(order)!=null) {
-			out.print(2);
-		}else if(orderService.addOrder(order)) {
+		if(orderService.addOrder(order)) {
 			out.print(1);
 		}else{
 			out.print(0);
