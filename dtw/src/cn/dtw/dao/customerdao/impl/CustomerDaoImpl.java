@@ -17,7 +17,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		return super.executeUpdate(sql,customer.getLoginName(),customer.getLoginPwd(),customer.getTel(),customer.getEmail(),customer.getStatusId());
 		
 	}
-	//查询
+	//登录查询
 	@Override
 	public Customer getCustomerByemail(Customer customer) {
 		String sql="select * from customer where email=?";
@@ -35,5 +35,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		String sql="select * from customer where tel=?";
 		return super.executeOneRow(new BeanHandler<Customer>(Customer.class), sql,  customer.getTel());
 	}
+	//根据下单人id查询客户公司id
 
+	
 }

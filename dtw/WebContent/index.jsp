@@ -55,7 +55,7 @@
 									<a title="城际快运" id="cost">快速下单</a>
 								</li>
 								<li>
-									<a title="贸易物流" href="">订单追踪</a>
+									<a title="贸易物流" href="" id="selectorder">订单追踪</a>
 								</li>
 							
 							</ul>
@@ -247,7 +247,7 @@
 				%>
 				window.location.href="<%=basePath%>index.jsp";
 			})
-			$("#cost").click(function(){
+			$("#selectorder").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("showMyOrder.jsp");
 			});
