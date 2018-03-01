@@ -3,11 +3,11 @@
 			
 				<div class="content-title" style="margin-top:30px;">
 					当前位置<span>></span>
-					<a id="homepage" title="首页">首页</a>
+					<a class="homepage" title="首页">首页</a>
 					<span>></span>
-					<a id="tradeNews" title="新闻中心">新闻中心</a>
+					<a class="tradeNews" title="新闻中心">新闻中心</a>
 					<span>></span>
-					<a id="tradeNews" title="行业新闻">行业新闻</a>
+					<a class="tradeNews" title="行业新闻">行业新闻</a>
 				</div>
 				<div class="a-cont">
 					<h1>发展城市物流的对策</h1>
@@ -56,11 +56,11 @@
 		
 			<script>
 		
-			$("#homepage").click(function(){
-				$("#homeDiv").load("homepage.html");
+			$(".homepage").click(function(){
+				window.location.href="index.jsp";
 			});
 			
-			$("#tradeNews").click(function(){
+			$(".tradeNews").click(function(){
 				$("#homeDiv").load("tradeNews.html");
 			});
 		</script>
