@@ -55,7 +55,7 @@
 									<a title="城际快运" id="cost">快速下单</a>
 								</li>
 								<li>
-									<a title="贸易物流" href="" id="selectorder">订单追踪</a>
+									<a title="贸易物流" class="selectorder">订单追踪</a>
 								</li>
 							
 							</ul>
@@ -160,8 +160,8 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a href="" target="_blank" title="快速下单">快速下单</a></dt>
-						<dt><a href="" target="_blank" title="订单追踪">订单追踪</a></dt>
+						<dt><a  target="_blank" title="快速下单">快速下单</a></dt>
+						<dt><a class="selectorder" target="_blank" title="订单追踪">订单追踪</a></dt>
 						
 					</dl>
 				</div>
@@ -246,19 +246,28 @@
 				$("#homeDiv").load("serviceTerms.html");
 			});
 			$("#delesession").click(function(){
-				<%
-				request.getSession().removeAttribute("customer");
-				%>
-				window.location.href="<%=basePath%>index.jsp";
+				$.ajax({
+					url:"custlogin.do?mn=deleSession",
+					data:"",
+					type:"post",
+					success:function(res){
+						window.location.href="<%=basePath%>index.jsp";
+					}
+				})
+				
 			})
-			$("#selectorder").click(function(){
-				window.location.href="#abstract";
-				if(${customer.statusId==1}){
+			$(".selectorder").click(function(){
+				var status ='${customer.statusId}';
+				if(status=='1'){
+					window.location.href="#abstract";
 					$("#homeDiv").load("bangdinggongsi.jsp");
-				}else if(${customer.statusId==3}){
+				}else if(status=='3'){
+					window.location.href="#abstract";
 					$("#homeDiv").load("showMyOrder.jsp");
-				}else if(${customer.statusId==2}){
+				}else if(status=='2'){
 					alert("您绑定的公司正在审核中，通过即可下单");
+				}else{
+					window.location.href="<%=basePath%>login.jsp";
 				}
 				
 			});
