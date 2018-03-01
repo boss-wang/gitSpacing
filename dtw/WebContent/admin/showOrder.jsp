@@ -114,6 +114,7 @@
 		 		<td>航班号</td>
 		 		<td>航班日期</td>
 		 		<td>到港日期</td>
+		 		<td>起运港</td>
 		 		<td>目的港</td>
 		 		<td>货物件数</td>
 		 		<td>货物重量</td>
@@ -141,6 +142,7 @@
 			 		<td>${order.flightNo }</td>
 			 		<td>${order.departDate }</td>
 			 		<td>${order.arriveDate }</td>
+			 		<td>${order.loadingPort }</td>
 			 		<td>${order.destination }</td>
 			 		<td>${order.cargoPiece }</td>
 			 		<td>${order.cargoWeight }</td>

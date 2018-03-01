@@ -6,7 +6,7 @@
 		<div class="tit">
                     <div class="col-md-3 col-xs-6">
                         <div class="tile quick-stats">
-                            <h3  style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">添加订单</h3>
+                            <h3  style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">修改订单&nbsp;${order.orderNo }</h3>
                     	</div>
 					</div>
                 </div>
@@ -21,8 +21,8 @@
 						<input type="hidden" id="clientId" name="clientId" />
 						<div class="findClient"></div>
 					</div>
-						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">业务编号</span>
-						<input  class="inpu" id="orderNo" name="orderNo" placeholder="业务编号" value="${order.orderNo }" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/><span style="margin-left: 460px;">*</span>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">起 运 港</span>
+						<input  class="inpu" id="loadingPort" name="loadingPort" placeholder="起运港" value="${order.loadingPort }" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div  class="tit-mess" style="display: inline-block;">
@@ -146,14 +146,7 @@
 				var orderId = ${order.orderId };
 				var clientName = $("#clientName").val();
 				var orderNo = $("#orderNo").val();
-				if(orderNo==""||orderNo==null){
-					$(".homeTip").text("请输入业务编号");
-					$(".homeTip").show(200);
-					$("#orderNo").focus();
-					setTimeout(function(){
-						$(".homeTip").fadeOut(1000);
-					},1000);
-				}else if(clientName==""||clientName==null){
+				if(clientName==""||clientName==null){
 					$(".homeTip").text("请输入客户抬头");
 					$(".homeTip").show(200);
 					$("#clientName").focus();
