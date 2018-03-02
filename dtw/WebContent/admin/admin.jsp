@@ -99,6 +99,9 @@
 								<li>
 									<a id="updateClient">客户管理</a>
 								</li>
+								<li>
+									<a id="customerApplication">客户审核</a>
+								</li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -217,6 +220,9 @@
 		});
 		$("#showCustomerOrder").click(function(){
 			$("#home").load("custorder.do","mn=showCustomerOrders");
+		});
+		$("#customerApplication").click(function(){
+			$("#home").load("/dtw/admin/CustomerApplication.jsp");	
 		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};
