@@ -71,11 +71,15 @@
 								</li>
 							</ul>
 						</li>
-					<c:if test="${customer==null }"><li class="mainlevel">
-							<a title="登陆" href="login.jsp" class="menu">登陆</a>
-								<a title="" href="register.jsp">/注册</a>
+						<li class="mainlevel">
+							<a title="联系我们" id="contactUs" class="menu">联系我们</a>
 						</li>
-						</c:if>
+								<c:if test="${customer==null }">
+									<li class="mainlevel">
+										<a title="登陆" href="login.jsp" class="menu">登陆</a>
+										<a title="" href="register.jsp">/注册</a>
+									</li>
+								</c:if>
 						<c:if test="${customer!=null }">
 						<li class="mainlevel" style="font-size: 15px; position:relative;top:30px;" >
 							${customer.loginName}<span id="delesession" style="display:inline;float: none;">/注销</span>
@@ -321,6 +325,10 @@
 			
 			$(".news2-news12").click(function() {
 				$("#homeDiv").load("news2/news12.html");
+			});
+			$("#contactUs").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("contactUs.jsp");
 			});
 		</script>
 </html>
