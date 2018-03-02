@@ -138,7 +138,7 @@ color:red;
 				type:"post",
 				success:function(res){
 					if(res=='true'){
-						alert("ok");
+						$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId");
 					}
 				}
 			})

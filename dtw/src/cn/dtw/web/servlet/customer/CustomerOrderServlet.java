@@ -126,7 +126,7 @@ public class CustomerOrderServlet extends BaseServlet {
 			Client client = new Client();
 			client.setClientId(customer_client.getClientId());
 			int totalRow = customerOrderService.getOrderCount(client);
-			int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+			int totalPage = totalRow%6==0?totalRow/6:totalRow/6+1;
 			if(curPage==null) {
 				currentPage = 1;
 			}else {
@@ -134,7 +134,7 @@ public class CustomerOrderServlet extends BaseServlet {
 				currentPage = currentPage<1?1:currentPage;
 				currentPage = currentPage>totalPage?totalPage:currentPage;
 			}
-			List<Order> orderList = customerOrderService.getOrderListByClientId(client, currentPage, 10);
+			List<Order> orderList = customerOrderService.getOrderListByClientId(client, currentPage, 6);
 			List<OrderStatus> statusList = orderService.getAllStatus();
 			List<Terms> termsList = orderService.getAllTerms();
 			req.setAttribute("currentPage", currentPage);

@@ -10,8 +10,20 @@
 			#myOrderTable tr{
 				text-align:center;
 			}
+			#myOrderTable tr td{
+				padding-top:10px;
+				padding-bottom:10px;
+			}
 			#myOrderTable tr:nth-child(odd) {
 				background:rgba(0,0,0,0.1);
+			}
+			#pageTip{
+				position:absolute;
+				border-radius:6px;
+				top:52px;
+				left:500px;
+				padding:3px 10px 3px 10px;
+				background:rgba(89,154,222,1);
 			}
 		</style>
 		
@@ -25,6 +37,7 @@
 						<a href="#"  title="公司简介">查看订单</a>
 					</div>
 				</caption>
+				<div id="pageTip"></div>
 				<center>
 					<table id="myOrderTable"  width="100%">
 						
@@ -65,12 +78,51 @@
 							</td>
 						</tr>
 						</c:forEach>
+						
+						<tr style="height:50px;">
+            				<td  colspan="11"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
+          			    </tr> 
 					</table>
 				</center>
 				<!--cont end-->
 		
 			<!--container end-->
 		</div>
-		
 </body>
+<script type="text/javascript">
+	//分页
+	$("#firstPage").click(function(){
+		$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage=1");
+	});
+	$("#lastPage").click(function(){
+		var totalPage = ${totalPage };
+		$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+totalPage);
+	});
+	$("#prePage").click(function(){
+		var currentPage = ${currentPage }-1;
+		if(currentPage==0){
+			$("#pageTip").text("已经是第一页了");
+			$("#pageTip").show(200);
+			setTimeout(function(){
+				$("#pageTip").fadeOut(1000);
+			},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+currentPage);
+		}
+	});
+	$("#nextPage").click(function(){
+		var totalPage = ${totalPage }+1;
+		var currentPage = ${currentPage }+1;
+		if(totalPage==currentPage){
+				$("#pageTip").text("已经是最后一页了");
+				$("#pageTip").show(200);
+				setTimeout(function(){
+					$("#pageTip").fadeOut(1000);
+				},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+currentPage);
+		}
+	
+	});
+</script>
 </html>
