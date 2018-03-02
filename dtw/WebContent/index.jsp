@@ -145,11 +145,11 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a href="" target="_blank" title="汽配进口清关/刹车片车轮毂引擎进口报关">汽配进口清关/刹车片车轮毂引擎进口报关</a></dt>
-						<dt><a href="" target="_blank" title="奢侈品代收转运|包税清关转运内地">奢侈品代收转运|包税清关转运内地</a></dt>
-						<dt><a href="" target="_blank" title="运动系列/nike/adidas/Air jordan/新百伦/球服/鞋帽/进口报关/包税进口">运动系列/nike/adidas/Air jordan/新百伦/球服/鞋帽/进口报关/包税进口</a></dt>
-						<dt><a href="" target="_blank" title="猫粮进口清关/狗粮进口报关/鼠粮进口代理/宠物食品包税进口">猫粮进口清关/狗粮进口报关/鼠粮进口代理/宠物食品包税进口</a></dt>
-						<dt><a href="" target="_blank" title="印度雪松种子辣木籽进口清关">印度雪松种子辣木籽进口清关</a></dt>
+						<dt><a class="news2-news12" title="运动系列/球服/鞋帽/进口报关/包税进口">运动系列//球服/鞋帽/进口报关/包税进口</a></dt>
+						<dt><a class="news3-news1" title="猫粮进口清关/狗粮进口报关/鼠粮进口代理/宠物食品包税进口">猫粮进口清关/狗粮进口报关/鼠粮进口代理/宠物食品包税进口</a></dt>
+						<dt><a class="news3-news2" title="美容护肤品进口清关报关|化妆品大田快件进口代理">美容护肤品进口清关报关|化妆品大田快件进口代理</a></dt>
+						<dt><a class="news3-news3" title="多肉植物进口清关报关|多肉植物大田进口|多肉植物运输">多肉植物进口清关报关|多肉植物大田进口|多肉植物运输</a></dt>
+						<dt><a class="news3-news4" title="印度雪松种子辣木籽进口清关">印度雪松种子辣木籽进口清关</a></dt>
 
 					</dl>
 				</div>
@@ -301,6 +301,26 @@
 
 			$(".serviceTermsNews-news3").click(function() {
 				$("#homeDiv").load("serviceTermsNews/news3.html");
+			});
+			
+			$(".news3-news1").click(function() {
+				$("#homeDiv").load("news3/news1.html");
+			});
+
+			$(".news3-news2").click(function() {
+				$("#homeDiv").load("news3/news2.html");
+			});
+
+			$(".news3-news3").click(function() {
+				$("#homeDiv").load("news3/news3.html");
+			});
+
+			$(".news3-news4").click(function() {
+				$("#homeDiv").load("news3/news4.html");
+			});
+			
+			$(".news2-news12").click(function() {
+				$("#homeDiv").load("news2/news12.html");
 			});
 		</script>
 </html>
