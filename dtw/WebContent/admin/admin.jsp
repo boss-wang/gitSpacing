@@ -102,6 +102,9 @@
 								<li>
 									<a id="customerApplication">客户审核</a>
 								</li>
+								<li>
+									<a id="customerLeaveMessage">查看客户留言</a>
+								</li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -223,6 +226,9 @@
 		});
 		$("#customerApplication").click(function(){
 			$("#home").load("customer.do","mn=showCustomerApplication");	
+		});
+		$("#customerLeaveMessage").click(function(){
+			$("#home").load("admin/leaveMessage.jsp");
 		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};
