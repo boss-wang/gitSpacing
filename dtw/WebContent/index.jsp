@@ -292,15 +292,15 @@
 			});
 			
 			$(".serviceTermsNews-news1").click(function() {
-				$("#homeDiv").load("serviceTermsNews/news1.html");
+				$("#homeDiv").load("serviceTermsNews/news1.jsp");
 			});
 
 			$(".serviceTermsNews-news2").click(function() {
-				$("#homeDiv").load("serviceTermsNews/news2.html");
+				$("#homeDiv").load("serviceTermsNews/news2.jsp");
 			});
 
 			$(".serviceTermsNews-news3").click(function() {
-				$("#homeDiv").load("serviceTermsNews/news3.html");
+				$("#homeDiv").load("serviceTermsNews/news3.jsp");
 			});
 			
 			$(".news3-news1").click(function() {
