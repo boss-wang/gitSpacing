@@ -4,17 +4,16 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
-import cn.dtw.entity.Order;
-import cn.dtw.entity.User;
 import cn.dtw.service.customerservice.CustomerService;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.web.servlet.BaseServlet;
 
+@WebServlet("/customer.do")
 public class CustomerServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 335282468601497196L;

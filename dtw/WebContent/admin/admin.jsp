@@ -222,7 +222,7 @@
 			$("#home").load("custorder.do","mn=showCustomerOrders");
 		});
 		$("#customerApplication").click(function(){
-			$("#home").load("/dtw/admin/CustomerApplication.jsp");	
+			$("#home").load("customer.do","mn=showCustomerApplication");	
 		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};

@@ -19,35 +19,50 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1"  id="showCustomerApplication"  >
+        <table   border="1" id="clientUpdate" style="width: 970px; height: 350px"  >
             	<tr id="" class="tit-mess3">
             		<td class="mess1"  style="width:150px;">联系人</td>
             		<td class="mess1"  style="width:160px;" >公司名</td>
             		<td class="mess1" style="width:120px;">公司地址</td>
+            		<td class="mess1" style="width:120px;">公司状态</td>
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
-            	<c:forEach var="supplier" items="${supplierList }">
+            	<c:forEach var="customer" items="${customerList }">
             		<tr  class="tit-mess3">
 	            		<td class="mess2">
-	            			<c:forEach var="contact" items="${supplier.supplierContacts }">
-	            				<div class="ccName"><a class="nameContent" contactId="${contact.supplierContactId }" >${contact.supplierContactName }</a>
+	            				<div class="ccName"><a class="nameContent" contactId="${customer.id }" >${customer.loginName }</a>
 		            				<div class="messdiv">
-										<p>电话：${contact.supplierContactTel }</p>
-										<p>邮箱：${contact.supplierContactEmail }</p>
-										<p>Q Q：${contact.supplierContactQQ }</p>
-										<p>
-											<a class="ccOperation modifyCC" modName="${contact.supplierContactName }" tel="${contact.supplierContactTel }"  email="${contact.supplierContactEmail }" qq="${contact.supplierContactQQ }">修改</a>
-											<a class="ccOperation delCC" supplierId="${supplier.supplierId }" contactId="${contact.supplierContactId }">删除</a>
-										</p>
+										<p>电话：${customer.tel }</p>
+										<p>邮箱：${customer.email }</p>
 									</div>
 								</div>
-	            			</c:forEach>
 	            		</td>
-	            		<td class="mess2">${client.clientName }</td>
-	            		<td class="mess2">${client.clientAddress}</td>
+	            		<td class="mess2">${customer.clientTemp.clientName }</td>
+	            		<td class="mess2">${customer.clientTemp.clientAddress}</td>
 	            		
-	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">增加</a></td>
-	            		<td class="mess2"><a class="updateSupplier" modifyId="${supplier.supplierId }">修改</a>&nbsp;&nbsp;<a class="delSupplier" modifyId="${supplier.supplierId }">删除</a></td>
+	            		<td class="mess2">
+	           	 			<c:if test="${customer.statusId!=1}">
+	            				<c:if test="${customer.clientExists==0}">
+	            					<a class="addCC" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}">无此公司，点击添加</a>
+	            				</c:if>
+	            			</c:if>
+	            			<c:if test="${customer.clientExists==1}">
+	            				已存在
+	            			</c:if>
+	            		</td>
+	            		<td class="mess2">
+	            			<c:if test="${customer.statusId==1}">
+	            				<a class="noApp">未申请</a>
+	            			</c:if>
+	            			<c:if test="${customer.statusId==2}">
+	            				<c:if test="${customer.clientExists==1}">
+	            					<a class="pass">未审核，点击通过</a>
+	            				</c:if>
+	            			</c:if>
+	            			<c:if test="${customer.statusId==3}">
+	            				已审核
+	            			</c:if>
+	            		</td>
             		</tr> 
             	</c:forEach>
 	            	
