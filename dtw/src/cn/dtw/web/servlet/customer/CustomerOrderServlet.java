@@ -56,11 +56,17 @@ public class CustomerOrderServlet extends BaseServlet {
 	}
 	//跳转客户下单页面
 	protected void goAddCustomerOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Customer customer = new Customer();
-		List<Terms> termsList = orderService.getAllTerms();
-		List<Clientcontact> clientcontactList = customerService.getAllContactIdByClientId(customer);
-		req.setAttribute("termsList", termsList);
-		req.setAttribute("clientcontactList", clientcontactList);
-		req.getRequestDispatcher("").forward(req, resp);
+		Customer customer = (Customer)req.getSession().getAttribute("customer");
+		if(customer!=null) {
+			List<Terms> termsList = orderService.getAllTerms();
+			List<Clientcontact> clientcontactList = customerService.getAllContactIdByClientId(customer);
+			req.setAttribute("termsList", termsList);
+			req.setAttribute("clientcontactList", clientcontactList);
+			req.getRequestDispatcher("/addCustomerOrder.jsp").forward(req, resp);
+		}
+	}
+	//保存下单
+	protected void addddCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
+		
 	}
 }
