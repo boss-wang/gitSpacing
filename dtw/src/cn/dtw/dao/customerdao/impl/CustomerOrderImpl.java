@@ -14,7 +14,7 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 	//通过公司id查询订单信息(orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId)
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int starPage, int pageSize) {
-		String sql="SELECT orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId FROM `order` WHERE clientId=? limit ?,?";
+		String sql="SELECT orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId,loadingPort FROM `order` WHERE clientId=? limit ?,?";
 		Object[] params= {client.getClientId(),starPage,pageSize};
 		return super.executeQuery(new BeanListHandler<Order>(Order.class), sql, params);
 	}
