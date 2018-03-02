@@ -1,4 +1,10 @@
-<meta charset="utf-8">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div class="container clearfix">
   <div class="side">
         
@@ -9,7 +15,7 @@
 <li><img src="images/side-cate.png">    <a class="selectorder" title="订单追踪">订单追踪</a></li>
 </ul>
 </div>
-<div class="s-contact-title"><a title="联系我们" style="color: white;">联系我们</a></div>
+<div class="s-contact-title"><a class="lmessage" title="联系我们" style="color: white;">联系我们</a></div>
 <div><img src="images/side-contact.jpg"></div>
     </div>
 
@@ -25,7 +31,7 @@
 			<div class="cont">
 				<strong>进口分为两种方式：</strong><br />
 				正常的打税一般贸易缴税进口，一般是增值税17%+关税+中港拖车费+报关费等，这种方式进口费用高额，手续繁杂需要客户提供各种单证票据才能正常报关回来，一旦某个环节有问题，将会影响整个货物的操作。<br />
-				另外一种方式：从大田中转进口，采用中港运输，台湾小小额贸易报关（简称：小三通），中港车，快件，商务车、空运、水客带货清关等等&nbsp;的方式进行申报，通过这些绿色通道申报来降低关税，降低成本，快速进口，。我们主要重点介绍这种快捷的、低成本的、简单的，进口操作模式<br />
+				另外一种方式：从大田中转进口，台湾小小额贸易报关（简称：小三通），快件，商务车、空运、水客带货清关等等&nbsp;的方式进行申报，通过这些绿色通道申报来降低关税，降低成本，快速进口，。我们主要重点介绍这种快捷的、低成本的、简单的，进口操作模式<br />
 				&nbsp;<br /> <strong>第一，操作的一个流程</strong><br /> 操作流程：国外-大田-国内<br />
 				A.货物在国外的客户：英国/日本/美国/法国/新西兰/澳洲等国外客户，通过空运，海运或是快递，把货物发到我大田公司或航空公司或船公司码头，我司即可安排大田换单，提货，办理大田当地手续等.&nbsp;我大田公司收到货以后以，根据货物的实际情况来安排清关方式，免除了一般贸易进口的复杂手续，不需要客户提供任何的单证票据合同，只需要装箱单即可，客户只需大田交货，天津接货即可，货到广东再支付运费，整个过程手续简单、安全快捷！<br />
 				B.货物在大田的客户：您可以送货到我大田公司，也可以通知我们上门提货，我大田公司收到货以后，做单申报安排进口。<br />
@@ -57,6 +63,9 @@ $(".serviceTerms").click(function() {
 	$("#homeDiv").load("serviceTerms.html");
 });
 
+$(".lmessage").click(function() {
+	$("#homeDiv").load("leaveMessage.jsp");
+});
 $(".selectorder").click(function(){
 	var status ='${customer.statusId}';
 	if(status=='1'){

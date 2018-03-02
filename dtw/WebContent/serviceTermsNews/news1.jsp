@@ -1,4 +1,10 @@
-<meta charset="utf-8">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div class="container clearfix">
   <div class="side">
         
@@ -9,7 +15,7 @@
 <li><img src="images/side-cate.png">    <a class="selectorder" title="订单追踪">订单追踪</a></li>
 </ul>
 </div>
-<div class="s-contact-title"><a title="联系我们" style="color: white;">联系我们</a></div>
+<div class="s-contact-title"><a class="lmessage" title="联系我们" style="color: white;">联系我们</a></div>
 <div><img src="images/side-contact.jpg"></div>
     </div>
 
@@ -53,7 +59,12 @@ $(".serviceTerms").click(function() {
 	$("#homeDiv").load("serviceTerms.html");
 });
 
+$(".lmessage").click(function() {
+	$("#homeDiv").load("leaveMessage.jsp");
+});
+
 $(".selectorder").click(function(){
+	alert();
 	var status ='${customer.statusId}';
 	if(status=='1'){
 		window.location.href="#abstract";
@@ -70,6 +81,7 @@ $(".selectorder").click(function(){
 });
 
 $(".fastAddOrder").click(function(){
+	alert();
 	var status ='${customer.statusId}';
 	if(status=='1'){
 		window.location.href="#abstract";
