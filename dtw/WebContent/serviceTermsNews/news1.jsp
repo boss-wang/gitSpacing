@@ -64,7 +64,6 @@ $(".lmessage").click(function() {
 });
 
 $(".selectorder").click(function(){
-	alert();
 	var status ='${customer.statusId}';
 	if(status=='1'){
 		window.location.href="#abstract";
@@ -81,7 +80,6 @@ $(".selectorder").click(function(){
 });
 
 $(".fastAddOrder").click(function(){
-	alert();
 	var status ='${customer.statusId}';
 	if(status=='1'){
 		window.location.href="#abstract";
