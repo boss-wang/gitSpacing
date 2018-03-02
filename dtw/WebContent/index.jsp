@@ -172,11 +172,9 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a href="" target="_blank" title="投诉建议？">投诉建议</a></dt>
-						<dt><a href="" target="_blank" title="法律声明？">法律声明</a></dt>
-						<dt><a href="" target="_blank" title="常见进口货物">常见进口货物</a></dt>
-						<dt><a href="" target="_blank" title="关口禁运物品">关口禁运物品</a></dt>
-
+						<dt><a class="serviceTermsNews-news1" title="关口禁运物品">关口禁运物品</a></dt>
+						<dt><a class="serviceTermsNews-news2" title="大田进口如何节省成本">大田进口如何节省成本</a></dt>
+						<dt><a class="serviceTermsNews-news3" title="常见进口货物">常见进口货物</a></dt>
 					</dl>
 				</div>
 			</div>
@@ -291,6 +289,18 @@
 			$("#compyprofile").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("companyprofile.jsp");
+			});
+			
+			$(".serviceTermsNews-news1").click(function() {
+				$("#homeDiv").load("serviceTermsNews/news1.html");
+			});
+
+			$(".serviceTermsNews-news2").click(function() {
+				$("#homeDiv").load("serviceTermsNews/news2.html");
+			});
+
+			$(".serviceTermsNews-news3").click(function() {
+				$("#homeDiv").load("serviceTermsNews/news3.html");
 			});
 		</script>
 </html>
