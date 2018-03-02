@@ -129,7 +129,6 @@ color:red;
 		var contact=$("#contact").val();
 		var customerId =${customer.id};
 		if(reg.test(weight)&&reg.test(volume)&&reg2.test(cargoPiece)){
-			alert(customerId);
 			$.ajax({
 				url:"",
 				data:"",
