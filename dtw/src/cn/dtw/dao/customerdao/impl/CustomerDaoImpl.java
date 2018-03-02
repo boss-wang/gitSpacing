@@ -3,9 +3,11 @@ package cn.dtw.dao.customerdao.impl;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerDao;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 
@@ -41,6 +43,15 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public Customer_client getClientBycust(Customer customer) {
 		String sql="select * from customer_client where customerId=?";
 		return super.executeOneRow(new BeanHandler<Customer_client>(Customer_client.class), sql, customer.getId());
+	}
+	//根据客户公司id获取公司的所有联系人
+	@Override
+	public List<Clientcontact> getAllContactIdByClientId(Customer customer) {
+		String sql = "select clientContactEmail,clientcontact.clientContactId,clientContactName,clientContactQQ,clientContactTel "
+				+ "from clientcontact,client_clientcontact "
+				+ "where client_clientcontact.clientContactId=clientcontact.clientContactId "
+				+ "and clientId=(select clientId from customer_client where customerId=?)";
+		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, customer.getId());
 	}
 	
 	

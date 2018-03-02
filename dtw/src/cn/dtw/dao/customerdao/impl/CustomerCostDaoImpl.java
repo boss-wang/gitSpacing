@@ -6,7 +6,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerCostDao;
-import cn.dtw.entity.Client;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order_cost;
 

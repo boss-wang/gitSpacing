@@ -160,7 +160,7 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a  target="_blank" title="快速下单">快速下单</a></dt>
+						<dt><a id="fastAddOrder" target="_blank" title="快速下单">快速下单</a></dt>
 						<dt><a class="selectorder" target="_blank" title="订单追踪">订单追踪</a></dt>
 						
 					</dl>
@@ -231,6 +231,7 @@
 		<script type="text/javascript" src="js/banner.js"></script>
 		<script type="text/javascript" src="js/slide.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
 		<!-- 自定义javascript框架区 ends -->
 		<script type="text/javascript">
 			$("#newsCenter").click(function(){
@@ -240,6 +241,10 @@
 			$("#tradeNews").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
+			});
+			$("#fastAddOrder,#cost").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("custorder.do","mn=goAddCustomerOrder");
 			});
 			$("#serviceTerms").click(function(){
 				window.location.href="#abstract";

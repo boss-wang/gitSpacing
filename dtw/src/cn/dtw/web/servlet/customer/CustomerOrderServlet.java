@@ -8,21 +8,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.CostStatus;
+import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order;
+import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
+import cn.dtw.service.OrderService;
 import cn.dtw.service.customerservice.CustomerOrderService;
+import cn.dtw.service.customerservice.CustomerService;
 import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
+import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
+import cn.dtw.service.impl.OrderServiceImpl;
 import cn.dtw.web.servlet.BaseServlet;
 @WebServlet("/custorder.do")
 public class CustomerOrderServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1841587775305891652L;
 	private CustomerOrderService customerOrderService = new CustomerOrderServiceImpl();
+	private CustomerService customerService = new CustomerServiceImpl();
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
-
+	private OrderService orderService = new OrderServiceImpl();
+	
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
@@ -44,5 +53,14 @@ public class CustomerOrderServlet extends BaseServlet {
 		req.setAttribute("orderList", orderList);
 		req.setAttribute("costStatusList", costStatusList);
 		req.getRequestDispatcher("/admin/showCustomerOrder.jsp").forward(req, resp);
+	}
+	//跳转客户下单页面
+	protected void goAddCustomerOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Customer customer = new Customer();
+		List<Terms> termsList = orderService.getAllTerms();
+		List<Clientcontact> clientcontactList = customerService.getAllContactIdByClientId(customer);
+		req.setAttribute("termsList", termsList);
+		req.setAttribute("clientcontactList", clientcontactList);
+		req.getRequestDispatcher("").forward(req, resp);
 	}
 }
