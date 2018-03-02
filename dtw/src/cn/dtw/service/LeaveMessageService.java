@@ -9,4 +9,6 @@ public interface LeaveMessageService {
 	public int addMessage(Leavemessage lm);
 	//显示留言信息
 	public List<Leavemessage> showMessage(int pageCode,int pageSize);
+	//总页数
+	int getAllTotalPage(int rowsize);
 }

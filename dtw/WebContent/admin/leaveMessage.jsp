@@ -20,13 +20,13 @@
                 <hr class="whiter"/>
             <!-- 表单内容 -->
         <table   border="1" id="clientUpdate" style="width: 600px; height: 30px"  >
-            	<tr id="" class="tit-mess3" style="height:40px">
+            	<tr id="" class="tit-mess3" style="padding:10px">
             		<td class="mess1"  style="width:30px; height:10px">姓名</td>
             		<td class="mess1"  style="width:70px; height:10px" >手机</td>
             		<td class="mess1" style="width:120px; height:10px">留言内容</td>
        
             	</tr> 
-            	<c:forEach var="leavemessage" items="${leavemessageList }">
+            	<c:forEach var="leavemessage" items="${messageList }">
             		<tr>
             			<td>${leavemessage.name }</td>
             			<td>${leavemessage.phoneNum }</td>
@@ -43,11 +43,11 @@
 	<script type="text/javascript">
 		//分页
 		$("#firstPage").click(function(){
-			$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
+			$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage=1");
 		})
 		$("#lastPage").click(function(){
 			var totalPage = ${totalPage };
-			$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
+			$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage="+totalPage);
 		})
 		$("#prePage").click(function(){
 			var currentPage = ${currentPage }-1;
@@ -58,7 +58,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage="+currentPage);
 			}
 		})
 		$("#nextPage").click(function(){
@@ -71,7 +71,7 @@
 						$(".homeTip").fadeOut(1000);
 					},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage="+currentPage);
 			}
 
 		})

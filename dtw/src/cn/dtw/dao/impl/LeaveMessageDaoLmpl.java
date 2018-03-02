@@ -3,6 +3,7 @@ package cn.dtw.dao.impl;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.LeaveMessageDao;
@@ -22,6 +23,14 @@ public class LeaveMessageDaoLmpl extends BaseDao implements LeaveMessageDao {
 		String sql="select * from leavemessage limit ?,?";
 		
 		return super.executeQuery(new BeanListHandler<Leavemessage>(Leavemessage.class), sql, startsize,rowsize);
+	}
+	//获得总量
+	@Override
+	public int getAllTotal() {
+		String sql="select count(1) as count from leavemessage";
+		Object obj=  super.executeOneColumn(new ScalarHandler("count"), sql);
+		Long m = (long)obj;
+		return 	m.intValue();
 	}
 
 }

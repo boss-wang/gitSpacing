@@ -228,7 +228,7 @@
 			$("#home").load("customer.do","mn=showCustomerApplication");	
 		});
 		$("#customerLeaveMessage").click(function(){
-			$("#home").load("admin/leaveMessage.jsp");
+			$("#home").load("customer.do","mn=showCustomerLeaveMessage");
 		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};
