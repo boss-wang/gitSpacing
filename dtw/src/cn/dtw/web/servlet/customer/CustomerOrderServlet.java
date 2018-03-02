@@ -66,7 +66,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		}
 	}
 	//保存下单
-	protected void addddCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
+	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
 		
 	}
 }
