@@ -20,6 +20,7 @@
 <script type="text/javascript" src="js/banner.js"></script>
 <script type="text/javascript" src="js/slide.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+
 <!-- 自定义javascript框架区 ends -->
 
 </head>
@@ -66,21 +67,21 @@
 				<a href="#" title="公司简介">请您留言</a>
 			</div>
 			<div class="cont">
-				<form method="post">
+				<form id="form1">
 					<div id="" style="height: 30px; margin-left: 393px;">
 						<h5 style="display: inline-block; color: #555555; width: 57px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</h5>
-						<input style="width: 300px; height: 24px; margin-left: 5px;" placeholder="请输入您的姓名" />
+						<input required name="name" style="width: 300px; height: 24px; margin-left: 5px;" placeholder="请输入您的姓名" />
 					</div>
 					<div id="" style="height: 30px; margin-left: 393px; margin-top: 10px;">
 						<h5 style="display: inline-block; color: #555555; width: 57px;">联系电话:</h5>
-						<input style="width: 300px; height: 24px; margin-left: 5px;" placeholder="请输入您的联系电话" />
+						<input required name="phoneNum" style="width: 300px; height: 24px; margin-left: 5px;" placeholder="请输入您的联系电话" />
 					</div>
 					<div id="" style="height: 120px; margin-left: 393px; margin-top: 33px;">
 						<h5 style="display: inline-block; color: #555555; position: absolute; width: 57px;">内容:</h5>
-						<textarea name="" rows="" cols="" style="width: 298px; height: 100px; margin-left: 67px;" placeholder="留言：您留言后，我们很快会和你电话联系，同时非常感谢您的关注，愿我们合作成功。"></textarea>
+						<textarea required name="message" rows="" cols="" style="width: 298px; height: 100px; margin-left: 67px;" placeholder="留言：您留言后，我们很快会和你电话联系，同时非常感谢您的关注，愿我们合作成功。"></textarea>
 					</div>
 					<div id="" style="height: 30px; margin-left: 460px; margin-top: 10px;">
-						<input type="button" name="" id="" value="提交" style="height: 30px; width: 100px; border: 1px solid orangered; background-color: orangered; color: white;" />
+						<input type="button" name="" id="addMessage" value="提交" style="height: 30px; width: 100px; border: 1px solid orangered; background-color: orangered; color: white;" />
 					</div>
 				</form>
 			</div>
@@ -195,5 +196,31 @@
 	<!--row end-->
 
 </body>
+<script type="text/javascript">
+	$("#addMessage").click(function(){
+		
+		
+		$.ajax({
+		    //几个参数需要注意一下
+		        type: "POST",//方法类型
+		        dataType: "json",//预期服务器返回的数据类型
+		        url: "leavamassage.do" ,//url
+		        data: "mn=addLeaveMessage&"+$("#form1").serialize(),
+		        success: function (result) {
+		            console.log(result);//打印服务端返回的数据(调试用)
+		            if (result>0) {
+		                alert("留言成功");
+		                window.location.href="index.jsp";
+		            }else{
+		            	alert("失败");
+		            }
+		        },
+		        error : function() {
+		            alert("异常！");
+		        }
+		    });
+	});
+	
 
+</script>
 </html>
