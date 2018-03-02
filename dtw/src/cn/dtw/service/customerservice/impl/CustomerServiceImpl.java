@@ -7,6 +7,7 @@ import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 import cn.dtw.service.customerservice.CustomerService;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -72,6 +73,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int getCustomerCount() {
 		return customerDao.getCustomerCount();
+	}
+	//通过下单人查询绑定公司id
+	@Override
+	public Customer_client getClientBycust(Customer customer) {
+		return customerDao.getClientBycust(customer);
 	}
 
 }

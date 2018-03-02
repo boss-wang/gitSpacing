@@ -13,6 +13,7 @@ import cn.dtw.entity.Clienttemp;
 import cn.dtw.entity.Clienttemp_customer;
 import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
@@ -70,8 +71,30 @@ public class CustomerOrderServlet extends BaseServlet {
 		}
 	}
 	//保存下单
-	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
-		
+	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String departDate=req.getParameter("departDate");
+		String loadingPort=req.getParameter("loadingPort");
+		String destination=req.getParameter("destination");
+		String cargoPiece=req.getParameter("cargoPiece");
+		String weight=req.getParameter("weight");
+		String volume=req.getParameter("volume");
+		String typetrading=req.getParameter("typetrading");
+		String contact=req.getParameter("contact");
+		String customerId=req.getParameter("customerId");
+		Order order = new Order();
+		order.setDepartDate(departDate);
+		order.setLoadingPort(loadingPort);
+		order.setDestination(destination);
+		order.setCargoPiece(cargoPiece);
+		order.setCargoWeight(Double.parseDouble(weight));
+		order.setCargoVolume(Double.parseDouble(volume));
+		order.setTermsId(Integer.parseInt(typetrading));
+		Customer customer = new Customer();
+		customer.setId(Integer.parseInt(customerId));
+		Customer_client custClient= customerService.getClientBycust(customer);
+		order.setClientId(custClient.getClientId());
+		boolean back=customerOrderService.addCustomerOrder(order);
+		resp.getWriter().print(back);
 	}
 	//绑定公司
 		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -18,6 +18,9 @@
 	width: 240px;
 	border: 1px solid rgba(0, 0, 0, 0.35);
 }
+#weight{
+	margin-left: 4px;
+}
 
 .tit-mess {
 	padding-bottom:20px;
@@ -59,8 +62,8 @@ color:red;
 					</div>
 					<div class="tit-mess" >
 						<span class="mess">货物重量</span><span id="status1"></span><input class="inpu"  required="required"  id="weight"
-							placeholder="货物重量" /> <span class="mess">货物体积</span><span id="status2"></span> <input
-							class="inpu"   required="required" id="volume" placeholder="货物体积" />
+							placeholder="货物重量单位kg" /> <span class="mess">货物体积</span><span id="status2"></span> <input
+							class="inpu"   required="required" id="volume" placeholder="货物体积m³" />
 					</div>
 					<div class="tit-mess">
 						<span class="mess">贸易方式</span> <select class="inpu" id="typetrading">
@@ -130,11 +133,13 @@ color:red;
 		var customerId =${customer.id};
 		if(reg.test(weight)&&reg.test(volume)&&reg2.test(cargoPiece)){
 			$.ajax({
-				url:"",
-				data:"",
-				type:"",
+				url:"custorder.do?mn=addCustomerOrder",
+				data:"departDate="+departDate+"&loadingPort="+loadingPort+"&destination="+destination+"&cargoPiece="+cargoPiece+"&weight="+weight+"&volume="+volume+"&typetrading="+typetrading+"&contact="+contact+"&customerId="+customerId,
+				type:"post",
 				success:function(res){
-					
+					if(res=='true'){
+						alert("ok");
+					}
 				}
 			})
 		}

@@ -39,8 +39,8 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 	//添加订单(客户下单)
 	@Override
 	public boolean addCustomerOrder(Order order) {
-		String sql="INSERT INTO `order`(clientId,destination,cargoPiece,cargoWeight,cargoVolume,termsId,loadingPort) VALUES(?,?,?,?,?,?,?);";
-		Object[] params= {order.getClientId(),order.getDestination(),order.getCargoPiece(),order.getCargoWeight(),order.getCargoVolume(),order.getTermsId(),order.getLoadingPort()};
+		String sql="INSERT INTO `order`(clientId,orderNo,destination,departDate,cargoPiece,cargoWeight,cargoVolume,termsId,loadingPort) VALUES(?,?,?,?,?,?,?,?,?);";
+		Object[] params= {order.getClientId(),order.getOrderNo(),order.getDestination(),order.getDepartDate(),order.getCargoPiece(),order.getCargoWeight(),order.getCargoVolume(),order.getTermsId(),order.getLoadingPort()};
 		int result=super.executeUpdate(sql, params);
 		return result>0?true:false;
 	}
