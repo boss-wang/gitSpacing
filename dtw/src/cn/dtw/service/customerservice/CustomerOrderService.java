@@ -19,6 +19,8 @@ public interface CustomerOrderService {
 	public boolean addCustomerOrder(Order order);
 	//查询订单条数
 	public int getOrderCount(User user);
+	//根据客户id查询订单条数
+	public int getOrderCount(Client client);
 	//查询所有客户自助下单的订单列表（userId=0）
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
 }

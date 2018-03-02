@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Clienttemp;
 import cn.dtw.entity.Clienttemp_customer;
@@ -15,6 +16,7 @@ import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
+import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
@@ -37,6 +39,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClienttempService clientTempService = new  ClientTempServiceImpl();
+	//显示客户自助下单的列表（员工可查看）
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
@@ -113,5 +116,32 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.getSession().removeAttribute("customer");
 			req.getSession().setAttribute("customer",cust);
 			resp.getWriter().print(back);
+		}
+		//显示客户自助下单的列表（员工可查看）
+		protected void showCustomerOrdersByClientId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String curPage = req.getParameter("currentPage");
+			int currentPage;
+			Customer customer = (Customer)req.getSession().getAttribute("customer");
+			Customer_client customer_client = customerService.getClientBycust(customer);
+			Client client = new Client();
+			client.setClientId(customer_client.getClientId());
+			int totalRow = customerOrderService.getOrderCount(client);
+			int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Order> orderList = customerOrderService.getOrderListByClientId(client, currentPage, 10);
+			List<OrderStatus> statusList = orderService.getAllStatus();
+			List<Terms> termsList = orderService.getAllTerms();
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("totalPage", totalPage);
+			req.setAttribute("orderList", orderList);
+			req.setAttribute("statusList", statusList);
+			req.setAttribute("termsList", termsList);
+			req.getRequestDispatcher("/showMyOrder.jsp").forward(req, resp);
 		}
 }

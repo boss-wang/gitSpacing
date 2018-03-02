@@ -7,6 +7,8 @@ import java.util.List;
 
 import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.OrderDao;
+import cn.dtw.dao.customerdao.CustomerOrderDao;
+import cn.dtw.dao.customerdao.impl.CustomerOrderImpl;
 import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.dao.impl.OrderDaoImpl;
 import cn.dtw.entity.Client;
@@ -21,11 +23,12 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	private OrderDao orderDao = new OrderDaoImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClientContactDao clientContactDao = new ClientContactDaoImpl();
+	private CustomerOrderDao customer = new CustomerOrderImpl();
 	//通过公司id查询订单信息
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int curPage, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		int startRow = (curPage-1)*pageSize;
+		return customer.getOrderListByClientId(client, startRow, pageSize);
 	}
 	//通过订单id查询订单信息
 	@Override
@@ -72,10 +75,15 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 		}
 		return orderList;
 	}
-	//查询订单
+	//查询订单条数
 	@Override
 	public int getOrderCount(User user) {
 		return orderDao.getOrderCount(user);
+	}
+	//根据公司id查询订单条数
+	@Override
+	public int getOrderCount(Client client) {
+		return customer.getOrderCount(client);
 	}
 
 }

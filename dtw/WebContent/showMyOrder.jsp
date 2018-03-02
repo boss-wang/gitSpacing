@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,78 +42,29 @@
 							<th><span>订单状态</span></th>
 							
 						</tr>
-						<tr>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
+						<c:forEach var="order" items="${orderList }">
+							<tr>
+							<td>${order.orderNo }</td>
+							<td>${order.mawbNo }</td>
+							<td>${order.hawbNo }</td>
+							<td>${order.departDate }</td>
+							<td>${order.arriveDate }</td>
+							<td>${order.destination }</td>
+							<td>
+								<c:forEach var="terms" items="${termsList }">
+									<c:if test="${terms.id==order.termsId }">${terms.code }</c:if>
+								</c:forEach>
+							</td>
+							<td>${order.cargoPiece }</td>
+							<td>${order.cargoWeight }</td>
+							<td>${order.cargoVolume }</td>
+							<td>
+								<c:forEach var="status" items="${statusList }">
+									<c:if test="${status.statusId==order.statusId }">${status.statusDescription }</c:if>
+								</c:forEach>
+							</td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>22</td>
-							<td>22</td>
-							<td>22</td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
-						
-						
+						</c:forEach>
 					</table>
 				</center>
 				<!--cont end-->

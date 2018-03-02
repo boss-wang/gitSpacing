@@ -3,6 +3,7 @@ package cn.dtw.dao.customerdao.impl;
 import java.util.List;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
@@ -43,6 +44,13 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 		Object[] params= {order.getClientId(),order.getOrderNo(),order.getDestination(),order.getDepartDate(),order.getCargoPiece(),order.getCargoWeight(),order.getCargoVolume(),order.getTermsId(),order.getLoadingPort()};
 		int result=super.executeUpdate(sql, params);
 		return result>0?true:false;
+	}
+	//根据公司id查询订单条数
+	@Override
+	public int getOrderCount(Client client) {
+		String sql = "select count(1) as count from `order` where clientId=?";
+		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql, client.getClientId());
+		return rs.intValue();
 	}
 
 }
