@@ -53,6 +53,11 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 				+ "and clientId=(select clientId from customer_client where customerId=?)";
 		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, customer.getId());
 	}
+	@Override
+	public int updateStatusByid(Customer customer) {
+		String sql ="update customer set statusId=? where id=?";
+		return super.executeUpdate(sql, customer.getStatusId(),customer.getId());
+	}
 	
 	
 }

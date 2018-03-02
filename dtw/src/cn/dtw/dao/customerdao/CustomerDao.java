@@ -20,4 +20,6 @@ public interface CustomerDao {
 	Customer_client getClientBycust(Customer customer);
 	//根据客户公司id获取公司的所有联系人
 	List<Clientcontact> getAllContactIdByClientId(Customer customer);
+	//根据id修改客户公司绑定状态
+	int updateStatusByid(Customer customer);
 }

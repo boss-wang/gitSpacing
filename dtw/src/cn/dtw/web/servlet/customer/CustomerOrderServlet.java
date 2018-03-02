@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Clienttemp;
+import cn.dtw.entity.Clienttemp_customer;
 import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order;
@@ -16,8 +18,10 @@ import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
 import cn.dtw.service.OrderService;
+import cn.dtw.service.customerservice.ClienttempService;
 import cn.dtw.service.customerservice.CustomerOrderService;
 import cn.dtw.service.customerservice.CustomerService;
+import cn.dtw.service.customerservice.impl.ClientTempServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
@@ -31,7 +35,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	private CustomerService customerService = new CustomerServiceImpl();
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	private OrderService orderService = new OrderServiceImpl();
-	
+	private ClienttempService clientTempService = new  ClientTempServiceImpl();
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
@@ -69,4 +73,22 @@ public class CustomerOrderServlet extends BaseServlet {
 	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
 		
 	}
+	//绑定公司
+		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String clientName=req.getParameter("clientName");
+			String clientAddress=req.getParameter("clientAddress");
+			String customerId=req.getParameter("customerId");
+			Clienttemp clienttemp = new Clienttemp();
+			clienttemp.setClientName(clientName);
+			clienttemp.setClientAddress(clientAddress);
+			Clienttemp_customer clienttemp_customer =  new Clienttemp_customer();
+			clienttemp_customer.setCustomerId(Integer.parseInt(customerId));
+			int back= clientTempService.addClienttemp_customer(clienttemp_customer, clienttemp);
+			Object obj = req.getSession().getAttribute("customer");
+			Customer customer =(Customer)obj;
+			Customer cust = customerService.getCustomer(customer);
+			req.getSession().removeAttribute("customer");
+			req.getSession().setAttribute("customer",cust);
+			resp.getWriter().print(back);
+		}
 }
