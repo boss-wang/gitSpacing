@@ -22,4 +22,8 @@ public interface CustomerDao {
 	List<Clientcontact> getAllContactIdByClientId(Customer customer);
 	//根据id修改客户公司绑定状态
 	int updateStatusByid(Customer customer);
+	//查询客户信息及审核状态
+	public List<Customer> getCustomerList(int startRow,int pageSize);
+	//查询客户总条数
+	public int getCustomerCount();
 }

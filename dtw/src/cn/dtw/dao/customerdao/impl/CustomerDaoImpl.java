@@ -1,18 +1,21 @@
 package cn.dtw.dao.customerdao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
+import cn.dtw.dao.customerdao.ClienttempDao;
 import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
-	
+	private ClienttempDao clienttempDao = new ClienttempDaoImpl();
 	//注册
 	@Override
 	public int addCustomer(Customer customer) {
@@ -57,6 +60,25 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public int updateStatusByid(Customer customer) {
 		String sql ="update customer set statusId=? where id=?";
 		return super.executeUpdate(sql, customer.getStatusId(),customer.getId());
+	}
+	//查询客户信息及审核状态
+	@Override
+	public List<Customer> getCustomerList(int startRow, int pageSize) {
+		String sql = "select * from customer,clienttemp_customer where customer.id=clienttemp_customer.customerId order by statusId limit ?,?";
+		List<Customer> list = super.executeQuery(new BeanListHandler<Customer>(Customer.class), sql, startRow,pageSize);
+		List<Customer> customerList = new ArrayList<Customer>();
+		for(Customer customer:list) {
+			customer.setClientTemp(clienttempDao.getClienttempByCustomer(customer));
+			customerList.add(customer);
+		}
+		return customerList;
+	}
+	//查询客户总条数
+	@Override
+	public int getCustomerCount() {
+		String sql = "select count(1) as count from customer";
+		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql);
+		return rs.intValue();
 	}
 	
 	

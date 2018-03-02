@@ -62,5 +62,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Clientcontact> getAllContactIdByClientId(Customer customer) {
 		return customerDao.getAllContactIdByClientId(customer);
 	}
+	//查询客户信息及审核状态
+	@Override
+	public List<Customer> getCustomerList(int curPage, int pageSize) {
+		int startRow = (curPage-1)*pageSize;
+		return customerDao.getCustomerList(startRow, pageSize);
+	}
+	//查询客户总条数
+	@Override
+	public int getCustomerCount() {
+		return customerDao.getCustomerCount();
+	}
 
 }

@@ -13,13 +13,13 @@
                 <div class="tit">
                     <div class="col-md-3 col-xs-6" >
                         <div class="tile quick-stats">
-                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">供应商管理</h3>
+                            <h3 style="text-align: center;  background-color: rgba(0,0,0,0.15); padding: 10px; ">散客管理</h3>
                     	</div>
 					</div>
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1"  id="clientUpdate"  >
+        <table   border="1"  id="showCustomerApplication"  >
             	<tr id="" class="tit-mess3">
             		<td class="mess1"  style="width:150px;">联系人</td>
             		<td class="mess1"  style="width:160px;" >公司名</td>

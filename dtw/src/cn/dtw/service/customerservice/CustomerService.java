@@ -14,4 +14,8 @@ public interface CustomerService {
 		Customer getCustomer(Customer customer);
 	//根据客户公司id获取公司的所有联系人
 		List<Clientcontact> getAllContactIdByClientId(Customer customer);
+	//查询客户信息及审核状态
+		public List<Customer> getCustomerList(int curPage,int pageSize);
+	//查询客户总条数
+		public int getCustomerCount();
 }

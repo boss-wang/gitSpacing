@@ -7,7 +7,23 @@ private String loginPwd;
 private String tel;
 private String email;
 private int statusId;
+private Clienttemp clientTemp;
+private int clientExists;
 
+
+
+public Clienttemp getClientTemp() {
+	return clientTemp;
+}
+public void setClientTemp(Clienttemp clientTemp) {
+	this.clientTemp = clientTemp;
+}
+public int getClientExists() {
+	return clientExists;
+}
+public void setClientExists(int clientExists) {
+	this.clientExists = clientExists;
+}
 public int getStatusId() {
 	return statusId;
 }
