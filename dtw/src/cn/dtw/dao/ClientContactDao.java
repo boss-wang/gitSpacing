@@ -18,5 +18,7 @@ public interface ClientContactDao {
 	//删除联系人id和对应公司id
 	int deleClientIdAndClientContactId(Client_clientcontact client_clientcontact);
 	//根据客户id获取所有联系人id
-		List<Client_clientcontact> getAllContactIdByClientId(Client client);
+	List<Client_clientcontact> getAllContactIdByClientId(Client client);
+	//通过id获取联系人信息
+	public Clientcontact getClientContactById(int id);
 }

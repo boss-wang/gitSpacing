@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Order;
+import cn.dtw.entity.User;
 
 public interface CustomerOrderService {
 	//通过公司id查询订单信息(orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,cusStatus,cargoPiece,cargoWeight,cargoVolume,orderStatus)
@@ -16,4 +17,8 @@ public interface CustomerOrderService {
 	public List<Order> getOrderListByMawbNo(String mawbNo);
 	//添加订单(客户下单)
 	public boolean addCustomerOrder(Order order);
+	//查询订单条数
+	public int getOrderCount(User user);
+	//查询所有客户自助下单的订单列表（userId=0）
+	public List<Order> getOrderList(User user,int curPage,int pageSize);
 }

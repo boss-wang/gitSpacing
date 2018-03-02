@@ -138,7 +138,9 @@
 			});
 			$("#addRes").click(function() {
 				var currentPage = ${currentPage };
-				$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+				var backdo = "${param.backdo }";
+				var backmn = "${param.backmn}";
+				$("#home").load(backdo,"mn="+backmn+"&currentPage="+currentPage);
 			});
 			$("#addSub").click(function() {
 				$(".tip").text("");
@@ -171,9 +173,11 @@
 									"data":"mn=updateOrder&orderId="+orderId+"&"+content,
 									"success":function(res){
 										if(res==1){
+											var backdo = "${param.backdo }";
+											var backmn = "${param.backmn}";
 											$(".homeTip").text("修改成功！");
 											$(".homeTip").show(200);
-											$("#home").load("order.do","mn=showOrders&currentPage="+currentPage);
+											$("#home").load(backdo,"mn="+backmn+"&currentPage="+currentPage);
 											setTimeout(function(){
 												$(".homeTip").fadeOut(1000);
 											},1000);

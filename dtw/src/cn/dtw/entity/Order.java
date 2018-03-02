@@ -30,8 +30,21 @@ private OrderStatus orderStatus;	//订单状态
 private Terms terms;		//贸易条款
 private List<Order_cost> orderCostList;		//应收列表
 private List<Order_pay> orderPayList;	//应付列表
+private int orderClientContactId;	//客户自助下单时填写的联系人id
+private Clientcontact clientcontact;	//客户自助下单时填写的联系人
 
-
+public int getOrderClientContactId() {
+	return orderClientContactId;
+}
+public void setOrderClientContactId(int orderClientContactId) {
+	this.orderClientContactId = orderClientContactId;
+}
+public Clientcontact getClientcontact() {
+	return clientcontact;
+}
+public void setClientcontact(Clientcontact clientcontact) {
+	this.clientcontact = clientcontact;
+}
 public String getLoadingPort() {
 	return loadingPort;
 }

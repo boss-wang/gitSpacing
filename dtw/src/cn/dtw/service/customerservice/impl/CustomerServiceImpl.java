@@ -1,8 +1,11 @@
 package cn.dtw.service.customerservice.impl;
 
 
+import java.util.List;
+
 import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.service.customerservice.CustomerService;
 
@@ -53,6 +56,11 @@ public class CustomerServiceImpl implements CustomerService {
 			return null;
 		}
 		
+	}
+	//根据用户id查询其公司id 然后查出公司的所有联系人
+	@Override
+	public List<Clientcontact> getAllContactIdByClientId(Customer customer) {
+		return customerDao.getAllContactIdByClientId(customer);
 	}
 
 }

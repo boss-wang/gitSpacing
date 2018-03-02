@@ -151,7 +151,9 @@
 			//返回
 			$("#resPay").click(function(){
 				var currentPage=${currentPage };
-				$("#home").load("order.do","mn=showOrders&currentPage="+currentPage);
+				var backdo = "${param.backdo }";
+				var backmn = "${param.backmn}";
+				$("#home").load(backdo,"mn="+backmn+"&currentPage="+currentPage);
 			});
 			//保存添加
 			$("#addPay").click(function(){
@@ -184,9 +186,11 @@
 									"success":function(res){
 										if(res==1){
 											var currentPage=${currentPage };
+											var backdo = "${param.backdo }";
+											var backmn = "${param.backmn}";
 											$(".homeTip").text("添加成功！");
 											$(".homeTip").show(200);
-											$("#home").load("order.do","mn=showOrders&currentPage="+currentPage);
+											$("#home").load(backdo,"mn="+backmn+"&currentPage="+currentPage);
 											setTimeout(function(){
 												$(".homeTip").fadeOut(1000);
 											},1000);

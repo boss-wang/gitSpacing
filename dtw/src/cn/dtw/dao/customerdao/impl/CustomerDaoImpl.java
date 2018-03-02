@@ -3,10 +3,13 @@ package cn.dtw.dao.customerdao.impl;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerDao;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	
@@ -17,7 +20,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		return super.executeUpdate(sql,customer.getLoginName(),customer.getLoginPwd(),customer.getTel(),customer.getEmail(),customer.getStatusId());
 		
 	}
-	//查询
+	//登录查询
 	@Override
 	public Customer getCustomerByemail(Customer customer) {
 		String sql="select * from customer where email=?";
@@ -35,5 +38,21 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		String sql="select * from customer where tel=?";
 		return super.executeOneRow(new BeanHandler<Customer>(Customer.class), sql,  customer.getTel());
 	}
-
+	//根据下单人id查询客户公司id
+	@Override
+	public Customer_client getClientBycust(Customer customer) {
+		String sql="select * from customer_client where customerId=?";
+		return super.executeOneRow(new BeanHandler<Customer_client>(Customer_client.class), sql, customer.getId());
+	}
+	//根据客户公司id获取公司的所有联系人
+	@Override
+	public List<Clientcontact> getAllContactIdByClientId(Customer customer) {
+		String sql = "select clientContactEmail,clientcontact.clientContactId,clientContactName,clientContactQQ,clientContactTel "
+				+ "from clientcontact,client_clientcontact "
+				+ "where client_clientcontact.clientContactId=clientcontact.clientContactId "
+				+ "and clientId=(select clientId from customer_client where customerId=?)";
+		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, customer.getId());
+	}
+	
+	
 }

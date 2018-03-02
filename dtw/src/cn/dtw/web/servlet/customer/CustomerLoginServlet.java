@@ -89,8 +89,12 @@ public class CustomerLoginServlet extends BaseServlet {
 		int back= cusService.loginCustomer(customer);
 		if(back==1) {
 			Customer cust = cusService.getCustomer(customer);
-			req.getSession().setAttribute("customer", cust);
+			req.getSession().setAttribute("customer",cust);
 		}
 		resp.getWriter().print(back);
+	}
+	//移除session
+	protected void deleSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		req.getSession().removeAttribute("customer");
 	}
 }

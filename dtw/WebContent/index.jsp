@@ -43,7 +43,7 @@
 							<a title="关于大田" href="" class="menu">关于大田</a>
 							<ul style="display: none;">
 								<li>
-									<a title="公司简介" href="#abstract">公司简介</a>
+									<a title="公司简介" href="#abstract" id="compyprofile">公司简介</a>
 								</li>
 								
 							</ul>
@@ -52,10 +52,10 @@
 							<a title="服务项目" href="" class="menu">服务项目</a>
 							<ul style="display: none;">
 								<li>
-									<a title="城际快运" href="">快速下单</a>
+									<a title="城际快运" id="cost">快速下单</a>
 								</li>
 								<li>
-									<a title="贸易物流" href="">订单追踪</a>
+									<a title="贸易物流" class="selectorder">订单追踪</a>
 								</li>
 							
 							</ul>
@@ -67,7 +67,7 @@
 									<a title="行业新闻" id="tradeNews">行业新闻</a>
 								</li>
 								<li>
-									<a title="帮助支持" href="serviceTerms.html">帮助支持</a>
+									<a title="帮助支持" id="serviceTerms">帮助支持</a>
 								</li>
 							</ul>
 						</li>
@@ -124,7 +124,7 @@
 		<div class="index-about" id="homeDiv" >
 			<div class="container">
 				<div class="index-title">
-					<a href="#"  title="公司简介">公司简介</a>
+					<a id="compy"  title="公司简介">公司简介</a>
 				</div>
 				<div class="cont">
 
@@ -160,8 +160,8 @@
 						</a>
 					</div>
 					<dl>
-						<dt><a href="" target="_blank" title="快速下单">快速下单</a></dt>
-						<dt><a href="" target="_blank" title="订单追踪">订单追踪</a></dt>
+						<dt><a id="fastAddOrder" target="_blank" title="快速下单">快速下单</a></dt>
+						<dt><a class="selectorder" target="_blank" title="订单追踪">订单追踪</a></dt>
 						
 					</dl>
 				</div>
@@ -231,6 +231,7 @@
 		<script type="text/javascript" src="js/banner.js"></script>
 		<script type="text/javascript" src="js/slide.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
 		<!-- 自定义javascript框架区 ends -->
 		<script type="text/javascript">
 			$("#newsCenter").click(function(){
@@ -241,11 +242,55 @@
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
 			});
+			
+			$("#serviceTerms").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("serviceTerms.html");
+			});
 			$("#delesession").click(function(){
-				<%
-				request.getSession().removeAttribute("customer");
-				%>
-				window.location.href="<%=basePath%>index.jsp";
+				$.ajax({
+					url:"custlogin.do?mn=deleSession",
+					data:"",
+					type:"post",
+					success:function(res){
+						window.location.href="<%=basePath%>index.jsp";
+					}
+				})
+				
 			})
+			$(".selectorder").click(function(){
+				var status ='${customer.statusId}';
+				if(status=='1'){
+					window.location.href="#abstract";
+					$("#homeDiv").load("bangdinggongsi.jsp");
+				}else if(status=='3'){
+					window.location.href="#abstract";
+					$("#homeDiv").load("showMyOrder.jsp");
+				}else if(status=='2'){
+					alert("您绑定的公司正在审核中，通过即可下单");
+				}else{
+					window.location.href="<%=basePath%>login.jsp";
+				}
+				
+			});
+
+			$("#fastAddOrder,#cost").click(function(){
+				var status ='${customer.statusId}';
+				if(status=='1'){
+					window.location.href="#abstract";
+					$("#homeDiv").load("bangdinggongsi.jsp");
+				}else if(status=='3'){
+					window.location.href="#abstract";
+					$("#homeDiv").load("custorder.do","mn=goAddCustomerOrder");
+				}else if(status=='2'){
+					alert("您绑定的公司正在审核中，通过即可下单");
+				}else{
+					window.location.href="<%=basePath%>login.jsp";
+				}
+			});
+			$("#compyprofile").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("companyprofile.jsp");
+			});
 		</script>
 </html>

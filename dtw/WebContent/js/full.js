@@ -152,8 +152,8 @@
 						container.append('<div class="tp-loader"></div>');
 
 						// RESET THE TIMER
-						if (container.find('.tp-bannertimer').length==0) container.append('<div class="tp-bannertimer" style="visibility:hidden"></div>');
-						var bt=container.find('.tp-bannertimer');
+						if (container.find('tempAA').length==0) container.append('<div class="tp-bannertimer" style="visibility:hidden"></div>');
+						var bt=container.find('tempAA');
 						if (bt.length>0) {
 							bt.css({'width':'0%'});
 						};
@@ -251,7 +251,7 @@
 						container.data('conthover',1);
 						container.data('conthover-changed',1);
 						container.trigger('revolution.slide.onpause');
-						var bt = container.parent().find('.tp-bannertimer');
+						var bt = container.parent().find('tempAA');
 						bt.stop();
 
 					})
@@ -266,7 +266,7 @@
 						container.data('conthover',0);
 						container.data('conthover-changed',1);
 						container.trigger('revolution.slide.onresume');
-						var bt = container.parent().find('.tp-bannertimer');
+						var bt = container.parent().find('tempAA');
 						var opt = bt.data('opt');
 
 						bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -361,7 +361,7 @@
 		function restartBannerTimer(opt,container) {
 						opt.cd=0;
 						if (opt.videoplaying !=true) {
-							var bt=	container.find('.tp-bannertimer');
+							var bt=	container.find('tempAA');
 								if (bt.length>0) {
 									bt.stop();
 									bt.css({'width':'0%'});
@@ -380,7 +380,7 @@
 						swapSlide(container,opt);
 
 						// STOP TIMER AND RESCALE IT
-							var bt=	container.find('.tp-bannertimer');
+							var bt=	container.find('tempAA');
 							if (bt.length>0) {
 								bt.stop();
 								bt.css({'width':'0%'});
@@ -2595,7 +2595,7 @@
 				 function onPlayerStateChange(event) {
 					if (event.data == YT.PlayerState.PLAYING) {
 
-						var bt = $('body').find('.tp-bannertimer');
+						var bt = $('body').find('tempAA');
 						var opt = bt.data('opt');
 						bt.stop();
 						opt.videoplaying=true;
@@ -2603,7 +2603,7 @@
 
 					} else {
 
-						var bt = $('body').find('.tp-bannertimer');
+						var bt = $('body').find('tempAA');
 						var opt = bt.data('opt');
 						if (opt.conthover==0)
 							bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -2650,14 +2650,14 @@
 								froogaloop.addEvent('play', function(data) {
 									//$('#debug').html($('#debug').html()+" <br>Play"+Math.round(Math.random()*100));
 
-									var bt = $('body').find('.tp-bannertimer');
+									var bt = $('body').find('tempAA');
 									var opt = bt.data('opt');
 									bt.stop();
 									opt.videoplaying=true;
 								});
 
 								froogaloop.addEvent('finish', function(data) {
-										var bt = $('body').find('.tp-bannertimer');
+										var bt = $('body').find('tempAA');
 										var opt = bt.data('opt');
 										if (opt.conthover==0)
 											bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -2666,7 +2666,7 @@
 								});
 
 								froogaloop.addEvent('pause', function(data) {
-										var bt = $('body').find('.tp-bannertimer');
+										var bt = $('body').find('tempAA');
 										var opt = bt.data('opt');
 										if (opt.conthover==0)
 											bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -2691,14 +2691,14 @@
 						});
 
 						froogaloop.addEvent('play', function(data) {
-							var bt = $('body').find('.tp-bannertimer');
+							var bt = $('body').find('tempAA');
 							var opt = bt.data('opt');
 							bt.stop();
 							opt.videoplaying=true;
 						});
 
 						froogaloop.addEvent('finish', function(data) {
-								var bt = $('body').find('.tp-bannertimer');
+								var bt = $('body').find('tempAA');
 								var opt = bt.data('opt');
 								if (opt.conthover==0)
 									bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -2707,7 +2707,7 @@
 						});
 
 						froogaloop.addEvent('pause', function(data) {
-								var bt = $('body').find('.tp-bannertimer');
+								var bt = $('body').find('tempAA');
 								var opt = bt.data('opt');
 								if (opt.conthover==0)
 									bt.animate({'width':"100%"},{duration:((opt.delay-opt.cd)-100),queue:false, easing:"linear"});
@@ -3339,7 +3339,7 @@
 
 
 			if (opt.slideamount >1 && !(opt.stopAfterLoops==0 && opt.stopAtSlide==1) ) {
-					var bt=container.find('.tp-bannertimer');
+					var bt=container.find('tempAA');
 					if (bt.length>0) {
 						bt.css({'width':'0%'});
 						bt.animate({'width':"100%"},{duration:(opt.delay-100),queue:false, easing:"linear"});
@@ -3390,7 +3390,7 @@
 							// STOP TIMER IF NO LOOP NO MORE NEEDED.
 							if (opt.stopLoop=="on" && opt.next==opt.lastslidetoshow-1) {
 									clearInterval(opt.cdint);
-									container.find('.tp-bannertimer').css({'visibility':'hidden'});
+									container.find('tempAA').css({'visibility':'hidden'});
 									container.trigger('revolution.slide.onstop');
 							}
 
