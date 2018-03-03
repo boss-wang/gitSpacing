@@ -7,12 +7,18 @@ import java.util.List;
 
 import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.OrderDao;
+import cn.dtw.dao.customerdao.CustomerCostDao;
+import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
+import cn.dtw.dao.customerdao.impl.CustomerCostDaoImpl;
+import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
 import cn.dtw.dao.customerdao.impl.CustomerOrderImpl;
 import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.dao.impl.OrderDaoImpl;
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
@@ -23,12 +29,14 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	private OrderDao orderDao = new OrderDaoImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClientContactDao clientContactDao = new ClientContactDaoImpl();
-	private CustomerOrderDao customer = new CustomerOrderImpl();
+	private CustomerOrderDao customerOrderDao = new CustomerOrderImpl();
+	private CustomerDao customerDao = new CustomerDaoImpl();
+	private CustomerCostDao customerCostDao = new CustomerCostDaoImpl();
 	//通过公司id查询订单信息
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int curPage, int pageSize) {
 		int startRow = (curPage-1)*pageSize;
-		return customer.getOrderListByClientId(client, startRow, pageSize);
+		return customerOrderDao.getOrderListByClientId(client, startRow, pageSize);
 	}
 	//通过订单id查询订单信息
 	@Override
@@ -83,7 +91,17 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	//根据公司id查询订单条数
 	@Override
 	public int getOrderCount(Client client) {
-		return customer.getOrderCount(client);
+		return customerOrderDao.getOrderCount(client);
+	}
+	//通过网站下单人id查询订单信息及付款信息
+	@Override
+	public List<Order> getPayOrderByCustomerId(Customer customer, int curPage, int rowSize) {
+		Customer_client clientId=customerDao.getClientBycust(customer);
+		Client client = new Client();
+		client.setClientId(clientId.getClientId());
+		List<Order> list=customerOrderDao.getOrderListByClientId(client,  (curPage-1)*rowSize, rowSize);
+		
+		return null;
 	}
 
 }

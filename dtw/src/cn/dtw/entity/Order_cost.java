@@ -9,8 +9,15 @@ private String invoiceNo;
 private int costStatus;
 private Client client;
 private Order order;	//保存订单详细信息
+private CostStatus statusName;
 
 
+public CostStatus getStatusName() {
+	return statusName;
+}
+public void setStatusName(CostStatus statusName) {
+	this.statusName = statusName;
+}
 public Order getOrder() {
 	return order;
 }

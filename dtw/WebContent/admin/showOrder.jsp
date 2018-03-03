@@ -48,6 +48,7 @@
         left: 150px; 
         top: 0px; 
         width:260px;
+        height:170px;
         background-color:rgba(50,83,100,0.7);
 	}
 	.contactDiv p{
@@ -172,7 +173,7 @@
 									</p>
 								</div>
 								
-	            				<div class="contactDiv">
+	            				<div class="contactDiv" style="overflow-y:scroll;">
 		            				<c:forEach var="clientcontact" items="${orderCost.client.clientContactlist }">
 										<p>姓名：${clientcontact.clientContactName}</p>
 										<p>电话：${clientcontact.clientContactTel}</p>

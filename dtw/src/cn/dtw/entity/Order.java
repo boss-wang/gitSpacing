@@ -32,7 +32,14 @@ private List<Order_cost> orderCostList;		//应收列表
 private List<Order_pay> orderPayList;	//应付列表
 private int orderClientContactId;	//客户自助下单时填写的联系人id
 private Clientcontact clientcontact;	//客户自助下单时填写的联系人
+private Order_cost order_cost;
 
+public Order_cost getOrder_cost() {
+	return order_cost;
+}
+public void setOrder_cost(Order_cost order_cost) {
+	this.order_cost = order_cost;
+}
 public int getOrderClientContactId() {
 	return orderClientContactId;
 }
