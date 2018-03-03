@@ -2,17 +2,20 @@ package cn.dtw.service.impl;
 
 import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.impl.ClientContactDaoImpl;
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Customer;
 import cn.dtw.service.ClientContactService;
 
 public class ClientContactServiceImpl implements ClientContactService {
 	private ClientContactDao clientContact = new ClientContactDaoImpl();
+	//添加联系人并返回id
 	@Override
 	public int addClientContact(Clientcontact clientcontact) {
 		return clientContact.addClientContact(clientcontact);
 	}
-
+	//添加联系人id和对应公司id
 	@Override
 	public int addClientidAndClientContactId(int clientId, int contactId) {
 		return clientContact.addClientidAndClientContactId(clientId, contactId);
@@ -34,6 +37,15 @@ public class ClientContactServiceImpl implements ClientContactService {
 			return 0;
 		}
 		
+	}
+	//将绑定公司的客户添加到对应公司
+	@Override
+	public boolean addCustomerContact(Client client, Customer customer) {
+		Clientcontact clientcontact = new Clientcontact();
+		clientcontact.setClientContactEmail(customer.getEmail());
+		clientcontact.setClientContactTel(customer.getTel());
+		int contactId = this.addClientContact(clientcontact);
+		return this.addClientidAndClientContactId(client.getClientId(), contactId)>0?true:false;
 	}
 
 }

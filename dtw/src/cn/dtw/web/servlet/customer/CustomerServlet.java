@@ -9,12 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Leavemessage;
+import cn.dtw.service.ClientContactService;
 import cn.dtw.service.ClientService;
 import cn.dtw.service.LeaveMessageService;
 import cn.dtw.service.customerservice.CustomerService;
+import cn.dtw.service.customerservice.Customer_ClientService;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
+import cn.dtw.service.customerservice.impl.Customer_ClientServiceImpl;
+import cn.dtw.service.impl.ClientContactServiceImpl;
 import cn.dtw.service.impl.ClientServiceImpl;
 import cn.dtw.service.impl.LeaveMessageServiceImpl;
 import cn.dtw.web.servlet.BaseServlet;
@@ -26,6 +31,8 @@ public class CustomerServlet extends BaseServlet {
 	private CustomerService customerService = new CustomerServiceImpl();
 	private LeaveMessageService messageService = new LeaveMessageServiceImpl();
 	private ClientService clientService = new ClientServiceImpl();
+	private ClientContactService clientContactService = new ClientContactServiceImpl();
+	private Customer_ClientService customerClientService = new Customer_ClientServiceImpl();
 	//显示注册的客户
 	protected void showCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
@@ -65,12 +72,27 @@ public class CustomerServlet extends BaseServlet {
 		req.getRequestDispatcher("/admin/leaveMessage.jsp").forward(req, resp);
 	}
 	//同意绑定公司申请
-	protected void passBindingCompany(HttpServletRequest req, HttpServletResponse resp) {
+	protected void passBindingCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int customerId = Integer.parseInt(req.getParameter("customerId"));
 		String clientName = req.getParameter("clientName");
+		
 		Client client = new Client();
 		client.setClientName(clientName);
 		client = clientService.getClientByName(client);
-		
+		Customer customer = customerService.getCustomerByid(customerId);
+		//通过手机号码判断客户联系人是否存在，不存在则添加
+		boolean flag = false;
+		for(Clientcontact contact:client.getClientContactlist()) {
+			if(contact.getClientContactTel().equals(customer.getTel())) {
+				flag = true;
+			};
+		}
+		if(!flag) {
+			clientContactService.addCustomerContact(client, customer);
+		}
+		if(customerClientService.addCustomer_client(customer,client)) {
+			resp.getWriter().print(1);
+		};
+		resp.getWriter().close();
 	}
 }

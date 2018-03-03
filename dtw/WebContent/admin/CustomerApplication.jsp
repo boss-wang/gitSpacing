@@ -30,7 +30,7 @@
             	<c:forEach var="customer" items="${customerList }">
             		<tr  class="tit-mess3">
 	            		<td class="mess2">
-	            				<div class="ccName"><a class="nameContent" contactId="${customer.id }" >${customer.loginName }</a>
+	            				<div class="ccName"><a class="nameContent"  >${customer.loginName }</a>
 		            				<div class="messdiv">
 										<p>电话：${customer.tel }</p>
 										<p>邮箱：${customer.email }</p>
@@ -55,7 +55,7 @@
 	            				<a class="noApp">未申请</a>
 	            			</c:if>
 	            			<c:if test="${customer.statusId==1}">
-	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}">是&nbsp;&nbsp;</a>/
+	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}" customerId="${customer.id }">是&nbsp;&nbsp;</a>/
 	            				<a class="refuse">&nbsp;否</a> 
 	            			</c:if>
 	            			<c:if test="${customer.statusId==3}">
@@ -121,6 +121,7 @@
 			var clientAddress = $(this).attr("clientAddress");
 			var tempClientId = $(this).attr("tempClientId");
 			var clientExists = $(this).attr("clientExists");
+			var customerId = $(this).attr("customerId");
 			if(clientExists==0){
 				if(confirm("申请绑定的公司不存在，是否添加？")){
 					$("#home").load("/dtw/admin/addClient.jsp?currentPage="+currentPage+"&clientName="+clientName+"&clientAddress="+clientAddress+"&tempClientId="+tempClientId);

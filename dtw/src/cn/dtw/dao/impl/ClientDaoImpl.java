@@ -114,7 +114,11 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	@Override
 	public Client getClientByName(Client client) {
 		String  sql="select * from client where clientName=? ";
-		return super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
+		Client clientGet = super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
+		//添加客户联系人信息
+		List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
+		clientGet.setClientContactlist(clientContactList);
+		return clientGet;
 	}
 
 	//根据id查询客户信息（订单）
