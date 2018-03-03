@@ -80,6 +80,13 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql);
 		return rs.intValue();
 	}
+	//根据客户id查出客户所有信息
+	@Override
+	public Customer getCustomerByid(int customerId) {
+		// TODO Auto-generated method stub
+		String sql="SELECT loginName,loginPwd,tel,email,clientName,clientAddress FROM customer_client INNER JOIN customer ON customer.id=customer_client.customerId INNER JOIN client ON customer_client.clientId=client.clientId WHERE customer.id=?";
+		return super.executeOneRow(new BeanHandler<Customer>(Customer.class), sql, customerId);
+	}
 	
 	
 }

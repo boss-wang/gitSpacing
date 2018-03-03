@@ -26,4 +26,6 @@ public interface CustomerDao {
 	public List<Customer> getCustomerList(int startRow,int pageSize);
 	//查询客户总条数
 	public int getCustomerCount();
+	//根据客户id查出客户所有信息
+	public Customer getCustomerByid(int customerId);
 }
