@@ -7,6 +7,11 @@
 		display:inline-block;
 		border:none;
 	}
+	.messdiv{
+		overflow-y:scroll; 
+		left:100px;
+		background-color: rgba(50,83,100,0.9);
+	}
 </style>
 <body>
 		 <!-- 供应商管理 -->
@@ -19,18 +24,29 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1" id="clientUpdate" style="width: 600px; height: 30px"  >
-            	<tr id="" class="tit-mess3" style="padding:10px">
-            		<td class="mess1"  style="width:30px; height:10px">姓名</td>
-            		<td class="mess1"  style="width:70px; height:10px" >手机</td>
+        <table   border="1" id="clientUpdate" style="width: 600px; height: 330px"  >
+            	<tr id="" class="tit-mess3" >
+            		<td class="mess1"  style="width:100px; height:10px">姓名</td>
+            		<td   style="width:70px; height:10px ;padding:10px;" >手机</td>
             		<td class="mess1" style="width:120px; height:10px">留言内容</td>
-       
+            		
+       				<td  class="mess1"	>留言时间</td>
+       				
+       				<td  class="mess1">操作</td>
             	</tr> 
             	<c:forEach var="leavemessage" items="${messageList }">
             		<tr>
             			<td>${leavemessage.name }</td>
             			<td>${leavemessage.phoneNum }</td>
-            			<td>${leavemessage.message }
+            			<td>
+            			<div class="ccName">
+            			<a class="nameContent" >留言详情</a>
+            			<div class="messdiv">${leavemessage.message } </div>
+            			</div>
+            			</td>
+            			
+            			<td>${leavemessage.messageTime}</td>
+            			<td><a id="delmessage" modifyId="${leavemessage.id }">删除</a></td>
             		</tr>
             		 
             	</c:forEach>
@@ -41,6 +57,15 @@
             	</tr> 
         </table>  
 	<script type="text/javascript">
+	
+		$("#clientUpdate").on("mouseover", ".ccName", function() {
+			$(this).find(".nameContent").css("color", "yellow");
+			$(this).find(".messdiv").show();
+		});
+		$("#clientUpdate").on("mouseout", ".ccName", function() {
+			$(this).find(".nameContent").css("color", "white");
+			$(this).find(".messdiv").hide();
+		});
 		//分页
 		$("#firstPage").click(function(){
 			$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage=1");
@@ -74,6 +99,30 @@
 				$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage="+currentPage);
 			}
 
+		})
+		//删除留言
+		$("#clientUpdate").on("click","#delmessage",function(){
+			var messid=$(this).attr("modifyId");
+			var currentPage = ${currentPage };
+			if(confirm("确认删除？")){
+				$.ajax({
+					type:"post",
+					url:"leavamassage.do",
+					data:"mn=delLeaveMessage&messid="+messid,
+					success:function(res){
+						if(res==1){
+							$(".homeTip").text("删除成功！");
+							$(".homeTip").show(200);
+							$("#home").load("customer.do?mn=showCustomerLeaveMessage&currentPage="+currentPage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1500);
+							},1500);
+						}else{
+							alert("删除失败");
+						}
+					}
+				})
+			}
 		})
 	</script>
 	</body>

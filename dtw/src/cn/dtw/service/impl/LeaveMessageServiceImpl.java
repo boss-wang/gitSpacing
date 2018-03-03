@@ -35,4 +35,9 @@ public class LeaveMessageServiceImpl implements LeaveMessageService {
 		return totalPage;
 	}
 
+	@Override
+	public int delMessageByid(Leavemessage leavemessage) {
+		return lmDao.delMessageByid(leavemessage);
+	}
+
 }

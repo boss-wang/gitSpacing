@@ -11,4 +11,6 @@ public interface LeaveMessageDao {
 	public List<Leavemessage> showMessage(int startsize,int rowsize);
 	//留言总数
 	int getAllTotal();
+	//删除留言
+	int delMessageByid(Leavemessage leavemessage);
 }

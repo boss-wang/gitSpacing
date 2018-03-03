@@ -5,7 +5,14 @@ private int id;
 private String name;
 private String phoneNum;
 private String message;
+private String messageTime;
 
+public String getMessageTime() {
+	return messageTime;
+}
+public void setMessageTime(String messageTime) {
+	this.messageTime = messageTime;
+}
 public int getId(){
 	return id;
 }
