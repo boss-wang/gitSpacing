@@ -116,8 +116,8 @@
 
 		});
 		//添加客户公司
-		$("#clientUpdate").on("mouseover",".ccName",function(){
+		$("#clientUpdate").on("mouseover",".addCC",function(){
 			
-		}
+		});
 	</script>
 	</body>
