@@ -118,7 +118,7 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.getSession().setAttribute("customer",cust);
 			resp.getWriter().print(back);
 		}
-		//显示客户自助下单的列表（员工可查看）
+		//显示客户自助下单的列表（客户查看）
 		protected void showCustomerOrdersByClientId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String curPage = req.getParameter("currentPage");
 			int currentPage;

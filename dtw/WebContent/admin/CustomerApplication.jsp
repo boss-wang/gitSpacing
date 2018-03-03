@@ -41,20 +41,20 @@
 	            		<td class="mess2">${customer.clientTemp.clientAddress}</td>
 	            		
 	            		<td class="mess2">
-	           	 			<c:if test="${customer.statusId!=1}">
+	           	 			<c:if test="${customer.statusId==1}">
 	            				<c:if test="${customer.clientExists==0}">
 	            					<a class="addCC" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}">无此公司，点击添加</a>
 	            				</c:if>
-	            			</c:if>
-	            			<c:if test="${customer.clientExists==1}">
-	            				已存在
+	            				<c:if test="${customer.clientExists==1}">
+	            					已存在
+	            				</c:if>
 	            			</c:if>
 	            		</td>
 	            		<td class="mess2">
-	            			<c:if test="${customer.statusId==1}">
+	            			<c:if test="${customer.statusId==2}">
 	            				<a class="noApp">未申请</a>
 	            			</c:if>
-	            			<c:if test="${customer.statusId==2}">
+	            			<c:if test="${customer.statusId==1}">
 	            				<c:if test="${customer.clientExists==1}">
 	            					<a class="pass">未审核，点击通过</a>
 	            				</c:if>
@@ -83,11 +83,11 @@
 		});
 		//分页
 		$("#firstPage").click(function(){
-			$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
+			$("#home").load("customer.do?mn=showCustomerApplication&currentPage=1");
 		})
 		$("#lastPage").click(function(){
 			var totalPage = ${totalPage };
-			$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
+			$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+totalPage);
 		})
 		$("#prePage").click(function(){
 			var currentPage = ${currentPage }-1;
@@ -98,7 +98,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+currentPage);
 			}
 		})
 		$("#nextPage").click(function(){
@@ -111,13 +111,16 @@
 						$(".homeTip").fadeOut(1000);
 					},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+currentPage);
 			}
 
 		});
 		//添加客户公司
-		$("#clientUpdate").on("mouseover",".addCC",function(){
-			
+		$("#clientUpdate").on("click",".addCC",function(){
+			var clientName = $(this).attr("clientName");
+			var clientAddress = $(this).attr("clientAddress");
+			var currentPage = ${currentPage };
+			$("#home").load("/dtw/admin/addClient.jsp?currentPage="+currentPage+"&clientName="+clientName+"&clientAddress="+clientAddress);
 		});
 	</script>
 	</body>

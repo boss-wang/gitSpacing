@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<body>
 		  <!-- 添加客户 -->
                 <div class="tit">
@@ -31,13 +32,18 @@
         </form>  
         
 	<script type="text/javascript">
+		$(function(){
+			var clientName = "${param.clientName }";
+			var clientAddress = "${param.clientAddress }";
+			$("#clientName").val(clientName);
+			$("#clientAddress").val(clientAddress);
+		});
 		$("#addRes").click(function(){
 			$(".tip").text("");
 			$("#clientName").focus();
 		});
 		$("#addSub").click(function(){
 			$(".tip").text("");
-			
 			var clientName = $("#clientName").val();
 			var clientAddress = $("#clientAddress").val();
 			if(clientName==""||clientName==null){
@@ -59,7 +65,12 @@
 						}else if(res==1){
 							$(".homeTip").text("添加成功");
 							$(".homeTip").show(200);
-							$("#home").load("client.do?mn=showClient");
+							var currentPage = ${param.currentPage };
+							if(currentPage==null||currentPage==""){
+								$("#home").load("client.do?mn=showClient");
+							}else{
+								$("#home").load("customer.do","mn=showCustomerApplication&currentPage="+currentPage);
+							}
 							setTimeout(function(){
 								$(".homeTip").fadeOut(1000);
 							},1000);

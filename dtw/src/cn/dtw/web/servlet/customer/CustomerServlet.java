@@ -22,6 +22,7 @@ public class CustomerServlet extends BaseServlet {
 	private static final long serialVersionUID = 335282468601497196L;
 	private CustomerService customerService = new CustomerServiceImpl();
 	private LeaveMessageService messageService = new LeaveMessageServiceImpl();
+	//显示注册的客户
 	protected void showCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
