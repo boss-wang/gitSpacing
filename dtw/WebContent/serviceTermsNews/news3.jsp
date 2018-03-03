@@ -15,11 +15,7 @@
 <li><img src="images/side-cate.png">    <a class="selectorder" title="订单追踪">订单追踪</a></li>
 </ul>
 </div>
-<<<<<<< HEAD
-<div class="s-contact-title"><a class="contactus" title="联系我们" style="color: white;">联系我们</a></div>
-=======
 <div class="s-contact-title"><a class="contactUs" title="联系我们" style="color: white;">联系我们</a></div>
->>>>>>> branch 'master' of https://github.com/boss-wang/gitSpacing.git
 <div><img src="images/side-contact.jpg"></div>
     </div>
 
@@ -63,11 +59,7 @@ $(".serviceTerms").click(function() {
 	$("#homeDiv").load("serviceTerms.html");
 });
 
-<<<<<<< HEAD
-$(".contactus").click(function() {
-=======
 $(".contactUs").click(function() {
->>>>>>> branch 'master' of https://github.com/boss-wang/gitSpacing.git
 	$("#homeDiv").load("contactUs.jsp");
 });
 $(".selectorder").click(function(){
