@@ -11,6 +11,27 @@
  		span{
  		color:red;
  		}
+ 			.findClient{	
+				        position: absolute;
+					    z-index: 10;
+					    top: 107px;
+					    left: 482px;
+					    border: 1px solid rebeccapurple;
+					}
+					.holder{
+						display: block;
+						margin: 0px;
+						text-indent: 10px;
+						height: 30px;
+						 width: 302px;
+						line-height: 30px;
+						background-color:white ;
+			}
+			.holder:hover{
+				text-decoration:none;
+				background:silver;
+				color:black;
+			}
 </style>
 	<body>
 		<a name="abstract"></a>
@@ -24,6 +45,7 @@
 						<div id="" style="height: 30px;margin-left:393px;">
 							<h3 style="display: inline-block;color: #555555;">公司名称:</h3>
 							<input style="width:300px;height: 24px; margin-left: 5px;" id="clientName" placeholder="请输入公司名称" />
+							<div class="findClient"></div>
 							<span></span>
 						</div>
 						<div id="" style="height: 120px;margin-left:393px;margin-top: 10px;">
@@ -76,6 +98,31 @@
 				})
 			}
 		})
+		$("#clientName").keyup(function(){
+				$(".findClient").empty();
+				var clientName = $(this).val();
+				if(clientName!=""&&clientName!=null){
+					$.ajax({
+						url:"client.do",
+						type:"post",
+						data:"mn=findClient&clientName="+clientName,
+						success:function(res){
+							var clientJson = JSON.parse(res);
+							for(var i=0;i<clientJson.length;i++){
+								var holder = $('<a class="holder" address="'+clientJson[i].clientAddress+'" >'+clientJson[i].clientName+'</a>');
+								$(".findClient").append(holder);
+							}
+						}
+					});
+				}
+			});
+		$(".findClient").on("click",".holder",function(){
+			var name = $(this).text();
+			var address =$(this).attr("address");
+			$("#clientName").val(name);
+			$("#clientAddress").val(address);
+			$(".findClient").empty();
+		});
 	</script>
 
 	</body>
