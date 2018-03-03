@@ -30,10 +30,15 @@ public class ClientTempServiceImpl implements ClienttempService {
 		}
 		Customer customer = new Customer();
 		customer.setId(clienttemp_customer.getCustomerId());
-		customer.setStatusId(2);
+		customer.setStatusId(1);
 		customerDao.updateStatusByid(customer);
 		clientTemp.addClienttemp_customer(clienttemp_customer);
 		return 1;
+	}
+	//修改临时公司存在状态
+	@Override
+	public boolean updateExists(Clienttemp_customer clienttemp_customer, int existsStatus) {
+		return clientTemp.updateExists(clienttemp_customer, existsStatus);
 	}
 	
 

@@ -4,6 +4,14 @@ public class Clienttemp_customer {
 	private int customerId;
 	private  int clientId;
 	private int clientExists;//0:不存在，1:存在
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}

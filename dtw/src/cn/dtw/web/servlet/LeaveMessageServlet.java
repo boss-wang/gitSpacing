@@ -27,4 +27,12 @@ public class LeaveMessageServlet extends BaseServlet {
 		int rs = lms.addMessage(lm);
 		resp.getWriter().print(rs);
 	}
+	//删除留言
+	protected void delLeaveMessage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String messid=req.getParameter("messid");
+		Leavemessage message = new Leavemessage();
+		message.setId(Integer.parseInt(messid));
+		int back= lms.delMessageByid(message);
+		resp.getWriter().print(back);
+	}
 }

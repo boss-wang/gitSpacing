@@ -144,7 +144,11 @@
 			<div class="container clearfix">
 				<div class="cont">
 					<div class="pic">
+<<<<<<< HEAD
 						<a class="tradeNews" title="行业新闻">
+=======
+						<a href="tradeNews.jsp" title="行业新闻">
+>>>>>>> branch 'master' of https://github.com/boss-wang/gitSpacing.git
 							<IMG src="images/homepage/index-pic1.jpg">
 						</a>
 					</div>
@@ -171,7 +175,11 @@
 				</div>
 				<div class="cont last">
 					<div class="pic">
+<<<<<<< HEAD
 						<a class="serviceTerms" title="帮助支持">
+=======
+						<a href="serviceTerms.jsp" title="帮助支持">
+>>>>>>> branch 'master' of https://github.com/boss-wang/gitSpacing.git
 							<IMG src="images/homepage/index-pic3.jpg">
 						</a>
 					</div>
@@ -238,16 +246,16 @@
 		<script type="text/javascript">
 			$("#newsCenter").click(function(){
 				window.location.href="#abstract";
-				$("#homeDiv").load("tradeNews.html");
+				$("#homeDiv").load("tradeNews.jsp");
 			});
 			$(".tradeNews").click(function(){
 				window.location.href="#abstract";
-				$("#homeDiv").load("tradeNews.html");
+				$("#homeDiv").load("tradeNews.jsp");
 			});
 			
 			$(".serviceTerms").click(function(){
 				window.location.href="#abstract";
-				$("#homeDiv").load("serviceTerms.html");
+				$("#homeDiv").load("serviceTerms.jsp");
 			});
 			$("#delesession").click(function(){
 				$.ajax({
@@ -262,13 +270,13 @@
 			})
 			$(".selectorder").click(function(){
 				var status ='${customer.statusId}';
-				if(status=='1'){
+				if(status=='2'){
 					window.location.href="#abstract";
 					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else if(status=='3'){
 					window.location.href="#abstract";
 					$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId");
-				}else if(status=='2'){
+				}else if(status=='1'){
 					alert("您绑定的公司正在审核中，通过即可下单");
 				}else{
 					window.location.href="<%=basePath%>login.jsp";
@@ -278,13 +286,13 @@
 
 			$("#fastAddOrder,.cost").click(function(){
 				var status ='${customer.statusId}';
-				if(status=='1'){
+				if(status=='2'){
 					window.location.href="#abstract";
 					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else if(status=='3'){
 					window.location.href="#abstract";
 					$("#homeDiv").load("custorder.do","mn=goAddCustomerOrder");
-				}else if(status=='2'){
+				}else if(status=='1'){
 					alert("您绑定的公司正在审核中，通过即可下单");
 				}else{
 					window.location.href="<%=basePath%>login.jsp";
@@ -308,23 +316,23 @@
 			});
 			
 			$(".news3-news1").click(function() {
-				$("#homeDiv").load("news3/news1.html");
+				$("#homeDiv").load("news3/news1.jsp");
 			});
 
 			$(".news3-news2").click(function() {
-				$("#homeDiv").load("news3/news2.html");
+				$("#homeDiv").load("news3/news2.jsp");
 			});
 
 			$(".news3-news3").click(function() {
-				$("#homeDiv").load("news3/news3.html");
+				$("#homeDiv").load("news3/news3.jsp");
 			});
 
 			$(".news3-news4").click(function() {
-				$("#homeDiv").load("news3/news4.html");
+				$("#homeDiv").load("news3/news4.jsp");
 			});
 			
 			$(".news2-news12").click(function() {
-				$("#homeDiv").load("news2/news12.html");
+				$("#homeDiv").load("news2/news12.jsp");
 			});
 			$("#contactUs").click(function(){
 				window.location.href="#abstract";

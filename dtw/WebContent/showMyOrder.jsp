@@ -19,6 +19,7 @@
 			}
 			#pageTip{
 				position:absolute;
+				display:none;
 				border-radius:6px;
 				top:52px;
 				left:500px;

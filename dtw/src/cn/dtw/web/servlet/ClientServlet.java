@@ -14,8 +14,11 @@ import com.alibaba.fastjson.JSON;
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Clienttemp_customer;
 import cn.dtw.service.ClientContactService;
 import cn.dtw.service.ClientService;
+import cn.dtw.service.customerservice.ClienttempService;
+import cn.dtw.service.customerservice.impl.ClientTempServiceImpl;
 import cn.dtw.service.impl.ClientContactServiceImpl;
 import cn.dtw.service.impl.ClientServiceImpl;
 @WebServlet("/client.do")
@@ -25,14 +28,22 @@ public class ClientServlet extends BaseServlet {
 	private ClientService clientserv = new ClientServiceImpl(); 
 	private ClientService serv = new ClientServiceImpl();
 	private ClientContactService clientconserv = new ClientContactServiceImpl();
+	private ClienttempService clientTemp = new ClientTempServiceImpl();
 	//添加客户
 	protected void addClient(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String clientName = req.getParameter("clientName");
 		String clientAddress = req.getParameter("clientAddress");
+		String tempClientIdStr = req.getParameter("tempClientId");
 		Client client = new  Client ();
 		client.setClientName(clientName);
 		client.setClientAddress(clientAddress);
 		int  back=	serv.addClient(client);
+		if(tempClientIdStr!=""&&back!=0) {
+			int tempClientId = Integer.parseInt(tempClientIdStr);
+			Clienttemp_customer clienttemp_customer = new Clienttemp_customer();
+			clienttemp_customer.setClientId(tempClientId);
+			clientTemp.updateExists(clienttemp_customer, 1); //修改存在状态为1，表示已经存在
+		}
 		resp.getWriter().print(back);
 	}
 	//查询所有客户

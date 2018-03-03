@@ -176,13 +176,14 @@ img {
 #nav .mainlevel ul {
 	display: none;
 	position: absolute;
-	top: 80px;
+	top: 55px;
 	left: 0px;
 	z-index: 99999;
 	float: left;
 	width: 120px;
 	overflow: hidden;
 	font-size: 14px;
+	background-color: darkblue;
 }
 
 #nav .mainlevel li {

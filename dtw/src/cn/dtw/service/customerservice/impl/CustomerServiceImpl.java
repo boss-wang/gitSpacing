@@ -79,5 +79,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer_client getClientBycust(Customer customer) {
 		return customerDao.getClientBycust(customer);
 	}
+	//根据客户id查出客户所有信息
+	@Override
+	public Customer getCustomerByid(int customerId) {
+		// TODO Auto-generated method stub
+	}
 
 }

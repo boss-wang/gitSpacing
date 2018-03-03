@@ -82,7 +82,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		String weight=req.getParameter("weight");
 		String volume=req.getParameter("volume");
 		String typetrading=req.getParameter("typetrading");
-		String contact=req.getParameter("contact");
+		int contactId=Integer.parseInt(req.getParameter("contactId"));
 		String customerId=req.getParameter("customerId");
 		Order order = new Order();
 		order.setDepartDate(departDate);
@@ -92,6 +92,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		order.setCargoWeight(Double.parseDouble(weight));
 		order.setCargoVolume(Double.parseDouble(volume));
 		order.setTermsId(Integer.parseInt(typetrading));
+		order.setOrderClientContactId(contactId);
 		Customer customer = new Customer();
 		customer.setId(Integer.parseInt(customerId));
 		Customer_client custClient= customerService.getClientBycust(customer);
@@ -99,7 +100,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		boolean back=customerOrderService.addCustomerOrder(order);
 		resp.getWriter().print(back);
 	}
-	//绑定公司
+	//申请绑定公司
 		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String clientName=req.getParameter("clientName");
 			String clientAddress=req.getParameter("clientAddress");
@@ -117,7 +118,7 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.getSession().setAttribute("customer",cust);
 			resp.getWriter().print(back);
 		}
-		//显示客户自助下单的列表（员工可查看）
+		//显示客户自助下单的列表（客户查看）
 		protected void showCustomerOrdersByClientId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String curPage = req.getParameter("currentPage");
 			int currentPage;

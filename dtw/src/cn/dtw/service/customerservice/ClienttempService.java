@@ -7,4 +7,6 @@ import cn.dtw.entity.Customer;
 public interface ClienttempService {
 	//添加临时公司id和对应客户id,同时判断是否存在，修改绑定状态
 	int addClienttemp_customer(Clienttemp_customer clienttemp_customer ,Clienttemp clienttemp);
+	//修改临时公司存在状态
+	public boolean updateExists(Clienttemp_customer clienttemp_customer,int existsStatus);
 }

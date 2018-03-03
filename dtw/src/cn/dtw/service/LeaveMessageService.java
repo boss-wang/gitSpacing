@@ -11,4 +11,6 @@ public interface LeaveMessageService {
 	public List<Leavemessage> showMessage(int pageCode,int pageSize);
 	//总页数
 	int getAllTotalPage(int rowsize);
+	//删除留言
+		int delMessageByid(Leavemessage leavemessage);
 }
