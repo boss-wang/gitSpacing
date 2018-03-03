@@ -150,13 +150,14 @@ img {
 	text-align: center;
 	position: relative;
 	z-index: 99;
+	text-align: center;
 }
 
 #nav .mainlevel a {
 	color: #555;
 	text-decoration: none;
 	line-height: 80px;
-	
+	text-align: center;
 }
 
 #nav .mainlevel a:hover {
