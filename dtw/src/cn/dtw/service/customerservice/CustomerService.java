@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 
 public interface CustomerService {
 	//注册
@@ -18,4 +19,7 @@ public interface CustomerService {
 		public List<Customer> getCustomerList(int curPage,int pageSize);
 	//查询客户总条数
 		public int getCustomerCount();
+	//根据下单人id查询客户公司id
+		Customer_client getClientBycust(Customer customer);
+		
 }

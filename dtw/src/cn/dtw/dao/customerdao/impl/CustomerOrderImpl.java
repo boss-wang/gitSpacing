@@ -3,6 +3,7 @@ package cn.dtw.dao.customerdao.impl;
 import java.util.List;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
@@ -14,7 +15,7 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 	//通过公司id查询订单信息(orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId)
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int starPage, int pageSize) {
-		String sql="SELECT orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId,loadingPort FROM `order` WHERE clientId=? limit ?,?";
+		String sql="SELECT orderNo,mawbNo,hawbNo,termsId,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId,loadingPort FROM `order` WHERE clientId=? order by departDate desc limit ?,?";
 		Object[] params= {client.getClientId(),starPage,pageSize};
 		return super.executeQuery(new BeanListHandler<Order>(Order.class), sql, params);
 	}
@@ -39,10 +40,17 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 	//添加订单(客户下单)
 	@Override
 	public boolean addCustomerOrder(Order order) {
-		String sql="INSERT INTO `order`(clientId,destination,cargoPiece,cargoWeight,cargoVolume,termsId,loadingPort) VALUES(?,?,?,?,?,?,?);";
-		Object[] params= {order.getClientId(),order.getDestination(),order.getCargoPiece(),order.getCargoWeight(),order.getCargoVolume(),order.getTermsId(),order.getLoadingPort()};
+		String sql="INSERT INTO `order`(clientId,orderNo,destination,departDate,cargoPiece,cargoWeight,cargoVolume,termsId,loadingPort) VALUES(?,?,?,?,?,?,?,?,?);";
+		Object[] params= {order.getClientId(),order.getOrderNo(),order.getDestination(),order.getDepartDate(),order.getCargoPiece(),order.getCargoWeight(),order.getCargoVolume(),order.getTermsId(),order.getLoadingPort()};
 		int result=super.executeUpdate(sql, params);
 		return result>0?true:false;
+	}
+	//根据公司id查询订单条数
+	@Override
+	public int getOrderCount(Client client) {
+		String sql = "select count(1) as count from `order` where clientId=?";
+		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql, client.getClientId());
+		return rs.intValue();
 	}
 
 }

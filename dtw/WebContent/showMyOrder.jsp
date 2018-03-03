@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +10,20 @@
 			#myOrderTable tr{
 				text-align:center;
 			}
+			#myOrderTable tr td{
+				padding-top:10px;
+				padding-bottom:10px;
+			}
 			#myOrderTable tr:nth-child(odd) {
 				background:rgba(0,0,0,0.1);
+			}
+			#pageTip{
+				position:absolute;
+				border-radius:6px;
+				top:52px;
+				left:500px;
+				padding:3px 10px 3px 10px;
+				background:rgba(89,154,222,1);
 			}
 		</style>
 		
@@ -24,6 +37,7 @@
 						<a href="#"  title="公司简介">查看订单</a>
 					</div>
 				</caption>
+				<div id="pageTip"></div>
 				<center>
 					<table id="myOrderTable"  width="100%">
 						
@@ -41,84 +55,74 @@
 							<th><span>订单状态</span></th>
 							
 						</tr>
-						<tr>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td>11</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
+						<c:forEach var="order" items="${orderList }">
+							<tr>
+							<td>${order.orderNo }</td>
+							<td>${order.mawbNo }</td>
+							<td>${order.hawbNo }</td>
+							<td>${order.departDate }</td>
+							<td>${order.arriveDate }</td>
+							<td>${order.destination }</td>
+							<td>
+								<c:forEach var="terms" items="${termsList }">
+									<c:if test="${terms.id==order.termsId }">${terms.code }</c:if>
+								</c:forEach>
+							</td>
+							<td>${order.cargoPiece }</td>
+							<td>${order.cargoWeight }</td>
+							<td>${order.cargoVolume }</td>
+							<td>
+								<c:forEach var="status" items="${statusList }">
+									<c:if test="${status.statusId==order.statusId }">${status.statusDescription }</c:if>
+								</c:forEach>
+							</td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>22</td>
-							<td>22</td>
-							<td>22</td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							
-						</tr>
+						</c:forEach>
 						
-						
+						<tr style="height:50px;">
+            				<td  colspan="11"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
+          			    </tr> 
 					</table>
 				</center>
 				<!--cont end-->
 		
 			<!--container end-->
 		</div>
-		
 </body>
+<script type="text/javascript">
+	//分页
+	$("#firstPage").click(function(){
+		$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage=1");
+	});
+	$("#lastPage").click(function(){
+		var totalPage = ${totalPage };
+		$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+totalPage);
+	});
+	$("#prePage").click(function(){
+		var currentPage = ${currentPage }-1;
+		if(currentPage==0){
+			$("#pageTip").text("已经是第一页了");
+			$("#pageTip").show(200);
+			setTimeout(function(){
+				$("#pageTip").fadeOut(1000);
+			},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+currentPage);
+		}
+	});
+	$("#nextPage").click(function(){
+		var totalPage = ${totalPage }+1;
+		var currentPage = ${currentPage }+1;
+		if(totalPage==currentPage){
+				$("#pageTip").text("已经是最后一页了");
+				$("#pageTip").show(200);
+				setTimeout(function(){
+					$("#pageTip").fadeOut(1000);
+				},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId&currentPage="+currentPage);
+		}
+	
+	});
+</script>
 </html>

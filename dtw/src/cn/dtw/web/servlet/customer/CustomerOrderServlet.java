@@ -8,12 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Clienttemp;
 import cn.dtw.entity.Clienttemp_customer;
 import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
+import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
+import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
@@ -36,6 +39,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClienttempService clientTempService = new  ClientTempServiceImpl();
+	//显示客户自助下单的列表（员工可查看）
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
@@ -70,8 +74,30 @@ public class CustomerOrderServlet extends BaseServlet {
 		}
 	}
 	//保存下单
-	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) {
-		
+	protected void addCustomerOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String departDate=req.getParameter("departDate");
+		String loadingPort=req.getParameter("loadingPort");
+		String destination=req.getParameter("destination");
+		String cargoPiece=req.getParameter("cargoPiece");
+		String weight=req.getParameter("weight");
+		String volume=req.getParameter("volume");
+		String typetrading=req.getParameter("typetrading");
+		String contact=req.getParameter("contact");
+		String customerId=req.getParameter("customerId");
+		Order order = new Order();
+		order.setDepartDate(departDate);
+		order.setLoadingPort(loadingPort);
+		order.setDestination(destination);
+		order.setCargoPiece(cargoPiece);
+		order.setCargoWeight(Double.parseDouble(weight));
+		order.setCargoVolume(Double.parseDouble(volume));
+		order.setTermsId(Integer.parseInt(typetrading));
+		Customer customer = new Customer();
+		customer.setId(Integer.parseInt(customerId));
+		Customer_client custClient= customerService.getClientBycust(customer);
+		order.setClientId(custClient.getClientId());
+		boolean back=customerOrderService.addCustomerOrder(order);
+		resp.getWriter().print(back);
 	}
 	//绑定公司
 		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -90,5 +116,32 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.getSession().removeAttribute("customer");
 			req.getSession().setAttribute("customer",cust);
 			resp.getWriter().print(back);
+		}
+		//显示客户自助下单的列表（员工可查看）
+		protected void showCustomerOrdersByClientId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String curPage = req.getParameter("currentPage");
+			int currentPage;
+			Customer customer = (Customer)req.getSession().getAttribute("customer");
+			Customer_client customer_client = customerService.getClientBycust(customer);
+			Client client = new Client();
+			client.setClientId(customer_client.getClientId());
+			int totalRow = customerOrderService.getOrderCount(client);
+			int totalPage = totalRow%6==0?totalRow/6:totalRow/6+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Order> orderList = customerOrderService.getOrderListByClientId(client, currentPage, 6);
+			List<OrderStatus> statusList = orderService.getAllStatus();
+			List<Terms> termsList = orderService.getAllTerms();
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("totalPage", totalPage);
+			req.setAttribute("orderList", orderList);
+			req.setAttribute("statusList", statusList);
+			req.setAttribute("termsList", termsList);
+			req.getRequestDispatcher("/showMyOrder.jsp").forward(req, resp);
 		}
 }

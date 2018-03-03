@@ -267,7 +267,7 @@
 					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else if(status=='3'){
 					window.location.href="#abstract";
-					$("#homeDiv").load("showMyOrder.jsp");
+					$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId");
 				}else if(status=='2'){
 					alert("您绑定的公司正在审核中，通过即可下单");
 				}else{
