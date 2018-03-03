@@ -42,15 +42,17 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//分页查询客户信息
 	@Override
 	public List<Client> getAllClient(int startPage, int rowsize) {
-		String sql ="select * from client limit ?,?";
+		String sql ="select * from client order by clientId desc limit ?,?";
 		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,startPage,rowsize);
 		List<Client> clientList = new ArrayList<Client>();
-		for(Client client:list) {
-			//添加客户联系人信息
-			List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
-			clientContactList=this.getClientcontact(client);
-			client.setClientContactlist(clientContactList);
-			clientList.add(client);
+		if(list!=null) {
+			for(Client client:list) {
+				//添加客户联系人信息
+				List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
+				clientContactList=this.getClientcontact(client);
+				client.setClientContactlist(clientContactList);
+				clientList.add(client);
+			}
 		}
 		return clientList;
 	}
@@ -115,9 +117,11 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	public Client getClientByName(Client client) {
 		String  sql="select * from client where clientName=? ";
 		Client clientGet = super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
-		//添加客户联系人信息
-		List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
-		clientGet.setClientContactlist(clientContactList);
+		if(clientGet!=null) {
+			//添加客户联系人信息
+			List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
+			clientGet.setClientContactlist(clientContactList);
+		}
 		return clientGet;
 	}
 
@@ -133,9 +137,11 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	public Client getClienttext(Client client) {
 		String sql ="select * from client where clientId=?";
 		Client clientGet = super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientId());
-		//添加客户联系人信息
-		List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
-		clientGet.setClientContactlist(clientContactList);
+		if(clientGet!=null) {
+			//添加客户联系人信息
+			List<Clientcontact> clientContactList = this.getClientcontact(clientGet);
+			clientGet.setClientContactlist(clientContactList);
+		}
 		return clientGet;
 	}
 }

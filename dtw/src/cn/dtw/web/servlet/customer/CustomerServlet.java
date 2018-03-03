@@ -90,8 +90,11 @@ public class CustomerServlet extends BaseServlet {
 		if(!flag) {
 			clientContactService.addCustomerContact(client, customer);
 		}
+		//绑定客户id到对应的公司id
 		if(customerClientService.addCustomer_client(customer,client)) {
-			resp.getWriter().print(1);
+			if(customerService.updateCustomerStatus(customer, 3)) {
+				resp.getWriter().print(1);
+			}
 		};
 		resp.getWriter().close();
 	}

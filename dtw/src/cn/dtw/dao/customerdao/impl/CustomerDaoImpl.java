@@ -56,11 +56,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 				+ "and clientId=(select clientId from customer_client where customerId=?)";
 		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, customer.getId());
 	}
-	@Override
-	public int updateStatusByid(Customer customer) {
-		String sql ="update customer set statusId=? where id=?";
-		return super.executeUpdate(sql, customer.getStatusId(),customer.getId());
-	}
+
 	//查询客户信息及审核状态
 	@Override
 	public List<Customer> getCustomerList(int startRow, int pageSize) {
@@ -85,6 +81,12 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public Customer getCustomerByid(int customerId) {
 		String sql = "select * from customer where id=?";
 		return super.executeOneRow(new BeanHandler<Customer>(Customer.class), sql, customerId);
+	}
+	//修改客户账号的状态
+	@Override
+	public boolean updateCustomerStatus(Customer customer,int statusId) {
+		String sql = "update customer set statusId=? where id=?";
+		return super.executeUpdate(sql, statusId,customer.getId())>0?true:false;
 	}
 	
 	

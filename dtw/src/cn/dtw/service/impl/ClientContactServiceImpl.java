@@ -44,6 +44,7 @@ public class ClientContactServiceImpl implements ClientContactService {
 		Clientcontact clientcontact = new Clientcontact();
 		clientcontact.setClientContactEmail(customer.getEmail());
 		clientcontact.setClientContactTel(customer.getTel());
+		clientcontact.setClientContactName(customer.getLoginName());
 		int contactId = this.addClientContact(clientcontact);
 		return this.addClientidAndClientContactId(client.getClientId(), contactId)>0?true:false;
 	}

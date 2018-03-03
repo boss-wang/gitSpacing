@@ -126,7 +126,26 @@
 				if(confirm("申请绑定的公司不存在，是否添加？")){
 					$("#home").load("/dtw/admin/addClient.jsp?currentPage="+currentPage+"&clientName="+clientName+"&clientAddress="+clientAddress+"&tempClientId="+tempClientId);
 				}
-			}else{
+			}else if(clientExists==1){
+				if(confirm("确认通过本次绑定？")){
+					$.ajax({
+						"url":"customer.do",
+						"type":"post",
+						"data":"mn=passBindingCompany&customerId="+customerId+"&clientName="+clientName,
+						"success":function(res){
+							if(res==1){
+								$(".homeTip").text("修改成功，审核已通过");
+								$(".homeTip").show(200);
+								$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+currentPage);
+								setTimeout(function(){
+									$(".homeTip").fadeOut(1000);
+								},1000);
+							}else{
+								alert("修改失败");
+							}
+						}
+					});
+				}
 				
 			}
 			

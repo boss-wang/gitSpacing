@@ -50,7 +50,7 @@ public class CustomerLoginServlet extends BaseServlet {
 			cust.setLoginPwd(loginPwd);
 			cust.setTel(tel);
 			cust.setEmail(email);
-			cust.setStatusId(1);
+			cust.setStatusId(2);
 			cusService.addCustomer(cust);
 			resp.getWriter().print(1);
 		}else {

@@ -47,11 +47,13 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer cust2=customerDao.getCustomerBytel(customer);
 		Customer cust3=customerDao.getCustomerByloginName(customer);
 		if(cust1!=null) {
-			
+			System.out.println("邮箱登录");
 			return cust1;
 		}else if(cust2!=null) {
+			System.out.println("手机登录");
 			return cust2;
 		}else if(cust3!=null) {
+			System.out.println("账号登录");
 			return cust3;
 		}else {
 			return null;
@@ -84,6 +86,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer getCustomerByid(int customerId) {
 		// TODO Auto-generated method stub
 		return customerDao.getCustomerByid(customerId);
+	}
+	//修改客户账号的状态
+	@Override
+	public boolean updateCustomerStatus(Customer customer, int statusId) {
+		return customerDao.updateCustomerStatus(customer, statusId);
 	}
 
 }

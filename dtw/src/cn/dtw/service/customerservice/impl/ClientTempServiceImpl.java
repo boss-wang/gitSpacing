@@ -16,6 +16,7 @@ public class ClientTempServiceImpl implements ClienttempService {
 	private  ClienttempDao clientTemp = new ClienttempDaoImpl();
 	private CustomerDao customerDao = new CustomerDaoImpl();
 	private ClientDao clientDao = new ClientDaoImpl();
+	//申请绑定公司
 	@Override
 	public int addClienttemp_customer(Clienttemp_customer clienttemp_customer, Clienttemp clienttemp) {
 		int clientId = clientTemp.addClienttemp(clienttemp);
@@ -30,8 +31,7 @@ public class ClientTempServiceImpl implements ClienttempService {
 		}
 		Customer customer = new Customer();
 		customer.setId(clienttemp_customer.getCustomerId());
-		customer.setStatusId(1);
-		customerDao.updateStatusByid(customer);
+		customerDao.updateCustomerStatus(customer, 1);
 		clientTemp.addClienttemp_customer(clienttemp_customer);
 		return 1;
 	}

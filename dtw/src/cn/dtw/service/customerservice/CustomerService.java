@@ -23,4 +23,6 @@ public interface CustomerService {
 		Customer_client getClientBycust(Customer customer);
 	//根据客户id查出客户所有信息
 		public Customer getCustomerByid(int customerId);
+	//修改客户账号的状态
+		public boolean updateCustomerStatus(Customer customer,int statusId);
 }
