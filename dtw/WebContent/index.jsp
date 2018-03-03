@@ -52,7 +52,7 @@
 							<a title="服务项目" href="" class="menu">服务项目</a>
 							<ul style="display: none;">
 								<li>
-									<a title="城际快运" id="cost">快速下单</a>
+									<a title="城际快运" class="cost">快速下单</a>
 								</li>
 								<li>
 									<a title="贸易物流" class="selectorder">订单追踪</a>
@@ -64,10 +64,10 @@
 							<a title="新闻中心" id="newsCenter" class="menu">新闻中心</a>
 							<ul style="display: none;">
 								<li>
-									<a title="行业新闻" id="tradeNews">行业新闻</a>
+									<a title="行业新闻" class="tradeNews">行业新闻</a>
 								</li>
 								<li>
-									<a title="帮助支持" id="serviceTerms">帮助支持</a>
+									<a title="帮助支持" class="serviceTerms">帮助支持</a>
 								</li>
 							</ul>
 						</li>
@@ -144,7 +144,7 @@
 			<div class="container clearfix">
 				<div class="cont">
 					<div class="pic">
-						<a href="tradeNews.html" title="行业新闻">
+						<a class="tradeNews" title="行业新闻">
 							<IMG src="images/homepage/index-pic1.jpg">
 						</a>
 					</div>
@@ -159,7 +159,7 @@
 				</div>
 				<div class="cont">
 					<div class="pic">
-						<a href="" title="服务项目">
+						<a class="cost" title="服务项目">
 							<IMG src="images/homepage/index-pic2.jpg">
 						</a>
 					</div>
@@ -171,7 +171,7 @@
 				</div>
 				<div class="cont last">
 					<div class="pic">
-						<a href="serviceTerms.html" title="帮助支持">
+						<a class="serviceTerms" title="帮助支持">
 							<IMG src="images/homepage/index-pic3.jpg">
 						</a>
 					</div>
@@ -240,12 +240,12 @@
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
 			});
-			$("#tradeNews").click(function(){
+			$(".tradeNews").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.html");
 			});
 			
-			$("#serviceTerms").click(function(){
+			$(".serviceTerms").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("serviceTerms.html");
 			});
@@ -276,7 +276,7 @@
 				
 			});
 
-			$("#fastAddOrder,#cost").click(function(){
+			$("#fastAddOrder,.cost").click(function(){
 				var status ='${customer.statusId}';
 				if(status=='1'){
 					window.location.href="#abstract";

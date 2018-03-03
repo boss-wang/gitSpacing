@@ -15,7 +15,7 @@
 <li><img src="images/side-cate.png">    <a class="selectorder" title="订单追踪">订单追踪</a></li>
 </ul>
 </div>
-<div class="s-contact-title"><a class="lmessage" title="联系我们" style="color: white;">联系我们</a></div>
+<div class="s-contact-title"><a class="contactus" title="联系我们" style="color: white;">联系我们</a></div>
 <div><img src="images/side-contact.jpg"></div>
     </div>
 
@@ -59,8 +59,8 @@ $(".serviceTerms").click(function() {
 	$("#homeDiv").load("serviceTerms.html");
 });
 
-$(".lmessage").click(function() {
-	$("#homeDiv").load("leaveMessage.jsp");
+$(".contactus").click(function() {
+	$("#homeDiv").load("contactUs.jsp");
 });
 
 $(".selectorder").click(function(){
