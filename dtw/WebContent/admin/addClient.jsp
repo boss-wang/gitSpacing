@@ -53,10 +53,11 @@
 				$("#AddressTip").text("地址不能为空");
 				$("#clientAddress").focus();
 			}else{
+				var tempClientId = "${param.tempClientId }";
 				$.ajax({
 					type:"post",
 					url:"client.do",
-					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&mn=addClient",
+					data:"clientName="+clientName+"&clientAddress="+clientAddress+"&mn=addClient&tempClientId="+tempClientId,
 					async:true,
 					success:function(res){
 						if(res==0){

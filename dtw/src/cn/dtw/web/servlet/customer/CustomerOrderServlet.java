@@ -100,7 +100,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		boolean back=customerOrderService.addCustomerOrder(order);
 		resp.getWriter().print(back);
 	}
-	//绑定公司
+	//申请绑定公司
 		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String clientName=req.getParameter("clientName");
 			String clientAddress=req.getParameter("clientAddress");

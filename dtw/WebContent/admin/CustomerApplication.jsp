@@ -19,13 +19,13 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1" id="clientUpdate" style="width: 970px; height: 350px"  >
+        <table   border="1" id="clientUpdate" style="width: 850px; height: 350px"  >
             	<tr id="" class="tit-mess3">
-            		<td class="mess1"  style="width:150px;">联系人</td>
-            		<td class="mess1"  style="width:160px;" >公司名</td>
-            		<td class="mess1" style="width:120px;">公司地址</td>
-            		<td class="mess1" style="width:120px;">公司状态</td>
-            		<td class="mess1" style="width:120px;">操作栏</td>
+            		<td class="mess1"  style="width:150px;">姓名</td>
+            		<td class="mess1"  style="width:160px;" >申请公司</td>
+            		<td class="mess1" style="width:120px;">申请地址</td>
+            		<td class="mess1" style="width:160px;">公司是否存在</td>
+            		<td class="mess1" style="width:160px;">是否同意审核</td>
             	</tr> 
             	<c:forEach var="customer" items="${customerList }">
             		<tr  class="tit-mess3">
@@ -43,7 +43,7 @@
 	            		<td class="mess2">
 	           	 			<c:if test="${customer.statusId==1}">
 	            				<c:if test="${customer.clientExists==0}">
-	            					<a class="addCC" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}">无此公司，点击添加</a>
+	            					不存在
 	            				</c:if>
 	            				<c:if test="${customer.clientExists==1}">
 	            					已存在
@@ -55,9 +55,8 @@
 	            				<a class="noApp">未申请</a>
 	            			</c:if>
 	            			<c:if test="${customer.statusId==1}">
-	            				<c:if test="${customer.clientExists==1}">
-	            					<a class="pass">未审核，点击通过</a>
-	            				</c:if>
+	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}">是&nbsp;&nbsp;</a>/
+	            				<a class="refuse">&nbsp;否</a> 
 	            			</c:if>
 	            			<c:if test="${customer.statusId==3}">
 	            				已审核
@@ -116,11 +115,20 @@
 
 		});
 		//添加客户公司
-		$("#clientUpdate").on("click",".addCC",function(){
+		$("#clientUpdate").on("click",".pass",function(){
+			var currentPage = ${currentPage };
 			var clientName = $(this).attr("clientName");
 			var clientAddress = $(this).attr("clientAddress");
-			var currentPage = ${currentPage };
-			$("#home").load("/dtw/admin/addClient.jsp?currentPage="+currentPage+"&clientName="+clientName+"&clientAddress="+clientAddress);
+			var tempClientId = $(this).attr("tempClientId");
+			var clientExists = $(this).attr("clientExists");
+			if(clientExists==0){
+				if(confirm("申请绑定的公司不存在，是否添加？")){
+					$("#home").load("/dtw/admin/addClient.jsp?currentPage="+currentPage+"&clientName="+clientName+"&clientAddress="+clientAddress+"&tempClientId="+tempClientId);
+				}
+			}else{
+				
+			}
+			
 		});
 	</script>
 	</body>

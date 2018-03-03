@@ -8,11 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Leavemessage;
+import cn.dtw.service.ClientService;
 import cn.dtw.service.LeaveMessageService;
 import cn.dtw.service.customerservice.CustomerService;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
+import cn.dtw.service.impl.ClientServiceImpl;
 import cn.dtw.service.impl.LeaveMessageServiceImpl;
 import cn.dtw.web.servlet.BaseServlet;
 
@@ -22,6 +25,7 @@ public class CustomerServlet extends BaseServlet {
 	private static final long serialVersionUID = 335282468601497196L;
 	private CustomerService customerService = new CustomerServiceImpl();
 	private LeaveMessageService messageService = new LeaveMessageServiceImpl();
+	private ClientService clientService = new ClientServiceImpl();
 	//显示注册的客户
 	protected void showCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
@@ -41,6 +45,7 @@ public class CustomerServlet extends BaseServlet {
 		req.setAttribute("customerList", customerList);
 		req.getRequestDispatcher("/admin/CustomerApplication.jsp").forward(req, resp);
 	}
+	//显示留言信息
 	protected void showCustomerLeaveMessage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
@@ -58,6 +63,14 @@ public class CustomerServlet extends BaseServlet {
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("messageList", messageList);
 		req.getRequestDispatcher("/admin/leaveMessage.jsp").forward(req, resp);
-
+	}
+	//同意绑定公司申请
+	protected void passBindingCompany(HttpServletRequest req, HttpServletResponse resp) {
+		int customerId = Integer.parseInt(req.getParameter("customerId"));
+		String clientName = req.getParameter("clientName");
+		Client client = new Client();
+		client.setClientName(clientName);
+		client = clientService.getClientByName(client);
+		
 	}
 }

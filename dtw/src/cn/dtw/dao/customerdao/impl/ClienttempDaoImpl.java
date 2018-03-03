@@ -27,5 +27,11 @@ public class ClienttempDaoImpl extends BaseDao implements ClienttempDao  {
 		String sql = "select * from clienttemp where clienttemp.clientId=(select clientId from clienttemp_customer where customerId=? )";
 		return super.executeOneRow(new BeanHandler<Clienttemp>(Clienttemp.class), sql, customer.getId());
 	}
+	//修改临时公司存在状态
+	@Override
+	public boolean updateExists(Clienttemp_customer clienttemp_customer,int existsStatus) {
+		String sql = "update clienttemp_customer set clientExists=? where clientId=?";
+		return super.executeUpdate(sql, existsStatus,clienttemp_customer.getClientId())>0?true:false;
+	}
 
 }

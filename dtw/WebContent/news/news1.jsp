@@ -8,14 +8,14 @@
     <div class="container clearfix">
     <div class="side">
         
-<div class="side-title"><a href="" title="服务项目">服务项目</a></div>
+<div class="side-title">服务项目</div>
 <div class="side-cate">
 <ul>
 <li><img src="images/side-cate.png">    <a class="fastAddOrder" title="快速下单">快速下单</a></li>
 <li><img src="images/side-cate.png">    <a class="selectorder" title="订单追踪">订单追踪</a></li>
 </ul>
 </div>
-<div class="s-contact-title"><a class="lmessage" title="联系我们" style="color: white;">联系我们</a></div>
+<div class="s-contact-title"><a class="contactUs" title="联系我们" style="color: white;">联系我们</a></div>
 <div><img src="images/side-contact.jpg"></div>
     </div>
 
@@ -111,8 +111,8 @@
 				$("#homeDiv").load("tradeNews.jsp");
 			});
 			
-			$(".lmessage").click(function() {
-				$("#homeDiv").load("leaveMessage.jsp");
+			$(".contactUs").click(function() {
+				$("#homeDiv").load("contactUs.jsp");
 			});
 
 			$(".selectorder").click(function(){

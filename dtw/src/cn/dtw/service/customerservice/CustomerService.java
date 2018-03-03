@@ -21,5 +21,6 @@ public interface CustomerService {
 		public int getCustomerCount();
 	//根据下单人id查询客户公司id
 		Customer_client getClientBycust(Customer customer);
-		
+	//根据客户id查出客户所有信息
+		public Customer getCustomerByid(int customerId);
 }
