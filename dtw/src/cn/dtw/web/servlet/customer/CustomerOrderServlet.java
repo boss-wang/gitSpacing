@@ -82,7 +82,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		String weight=req.getParameter("weight");
 		String volume=req.getParameter("volume");
 		String typetrading=req.getParameter("typetrading");
-		String contact=req.getParameter("contact");
+		int contactId=Integer.parseInt(req.getParameter("contactId"));
 		String customerId=req.getParameter("customerId");
 		Order order = new Order();
 		order.setDepartDate(departDate);
@@ -92,6 +92,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		order.setCargoWeight(Double.parseDouble(weight));
 		order.setCargoVolume(Double.parseDouble(volume));
 		order.setTermsId(Integer.parseInt(typetrading));
+		order.setOrderClientContactId(contactId);
 		Customer customer = new Customer();
 		customer.setId(Integer.parseInt(customerId));
 		Customer_client custClient= customerService.getClientBycust(customer);

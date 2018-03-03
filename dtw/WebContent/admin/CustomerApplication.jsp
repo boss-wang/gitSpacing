@@ -114,6 +114,10 @@
 				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 			}
 
-		})
+		});
+		//添加客户公司
+		$("#clientUpdate").on("mouseover",".ccName",function(){
+			
+		}
 	</script>
 	</body>
