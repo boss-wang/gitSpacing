@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order;
 
 public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
@@ -52,5 +53,6 @@ public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
 		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql, client.getClientId());
 		return rs.intValue();
 	}
-
+	
+	
 }

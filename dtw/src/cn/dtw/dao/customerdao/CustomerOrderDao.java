@@ -3,6 +3,7 @@ package cn.dtw.dao.customerdao;
 import java.util.List;
 
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
 
@@ -19,4 +20,5 @@ public interface CustomerOrderDao {
 	public boolean addCustomerOrder(Order order);
 	//根据公司id查询订单条数
 	public int getOrderCount(Client client); 
+
 }

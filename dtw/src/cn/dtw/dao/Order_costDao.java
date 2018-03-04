@@ -2,6 +2,7 @@ package cn.dtw.dao;
 
 import java.util.List;
 
+import cn.dtw.entity.Client;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.Order_cost;
 
@@ -14,4 +15,6 @@ public interface Order_costDao {
 	public boolean updateCost(Order_cost orderCost);
 	//删除应收
 	public boolean delCost(Order_cost orderCost);
+	//根据订单id 和公司id 查询
+	List<Order_cost> getOrder_CostByOrderIdAndClientId(Client client,Order order);
 }

@@ -145,4 +145,24 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.setAttribute("termsList", termsList);
 			req.getRequestDispatcher("/showMyOrder.jsp").forward(req, resp);
 		}
+		//客户应付订单查询
+		protected void showCustomerPayOrdersByClientId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String curPage = req.getParameter("currentPage");
+			Customer customer = (Customer)req.getSession().getAttribute("customer");
+			int currentPage;
+			int totalRow = customerOrderService.getPayOrderCountByCustomerId(customer);
+			int totalPage = totalRow%6==0?totalRow/6:totalRow/6+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Order> payorderList = customerOrderService.getPayOrderByCustomerId(customer, currentPage, 6);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("totalPage", totalPage);
+			req.setAttribute("orderList", payorderList);
+			req.getRequestDispatcher("/payorder.jsp").forward(req, resp);
+		}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.OrderDao;
+import cn.dtw.dao.Order_costDao;
 import cn.dtw.dao.customerdao.CustomerCostDao;
 import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
@@ -15,11 +16,13 @@ import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
 import cn.dtw.dao.customerdao.impl.CustomerOrderImpl;
 import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.dao.impl.OrderDaoImpl;
+import cn.dtw.dao.impl.Order_costDaoImpl;
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
+import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.User;
 import cn.dtw.service.OrderService;
 import cn.dtw.service.customerservice.CustomerOrderService;
@@ -32,6 +35,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	private CustomerOrderDao customerOrderDao = new CustomerOrderImpl();
 	private CustomerDao customerDao = new CustomerDaoImpl();
 	private CustomerCostDao customerCostDao = new CustomerCostDaoImpl();
+	private   Order_costDao order_costDao = new Order_costDaoImpl();
 	//通过公司id查询订单信息
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int curPage, int pageSize) {
@@ -100,8 +104,19 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 		Client client = new Client();
 		client.setClientId(clientId.getClientId());
 		List<Order> list=customerOrderDao.getOrderListByClientId(client,  (curPage-1)*rowSize, rowSize);
-		
-		return null;
+		for(Order order:list) {
+			List<Order_cost> costList = order_costDao.getOrder_CostByOrderIdAndClientId(client, order);
+			order.setOrderCostList(costList);
+		}
+		return list;
+	}
+	//根据下单人id查询订单条数
+	@Override
+	public int getPayOrderCountByCustomerId(Customer customer) {
+		Customer_client clientId=customerDao.getClientBycust(customer);
+		Client client = new Client();
+		client.setClientId(clientId.getClientId());
+		return customerOrderDao.getOrderCount(client);
 	}
 
 }
