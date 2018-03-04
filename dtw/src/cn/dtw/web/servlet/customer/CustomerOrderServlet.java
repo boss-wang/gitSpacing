@@ -29,6 +29,7 @@ import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
+import cn.dtw.util.phone.SDKDemo;
 import cn.dtw.web.servlet.BaseServlet;
 @WebServlet("/custorder.do")
 public class CustomerOrderServlet extends BaseServlet {
@@ -42,9 +43,11 @@ public class CustomerOrderServlet extends BaseServlet {
 	//后台审核通过
 	protected void takeOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		String contactTel = req.getParameter("contactTel");
 		Order order = new Order();
 		order.setOrderId(orderId);
 		if(orderService.updateOrderStatus(order, 0)){
+			SDKDemo.send(contactTel, "审核成功");
 			resp.getWriter().print(1);
 		};
 		resp.getWriter().close();
@@ -52,9 +55,11 @@ public class CustomerOrderServlet extends BaseServlet {
 	//后台审核不通过
 	protected void refuseOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		String contactTel = req.getParameter("contactTel");
 		Order order = new Order();
 		order.setOrderId(orderId);
 		if(orderService.updateOrderStatus(order, 8)){
+			SDKDemo.send(contactTel, "审核失败");
 			resp.getWriter().print(1);
 		};
 		resp.getWriter().close();
