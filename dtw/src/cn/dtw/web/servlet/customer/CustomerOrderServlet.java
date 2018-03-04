@@ -123,6 +123,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		order.setCargoVolume(Double.parseDouble(volume));
 		order.setTermsId(Integer.parseInt(typetrading));
 		order.setOrderClientContactId(contactId);
+		order.setStatusId(6);
 		Customer customer = new Customer();
 		customer.setId(Integer.parseInt(customerId));
 		Customer_client custClient= customerService.getClientBycust(customer);
