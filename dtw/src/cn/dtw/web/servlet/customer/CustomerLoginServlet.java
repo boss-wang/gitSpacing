@@ -77,6 +77,8 @@ public class CustomerLoginServlet extends BaseServlet {
 	
 	//登录
 	protected void customerlogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Integer loginTimes = (Integer)req.getSession().getAttribute("loginTimes");
+		loginTimes = loginTimes==null?0:loginTimes;
 		String loginName=req.getParameter("loginName");
 		String paswd=req.getParameter("paswd");
 		Customer customer = new Customer();
@@ -88,8 +90,12 @@ public class CustomerLoginServlet extends BaseServlet {
 		if(back==1) {
 			Customer cust = cusService.getCustomer(customer);
 			req.getSession().setAttribute("customer",cust);
+		}else {
+			loginTimes++;
+			req.getSession().setAttribute("loginTimes", loginTimes);
 		}
-		resp.getWriter().print(back);
+		String rs = "{\"back\":\""+back+"\",\"loginTimes\":\""+loginTimes+"\"}";
+		resp.getWriter().print(rs);
 	}
 	//移除session
 	protected void deleSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -94,7 +94,7 @@ public class CustomerServlet extends BaseServlet {
 		//绑定客户id到对应的公司id
 		if(customerClientService.addCustomer_client(customer,client)) {
 			if(customerService.updateCustomerStatus(customer, 3)) {
-				SDKDemo.send(customer.getTel(), "尊敬的用户您好，我们已收到您的报名申请，并核准通过，请您准时前来签到，感谢您的参与。");
+				SDKDemo.send(customer.getTel(), "恭喜，您申请绑定的公司已经通过审核！");
 				resp.getWriter().print(1);
 			}
 		};

@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public int addCustomer(Customer customer) {
 		return customerDao.addCustomer(customer);
 	}
-	//登录(0:用户不存在，1：成功，2：密码错误)
+	//登录(3:用户不存在，1：成功，2：密码错误)
 	@Override
 	public int loginCustomer(Customer customer) {
 	Customer cust1=customerDao.getCustomerByemail(customer);
@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return 2;
 	}
-		return 0;
+		return 3;
 	}
 	@Override
 	public Customer getCustomer(Customer customer) {
