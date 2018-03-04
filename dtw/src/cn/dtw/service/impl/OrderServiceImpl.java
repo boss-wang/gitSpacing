@@ -101,5 +101,10 @@ public class OrderServiceImpl implements OrderService {
 	public boolean delPay(Order_pay orderPay) {
 		return orderPayDao.delPay(orderPay);
 	}
+	//修改订单状态
+	@Override
+	public boolean updateOrderStatus(Order order, int statusId) {
+		return orderDao.updateOrderStatus(order, statusId);
+	}
 
 }

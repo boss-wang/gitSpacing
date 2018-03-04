@@ -81,7 +81,9 @@
 						<span class="mess">订单状态</span>
 						<select  class="inpu" id="orderStatus" name="orderStatus">
 							<c:forEach var="status" items="${statusList }">
-								<option value="${status.statusId }" <c:if test="${status.statusId==order.statusId }">selected="selected"</c:if>>${status.statusDescription }</option>
+								<c:if test="${status.statusId!=6&&status.statusId!=7&&status.statusId!=8 }">
+									<option value="${status.statusId }" <c:if test="${status.statusId==order.statusId }">selected="selected"</c:if>>${status.statusDescription }</option>
+								</c:if>
 							</c:forEach>
 						</select><span style="margin-left: 10px;">*</span>
 					</div>

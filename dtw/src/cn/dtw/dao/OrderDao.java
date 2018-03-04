@@ -18,4 +18,6 @@ public interface OrderDao {
 	public Order getOrderById(int id);
 	//通过业务编号查询订单信息
 	public Order getOrderByOrderNo(Order order);
+	//修改订单状态
+	public boolean updateOrderStatus(Order order,int statusId);
 }

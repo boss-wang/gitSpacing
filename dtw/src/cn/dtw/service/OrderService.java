@@ -39,4 +39,6 @@ public interface OrderService {
 	public boolean addOrderPay(Order_pay orderPay);
 	//删除应付
 	public boolean delPay(Order_pay orderPay);
+	//修改订单状态
+	public boolean updateOrderStatus(Order order,int statusId);
 }

@@ -108,6 +108,7 @@
 		<table border="1" id="selorder" >
 		 	<tr >
 		 		<td>客户名</td>
+		 		<td>订单状态</td>
 		 		<td>业务编号</td>
 		 		<td>系统号</td>
 		 		<td>主单号</td>
@@ -123,7 +124,6 @@
 		 		<td>货物体积</td>
 		 		<td>报关单号</td>
 		 		<td>报关单状态</td>
-		 		<td>订单状态</td>
 		 		<td>最近修改时间</td>
 		 		<td>备注内容</td>
 		 		<td>贸易条款</td>
@@ -136,6 +136,7 @@
 		 	<c:forEach var="order" items="${orderList }">
 		 		<tr>
 			 		<td>${order.client.clientName }</td>
+			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${order.orderNo }</td>
 			 		<td>${order.systemNo }</td>
 			 		<td>${order.mawbNo }</td>
@@ -151,7 +152,6 @@
 			 		<td>${order.cargoVolume }</td>
 			 		<td>${order.customsNo }</td>
 			 		<td>${order.cusStatus.description }</td>
-			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${fn:substring(order.updateTime, 0, 19) }</td>
 			 		<td>${order.remarks }</td>
 			 		<td>${order.terms.code }</td>

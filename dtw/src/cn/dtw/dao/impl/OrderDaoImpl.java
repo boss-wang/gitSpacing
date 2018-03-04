@@ -87,5 +87,11 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "select * from `order` where orderNo=?";
 		return super.executeOneRow(new BeanHandler<Order>(Order.class), sql, order.getOrderNo());
 	}
+	//修改订单状态
+	@Override
+	public boolean updateOrderStatus(Order order, int statusId) {
+		String sql = "update `order` set statusId=? where orderId=?";
+		return super.executeUpdate(sql, statusId,order.getOrderId())>0?true:false;
+	}
 
 }

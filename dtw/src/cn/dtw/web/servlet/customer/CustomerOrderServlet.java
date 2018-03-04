@@ -39,6 +39,36 @@ public class CustomerOrderServlet extends BaseServlet {
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClienttempService clientTempService = new  ClientTempServiceImpl();
+	//后台审核通过
+	protected void takeOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		Order order = new Order();
+		order.setOrderId(orderId);
+		if(orderService.updateOrderStatus(order, 0)){
+			resp.getWriter().print(1);
+		};
+		resp.getWriter().close();
+	}
+	//后台审核不通过
+	protected void refuseOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		Order order = new Order();
+		order.setOrderId(orderId);
+		if(orderService.updateOrderStatus(order, 8)){
+			resp.getWriter().print(1);
+		};
+		resp.getWriter().close();
+	}
+	//取消订单
+	protected void cancelOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		Order order = new Order();
+		order.setOrderId(orderId);
+		if(orderService.updateOrderStatus(order, 7)){
+			resp.getWriter().print(1);
+		};
+		resp.getWriter().close();
+	}
 	//显示客户自助下单的列表（员工可查看）
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String curPage = req.getParameter("currentPage");

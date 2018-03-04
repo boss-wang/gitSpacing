@@ -107,6 +107,7 @@
 		<table border="1" id="selorder" >
 		 	<tr >
 		 		<td>客户名</td>
+		 		<td>订单状态</td>
 		 		<td>业务编号</td>
 		 		<td>联系人</td>
 		 		<td>系统号</td>
@@ -123,19 +124,19 @@
 		 		<td>货物体积</td>
 		 		<td>报关单号</td>
 		 		<td>报关单状态</td>
-		 		<td>订单状态</td>
 		 		<td>最近修改时间</td>
 		 		<td>备注内容</td>
 		 		<td>贸易条款</td>
-		 		<td>应收</td>
-		 		<td>新增应收</td>
-		 		<td>应付</td>
-		 		<td>新增应付</td>
+		 		<td>收入</td>
+		 		<td>新增收入</td>
+		 		<td>支出</td>
+		 		<td>新增支出</td>
 		 		<td>操作栏</td>
 		 	</tr>
 		 	<c:forEach var="order" items="${orderList }">
 		 		<tr>
 			 		<td>${order.client.clientName }</td>
+			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${order.orderNo }</td>
 			 		<td>
 			 			<div class="ccName">
@@ -161,7 +162,6 @@
 			 		<td>${order.cargoVolume }</td>
 			 		<td>${order.customsNo }</td>
 			 		<td>${order.cusStatus.description }</td>
-			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${fn:substring(order.updateTime, 0, 19) }</td>
 			 		<td>${order.remarks }</td>
 			 		<td>${order.terms.code }</td>
@@ -196,7 +196,11 @@
 							</div>
 						</c:forEach>
 					</td>
-			 		<td><a class="addCost" orderId="${order.orderId }">添加应收</a></td>
+			 		<td>
+			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="addCost" orderId="${order.orderId }">添加</a>
+			 			</c:if>
+			 		</td>
 			 		<td>
 			 			<c:forEach var="orderPay" items="${order.orderPayList}">
 							<div class="ssName">
@@ -230,8 +234,22 @@
 							</div>
 						</c:forEach>
 			 		</td>
-			 		<td><a class="addPay" orderId="${order.orderId }">添加</a></td>
-			 		<td><a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a>删除</a></td>
+			 		<td>
+			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="addPay" orderId="${order.orderId }">添加</a>
+			 			</c:if>
+			 		</td>
+			 		<td>
+			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a class="cancel">取消</a>
+			 			</c:if>
+			 			<c:if test="${order.orderStatus.statusId==6}">
+			 				<a class="takeOrder" orderId="${order.orderId }">接单</a>&nbsp;&nbsp;<a class="refuse">取消</a>
+			 			</c:if>
+			 			<c:if test="${order.orderStatus.statusId==7||order.orderStatus.statusId==8}">
+			 				<a>删除</a>
+			 			</c:if>
+			 		</td>
 		 		</tr>
 		 	</c:forEach>
 		 	
@@ -241,6 +259,21 @@
 		 </table>
 	</div>
 	<script>
+	//通过审核
+	$("#selorder").on("click",".takeOrder",function(){
+		var orderId = $(this).attr("orderId");
+		var currentPage = ${currentPage };
+		if(confirm("确认接单？")){
+			$.ajax({
+				url:"custorder.do",
+				type:"post",
+				data:"mn=takeOrder&orderId="+orderId,
+				success:function(res){
+					
+				}
+			});
+		}
+	});
 	//修改订单
 	$("#selorder").on("click",".updateOrder",function(){
 		var orderId = $(this).attr("modifyId");
