@@ -114,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-
+		<a name="abstract" style="display:inline-block;position:absolute;top:580px;"></a>
 		<div class="container">
 			<div class="index-ico">
 				<ul class="clearfix">
@@ -126,7 +126,7 @@
 			</div>
 		</div>
 		<!--index-ico end-->
-		<a name="abstract"></a>
+		
 		<div class="index-about" id="homeDiv" >
 			<div class="container">
 				<div class="index-title">
