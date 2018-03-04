@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage_1_0;
 
 import cn.dtw.entity.Customer;
 import cn.dtw.service.customerservice.CustomerService;
@@ -20,7 +19,6 @@ public class CustomerLoginServlet extends BaseServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 5781959352267918484L;
-	private  SDKDemo phonesend = new SDKDemo();
 	private CustomerService cusService = new  CustomerServiceImpl();
 	//发送短信
 	protected void sendMessage(HttpServletRequest req, HttpServletResponse resp) {
@@ -33,7 +31,7 @@ public class CustomerLoginServlet extends BaseServlet {
 			m[i]=Integer.toString(math.nextInt(10));
 			contentCode=contentCode+m[i];
 		}
-		phonesend.send(phoneNumber, contentCode);
+		SDKDemo.send(phoneNumber, "您的注册验证码是"+contentCode+"，在1分钟内输入有效。如非本人操作请忽略此短信。");
 		req.getSession().setAttribute("contentCode", contentCode);
 	}
 	//验证

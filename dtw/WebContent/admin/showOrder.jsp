@@ -226,7 +226,7 @@
 		 	</c:forEach>
 		 	
 		 	<tr id="last" style="height:50px;">
-            		<td  colspan="21"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
+            		<td  colspan="25"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
             </tr> 
 		 </table>
 	</div>

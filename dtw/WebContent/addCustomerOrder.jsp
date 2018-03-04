@@ -115,8 +115,6 @@ color:red;
 	<!--about end-->
 	</body>
 
-<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
-
 <script type="text/javascript">
 	var reg=/^\d*(\.\d*){0,1}$/;
     var reg2 =/^\d+$/;

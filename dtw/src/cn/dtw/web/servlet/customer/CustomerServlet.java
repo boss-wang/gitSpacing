@@ -22,6 +22,7 @@ import cn.dtw.service.customerservice.impl.Customer_ClientServiceImpl;
 import cn.dtw.service.impl.ClientContactServiceImpl;
 import cn.dtw.service.impl.ClientServiceImpl;
 import cn.dtw.service.impl.LeaveMessageServiceImpl;
+import cn.dtw.util.phone.SDKDemo;
 import cn.dtw.web.servlet.BaseServlet;
 
 @WebServlet("/customer.do")
@@ -93,6 +94,7 @@ public class CustomerServlet extends BaseServlet {
 		//绑定客户id到对应的公司id
 		if(customerClientService.addCustomer_client(customer,client)) {
 			if(customerService.updateCustomerStatus(customer, 3)) {
+				SDKDemo.send(customer.getTel(), "尊敬的用户您好，我们已收到您的报名申请，并核准通过，请您准时前来签到，感谢您的参与。");
 				resp.getWriter().print(1);
 			}
 		};

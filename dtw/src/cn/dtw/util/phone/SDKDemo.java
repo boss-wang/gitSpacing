@@ -20,7 +20,7 @@ public class SDKDemo {
 	 * @description SDK示例
 	 * @param args
 	 */
-	public  void send (String phoneNumber,String contentCode ) {
+	public static void send (String phoneNumber,String content ) {
 		// 用户账号
 		String userid = "E1026G";
 
@@ -42,7 +42,7 @@ public class SDKDemo {
 		SmsSendConn smsSendConn = new SmsSendConn(isKeepAlive);
 
 		// 单条发送
-		singleSend(smsSendConn, userid,phoneNumber,contentCode);
+		singleSend(smsSendConn, userid,phoneNumber,content);
 
 		// 相同内容群发
 //		batchSend(smsSendConn, userid);
@@ -153,7 +153,7 @@ public class SDKDemo {
 	 * @param userid
 	 *            用户账号
 	 */
-	public static void singleSend(SmsSendConn smsSendConn, String userid,String phoneNumber,String contentCode) {
+	public static void singleSend(SmsSendConn smsSendConn, String userid,String phoneNumber,String content) {
 		try {
 			// 参数类
 			Message message = new Message();
@@ -162,7 +162,7 @@ public class SDKDemo {
 			// 设置手机号码 此处只能设置一个手机号码
 			message.setMobile(phoneNumber);
 			// 设置内容
-			message.setContent("您的注册验证码是"+contentCode+"，在1分钟内输入有效。如非本人操作请忽略此短信。");
+			message.setContent(content);
 			// 设置扩展号
 			message.setExno("11");
 			// 用户自定义流水编号

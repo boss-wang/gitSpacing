@@ -181,6 +181,7 @@
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="js/time.js"></script>
 	<script type="text/javascript" src="js/hiddenlist.js" ></script>
+	<script type="text/javascript" src="My97DatePicker/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
 		$("#mhonme").click(function(){
 			$("#home").load("/dtw/admin/home.jsp");
