@@ -1,0 +1,24 @@
+<c3p0-config> <!-- comboPooledDataSource -->
+	<named-config name="webApp">
+		<!-- 配置连接信息 -->
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/dtwmanage?useSSL=true&amp;characterEncoding=utf8</property>
+		<property name="password">1234</property>
+		<property name="user">root</property>
+		
+		<!-- 初始化时的数量 --> 
+		<property name="initialPoolSize">15</property>
+		<!--一次要多少-->
+		<property name="acquireIncrement">10</property>
+		<!-- [10,20] -->
+		<!-- 池子中最小的连接数量 -->
+		<property name="minPoolSize">10</property>
+		<!-- 池子中最大的连接数量 -->
+		<property name="maxPoolSize">20</property>
+		<!-- 最大的statement的数量 -->
+		<property name="maxStatements">5</property>
+		
+		<property name="maxStatementsPerConnection">5</property> 
+		
+	</named-config>
+</c3p0-config>
