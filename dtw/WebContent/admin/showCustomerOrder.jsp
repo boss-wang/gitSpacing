@@ -244,7 +244,7 @@
 			 				<a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a class="cancel" orderId="${order.orderId }">取消</a>
 			 			</c:if>
 			 			<c:if test="${order.orderStatus.statusId==6}">
-			 				<a class="takeOrder" orderId="${order.orderId }" contactTel="${order.clientcontact.clientContactTel}">接单</a>&nbsp;&nbsp;<a class="refuse" orderId="${order.orderId }" contactTel="${order.clientcontact.clientContactTel}">取消</a>
+			 				<a class="takeOrder" orderId="${order.orderId }" contactTel="${order.clientcontact.clientContactTel}" orderNo="${order.orderNo }">接单</a>&nbsp;&nbsp;<a class="refuse" orderId="${order.orderId }" orderNo="${order.orderNo }" contactTel="${order.clientcontact.clientContactTel}">取消</a>
 			 			</c:if>
 			 			<c:if test="${order.orderStatus.statusId==7||order.orderStatus.statusId==8}">
 			 				<a>删除</a>
@@ -264,11 +264,12 @@
 		var orderId = $(this).attr("orderId");
 		var currentPage = ${currentPage };
 		var contactTel = $(this).attr("contactTel");
+		var orderNo = $(this).attr("orderNo");
 		if(confirm("确认接单？")){
 			$.ajax({
 				url:"custorder.do",
 				type:"post",
-				data:"mn=takeOrder&orderId="+orderId+"&contactTel="+contactTel,
+				data:"mn=takeOrder&orderId="+orderId+"&contactTel="+contactTel+"&orderNo="+orderNo,
 				success:function(res){
 					if(res==1){
 						$(".homeTip").text("接单成功！");
@@ -286,12 +287,13 @@
 	$("#selorder").on("click",".refuse",function(){
 		var contactTel = $(this).attr("contactTel");
 		var orderId = $(this).attr("orderId");
+		var orderNo = $(this).attr("orderNo");
 		var currentPage = ${currentPage };
 		if(confirm("确认取消接单？")){
 			$.ajax({
 				url:"custorder.do",
 				type:"post",
-				data:"mn=refuseOrder&orderId="+orderId+"&contactTel="+contactTel,
+				data:"mn=refuseOrder&orderId="+orderId+"&contactTel="+contactTel+"&orderNo="+orderNo,
 				success:function(res){
 					if(res==1){
 						$(".homeTip").text("已取消接单");

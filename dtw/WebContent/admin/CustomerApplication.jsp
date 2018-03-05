@@ -56,7 +56,7 @@
 	            			</c:if>
 	            			<c:if test="${customer.statusId==1}">
 	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}" customerId="${customer.id }">是&nbsp;&nbsp;</a>/
-	            				<a class="refuse">&nbsp;否</a> 
+	            				<a class="refuse" customerId="${customer.id }">&nbsp;否</a> 
 	            			</c:if>
 	            			<c:if test="${customer.statusId==3}">
 	            				已审核
@@ -114,7 +114,7 @@
 			}
 
 		});
-		//添加客户公司
+		//审核通过
 		$("#clientUpdate").on("click",".pass",function(){
 			var currentPage = ${currentPage };
 			var clientName = $(this).attr("clientName");
@@ -149,6 +149,31 @@
 				
 			}
 			
+		});
+		//审核不通过
+		$("#clientUpdate").on("click",".pass",function(){
+			var currentPage = ${currentPage };
+			
+			var customerId = $(this).attr("customerId");
+			if(confirm("确认不同意本次绑定申请？")){
+				$.ajax({
+					"url":"customer.do",
+					"type":"post",
+					"data":"mn=refuseBindingCompany&customerId="+customerId,
+					"success":function(res){
+						if(res==1){
+							$(".homeTip").text("操作成功");
+							$(".homeTip").show(200);
+							$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+currentPage);
+							setTimeout(function(){
+								$(".homeTip").fadeOut(1000);
+							},1000);
+						}else{
+							alert("修改失败");
+						}
+					}
+				});
+			}
 		});
 	</script>
 	</body>

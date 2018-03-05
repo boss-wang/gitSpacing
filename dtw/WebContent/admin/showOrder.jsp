@@ -127,10 +127,10 @@
 		 		<td>最近修改时间</td>
 		 		<td>备注内容</td>
 		 		<td>贸易条款</td>
-		 		<td>应收</td>
-		 		<td>新增应收</td>
-		 		<td>应付</td>
-		 		<td>新增应付</td>
+		 		<td>收入</td>
+		 		<td>新增收入</td>
+		 		<td>支出</td>
+		 		<td>新增支出</td>
 		 		<td>操作栏</td>
 		 	</tr>
 		 	<c:forEach var="order" items="${orderList }">
@@ -186,7 +186,7 @@
 							</div>
 						</c:forEach>
 					</td>
-			 		<td><a class="addCost" orderId="${order.orderId }">添加应收</a></td>
+			 		<td><a class="addCost" orderId="${order.orderId }">添加</a></td>
 			 		<td>
 			 			<c:forEach var="orderPay" items="${order.orderPayList}">
 							<div class="ssName">

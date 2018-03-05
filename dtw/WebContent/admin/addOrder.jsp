@@ -28,6 +28,16 @@
 						<input type="hidden" id="clientId" name="clientId" />
 						<div class="findClient"></div>
 					</div>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>
+						<select  class="inpu" id="contactName" name="contactName" style="display: inline-block; position: absolute; left: 854px;top: 23px;">
+								<option value="${customsStatus.id }">${customsStatus.description }</option>
+						</select><span style="margin-left: 10px;display: inline-block;position: absolute;left: 1095px;top: 30px;">*</span>
+				</div>
+				<div class="line">
+					<div class="tit-mess" style="display: inline-block;">
+						<span class="mess">暂&nbsp;&nbsp;&nbsp;&nbsp;无</span>
+						<input id="" class="inpu" placeholder=""/><span style="margin-left: 10px;">*</span>
+					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">起运港</span>
 						<input  class="inpu" id="loadingPort" name="loadingPort" placeholder="起运港" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>

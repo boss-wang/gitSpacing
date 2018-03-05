@@ -48,10 +48,11 @@ public class CustomerOrderServlet extends BaseServlet {
 	protected void takeOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
 		String contactTel = req.getParameter("contactTel");
+		String orderNo = req.getParameter("orderNo");
 		Order order = new Order();
 		order.setOrderId(orderId);
 		if(orderService.updateOrderStatus(order, 0)){
-			SDKDemo.send(contactTel, "审核成功");
+			SDKDemo.send(contactTel, "尊敬的用户您好，您的订单已经通过审核，订单号为"+orderNo+"，可随时登录我司网站查看货物状态。");
 			resp.getWriter().print(1);
 		};
 		resp.getWriter().close();
@@ -60,10 +61,11 @@ public class CustomerOrderServlet extends BaseServlet {
 	protected void refuseOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
 		String contactTel = req.getParameter("contactTel");
+		String orderNo = req.getParameter("orderNo");
 		Order order = new Order();
 		order.setOrderId(orderId);
 		if(orderService.updateOrderStatus(order, 8)){
-			SDKDemo.send(contactTel, "审核失败");
+			SDKDemo.send(contactTel, "抱歉，您申请的订单"+orderNo+"未能通过审核，具体原因请联系我司客服，谢谢。");
 			resp.getWriter().print(1);
 		};
 		resp.getWriter().close();

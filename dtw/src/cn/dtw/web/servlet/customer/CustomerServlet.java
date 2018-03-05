@@ -100,4 +100,14 @@ public class CustomerServlet extends BaseServlet {
 		};
 		resp.getWriter().close();
 	}
+	//绑定公司申请不通过
+		protected void refuseBindingCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			int customerId = Integer.parseInt(req.getParameter("customerId"));
+			Customer customer = customerService.getCustomerByid(customerId);
+			if(customerService.updateCustomerStatus(customer, 4)) {
+				SDKDemo.send(customer.getTel(), "抱歉，您申请绑定的公司未能通过审核，请重新选择公司进行绑定或联系我司客服人员。");
+				resp.getWriter().print(1);
+			}
+			resp.getWriter().close();
+		}
 }
