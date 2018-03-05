@@ -74,15 +74,15 @@
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
-						<span class="mess">货物重量</span>
+						<span class="mess">毛重(KG)</span>
 						<input class="inpu" id="cargoWeight" name="cargoWeight" placeholder="货物重量" />
 					</div>	
-						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">计费重量</span>
+						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">计重(KG)</span>
 						<input class="inpu" id="chargeWeight" name="chargeWeight" placeholder="计费重量" style="display: inline-block; position: absolute; left: 854px;top: 23px;"/>
 				</div>
 				<div class="line">
 					<div class="tit-mess" style="display: inline-block;">
-						<span class="mess">货物体积</span>
+						<span class="mess">体积(m³)</span>
 						<input  class="inpu" id="cargoVolume" name="cargoVolume" placeholder="货物体积" />
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">报关单状态</span>
