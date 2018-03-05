@@ -30,7 +30,6 @@
 					</div>
 						<span class="mess" style="display: inline-block; position: absolute; left: 450px;">联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>
 						<select  class="inpu" id="contactName" name="contactName" style="display: inline-block; position: absolute; left: 854px;top: 23px;">
-								<option value="${customsStatus.id }">${customsStatus.description }</option>
 						</select><span style="margin-left: 10px;display: inline-block;position: absolute;left: 1095px;top: 30px;">*</span>
 				</div>
 				<div class="line">
@@ -151,7 +150,43 @@
 				var name = $(this).text();
 				$("#clientName").val(name);
 				$(".findClient").empty();
+				$("#contactName").html("");
+				$(".tip").text("");
+				$(".rightTip").text("");
+				var clientName = $("#clientName").val();
+				if(clientName==""||clientName==null){
+					$("#clientTip").text("请输入客户抬头");
+				}else{
+					$.ajax({
+						"url":"client.do",
+						"type":"post",
+						"data":"mn=checkClient&clientName="+clientName,
+						"success":function(res){
+							if(res==0){
+								$("#clientTip").text("不存在此公司，请先添加");
+							}else{
+								var clientId = res;
+								$("#clientTip").text("");
+								$.ajax({
+									"url":"client.do",
+									"type":"post",
+									"data":"mn=getClientContact&clientId="+clientId,
+									"success":function(res){
+										var contactList = JSON.parse(res);
+										for(var i=0;i<contactList.length;i++){
+											var clientContactName = contactList[i].clientContactName;
+											var clientContactId = contactList[i].clientContactId;
+											var option = $('<option value="'+clientContactId+'">'+clientContactName+'</option>');
+											$("#contactName").append(option);
+										}
+									}
+								});
+							}
+						}
+					});
+				}
 			});
+			
 			$("#clientName").blur(function(){
 				setTimeout(function(){
 					$(".findClient").empty();
@@ -204,5 +239,6 @@
 					});
 				}
 			});
+			
 		</script>
 	</body>

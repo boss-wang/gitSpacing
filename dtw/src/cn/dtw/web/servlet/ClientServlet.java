@@ -158,5 +158,16 @@ public class ClientServlet extends BaseServlet {
 			resp.getWriter().print(clientGet.getClientId());
 		};
 	}
-		
+	//根据公司id查询联系人信息
+	protected void getClientContact(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int clientId = Integer.parseInt(req.getParameter("clientId"));
+		Client client = new Client();
+		client.setClientId(clientId);
+		client = clientserv.getClienttext(client);
+		List<Clientcontact> contactList = client.getClientContactlist();
+		String contactJSON = JSON.toJSONString(contactList);
+		resp.getWriter().print(contactJSON);
+		resp.getWriter().flush();
+		resp.getWriter().close();
+	}
 }
