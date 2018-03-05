@@ -14,7 +14,7 @@
  			.findClient{	
 				        position: absolute;
 					    z-index: 10;
-					    top: 107px;
+					    top: 147px;
 					    left: 482px;
 					    border: 1px solid rebeccapurple;
 					}
@@ -42,16 +42,21 @@
 				</div>
 				<div class="cont">
 					<form action="" method="post">
-						<div id="" style="height: 30px;margin-left:393px;">
+						<div  style="height: 30px;margin-left:393px;margin-bottom: 10px;">
+							<h3 style="display: inline-block;color: #555555;">真实姓名:</h3>
+							<input style="width:300px;height: 24px; margin-left: 5px;" id="customerName" placeholder="请输入真实姓名" />
+							<span></span>
+						</div>
+						<div  style="height: 30px;margin-left:393px;">
 							<h3 style="display: inline-block;color: #555555;">公司名称:</h3>
 							<input style="width:300px;height: 24px; margin-left: 5px;" id="clientName" placeholder="请输入公司名称" />
 							<div class="findClient"></div>
 							<span></span>
 						</div>
-						<div id="" style="height: 120px;margin-left:393px;margin-top: 10px;">
+						<div  style="height: 120px;margin-left:393px;margin-top: 10px;">
 							<h3 style="display: inline-block;color: #555555;position: absolute;">公司地址:</h3>
 							<!--<input style="width:300px;height: 24px; margin-left: 5px;" placeholder="请输入公司地址" />-->
-							<textarea name="" rows="" cols="" style="width:300px;height: 100px; margin-left: 90.2px;" id="clientAddress" placeholder="请输入公司地址"></textarea>
+							<textarea name="" rows="" cols="" style="width:299px;height: 100px; margin-left: 89.2px;" id="clientAddress" placeholder="请输入公司地址"></textarea>
 							<span></span>
 						</div>
 						<div id="" style="height: 30px;margin-left:482px;margin-top: 10px;">
@@ -109,6 +114,7 @@
 						success:function(res){
 							var clientJson = JSON.parse(res);
 							for(var i=0;i<clientJson.length;i++){
+								$(".findClient").show();
 								var holder = $('<a class="holder" address="'+clientJson[i].clientAddress+'" >'+clientJson[i].clientName+'</a>');
 								$(".findClient").append(holder);
 							}
@@ -116,6 +122,12 @@
 					});
 				}
 			});
+		$(document).click(function(){
+		    $(".findClient").hide();
+		});
+		$(".findClient").click(function(event){
+		    event.stopPropagation();
+		});
 		$(".findClient").on("click",".holder",function(){
 			var name = $(this).text();
 			var address =$(this).attr("address");

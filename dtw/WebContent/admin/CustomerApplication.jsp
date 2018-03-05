@@ -151,7 +151,7 @@
 			
 		});
 		//审核不通过
-		$("#clientUpdate").on("click",".pass",function(){
+		$("#clientUpdate").on("click",".refuse",function(){
 			var currentPage = ${currentPage };
 			
 			var customerId = $(this).attr("customerId");

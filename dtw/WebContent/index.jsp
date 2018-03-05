@@ -272,6 +272,10 @@
 					$("#homeDiv").load("custorder.do","mn=showCustomerOrdersByClientId");
 				}else if(status=='1'){
 					alert("您绑定的公司正在审核中，通过即可下单");
+				}else if(status=='4'){
+					alert("您绑定的公司未通过审核，请重新绑定");
+					window.location.href="#abstract";
+					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else{
 					window.location.href="<%=basePath%>login.jsp";
 				}
@@ -288,6 +292,10 @@
 					$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId");
 				}else if(status=='1'){
 					alert("您绑定的公司正在审核中，通过即可下单");
+				}else if(status=='4'){
+					alert("您绑定的公司未通过审核，请重新绑定");
+					window.location.href="#abstract";
+					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else{
 					window.location.href="<%=basePath%>login.jsp";
 				}
@@ -304,6 +312,10 @@
 					$("#homeDiv").load("custorder.do","mn=goAddCustomerOrder");
 				}else if(status=='1'){
 					alert("您绑定的公司正在审核中，通过即可下单");
+				}else if(status=='4'){
+					alert("您绑定的公司未通过审核，请重新绑定");
+					window.location.href="#abstract";
+					$("#homeDiv").load("bangdinggongsi.jsp");
 				}else{
 					window.location.href="<%=basePath%>login.jsp";
 				}
