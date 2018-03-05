@@ -164,9 +164,13 @@ public class ClientServlet extends BaseServlet {
 		Client client = new Client();
 		client.setClientName(clientName);
 		client = clientserv.getClientByName(client);
-		List<Clientcontact> contactList = client.getClientContactlist();
-		String contactJSON = JSON.toJSONString(contactList);
-		resp.getWriter().print(contactJSON);
+		if(client!=null) {
+			List<Clientcontact> contactList = client.getClientContactlist();
+			String contactJSON = JSON.toJSONString(contactList);
+			resp.getWriter().print(contactJSON);
+		}else {
+			resp.getWriter().print("no");
+		}
 		resp.getWriter().flush();
 		resp.getWriter().close();
 	}

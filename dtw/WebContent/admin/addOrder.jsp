@@ -146,6 +146,7 @@
 					});
 				}
 			});
+			
 			$(".findClient").on("click",".holder",function(){
 				var name = $(this).text();
 				$("#clientName").val(name);
@@ -173,7 +174,26 @@
 			$("#clientName").blur(function(){
 				setTimeout(function(){
 					$(".findClient").empty();
-				},150);
+				},250);
+				var name = $(this).val();
+				$("#contactName").html("");
+				$.ajax({
+					"url":"client.do",
+					"type":"post",
+					"data":"mn=getClientContact&clientName="+name,
+					"success":function(res){
+						if(res!='no'){
+							var contactList = JSON.parse(res);
+							for(var i=0;i<contactList.length;i++){
+								var clientContactName = contactList[i].clientContactName;
+								var clientContactId = contactList[i].clientContactId;
+								var option = $('<option value="'+clientContactId+'">'+clientContactName+'</option>');
+								$("#contactName").append(option);
+							}
+						}
+					}
+				});
+				
 			});
 			$("#addRes").click(function() {
 				$(".tip").text("");
