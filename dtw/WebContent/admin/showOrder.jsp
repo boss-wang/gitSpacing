@@ -110,6 +110,7 @@
 		 		<td>客户名</td>
 		 		<td>订单状态</td>
 		 		<td>业务编号</td>
+		 		<td>联系人</td>
 		 		<td>系统号</td>
 		 		<td>主单号</td>
 		 		<td>分单号</td>
@@ -138,6 +139,16 @@
 			 		<td>${order.client.clientName }</td>
 			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${order.orderNo }</td>
+			 		<td>
+			 			<div class="ccName">
+			 				<a class="nameContent">${order.clientcontact.clientContactName}</a>
+							<div class="messdiv">
+								<p>电话：${order.clientcontact.clientContactTel}</p>
+								<p>邮箱：${order.clientcontact.clientContactEmail}</p>
+								<p>Q Q：${order.clientcontact.clientContactQQ}</p>
+							</div>
+						</div>
+					</td>
 			 		<td>${order.systemNo }</td>
 			 		<td>${order.mawbNo }</td>
 			 		<td>${order.hawbNo }</td>
@@ -258,7 +269,7 @@
 		 	</c:forEach>
 		 	
 		 	<tr id="last" style="height:50px;">
-            		<td  colspan="25"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
+            		<td  colspan="26"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
             </tr> 
 		 </table>
 	</div>

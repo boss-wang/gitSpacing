@@ -153,38 +153,21 @@
 				$("#contactName").html("");
 				$(".tip").text("");
 				$(".rightTip").text("");
-				var clientName = $("#clientName").val();
-				if(clientName==""||clientName==null){
-					$("#clientTip").text("请输入客户抬头");
-				}else{
-					$.ajax({
-						"url":"client.do",
-						"type":"post",
-						"data":"mn=checkClient&clientName="+clientName,
-						"success":function(res){
-							if(res==0){
-								$("#clientTip").text("不存在此公司，请先添加");
-							}else{
-								var clientId = res;
-								$("#clientTip").text("");
-								$.ajax({
-									"url":"client.do",
-									"type":"post",
-									"data":"mn=getClientContact&clientId="+clientId,
-									"success":function(res){
-										var contactList = JSON.parse(res);
-										for(var i=0;i<contactList.length;i++){
-											var clientContactName = contactList[i].clientContactName;
-											var clientContactId = contactList[i].clientContactId;
-											var option = $('<option value="'+clientContactId+'">'+clientContactName+'</option>');
-											$("#contactName").append(option);
-										}
-									}
-								});
-							}
+				$("#clientTip").text("");
+				$.ajax({
+					"url":"client.do",
+					"type":"post",
+					"data":"mn=getClientContact&clientName="+name,
+					"success":function(res){
+						var contactList = JSON.parse(res);
+						for(var i=0;i<contactList.length;i++){
+							var clientContactName = contactList[i].clientContactName;
+							var clientContactId = contactList[i].clientContactId;
+							var option = $('<option value="'+clientContactId+'">'+clientContactName+'</option>');
+							$("#contactName").append(option);
 						}
-					});
-				}
+					}
+				});
 			});
 			
 			$("#clientName").blur(function(){
