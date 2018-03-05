@@ -189,4 +189,10 @@
 				});
 				}
 			});
+			$(function(){
+				var clientName = "${param.clientName }";
+				if(clientName!=""){
+					$("#clientName").val(clientName);
+				}
+			});
         </script>

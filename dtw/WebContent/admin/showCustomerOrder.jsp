@@ -205,7 +205,7 @@
 					</td>
 			 		<td>
 			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
-			 				<a class="addCost" orderId="${order.orderId }">添加</a>
+			 				<a class="addCost" orderId="${order.orderId }" clientName="${order.client.clientName }">添加</a>
 			 			</c:if>
 			 		</td>
 			 		<td>
@@ -224,16 +224,14 @@
 									</p>
 									<p>
 										<c:if test="${orderPay.payStatus!=3 }">
-											<a class="ccOperation modifyCost" cost="${orderCost.cost}" invoiceNo="${orderCost.invoiceNo}" costStatus="${orderCost.costStatus }" >修 改</a> 
-											<c:if test="${orderCost.costStatus==1 }">
-												<a class="ccOperation delCost">删 除</a>	
+											<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a>  
+											<c:if test="${orderPay.payStatus==1 }">
+												<a class="ccOperation delPay">删除</a>	
 											</c:if>
-											<c:if test="${orderCost.costStatus==2 }">
-												<a class="ccOperation">催 款</a>	
+											<c:if test="${orderPay.payStatus==2 }">
+												<a class="ccOperation">付 款</a>	
 											</c:if>
 										</c:if>
-										<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a> 
-										<a class="ccOperation delPay">删除</a>
 									</p>
 								</div>
 								
@@ -354,8 +352,9 @@
 	//添加应收
 	$("#selorder").on("click",".addCost",function(){
 		var orderId = $(this).attr("orderId");
+		var clientName = $(this).attr("clientName");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
+		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders&clientName="+clientName);
 	});
 	//添加应付
 	$("#selorder").on("click",".addPay",function(){

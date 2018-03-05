@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style type="text/css">
 .mess {
 	display: inline-block;
@@ -107,7 +108,7 @@ position: absolute;
 						</select> <span class="mess">联&nbsp;&nbsp;系&nbsp;&nbsp;人</span> 
 						<select class="inpu" id="contact">
 							<c:forEach var="clientcontact" items="${clientcontactList }">
-								<option value="${clientcontact.clientContactId }">${clientcontact.clientContactName }</option>
+								<option value="${clientcontact.clientContactId }" <c:if test="${clientcontact.clientContactTel==customer.tel }">selected</c:if>>${clientcontact.clientContactName }&nbsp;【${fn:substring(clientcontact.clientContactTel,0,5) }****】</option>
 							</c:forEach>
 						</select>
 					</div>

@@ -193,7 +193,11 @@
 							</div>
 						</c:forEach>
 					</td>
-			 		<td><a class="addCost" orderId="${order.orderId }">添加</a></td>
+			 		<td>
+			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="addCost" orderId="${order.orderId }" clientName="${order.client.clientName }">添加</a>
+			 			</c:if>
+			 		</td>
 			 		<td>
 			 			<c:forEach var="orderPay" items="${order.orderPayList}">
 							<div class="ssName">
@@ -209,8 +213,15 @@
 										</c:forEach>
 									</p>
 									<p>
-										<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a> 
-										<a class="ccOperation delPay">删除</a>
+										<c:if test="${orderPay.payStatus!=3 }">
+											<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a>  
+											<c:if test="${orderPay.payStatus==1 }">
+												<a class="ccOperation delPay">删除</a>	
+											</c:if>
+											<c:if test="${orderPay.payStatus==2 }">
+												<a class="ccOperation">付 款</a>	
+											</c:if>
+										</c:if>
 									</p>
 								</div>
 								
@@ -227,8 +238,22 @@
 							</div>
 						</c:forEach>
 			 		</td>
-			 		<td><a class="addPay" orderId="${order.orderId }">添加</a></td>
-			 		<td><a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a>删除</a></td>
+			 		<td>
+			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="addPay" orderId="${order.orderId }">添加</a>
+			 			</c:if>
+			 		</td>
+			 		<td>
+						<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+			 				<a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a class="cancel" orderId="${order.orderId }">取消</a>
+			 			</c:if>
+			 			<c:if test="${order.orderStatus.statusId==6}">
+			 				<a class="takeOrder" orderId="${order.orderId }" contactTel="${order.clientcontact.clientContactTel}" orderNo="${order.orderNo }">接单</a>&nbsp;&nbsp;<a class="refuse" orderId="${order.orderId }" orderNo="${order.orderNo }" contactTel="${order.clientcontact.clientContactTel}">取消</a>
+			 			</c:if>
+			 			<c:if test="${order.orderStatus.statusId==7||order.orderStatus.statusId==8}">
+			 				<a>删除</a>
+			 			</c:if>
+					</td>
 		 		</tr>
 		 	</c:forEach>
 		 	
@@ -238,6 +263,28 @@
 		 </table>
 	</div>
 	<script>
+	//取消订单
+	$("#selorder").on("click",".cancel",function(){
+		var orderId = $(this).attr("orderId");
+		var currentPage = ${currentPage };
+		if(confirm("确认取消此票订单？")){
+			$.ajax({
+				url:"custorder.do",
+				type:"post",
+				data:"mn=cancelOrder&orderId="+orderId,
+				success:function(res){
+					if(res==1){
+						$(".homeTip").text("此票订单已取消");
+						$(".homeTip").show(200);
+						$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+						setTimeout(function(){
+							$(".homeTip").fadeOut(1000);
+						},1000);
+					}
+				}
+			});
+		}
+	});
 	//修改订单
 	$("#selorder").on("click",".updateOrder",function(){
 		var orderId = $(this).attr("modifyId");
@@ -247,8 +294,9 @@
 	//添加应收
 	$("#selorder").on("click",".addCost",function(){
 		var orderId = $(this).attr("orderId");
+		var clientName = $(this).attr("clientName");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders");
+		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders&clientName="+clientName);
 	});
 	//添加应付
 	$("#selorder").on("click",".addPay",function(){
