@@ -55,7 +55,7 @@
 									<a title="快速下单" id="cost">快速下单</a>
 								</li>
 								<li>
-									<a title="订单追踪" class="selectorder">订单追踪</a>
+									<a  class="selectorder">我的订单</a>
 								</li>
 								<li>
 									<a title="付款查询" class="payorder">订单付款</a>
@@ -74,8 +74,12 @@
 							</ul>
 						</li>
 						<li class="mainlevel">
+							<a  id="personCenter" class="menu">个人中心</a>
+						</li>
+						<li class="mainlevel">
 							<a title="联系我们" id="contactUs" class="menu">联系我们</a>
 						</li>
+						
 								<c:if test="${customer==null }">
 									<li class="mainlevel">
 										<a title="登陆" href="login.jsp" class="menu">登陆</a>
@@ -167,7 +171,7 @@
 					</div>
 					<dl>
 						<dt><a id="fastAddOrder"  title="快速下单">快速下单</a></dt>
-						<dt><a class="selectorder"  title="订单追踪">订单追踪</a></dt>
+						<dt><a class="selectorder"  >我的订单</a></dt>
 						<dt><a title="付款查询" class="payorder">订单付款</a></dt>
 					</dl>
 				</div>
@@ -367,5 +371,13 @@
 					$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId");
 				}
 			});
+			$("#personCenter").click(function(){
+				if('${customer}'==''){
+					window.location.href="<%=basePath%>login.jsp";
+				}else{
+					window.location.href="#abstract";
+					$("#homeDiv").load("updateCustomerMessage.jsp");
+				}
+			})
 		</script>
 </html>

@@ -145,7 +145,7 @@ img {
 #nav .mainlevel {
 	float: left;
 	border-right: 1px solid #fff;
-	width: 120px;
+	width: 110px;
 	/*IE6 only*/
 	text-align: center;
 	position: relative;
@@ -180,7 +180,7 @@ img {
 	left: 0px;
 	z-index: 99999;
 	float: left;
-	width: 120px;
+	width: 110px;
 	overflow: hidden;
 	font-size: 14px;
 	background-color: darkblue;

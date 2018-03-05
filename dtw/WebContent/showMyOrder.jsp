@@ -42,7 +42,7 @@
 			<div class="container">
 				<caption id="cap">
 					<div class="index-title">
-						<a href="#"  title="公司简介">查看订单</a>
+						<a  title="公司简介">查看订单</a>
 					</div>
 				</caption>
 				<div id="pageTip"></div>
