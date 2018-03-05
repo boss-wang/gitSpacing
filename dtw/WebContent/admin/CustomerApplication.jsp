@@ -21,7 +21,7 @@
             <!-- 表单内容 -->
         <table   border="1" id="clientUpdate" style="width: 850px; height: 350px"  >
             	<tr id="" class="tit-mess3">
-            		<td class="mess1"  style="width:150px;">姓名</td>
+            		<td class="mess1"  style="width:150px;">账号</td>
             		<td class="mess1"  style="width:160px;" >申请公司</td>
             		<td class="mess1" style="width:120px;">申请地址</td>
             		<td class="mess1" style="width:160px;">公司是否存在</td>
@@ -32,6 +32,7 @@
 	            		<td class="mess2">
 	            				<div class="ccName"><a class="nameContent"  >${customer.loginName }</a>
 		            				<div class="messdiv">
+		            					<p>姓名：${customer.realName }</p>
 										<p>电话：${customer.tel }</p>
 										<p>邮箱：${customer.email }</p>
 									</div>

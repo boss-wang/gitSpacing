@@ -9,9 +9,16 @@ private String email;
 private int statusId;
 private Clienttemp clientTemp;
 private int clientExists;
+private String realName;
 
 
 
+public String getRealName() {
+	return realName;
+}
+public void setRealName(String realName) {
+	this.realName = realName;
+}
 public Clienttemp getClientTemp() {
 	return clientTemp;
 }

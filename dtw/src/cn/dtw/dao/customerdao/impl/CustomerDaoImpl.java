@@ -60,9 +60,10 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	//查询客户信息及审核状态
 	@Override
 	public List<Customer> getCustomerList(int startRow, int pageSize) {
-		String sql = "select loginName,loginPwd,tel,email,statusId,customer.id as id,clientExists from customer left join clienttemp_customer on customer.id=clienttemp_customer.customerId order by statusId limit ?,?";
+		String sql = "select loginName,loginPwd,tel,email,statusId,customer.id as id,clientExists,realName from customer left join clienttemp_customer on customer.id=clienttemp_customer.customerId order by statusId limit ?,?";
 		List<Customer> list = super.executeQuery(new BeanListHandler<Customer>(Customer.class), sql, startRow,pageSize);
 		List<Customer> customerList = new ArrayList<Customer>();
+		//保存临时公司信息
 		for(Customer customer:list) {
 			customer.setClientTemp(clienttempDao.getClienttempByCustomer(customer));
 			customerList.add(customer);
