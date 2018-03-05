@@ -15,8 +15,10 @@ import cn.dtw.entity.Leavemessage;
 import cn.dtw.service.ClientContactService;
 import cn.dtw.service.ClientService;
 import cn.dtw.service.LeaveMessageService;
+import cn.dtw.service.customerservice.ClienttempService;
 import cn.dtw.service.customerservice.CustomerService;
 import cn.dtw.service.customerservice.Customer_ClientService;
+import cn.dtw.service.customerservice.impl.ClientTempServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.customerservice.impl.Customer_ClientServiceImpl;
 import cn.dtw.service.impl.ClientContactServiceImpl;
@@ -34,6 +36,7 @@ public class CustomerServlet extends BaseServlet {
 	private ClientService clientService = new ClientServiceImpl();
 	private ClientContactService clientContactService = new ClientContactServiceImpl();
 	private Customer_ClientService customerClientService = new Customer_ClientServiceImpl();
+	private ClienttempService clienttempService = new ClientTempServiceImpl();
 	//显示注册的客户
 	protected void showCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");
@@ -104,6 +107,7 @@ public class CustomerServlet extends BaseServlet {
 		protected void refuseBindingCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 			int customerId = Integer.parseInt(req.getParameter("customerId"));
 			Customer customer = customerService.getCustomerByid(customerId);
+			clienttempService.delClienttempByCustomer(customer);
 			if(customerService.updateCustomerStatus(customer, 4)) {
 				SDKDemo.send(customer.getTel(), "抱歉，您申请绑定的公司未能通过审核，请重新选择公司进行绑定或联系我司客服人员。");
 				resp.getWriter().print(1);

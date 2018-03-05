@@ -16,6 +16,7 @@ public class ClientTempServiceImpl implements ClienttempService {
 	private  ClienttempDao clientTemp = new ClienttempDaoImpl();
 	private CustomerDao customerDao = new CustomerDaoImpl();
 	private ClientDao clientDao = new ClientDaoImpl();
+	private ClienttempDao clienttempDao = new ClienttempDaoImpl();
 	//申请绑定公司
 	@Override
 	public int addClienttemp_customer(Clienttemp_customer clienttemp_customer, Clienttemp clienttemp) {
@@ -39,6 +40,17 @@ public class ClientTempServiceImpl implements ClienttempService {
 	@Override
 	public boolean updateExists(Clienttemp_customer clienttemp_customer, int existsStatus) {
 		return clientTemp.updateExists(clienttemp_customer, existsStatus);
+	}
+	//删除临时公司
+	@Override
+	public boolean delClienttempByCustomer(Customer customer) {
+		Clienttemp clienttemp = clienttempDao.getClienttempByCustomer(customer);
+		if(clienttempDao.delClienttempByCustomer(customer)) {
+			if(clienttempDao.delClienttemp(clienttemp)) {
+				return true;
+			}
+		};
+		return false;
 	}
 	
 

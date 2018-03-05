@@ -9,4 +9,6 @@ public interface ClienttempService {
 	int addClienttemp_customer(Clienttemp_customer clienttemp_customer ,Clienttemp clienttemp);
 	//修改临时公司存在状态
 	public boolean updateExists(Clienttemp_customer clienttemp_customer,int existsStatus);
+	//删除绑定失败的客户对应的临时公司信息
+	public boolean delClienttempByCustomer(Customer customer);
 }

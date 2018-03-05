@@ -13,4 +13,8 @@ public interface ClienttempDao {
 		int addClienttemp_customer(Clienttemp_customer clienttemp_customer );
 		//通过客户id查询其对应临时公司信息
 		public Clienttemp getClienttempByCustomer(Customer customer);
+		//根据客户id删除临时公司信息
+		public boolean delClienttempByCustomer(Customer customer);
+		//删除临时公司
+		public boolean delClienttemp(Clienttemp clienttemp);
 }

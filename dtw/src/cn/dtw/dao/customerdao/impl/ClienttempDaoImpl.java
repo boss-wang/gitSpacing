@@ -33,5 +33,17 @@ public class ClienttempDaoImpl extends BaseDao implements ClienttempDao  {
 		String sql = "update clienttemp_customer set clientExists=? where clientId=?";
 		return super.executeUpdate(sql, existsStatus,clienttemp_customer.getClientId())>0?true:false;
 	}
+	//根据客户id删除其临时公司
+	@Override
+	public boolean delClienttempByCustomer(Customer customer) {
+		String sql = "delete from clienttemp_customer where customerId=?";
+		return super.executeUpdate(sql, customer.getId())>0?true:false;
+	}
+	//删除临时公司
+	@Override
+	public boolean delClienttemp(Clienttemp clienttemp) {
+		String sql = "delete from clienttemp where clientId=?";
+		return super.executeUpdate(sql, clienttemp.getClientId())>0?true:false;
+	}
 
 }
