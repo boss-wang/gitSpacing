@@ -259,9 +259,6 @@ public class OrderServlet extends BaseServlet {
 		order.setSystemNo(systemNo);
 		order.setTermsId(termsId);
 		order.setLoadingPort(loadingPort);
-		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		order.setUpdateTime(formater.format(date));
 		PrintWriter out = resp.getWriter();
 		if(orderService.updateOrder(order)) {
 			out.print(1);

@@ -76,10 +76,10 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "update `order` set arriveDate=?,cargoPiece=?,cargoVolume=?,"
 				+ "cargoWeight=?,chargeWeight=?,clientId=?,customsNo=?,customsStatus=?,"
 				+ "departDate=?,destination=?,flightNo=?,hawbNo=?,mawbNo=?,loadingPort=?,"
-				+ "remarks=?,statusId=?,systemNo=?,updateTime=?,termsId=? where orderId=?";
+				+ "remarks=?,statusId=?,systemNo=?,termsId=? where orderId=?";
 		return super.executeUpdate(sql, order.getArriveDate(),order.getCargoPiece(),order.getCargoVolume(),
 				order.getCargoWeight(),order.getChargeWeight(),order.getClientId(),order.getCustomsNo(),order.getCustomsStatus(),order.getDepartDate(),order.getDestination(),
-				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getLoadingPort(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getUpdateTime(),order.getTermsId(),order.getOrderId())>0?true:false;
+				order.getFlightNo(),order.getHawbNo(),order.getMawbNo(),order.getLoadingPort(),order.getRemarks(),order.getStatusId(),order.getSystemNo(),order.getTermsId(),order.getOrderId())>0?true:false;
 	}
 	//查询业务编号是否存在
 	@Override
