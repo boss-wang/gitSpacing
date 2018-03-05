@@ -90,8 +90,8 @@ position: absolute;
 						<input class="inpu"  required="required" id="cargoPiece" placeholder="货物件数" />
 					</div>
 					<div class="tit-mess" >
-						<span class="mess">货物重量</span><span id="status1"></span><input class="inpu"  required="required"  id="weight"
-							placeholder="货物重量单位kg" /> <span class="mess">货物体积</span><span id="status2"></span> <input
+						<span class="mess">毛 重(KG)</span><span id="status1"></span><input class="inpu"  required="required"  id="weight"
+							placeholder="货物重量单位kg" /> <span class="mess">体 积(m³)</span><span id="status2"></span> <input
 							class="inpu"   required="required" id="volume" placeholder="货物体积m³" />
 					</div>
 					<div class="tit-mess">
