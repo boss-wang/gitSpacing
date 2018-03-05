@@ -360,5 +360,12 @@
 				window.location.href="#abstract";
 				$("#homeDiv").load("contactUs.jsp");
 			});
+			$(function(){
+				var come = "${param.come }";
+				if(come!=""&&come!=null){
+					window.location.href="#abstract";
+					$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId");
+				}
+			});
 		</script>
 </html>

@@ -168,8 +168,15 @@
 										</c:forEach>
 									</p>
 									<p>
-										<a class="ccOperation modifyCost" cost="${orderCost.cost}" invoiceNo="${orderCost.invoiceNo}" costStatus="${orderCost.costStatus }" >修改</a> 
-										<a class="ccOperation delCost">删除</a>
+										<c:if test="${orderCost.costStatus!=3 }">
+											<a class="ccOperation modifyCost" cost="${orderCost.cost}" invoiceNo="${orderCost.invoiceNo}" costStatus="${orderCost.costStatus }" >修 改</a> 
+											<c:if test="${orderCost.costStatus==1 }">
+												<a class="ccOperation delCost">删 除</a>	
+											</c:if>
+											<c:if test="${orderCost.costStatus==2 }">
+												<a class="ccOperation">催 款</a>	
+											</c:if>
+										</c:if>
 									</p>
 								</div>
 								

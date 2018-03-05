@@ -1,12 +1,18 @@
 package cn.dtw.web.servlet.customer;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
@@ -32,6 +38,7 @@ import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
+import cn.dtw.util.alipay.AlipayConfig;
 import cn.dtw.util.phone.SDKDemo;
 import cn.dtw.web.servlet.BaseServlet;
 @WebServlet("/custorder.do")
@@ -211,5 +218,13 @@ public class CustomerOrderServlet extends BaseServlet {
 			req.setAttribute("totalPage", totalPage);
 			req.setAttribute("orderList", payorderList);
 			req.getRequestDispatcher("/payorder.jsp").forward(req, resp);
+		}
+		//付款成功
+		protected void payOrdersSuccess(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			int costId = Integer.parseInt(req.getParameter("costId"));
+			if(customerCostService.updateCostStatus(costId, 3)) {
+				resp.getWriter().print(1);
+			};
+			resp.getWriter().close();
 		}
 }

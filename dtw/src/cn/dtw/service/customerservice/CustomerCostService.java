@@ -13,4 +13,6 @@ public interface CustomerCostService {
 		List<Order_cost> getPayOrderByCustomerId(Customer customer,int curPage,int rowSize );
 	//根据下单人id查询订单条数
 		int getPayOrderCountByCustomerId(Customer customer);
+	//修改付款状态
+		public boolean updateCostStatus(int costId,int costStatus);
 }
