@@ -17,10 +17,29 @@
 		<link href="css/icons.css" rel="stylesheet">
 		<link href="css/generics.css" rel="stylesheet">
         <link rel="stylesheet" href="css/add.css" />
+        
+        <style type="text/css">
+        	#newOrderTip{
+        		display:none;
+        		position:fixed;
+        		bottom:0px;
+        		right:0px;
+        		width:400px;
+        		height:40px;
+        		border:5px solid gray;
+        		border-radius:15px;
+        		background: rgba(255,255,255,0.3);
+        		text-align:center;
+        		line-height:30px;
+        		font-size:16px;
+        		cursor: pointer;
+        	}
+        </style>
 </head>
 
 
 <body id="skin-blur-blue">
+		<div id="newOrderTip"></div>
 		<header id="header" class="media">
 			<a id="menu-toggle"></a>
 			<a class="logo pull-left" >${user.userName}</a>
@@ -239,8 +258,25 @@
 				$("#headpics").hide();
 				
 			})
-		})
-		
+		});
+		setInterval(function() {
+			$.ajax({
+				url:"custorder.do",
+				type:"post",
+				data:"mn=getNewOrderCount",
+				success:function(res){
+					if(res>0){
+						var con = "您有"+res+"条新订单，点击查看";
+						$("#newOrderTip").text(con);
+						$("#newOrderTip").show();
+					}
+				}
+			});
+		}, 10000);
+		$("#newOrderTip").click(function(){
+			$(this).hide();
+			$("#home").load("custorder.do","mn=showCustomerOrders");
+		});
 
 	</script>
 	

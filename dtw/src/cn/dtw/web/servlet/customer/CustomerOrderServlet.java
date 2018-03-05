@@ -1,18 +1,12 @@
 package cn.dtw.web.servlet.customer;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayTradePagePayRequest;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
@@ -38,7 +32,6 @@ import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
-import cn.dtw.util.alipay.AlipayConfig;
 import cn.dtw.util.phone.SDKDemo;
 import cn.dtw.web.servlet.BaseServlet;
 @WebServlet("/custorder.do")
@@ -89,6 +82,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	}
 	//显示客户自助下单的列表（员工可查看）
 	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		this.getServletContext().setAttribute("newOrder",0);
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
 		User user = new User();
@@ -147,7 +141,20 @@ public class CustomerOrderServlet extends BaseServlet {
 		Customer_client custClient= customerService.getClientBycust(customer);
 		order.setClientId(custClient.getClientId());
 		boolean back=customerOrderService.addCustomerOrder(order);
+		Integer newOrder = (Integer)this.getServletContext().getAttribute("newOrder");
+		newOrder = newOrder==null?0:newOrder;
+		if(back) {
+			newOrder++; 
+			this.getServletContext().setAttribute("newOrder", newOrder);
+		}
 		resp.getWriter().print(back);
+	}
+	//查看新订单数量
+	protected void getNewOrderCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Integer newOrder = (Integer)this.getServletContext().getAttribute("newOrder");
+		newOrder = newOrder==null?0:newOrder;
+		resp.getWriter().print(newOrder);
+		resp.getWriter().close();
 	}
 	//申请绑定公司
 		protected void bindingCompany (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
