@@ -5,6 +5,14 @@
 <style>
  #payOrderTable tr{
 				text-align:center;
+				height: 30px;
+			}
+			
+			#payOrderTable th{
+				height: 30px;
+			}
+			#payOrderTable tr:last-child{
+				height: 30px;
 			}
 			#payOrderTable tr td{
 				padding-top:10px;
@@ -48,25 +56,66 @@
 							<th><span>付款状态</span></th>
 							
 						</tr>
-						<c:forEach var="order" items="${orderList }">
+						<c:if test="${orderList!=null }">
+						<c:forEach var="order_cost" items="${orderList }">
 							<tr>
-							<td>${order.orderNo }</td>
-							<td>${order.mawbNo }</td>
-							<td>${order.hawbNo }</td>
-							<td>${order.departDate }</td>
-							<td>${order.destination }</td>
-							<td>${order.cargoPiece }</td>
-							<td>${order.cargoWeight }</td>
-							<td>${order.cargoVolume }</td>
-							<td>${order.order_cost.cost }</td>
-							<td>${order.order_cost.statusName.name }</td>
+							<td>${order_cost.order.orderNo }</td>
+							<td>${order_cost.order.mawbNo }</td>
+							<td>${order_cost.order.hawbNo }</td>
+							<td>${order_cost.order.departDate }</td>
+							<td>${order_cost.order.destination }</td>
+							<td>${order_cost.order.cargoPiece }</td>
+							<td>${order_cost.order.cargoWeight }</td>
+							<td>${order_cost.order.cargoVolume }</td>
+							<td>${order_cost.cost }</td>
+							<td>${order_cost.statusName.name }</td>
 						</tr>
 						</c:forEach>
+						</c:if>
 						
-						<tr style="height:50px;">
+						<c:if test="${empty orderList  }">
+						<tr><td colspan="11">暂无付款订单</td></tr>
+						</c:if>
+						
+						<tr >
             				<th  colspan="11"><a id="firstPage">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="prePage">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="nextPage">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="lastPage">末页</a></th>
           			    </tr> 
 					</table>
 				</center>
 		</div>
 </body>
+<script>
+$("#firstPage").click(function(){
+		$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId&currentPage=1");
+	});
+	$("#lastPage").click(function(){
+		var totalPage = ${totalPage };
+		$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId&currentPage="+totalPage);
+	});
+	$("#prePage").click(function(){
+		var currentPage = ${currentPage }-1;
+		if(currentPage==0){
+			$("#pageTip").text("已经是第一页了");
+			$("#pageTip").show(200);
+			setTimeout(function(){
+				$("#pageTip").fadeOut(1000);
+			},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId&currentPage="+currentPage);
+		}
+	});
+	$("#nextPage").click(function(){
+		var totalPage = ${totalPage }+1;
+		var currentPage = ${currentPage }+1;
+		if(totalPage==currentPage){
+				$("#pageTip").text("已经是最后一页了");
+				$("#pageTip").show(200);
+				setTimeout(function(){
+					$("#pageTip").fadeOut(1000);
+				},1000);
+		}else{
+			$("#homeDiv").load("custorder.do","mn=showCustomerPayOrdersByClientId&currentPage="+currentPage);
+		}
+	
+	});
+	</script>

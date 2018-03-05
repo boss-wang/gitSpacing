@@ -24,8 +24,5 @@ public interface CustomerOrderService {
 	public int getOrderCount(Client client);
 	//查询所有客户自助下单的订单列表（userId=0）
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
-	//通过下单人id查询订单信息及付款信息
-	List<Order> getPayOrderByCustomerId(Customer customer,int curPage,int rowSize );
-	//根据下单人id查询订单条数
-	int getPayOrderCountByCustomerId(Customer customer);
+	
 }

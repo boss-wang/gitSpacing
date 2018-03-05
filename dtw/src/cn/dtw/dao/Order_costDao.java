@@ -17,4 +17,8 @@ public interface Order_costDao {
 	public boolean delCost(Order_cost orderCost);
 	//根据订单id 和公司id 查询
 	List<Order_cost> getOrder_CostByOrderIdAndClientId(Client client,Order order);
+	//根据公司Id查询
+	List<Order_cost> getOrder_CostByClientId(Client client,int startSize ,int rowSize);
+	//根据公司Id查询条数
+	int getAlltotal(Client client);
 }

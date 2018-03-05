@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.ClientDao;
@@ -60,6 +61,20 @@ public class Order_costDaoImpl extends BaseDao implements Order_costDao {
 			order_cost.setStatusName(coststatus);
 		}
 		return list;
+	}
+	//根据公司Id查询
+	@Override
+	public List<Order_cost> getOrder_CostByClientId(Client client, int startSize, int rowSize) {
+		String sql="select * from order_cost where clientId=? order by costStatus limit ?,? ";
+		return super.executeQuery(new BeanListHandler<Order_cost>(Order_cost.class), sql, client.getClientId(),startSize,rowSize);
+	}
+	//根据公司Id查询条数
+	@Override
+	public int getAlltotal(Client client) {
+		String sql="select count(1) as count from order_cost where clientId=?";
+		Object obj =super.executeOneColumn(new  ScalarHandler("count"), sql, client.getClientId());
+		Long m = (Long)obj;
+		return m.intValue();
 	}
 
 }

@@ -33,9 +33,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	private OrderService orderService = new OrderServiceImpl();
 	private ClientContactDao clientContactDao = new ClientContactDaoImpl();
 	private CustomerOrderDao customerOrderDao = new CustomerOrderImpl();
-	private CustomerDao customerDao = new CustomerDaoImpl();
-	private CustomerCostDao customerCostDao = new CustomerCostDaoImpl();
-	private   Order_costDao order_costDao = new Order_costDaoImpl();
+	
 	//通过公司id查询订单信息
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int curPage, int pageSize) {
@@ -97,26 +95,5 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	public int getOrderCount(Client client) {
 		return customerOrderDao.getOrderCount(client);
 	}
-	//通过网站下单人id查询订单信息及付款信息
-	@Override
-	public List<Order> getPayOrderByCustomerId(Customer customer, int curPage, int rowSize) {
-		Customer_client clientId=customerDao.getClientBycust(customer);
-		Client client = new Client();
-		client.setClientId(clientId.getClientId());
-		List<Order> list=customerOrderDao.getOrderListByClientId(client,  (curPage-1)*rowSize, rowSize);
-		for(Order order:list) {
-			List<Order_cost> costList = order_costDao.getOrder_CostByOrderIdAndClientId(client, order);
-			order.setOrderCostList(costList);
-		}
-		return list;
-	}
-	//根据下单人id查询订单条数
-	@Override
-	public int getPayOrderCountByCustomerId(Customer customer) {
-		Customer_client clientId=customerDao.getClientBycust(customer);
-		Client client = new Client();
-		client.setClientId(clientId.getClientId());
-		return customerOrderDao.getOrderCount(client);
-	}
-
+	
 }

@@ -9,6 +9,13 @@
 		<style>
 			#myOrderTable tr{
 				text-align:center;
+				height: 30px;
+			}
+			#myOrderTable th{
+				height: 30px;
+			}
+			#myOrderTable tr:last-child{
+				height: 30px;
 			}
 			#myOrderTable tr td{
 				padding-top:10px;
@@ -79,9 +86,11 @@
 							</td>
 						</tr>
 						</c:forEach>
-						
-						<tr style="height:50px;">
-            				<td  colspan="11"><a id="firstPage">首页</a><a id="prePage">上一页</a><a id="nextPage">下一页</a><a id="lastPage">末页</a></td>
+						<c:if test="${empty orderList  }">
+						<tr><td colspan="11">暂无任何订单</td></tr>
+						</c:if>
+						<tr >
+            				<th  colspan="11"><a id="firstPage">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="prePage">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="nextPage">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="lastPage">末页</a></th>
           			    </tr> 
 					</table>
 				</center>

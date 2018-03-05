@@ -17,14 +17,17 @@ import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
+import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
 import cn.dtw.service.OrderService;
 import cn.dtw.service.customerservice.ClienttempService;
+import cn.dtw.service.customerservice.CustomerCostService;
 import cn.dtw.service.customerservice.CustomerOrderService;
 import cn.dtw.service.customerservice.CustomerService;
 import cn.dtw.service.customerservice.impl.ClientTempServiceImpl;
+import cn.dtw.service.customerservice.impl.CustomerCostServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
@@ -40,6 +43,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
 	private OrderService orderService = new OrderServiceImpl();
 	private ClienttempService clientTempService = new  ClientTempServiceImpl();
+	private CustomerCostService customerCostService= new CustomerCostServiceImpl();
 	//后台审核通过
 	protected void takeOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int orderId = Integer.parseInt(req.getParameter("orderId"));
@@ -186,7 +190,7 @@ public class CustomerOrderServlet extends BaseServlet {
 			String curPage = req.getParameter("currentPage");
 			Customer customer = (Customer)req.getSession().getAttribute("customer");
 			int currentPage;
-			int totalRow = customerOrderService.getPayOrderCountByCustomerId(customer);
+			int totalRow = customerCostService.getPayOrderCountByCustomerId(customer);
 			int totalPage = totalRow%6==0?totalRow/6:totalRow/6+1;
 			if(curPage==null) {
 				currentPage = 1;
@@ -195,7 +199,7 @@ public class CustomerOrderServlet extends BaseServlet {
 				currentPage = currentPage<1?1:currentPage;
 				currentPage = currentPage>totalPage?totalPage:currentPage;
 			}
-			List<Order> payorderList = customerOrderService.getPayOrderByCustomerId(customer, currentPage, 6);
+			List<Order_cost> payorderList = customerCostService.getPayOrderByCustomerId(customer, currentPage, 6);
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("totalPage", totalPage);
 			req.setAttribute("orderList", payorderList);
