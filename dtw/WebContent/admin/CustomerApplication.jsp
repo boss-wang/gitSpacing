@@ -62,6 +62,9 @@
 	            			<c:if test="${customer.statusId==3}">
 	            				已审核
 	            			</c:if>
+	            			<c:if test="${customer.statusId==4}">
+	            			审核未通过
+	            			</c:if>
 	            		</td>
             		</tr> 
             	</c:forEach>

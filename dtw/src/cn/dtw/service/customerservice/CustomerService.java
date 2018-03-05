@@ -25,4 +25,6 @@ public interface CustomerService {
 		public Customer getCustomerByid(int customerId);
 	//修改客户账号的状态
 		public boolean updateCustomerStatus(Customer customer,int statusId);
+	//根据下单人id更新真实姓名
+		int updateRealNameByCustomer(Customer customer);
 }

@@ -147,6 +147,11 @@ public class CustomerOrderServlet extends BaseServlet {
 			String clientName=req.getParameter("clientName");
 			String clientAddress=req.getParameter("clientAddress");
 			String customerId=req.getParameter("customerId");
+			String realName = req.getParameter("realName");
+			Customer cust1 = new Customer();
+			cust1.setId(Integer.parseInt(customerId));
+			cust1.setRealName(realName);
+			customerService.updateRealNameByCustomer(cust1);
 			Clienttemp clienttemp = new Clienttemp();
 			clienttemp.setClientName(clientName);
 			clienttemp.setClientAddress(clientAddress);

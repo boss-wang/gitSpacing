@@ -28,19 +28,25 @@
 	text-align:center;
 }
 #status1{
-position:absolute;
-top:947px;
-color:red;
+    position: absolute;
+    top: 898px;
+    left: 439px;
+    color: red;
+    font-size: 13px;
 }
 #status3{
-position:absolute;
-top:890px;
-color:red;
+position: absolute;
+    top: 842px;
+    right: 483px;
+    color: red;
+    font-size: 13px;
 }
 #status2{
-position:absolute;
-top:947px;
-color:red;
+    position: absolute;
+    top: 897px;
+    right: 483px;
+    color: red;
+    font-size: 13px;
 }
 .termsDiv{
 	display:none;

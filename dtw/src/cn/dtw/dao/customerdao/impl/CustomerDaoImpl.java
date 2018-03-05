@@ -89,6 +89,12 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		String sql = "update customer set statusId=? where id=?";
 		return super.executeUpdate(sql, statusId,customer.getId())>0?true:false;
 	}
+	//根据下单人id更新真实姓名
+	@Override
+	public int updateRealNameByCustomer(Customer customer) {
+		String sql="update customer set realName=? where id=?";
+		return super.executeUpdate(sql, customer.getRealName(),customer.getId());
+	}
 	
 	
 }

@@ -92,5 +92,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean updateCustomerStatus(Customer customer, int statusId) {
 		return customerDao.updateCustomerStatus(customer, statusId);
 	}
+	//根据下单人id更新真实姓名
+	@Override
+	public int updateRealNameByCustomer(Customer customer) {
+		
+		return customerDao.updateRealNameByCustomer(customer);
+	}
 
 }

@@ -248,6 +248,7 @@
 		position:relative;
 		width:100px;
 		height:80px
+		
 		}
 		
 		#headpics img:hover {
@@ -273,8 +274,15 @@
 			display:inline-block;
 			border-radius:50px;
 			width:100px;
+			
+			transition:all 200;
+			
 		}
 		#homesection tr td:hover{
+		
+		
+		}
+		#homesection img:hover{
 		cursor:pointer;
-		background-color:blue;
+		transform: scale(1.1);
 		}		

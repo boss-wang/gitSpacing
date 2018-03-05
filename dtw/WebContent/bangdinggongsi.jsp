@@ -44,7 +44,7 @@
 					<form action="" method="post">
 						<div  style="height: 30px;margin-left:393px;margin-bottom: 10px;">
 							<h3 style="display: inline-block;color: #555555;">真实姓名:</h3>
-							<input style="width:300px;height: 24px; margin-left: 5px;" id="customerName" placeholder="请输入真实姓名" />
+							<input style="width:300px;height: 24px; margin-left: 5px;" id="realName" placeholder="请输入真实姓名" />
 							<span></span>
 						</div>
 						<div  style="height: 30px;margin-left:393px;">
@@ -75,23 +75,36 @@
 		$("#sub").click(function(){
 		var	$clientName=$("#clientName").val();
 		var $clientAddress=$("#clientAddress").val();
-		
-			if(	$clientName==''){
+		var $realName=$("#realName").val();
+		var reg=/^[\u4e00-\u9fffa-zA-Z]{1,15}$/;
+			
+		if(!reg.test($realName)){
+			if($clientAddress!=''){
+				$("#clientAddress").next().text("");
+			}else if($clientName!=''){
+				$("#clientName").siblings("span").text("");
+			}
+			$("#realName").next().text("请填写真实姓名");
+		}else if($clientName==''){
 				if($clientAddress!=''){
 					$("#clientAddress").next().text("");
+				}else if(reg.test($realName)){
+					$("#realName").next().text('');
 				}
-				$("#clientName").next().text("公司名不能为空");
+				$("#clientName").siblings("span").text("公司名不能为空");
 			}else if($clientAddress==''){
 				if($clientName!=''){
-					$("#clientName").next().text("");
+					$("#clientName").siblings("span").text("");
+				}else if(reg.test($realName)){
+					$("#realName").next().text('');
 				}
 				$("#clientAddress").next().text("公司地址不能为空");
-			}else if($clientAddress!=''&&$clientName!=''){
+			}else if($clientAddress!=''&&$clientName!=''&&reg.test($realName)){
 				$("span").text('');
 				var customerId=${customer.id};
 				$.ajax({
 					url:"custorder.do?mn=bindingCompany",
-					data:"clientName="+$clientName+"&clientAddress="+$clientAddress+"&customerId="+customerId,
+					data:"clientName="+$clientName+"&clientAddress="+$clientAddress+"&customerId="+customerId+"&realName="+$realName,
 					type:"post",
 					success:function(res){
 						if(res==1){
