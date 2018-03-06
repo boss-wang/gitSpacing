@@ -211,6 +211,14 @@ table tr {
 		
 		}
 	})
+	
+	function removeSession(){
+				$.ajax({
+				url:"custlogin.do?mn=deleCode",
+				data:"",
+				type:"post"
+				});
+			}
 	function getdate() {
 		m--;
 		$("#getPhoneCode").text("已发送("+m+")");
@@ -225,14 +233,14 @@ table tr {
 		var phonecode= $("#phoneCode").val();
 		if(isright4==true){
 			$.ajax({
-				url:"custlogin.do?mn=islogin",
-				data:"phonecode="+phonecode,
+				url:"customer.do?mn=updatePhoneNumber",
+				data:"phonecode="+phonecode+"&oldphone="+${customer.tel}+"$newphone="+$("#form-phone").val()+"&customerId="+${customer.id},
 				type:"post",
 				success:function(res){
 					if(res==1){
 						$.ajax({
-							url:"custlogin.do?mn=customerlogin",
-							data:"loginName="+$("#form-account").val()+"&paswd="+$("#form-pwd").val(),
+							url:"custlogin.do?mn=customerlogin",//修改session
+							data:"",
 							type:"post",
 							success:function(res){
 									window.location.href="index.jsp";

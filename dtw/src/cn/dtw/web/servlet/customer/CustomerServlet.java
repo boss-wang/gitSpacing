@@ -128,4 +128,8 @@ public class CustomerServlet extends BaseServlet {
 			resp.getWriter().print(1);
 			}
 		}
+		//修改个人手机号
+		protected void updatePhoneNumber(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			
+		}
 }

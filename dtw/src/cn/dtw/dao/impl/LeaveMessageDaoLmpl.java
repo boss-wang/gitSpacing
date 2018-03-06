@@ -20,7 +20,7 @@ public class LeaveMessageDaoLmpl extends BaseDao implements LeaveMessageDao {
 
 	@Override
 	public List<Leavemessage> showMessage(int startsize,int rowsize) {
-		String sql="select * from leavemessage where status=1 limit ?,?";
+		String sql="select * from leavemessage where status=1 order by messageTime desc limit ?,?";
 		
 		return super.executeQuery(new BeanListHandler<Leavemessage>(Leavemessage.class), sql, startsize,rowsize);
 	}
