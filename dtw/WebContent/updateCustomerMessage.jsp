@@ -73,8 +73,8 @@ table tr {
 			</tr>
 			<tr>
 				<th>公司：</th>
-				<td ><c:if test="${customer.statusId==2}">未绑定公司</c:if><c:if test="${customer.statusId==1}">审核中</c:if><c:if test="${customer.statusId==3}">${clientName }</c:if><c:if test="${customer.statusId==4}">审核未通过</c:if></td>
-				<td  class="update"><c:if test="${customer.statusId==2}"><a>绑定</a></c:if><c:if test="${customer.statusId==1}">无法修改</c:if><c:if test="${customer.statusId==3}"><a>申请解绑</a></c:if><c:if test="${customer.statusId==4}"><a>重新绑定</a></c:if></td>
+				<td ><c:if test="${customer.statusId==2}">未绑定公司</c:if><c:if test="${customer.statusId==1}">审核中</c:if><c:if test="${customer.statusId==3}">${clienttemp.clientName }</c:if><c:if test="${customer.statusId==4}">审核未通过</c:if></td>
+				<td  class="update"><c:if test="${customer.statusId==2}"><a id="binding">绑定</a></c:if><c:if test="${customer.statusId==1}">无法修改</c:if><c:if test="${customer.statusId==3}"><a id="undinding">解绑</a></c:if><c:if test="${customer.statusId==4}"><a id="rebind">重新绑定</a></c:if></td>
 			</tr>
 				
 					</table>
@@ -110,6 +110,7 @@ table tr {
 			</div>
 </body>
 <script>
+		//修改
 	$("table").on("click",".up",function(){
 		var	content=$(this).parents(".update").prev().text();
 		var attrname=$(this).parent(".update").attr("attrname");
@@ -126,6 +127,7 @@ table tr {
 		 })
 		}
 	})
+	//保存
 	$("table").on("click",".save",function(){
 			 var attrname=$(this).parent(".update").attr("attrname");
 			var content=$(this).parent(".update").prev().find("input").val();
@@ -152,12 +154,37 @@ table tr {
 			}
 
 		 })
+		//解除绑定 
+	$("#binding").click(function(){
+		$("#homeDiv").load("bangdinggongsi.jsp");
+	})	 
+	$("#rebind").click(function(){
+		$("#homeDiv").load("bangdinggongsi.jsp");
+	})	 
+	$("#undinding").click(function(){
+		$.ajax({
+			url:"customer.do?mn=unbinding",
+			data:"customerId=${customer.id}&clientId=${clienttemp.clientId}",
+			type:"post",
+			success:function(res){
+				if(res==1){
+					$.ajax({
+						url:"custlogin.do?mn=customerlogin",
+						data:"loginName="+'${customer.loginName}'+"&paswd="+'${customer.loginPwd}',
+						type:"post",
+						success:function(res){
+							alert("解绑成功");
+							$("#personCenter").click();
+						}
+					});
+				}else{
+					alert("解绑失败");
+				}
+			}
+		})
+	})	 
 		 
-		 
-		 
-		 
-		 
-		 
+		 //手机验证
 		  $("#back").click(function(){
 			  $("#form-phone").val('');
 			  $("#phoneCode").val('');

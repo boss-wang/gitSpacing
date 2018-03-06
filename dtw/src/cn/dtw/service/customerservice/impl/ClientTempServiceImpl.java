@@ -57,6 +57,16 @@ public class ClientTempServiceImpl implements ClienttempService {
 	public Clienttemp getClienttempByCustomer(Customer customer) {
 		return clienttempDao.getClienttempByCustomer(customer);
 	}
+	//解绑公司
+	@Override
+	public int unbindingClientByCustomerId(Customer customer) {
+		if( clienttempDao.delClienttempByCustomer(customer)) {
+			customerDao.updateCustomerStatus(customer, 2);
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 	
 
 }

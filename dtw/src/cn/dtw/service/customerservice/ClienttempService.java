@@ -13,5 +13,7 @@ public interface ClienttempService {
 	public boolean delClienttempByCustomer(Customer customer);
 	//通过客户id查询其对应临时公司信息
 	public Clienttemp getClienttempByCustomer(Customer customer);
-
+	//根据客户id解绑对应公司
+	int unbindingClientByCustomerId(Customer customer);
+	
 }

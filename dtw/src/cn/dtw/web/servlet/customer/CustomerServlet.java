@@ -124,7 +124,7 @@ public class CustomerServlet extends BaseServlet {
 			if(clienttemp==null) {
 				resp.getWriter().print(2);
 			}else {
-			req.getSession().setAttribute("clientName", clienttemp.getClientName());
+			req.getSession().setAttribute("clienttemp", clienttemp);
 			resp.getWriter().print(1);
 			}
 		}
@@ -156,5 +156,13 @@ public class CustomerServlet extends BaseServlet {
 			customer.setTel(phoneNumber);
 			int back= customerService.updateEmailByCustomer(customer);
 			resp.getWriter().print(back);
+		}
+		//解除公司绑定
+		protected void unbinding(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+				String customerId=req.getParameter("customerId");
+				Customer customer = new Customer();
+				customer.setId(Integer.parseInt(customerId));
+				int back= clienttempService.unbindingClientByCustomerId(customer);
+				resp.getWriter().print(back);
 		}
 }
