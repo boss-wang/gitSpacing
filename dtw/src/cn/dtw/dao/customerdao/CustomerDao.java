@@ -22,8 +22,12 @@ public interface CustomerDao {
 	List<Clientcontact> getAllContactIdByClientId(Customer customer);
 	//查询客户信息及审核状态
 	public List<Customer> getCustomerList(int startRow,int pageSize);
+	//搜索客户信息及审核状态
+	public List<Customer> searchCustomerList(String searchContent,int startRow,int pageSize);
 	//查询客户总条数
 	public int getCustomerCount();
+	//搜索的客户总条数
+	public int searchCustomerCount(String searchContent);
 	//根据客户id查出客户所有信息
 	public Customer getCustomerByid(int customerId);
 	//修改客户账号的状态

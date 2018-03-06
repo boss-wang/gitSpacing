@@ -101,5 +101,27 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		String sql ="insert into userheadsculpture (userId,picturepath) values(?,?)";
 		return super.executeUpdate(sql, userHeadSculpture.getUserId(),userHeadSculpture.getPicturePath());
 	}
+	//搜索的总行数
+	@Override
+	public int searchAllTotal(String searchContnet) {
+		String sql = "select count(1) as count from user where (userAccount like concat('%',?,'%') or userName like concat('%',?,'%')) and userStatus=1 ";
+		Long total = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContnet,searchContnet);
+		return total.intValue();
+	}
+	//搜索员工列表
+	@Override
+	public List<User> searchUser(String searchContent, int start, int rowsize) {
+		User_roleDao userRoleDao = new User_roleDaoImpl();
+		String sql = "select * from user where (userAccount like concat('%',?,'%') or userName like concat('%',?,'%')) and userStatus=1 order by userId desc limit ?,?";
+		List<User> list = super.executeQuery(new BeanListHandler<User>(User.class), sql,searchContent,searchContent, start,rowsize);
+		List<User> userList = new ArrayList<User>();
+		for(User user:list) {
+			//获得用户的职位信息
+			List<Role> roleList = userRoleDao.getRoleByUserId(user);
+			user.setRoles(roleList);
+			userList.add(user);
+		}
+		return userList;
+	}
 
 }

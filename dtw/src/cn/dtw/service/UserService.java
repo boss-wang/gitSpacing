@@ -15,8 +15,12 @@ public interface UserService {
 	public List<User> getAllUser();
 	//获得分页数据
 	public List<User> getAllUser(int currentpage,int rowsize);
+	//搜索员工列表
+	public List<User> searchUser(String searchContent,int currentpage,int rowsize);
 	//总页数
 	public int TotalPage(int rowsize);
+	//搜索的总页数
+	public int searchTotalPage(String searchContent,int rowsize);
 	//删除员工账号
 	public int deleteUser(int userId);
 	//通过Id获取用户信息

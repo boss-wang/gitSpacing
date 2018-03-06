@@ -112,6 +112,17 @@ public class CustomerServiceImpl implements CustomerService {
 			clientContactDao.updateClientcontactByCustomer(customer);
 			return 1;
 		}
+	//搜索的总条数
+	@Override
+	public int searchCustomerCount(String searchContent) {
+		return customerDao.searchCustomerCount(searchContent);
+	}
+	//搜索客户信息及审核状态
+	@Override
+	public List<Customer> searchCustomerList(String searchContent, int curPage, int pageSize) {
+		int startRow = (curPage-1)*pageSize;
+		return customerDao.searchCustomerList(searchContent, startRow, pageSize);
+	}
 
 	
 

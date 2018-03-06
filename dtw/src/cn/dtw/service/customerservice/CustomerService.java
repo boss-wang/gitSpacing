@@ -17,8 +17,12 @@ public interface CustomerService {
 		List<Clientcontact> getAllContactIdByClientId(Customer customer);
 	//查询客户信息及审核状态
 		public List<Customer> getCustomerList(int curPage,int pageSize);
+	//搜索客户信息及审核状态
+		public List<Customer> searchCustomerList(String searchContent,int curPage,int pageSize);
 	//查询客户总条数
 		public int getCustomerCount();
+	//搜索客户总条数
+		public int searchCustomerCount(String searchContent);
 	//根据下单人id查询客户公司id
 		Customer_client getClientBycust(Customer customer);
 	//根据客户id查出客户所有信息

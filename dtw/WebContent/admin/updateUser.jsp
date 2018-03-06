@@ -12,6 +12,7 @@
 					</div>
                 </div>
                 <hr class="whiter"/>
+                <input type="hidden" value="user" class="searchPage" />
             <!-- 表单内容 -->
         <table   border="1"  id="del" style="width:750px;"  >
             	<tr id="" class="tit-mess1">
@@ -46,6 +47,7 @@
 			var userId = $(this).attr("modifyId");
 			$("#home").load("user.do?mn=goUpdateRole&userId="+userId+"&curpage="+curpage);
 		})
+		//分页
 		$("#prePage").click(function(){
 			var curpage = ${curpage-1 };
 			if(curpage==0){
@@ -55,7 +57,12 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+				var serchContent = "${param.serchContent }";
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("user.do","mn=searchUser&currentpage="+curpage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+				}
 			}
 		})
 		$("#nextPage").click(function(){
@@ -68,17 +75,33 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+				var serchContent = "${param.serchContent }";
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("user.do","mn=searchUser&currentpage="+curpage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+				}
 			}
 		})
 		$("#firstPage").click(function(){
 			var curpage = 1;
-			$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("user.do","mn=searchUser&currentpage="+curpage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+			}
 		})
 		$("#lastPage").click(function(){
 			var curpage = ${totalPage};
-			$("#home").load("user.do?mn=showUser&currentpage="+curpage);
-		})
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("user.do","mn=searchUser&currentpage="+curpage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
+			}
+		});
+		//删除用户
 		$("#del").on("click",".deleteUser",function(){
 			if(confirm("确定删除该用户?")){
 				var curpage = ${curpage };

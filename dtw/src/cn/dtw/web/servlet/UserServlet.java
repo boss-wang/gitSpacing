@@ -30,7 +30,25 @@ public class UserServlet extends BaseServlet {
 	private UserService userService = new UserServiceImpl();
 	private RoleService rs=new RoleServiceImpl();
 	private User_roleService userRoleService = new User_roleServiceImpl();
-	
+	//搜索员工列表
+	protected void searchUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String currentpage=req.getParameter("currentpage");
+		String searchContent = req.getParameter("serchContent");
+		int rowsize = 4;
+		int totalPage=userService.searchTotalPage(searchContent, rowsize);
+		Integer curpage;
+		if(currentpage!=""&&currentpage!=null) {
+			curpage=Integer.parseInt(currentpage)>totalPage?totalPage:Integer.parseInt(currentpage);
+			curpage=Integer.parseInt(currentpage)<=0?1:curpage;
+		}else {
+			curpage=new Integer(1);
+		}
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("curpage", curpage);
+		List<User> userList = userService.searchUser(searchContent,curpage, rowsize);
+		req.setAttribute("userList", userList);
+		req.getRequestDispatcher("admin/updateUser.jsp").forward(req, resp);
+	}
 	//显示员工列表
 	protected void showUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String currentpage=req.getParameter("currentpage");
@@ -205,4 +223,5 @@ public class UserServlet extends BaseServlet {
 			int back= userService.addUserHeadPic(userhead);
 			resp.getWriter().print(back);
 		}
+		
 }

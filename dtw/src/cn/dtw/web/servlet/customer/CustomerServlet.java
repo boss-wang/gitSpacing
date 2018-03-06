@@ -38,6 +38,27 @@ public class CustomerServlet extends BaseServlet {
 	private ClientContactService clientContactService = new ClientContactServiceImpl();
 	private Customer_ClientService customerClientService = new Customer_ClientServiceImpl();
 	private ClienttempService clienttempService = new ClientTempServiceImpl();
+	//搜索注册的客户
+	protected void searchCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String curPage = req.getParameter("currentPage");
+		String searchContent = req.getParameter("serchContent");
+		int currentPage;
+		int totalRow = customerService.searchCustomerCount(searchContent);
+		int totalPage = totalRow%5==0?totalRow/5:totalRow/5+1;
+		if(curPage==null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(curPage);
+			currentPage = currentPage<1?1:currentPage;
+			currentPage = currentPage>totalPage?totalPage:currentPage;
+		}
+		List<Customer> customerList = customerService.searchCustomerList(searchContent,currentPage, 5);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("customerList", customerList);
+		req.getRequestDispatcher("/admin/CustomerApplication.jsp").forward(req, resp);
+	}
+
 	//显示注册的客户
 	protected void showCustomerApplication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String curPage = req.getParameter("currentPage");

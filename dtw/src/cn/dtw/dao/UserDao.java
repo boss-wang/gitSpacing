@@ -20,8 +20,12 @@ public interface UserDao {
 	public int addUser(User user);
 	//分页
 	public List<User> getAllUser(int start,int rowsize);
+	//搜索员工列表
+	public List<User> searchUser(String searchContent,int start,int rowsize);
 	//总数
 	public int getAllTotal();
+	//搜索的总条数
+	public int searchAllTotal(String searchContnet);
 	//删除员工账号
 	public int deleteUser(int userId);
 	

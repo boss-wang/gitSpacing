@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = userDao.getAllUser();
 		return userList;
 	}
-
+	//获得分页数据
 	@Override
 	public List<User> getAllUser(int currentpage, int rowsize) {
 		int startPage = (currentpage-1)*rowsize;
@@ -94,6 +94,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int addUserHeadPic(UserHeadSculpture userHeadSculpture) {
 		return userDao.addUserHeadPic(userHeadSculpture);
+	}
+	//搜索的总页数
+	@Override
+	public int searchTotalPage(String searchContent, int rowsize) {
+		int totalPage=0;
+		int alltotal=userDao.searchAllTotal(searchContent);
+		if((alltotal%rowsize)==0) {
+			totalPage=(alltotal/rowsize);
+		}else if(alltotal%rowsize!=0) {
+			totalPage=(alltotal/rowsize)+1;
+		}
+		return totalPage;
+	}
+	//搜索员工列表
+	@Override
+	public List<User> searchUser(String searchContent, int currentpage, int rowsize) {
+		int startPage = (currentpage-1)*rowsize;
+		return userDao.searchUser(searchContent, startPage, rowsize);
 	}
 
 

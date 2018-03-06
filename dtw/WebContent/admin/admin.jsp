@@ -294,7 +294,12 @@
 			     	if(serchPage=='customerOrder'){
 			     		$("#home").load("order.do","mn=searchCustomerOrders&serchContent="+serchContent);
 			     	}
-			     	
+			     	if(serchPage=='user'){
+			     		$("#home").load("user.do","mn=searchUser&serchContent="+serchContent);
+			     	}
+			     	if(serchPage=='customerApplication'){
+			     		$("#home").load("customer.do","mn=searchCustomerApplication&serchContent="+serchContent);
+			     	}
 			     	
 			     	/* var htmlc = $("body").html();
 			     	htmlc = htmlc.replace(serchContent,"<font style='color:red'>" + serchContent + "</font>")

@@ -107,6 +107,27 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		String sql="update customer set email=? where tel=?";
 		return super.executeUpdate(sql, customer.getEmail(),customer.getTel());
 	}
+	//搜索注册的用户
+	@Override
+	public List<Customer> searchCustomerList(String searchContent, int startRow, int pageSize) {
+		String sql = "select loginName,loginPwd,tel,email,statusId,customer.id as id,clientExists,realName from customer left join clienttemp_customer on customer.id=clienttemp_customer.customerId "
+				+ "where loginName like concat('%',?,'%') or tel like concat('%',?,'%') or email like concat('%',?,'%') or realName like concat('%',?,'%') order by statusId limit ?,?";
+		List<Customer> list = super.executeQuery(new BeanListHandler<Customer>(Customer.class), sql,searchContent,searchContent,searchContent,searchContent, startRow,pageSize);
+		List<Customer> customerList = new ArrayList<Customer>();
+		//保存临时公司信息
+		for(Customer customer:list) {
+			customer.setClientTemp(clienttempDao.getClienttempByCustomer(customer));
+			customerList.add(customer);
+		}
+		return customerList;
+	}
+	//搜索的客户总条数
+	@Override
+	public int searchCustomerCount(String searchContent) {
+		String sql = "select count(1) as count from customer where loginName=? or tel=? or email=? or realName=?";
+		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContent,searchContent,searchContent,searchContent);
+		return rs.intValue();
+	}
 	
 	
 }
