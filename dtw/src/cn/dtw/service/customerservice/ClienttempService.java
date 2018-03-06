@@ -11,4 +11,7 @@ public interface ClienttempService {
 	public boolean updateExists(Clienttemp_customer clienttemp_customer,int existsStatus);
 	//删除绑定失败的客户对应的临时公司信息
 	public boolean delClienttempByCustomer(Customer customer);
+	//通过客户id查询其对应临时公司信息
+	public Clienttemp getClienttempByCustomer(Customer customer);
+
 }

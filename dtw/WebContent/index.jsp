@@ -87,7 +87,7 @@
 									</li>
 								</c:if>
 						<c:if test="${customer!=null }">
-						<li class="mainlevel" style="font-size: 15px; position:relative;top:30px;" >
+						<li class="mainlevel" style="font-size: 15px;width:120px; position:relative;top:30px;" >
 							${customer.loginName}<span id="delesession" style="display:inline;float: none;">/注销</span>
 						</li>
 						</c:if>	
@@ -375,8 +375,19 @@
 				if('${customer}'==''){
 					window.location.href="<%=basePath%>login.jsp";
 				}else{
-					window.location.href="#abstract";
-					$("#homeDiv").load("updateCustomerMessage.jsp");
+					customerId='${customer.id}';
+					$.ajax({
+						url:"customer.do?mn=showBindingCompany",
+						data:"customerId="+customerId,
+						type:"post",
+						success:function(res){
+							
+								window.location.href="#abstract";
+								$("#homeDiv").load("updateCustomerMessage.jsp");
+							
+						}
+					})
+					
 				}
 			})
 		</script>

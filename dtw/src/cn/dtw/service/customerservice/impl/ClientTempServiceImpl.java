@@ -52,6 +52,11 @@ public class ClientTempServiceImpl implements ClienttempService {
 		};
 		return false;
 	}
+	//通过客户id查询其对应临时公司信息
+	@Override
+	public Clienttemp getClienttempByCustomer(Customer customer) {
+		return clienttempDao.getClienttempByCustomer(customer);
+	}
 	
 
 }

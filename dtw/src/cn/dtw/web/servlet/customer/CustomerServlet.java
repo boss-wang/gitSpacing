@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Clienttemp;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Leavemessage;
 import cn.dtw.service.ClientContactService;
@@ -113,5 +114,18 @@ public class CustomerServlet extends BaseServlet {
 				resp.getWriter().print(1);
 			}
 			resp.getWriter().close();
+		}
+	//通过下单人id查询公司
+		protected void showBindingCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			String customerId=req.getParameter("customerId");
+			Customer customer = new Customer();
+			customer.setId(Integer.parseInt(customerId));
+			Clienttemp clienttemp=  clienttempService.getClienttempByCustomer(customer);
+			if(clienttemp==null) {
+				resp.getWriter().print(2);
+			}else {
+			req.getSession().setAttribute("clientName", clienttemp.getClientName());
+			resp.getWriter().print(1);
+			}
 		}
 }

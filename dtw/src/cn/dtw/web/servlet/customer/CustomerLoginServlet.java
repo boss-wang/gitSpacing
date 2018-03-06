@@ -99,6 +99,7 @@ public class CustomerLoginServlet extends BaseServlet {
 	}
 	//移除session
 	protected void deleSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		req.getSession().removeAttribute("customer");
+		req.getSession().invalidate();
+		
 	}
 }
