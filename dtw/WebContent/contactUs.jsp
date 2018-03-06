@@ -20,18 +20,22 @@ color:red;
 			<div class="index-title">
 				<a href="#" title="公司简介">请您留言</a>
 			</div>
-			<div class="info"
-				style="margin: 0px auto; width: 900px; height: 600px; border: 1px solid #f7f7f7; background-color: #f7f7f7; position: relative;">
-				QQ：<br> 客户服务：261668497 <br> 咨询热线：400-626-1166 <br> <br>
-				北京总公司地址： <br> 北京市顺义区天竺空港开发区A区天柱中路16号 <br> 电话：400-626-1166
-				<br> 邮编：101300
-				<!--margin-top:-217.76px;margin-left: 450px;-->
-				<div id=""
-					style="width: 600px; height: 350px; border: 1px solid #f7f7f7; position: absolute;">
-					<iframe src="map.html" width="600" height="350" frameborder="0"
-						scrolling="no"></iframe>
+			<div class="info" style="margin:0px auto;width:900px;height:600px;border: 1px solid #f7f7f7;background-color: #f7f7f7;position: relative;">
+					<div id="" style="margin-left: 150px;">
+						QQ：<br> 客户服务：261668497
+						<br> 咨询热线：400-626-1166
+						<br>
+						<br> 北京总公司地址：
+						<br> 北京市顺义区天竺空港开发区A区天柱中路16号
+						<br> 电话：400-626-1166
+						<br> 邮编：101300
+					</div>
+					<div id="" style="width: 600px;height: 350px;border: 1px solid #f7f7f7;position: absolute;margin-left: 150px;">
+						<iframe src="map.html" width="600" height="350" frameborder="0" scrolling="no"></iframe>
+					</div>
 				</div>
-			</div>
+			
+			
 			<div class="cont">
 				<form id="form1">
 					<div  style="height: 30px; margin-left: 393px;">
