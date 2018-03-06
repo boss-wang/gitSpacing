@@ -24,4 +24,6 @@ public interface ClientContactDao {
 	public Clientcontact getClientContactById(int id);
 	//通过下单人手机号更新联系人手机号
 	int updateClientcontactByCustomer(Customer newCustomer,Customer oldCustomer);
+	//根据下单人手机号更新邮箱
+	int updateClientcontactByCustomer(Customer customer);
 }

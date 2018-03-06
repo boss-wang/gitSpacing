@@ -101,6 +101,12 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		String sql="update customer set tel=? where id=?";
 		return super.executeUpdate(sql,customer.getTel(),customer.getId());
 	}
+	//根据下单人手机号更新邮箱
+	@Override
+	public int updateEmailByPhone(Customer customer) {
+		String sql="update customer set email=? where tel=?";
+		return super.executeUpdate(sql, customer.getEmail(),customer.getTel());
+	}
 	
 	
 }

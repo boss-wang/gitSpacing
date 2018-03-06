@@ -147,4 +147,14 @@ public class CustomerServlet extends BaseServlet {
 				resp.getWriter().print(0);
 			}
 		}
+		//修改邮箱
+		protected void updateEmail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			String phoneNumber=req.getParameter("phoneNumber");
+			String email=req.getParameter("email");
+			Customer customer = new Customer();
+			customer.setEmail(email);
+			customer.setTel(phoneNumber);
+			int back= customerService.updateEmailByCustomer(customer);
+			resp.getWriter().print(back);
+		}
 }

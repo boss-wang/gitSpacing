@@ -105,6 +105,13 @@ public class CustomerServiceImpl implements CustomerService {
 			
 			return customerDao.updateRealNameByCustomer(customer);
 		}
+	//根据下单人手机号更新邮箱
+		@Override
+		public int updateEmailByCustomer(Customer customer) {
+			customerDao.updateEmailByPhone(customer);
+			clientContactDao.updateClientcontactByCustomer(customer);
+			return 1;
+		}
 
 	
 

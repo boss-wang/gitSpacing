@@ -102,8 +102,8 @@ public class ClientServlet extends BaseServlet {
 		clientContact.setClientContactQQ(qq);
 		int contactId= clientconserv.addClientContact(clientContact);
 		int clientsId=Integer.parseInt(clientId);
-		clientconserv.addClientidAndClientContactId(clientsId, contactId);
-		 resp.getWriter().print(clientsId);
+		 int back=clientconserv.addClientidAndClientContactId(clientsId, contactId);
+		 resp.getWriter().print(back);
 	}
 	//修改联系人
 	protected void updateContact(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

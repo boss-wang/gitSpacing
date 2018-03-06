@@ -38,16 +38,20 @@ td input{
 	border: 1px solid rgba(0, 0, 0, 0.35);
 }
 table{
-cellspacing:50%;
-	margin:0px auto;
+    margin: -20px auto;
+    position: relative;
+    left: 40px;
+    border-spacing: 14px;
 	
 }
 table tr td {
  padding:10px;
+ border-spacing: 10px;
 }
 table tr {
 		margin:10px;
 				background:rgba(0,0,0,0.1);
+				border-spacing: 10px;
 			}
 </style>
 <body>
@@ -113,7 +117,7 @@ table tr {
 		if(attrname=='phone'){
 			$("#updatephone").show();
 		}else{
-			$(this).parent('.update').prev().html("<input type='text' value='"+content+"'/>");
+			$(this).parent('.update').prev().html("<input type='text'/>");
 		 $(this).parent('.update').html('<a class="save">保存</a>&nbsp;&nbsp;&nbsp;<a class="resert">取消</a>');
 		
 		 $(".resert").click(function(){
@@ -126,15 +130,34 @@ table tr {
 			 var attrname=$(this).parent(".update").attr("attrname");
 			var content=$(this).parent(".update").prev().find("input").val();
 		
-			 if(attrname=='phone'){
-				 $(this).parent('.update').prev().html(content);
-				 $(this).parent('.update').html('<a class="up">点击修改</a>');
-			}else if(attrname=='email'){
-				 $(this).parent('.update').prev().html(content);
-				 $(this).parent('.update').html('<a class="up">点击修改</a>');
+			
+			if(attrname=='email'){
+				$.ajax({
+					url:"customer.do?mn=updateEmail",
+					data:"phoneNumber=${customer.tel}&email="+content,
+					type:"post",
+					success:function(res){
+						$.ajax({
+							url:"custlogin.do?mn=customerlogin",
+							data:"loginName="+'${customer.loginName}'+"&paswd="+'${customer.loginPwd}',
+							type:"post",
+							success:function(res){
+								$("#personCenter").click();
+							}
+						});
+						
+					}
+				});
+				
 			}
 
 		 })
+		 
+		 
+		 
+		 
+		 
+		 
 		  $("#back").click(function(){
 			  $("#form-phone").val('');
 			  $("#phoneCode").val('');

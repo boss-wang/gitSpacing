@@ -64,5 +64,11 @@ public class ClientContactDaoImpl extends BaseDao implements ClientContactDao {
 		String sql="update clientcontact set ClientContactTel=? where ClientContactTel=? ";
 		return super.executeUpdate(sql, newCustomer.getTel(),oldCustomer.getTel());
 	}
+	//根据下单人手机号更新邮箱
+	@Override
+	public int updateClientcontactByCustomer(Customer customer) {
+		String sql="update clientcontact set ClientContactEmail=? where ClientContactTel=?";
+		return super.executeUpdate(sql, customer.getEmail(),customer.getTel());
+	}
 	
 }

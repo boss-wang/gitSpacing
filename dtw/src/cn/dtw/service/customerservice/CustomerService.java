@@ -29,4 +29,6 @@ public interface CustomerService {
 		int updateCustomerPhoneByCustomer(Customer newcustomer,Customer oldcustomer);
 	//根据下单人id更新真实姓名
 		int updateRealNameByCustomer(Customer customer);
+	//根据下单人手机号更新邮箱
+		int updateEmailByCustomer(Customer customer);
 }

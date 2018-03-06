@@ -32,4 +32,6 @@ public interface CustomerDao {
 	int updateRealNameByCustomer(Customer customer);
 	//根据下单人id更新手机号
 	int updateTeleByCustomerId(Customer customer);
+	//根据下单人手机号更新邮箱
+	int updateEmailByPhone(Customer customer);
 }
