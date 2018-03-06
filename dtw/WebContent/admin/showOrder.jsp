@@ -372,11 +372,21 @@
 	});
 	//分页
 	$("#firstPage").click(function(){
-		$("#home").load("order.do?mn=showOrders&currentPage=1");
+		var serchContent = "${param.serchContent }";
+		if(serchContent!=null&&serchContent!=""){
+			$("#home").load("order.do","mn=searchOrder&currentPage=1&serchContent="+serchContent);
+		}else{
+			$("#home").load("order.do?mn=showOrders&currentPage=1");
+		}
 	});
 	$("#lastPage").click(function(){
 		var totalPage = ${totalPage };
-		$("#home").load("order.do?mn=showOrders&currentPage="+totalPage);
+		var serchContent = "${param.serchContent }";
+		if(serchContent!=null&&serchContent!=""){
+			$("#home").load("order.do","mn=searchOrder&currentPage="+totalPage+"&serchContent="+serchContent);
+		}else{
+			$("#home").load("order.do?mn=showOrders&currentPage="+totalPage);
+		}
 	});
 	$("#prePage").click(function(){
 		var currentPage = ${currentPage }-1;
@@ -387,7 +397,12 @@
 				$(".homeTip").fadeOut(1000);
 			},1000);
 		}else{
-			$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("order.do","mn=searchOrder&currentPage="+currentPage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			}
 		}
 	});
 	$("#nextPage").click(function(){
@@ -400,7 +415,12 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 		}else{
-			$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("order.do","mn=searchOrder&currentPage="+currentPage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("order.do?mn=showOrders&currentPage="+currentPage);
+			}
 		}
 
 	});

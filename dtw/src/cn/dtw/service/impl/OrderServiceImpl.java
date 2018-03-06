@@ -121,8 +121,13 @@ public class OrderServiceImpl implements OrderService {
 	//搜索订单的条数
 	@Override
 	public int searchOrderCount(String searchContent, User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return orderDao.searchOrderCount(searchContent, user);
+	}
+	//搜索订单
+	@Override
+	public List<Order> searchOrderList(String searchContent, User user, int curPage, int pageSize) {
+		int startRow = (curPage-1)*pageSize;
+		return orderDao.searchOrderList(searchContent,user, startRow, pageSize);
 	}
 
 }

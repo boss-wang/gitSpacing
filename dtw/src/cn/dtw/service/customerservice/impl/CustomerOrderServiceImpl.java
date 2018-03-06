@@ -77,14 +77,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	@Override
 	public List<Order> getOrderList(User user, int curPage, int pageSize) {
 		int startRow = (curPage-1)*pageSize;
-		List<Order> list = orderDao.getOrderList(user, startRow, pageSize);
-		List<Order> orderList = new ArrayList<Order>();
-		for(Order order:list) {
-			Clientcontact cc = clientContactDao.getClientContactById(order.getOrderClientContactId());
-			order.setClientcontact(cc);
-			orderList.add(order);
-		}
-		return orderList;
+		return orderDao.getOrderList(user, startRow, pageSize);
 	}
 	//查询订单条数
 	@Override

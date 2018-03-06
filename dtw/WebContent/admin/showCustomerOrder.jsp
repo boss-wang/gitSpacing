@@ -132,7 +132,7 @@
            	</div>
         
             <hr class="whiter"/>
-              
+            <input type="hidden" value="customerOrder" class="searchPage" />
 		<table border="1" id="selorder" >
 		 	<tr >
 		 		<td>客户名</td>
@@ -419,11 +419,21 @@
 	});
 	//分页
 	$("#firstPage").click(function(){
-		$("#home").load("order.do?mn=showCustomerOrders&currentPage=1");
+		var serchContent = "${param.serchContent }";
+		if(serchContent!=null&&serchContent!=""){
+			$("#home").load("order.do","mn=searchCustomerOrders&currentPage=1&serchContent="+serchContent);
+		}else{
+			$("#home").load("order.do?mn=showCustomerOrders&currentPage=1");
+		}
 	});
 	$("#lastPage").click(function(){
 		var totalPage = ${totalPage };
-		$("#home").load("order.do?mn=showCustomerOrders&currentPage="+totalPage);
+		var serchContent = "${param.serchContent }";
+		if(serchContent!=null&&serchContent!=""){
+			$("#home").load("order.do","mn=searchCustomerOrders&currentPage="+totalPage+"&serchContent="+serchContent);
+		}else{
+			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+totalPage);
+		}
 	});
 	$("#prePage").click(function(){
 		var currentPage = ${currentPage }-1;
@@ -434,7 +444,12 @@
 				$(".homeTip").fadeOut(1000);
 			},1000);
 		}else{
-			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("order.do","mn=searchCustomerOrders&currentPage="+currentPage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
+			}
 		}
 	});
 	$("#nextPage").click(function(){
@@ -447,7 +462,12 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 		}else{
-			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("order.do","mn=searchCustomerOrders&currentPage="+currentPage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
+			}
 		}
 
 	});

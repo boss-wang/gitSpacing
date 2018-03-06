@@ -106,6 +106,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "delete from `order` where orderId=?";
 		return super.executeUpdate(sql, order.getOrderId())>0?true:false;
 	}
+	//搜索的订单条数
 	@Override
 	public int searchOrderCount(String searchContent, User user) {
 		String sql = "select count(1) as count from `order` where (orderNo like concat('%',?,'%') or systemNo like concat('%',?,'%') or mawbNo like concat('%',?,'%') or "
@@ -113,6 +114,24 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 				+ "customsNo like concat('%',?,'%') or remarks like concat('%',?,'%') or loadingPort like concat('%',?,'%')) and userId=?";
 		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,user.getUserId());
 		return rs.intValue();
+	}
+	//搜索订单
+	@Override
+	public List<Order> searchOrderList(String searchContent,User user, int startRow, int pageSize) {
+		String sql = "select * from `order` where (orderNo like concat('%',?,'%') or systemNo like concat('%',?,'%') or mawbNo like concat('%',?,'%') or hawbNo like concat('%',?,'%') or destination like concat('%',?,'%') or customsNo like concat('%',?,'%') or remarks like concat('%',?,'%') or loadingPort like concat('%',?,'%')) and userId=? order by statusId, updateTime desc limit ?,?";
+		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent, user.getUserId(),startRow,pageSize);
+		List<Order> orderList = new ArrayList<Order>();
+		for(Order order:list) {
+			order.setClient(clientDao.getClient(order));
+			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
+			order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
+			order.setTerms(termsDao.getTermsById(order));
+			order.setOrderCostList(orderCostDao.getCostByOrderId(order));
+			order.setOrderPayList(orderPayDao.getPayByOrderId(order));
+			order.setClientcontact(clientContactDao.getClientContactById(order.getOrderClientContactId()));
+			orderList.add(order);
+		}
+		return orderList;
 	}
 
 }
