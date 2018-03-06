@@ -26,7 +26,8 @@ public class frontFilter  implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		Object obj= req.getSession().getAttribute("customer");
-		if(obj==null) {
+		Object user = req.getSession().getAttribute("user");
+		if(obj==null&&user==null) {
 			resp.sendRedirect("loadLogin.jsp");
 		}else {
 			chain.doFilter(req, resp);

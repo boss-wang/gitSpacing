@@ -418,7 +418,7 @@
 		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showCustomerOrders");
 	});
 	//分页
-	$("#firstPage").click(function(){
+	$("#selorder").on("click","#firstPagey",function(){
 		var serchContent = "${param.serchContent }";
 		if(serchContent!=null&&serchContent!=""){
 			$("#home").load("order.do","mn=searchCustomerOrders&currentPage=1&serchContent="+serchContent);
@@ -426,7 +426,7 @@
 			$("#home").load("order.do?mn=showCustomerOrders&currentPage=1");
 		}
 	});
-	$("#lastPage").click(function(){
+	$("#selorder").on("click","#lastPage",function(){
 		var totalPage = ${totalPage };
 		var serchContent = "${param.serchContent }";
 		if(serchContent!=null&&serchContent!=""){
@@ -435,7 +435,7 @@
 			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+totalPage);
 		}
 	});
-	$("#prePage").click(function(){
+	$("#selorder").on("click","#prePage",function(){
 		var currentPage = ${currentPage }-1;
 		if(currentPage==0){
 			$(".homeTip").text("已经是第一页了");
@@ -452,7 +452,7 @@
 			}
 		}
 	});
-	$("#nextPage").click(function(){
+	$("#selorder").on("click","#nextPage",function(){
 		var totalPage = ${totalPage }+1;
 		var currentPage = ${currentPage }+1;
 		if(totalPage==currentPage){

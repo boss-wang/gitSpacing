@@ -22,10 +22,10 @@
             <input type="hidden" value="supplier" class="searchPage" />
         <table   border="1"  id="clientUpdate"  >
             	<tr id="" class="tit-mess3">
-            		<td class="mess1"  style="width:150px;">供应商公司抬头</td>
-            		<td class="mess1"  style="width:160px;" >供应商公司地址</td>
+            		<td class="mess1"  style="width:150px;">公司抬头</td>
+            		<td class="mess1"  style="width:160px;" >公司地址</td>
             		<td class="mess1" style="width:120px;">联系人</td>
-            		<td class="mess1" style="width:120px;">添加联系人</td>
+            		<td class="mess1" style="width:120px;">添加</td>
             		<td class="mess1" style="width:120px;">操作栏</td>
             	</tr> 
             	<c:forEach var="supplier" items="${supplierList }">
@@ -47,7 +47,7 @@
 								</div>
 	            			</c:forEach>
 	            		</td>
-	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">增加</a></td>
+	            		<td class="mess2"><a class="addCC" modifyId="${supplier.supplierId }" supplierName="${supplier.supplierName }">添加联系人</a></td>
 	            		<td class="mess2"><a class="updateSupplier" modifyId="${supplier.supplierId }">修改</a>&nbsp;&nbsp;<a class="delSupplier" modifyId="${supplier.supplierId }">删除</a></td>
             		</tr> 
             	</c:forEach>
@@ -188,7 +188,7 @@
 			$(this).find(".nameContent").css("color","white");
 		});
 		//分页
-		$("#firstPage").click(function(){
+		$("#clientUpdate").on("click","#firstPage",function(){
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
 				$("#home").load("supplier.do","mn=searchSupplier&currentPage=1&serchContent="+serchContent);
@@ -196,8 +196,8 @@
 				$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
 			}
 			
-		})
-		$("#lastPage").click(function(){
+		});
+		$("#clientUpdate").on("click","#lastPage",function(){
 			var totalPage = ${totalPage };
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
@@ -206,8 +206,8 @@
 				$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
 			}
 			
-		})
-		$("#prePage").click(function(){
+		});
+		$("#clientUpdate").on("click","#prePage",function(){
 			var currentPage = ${currentPage }-1;
 			if(currentPage==0){
 				$(".homeTip").text("已经是第一页了");
@@ -223,8 +223,8 @@
 					$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
 				}
 			}
-		})
-		$("#nextPage").click(function(){
+		});
+		$("#clientUpdate").on("click","#nextPage",function(){
 			var totalPage = ${totalPage }+1;
 			var currentPage = ${currentPage }+1;
 			if(totalPage==currentPage){

@@ -21,13 +21,13 @@
 	<hr class="whiter" />
 	<input type="hidden" value="client" class="searchPage" />
 	<!-- 表单内容 -->
-	<table border="1" id="clientUpdate" style="width: 970px; height: 350px">
+	<table border="1" id="clientUpdate" style="width: 700px;">
 
 		<tr class="tit-mess3">
-			<td class="mess1" style="width: 150px;">客户公司抬头</td>
-			<td class="mess1" style="width: 160px;">客户公司地址</td>
+			<td class="mess1" style="width: 150px;">公司抬头</td>
+			<td class="mess1" style="width: 160px;">公司地址</td>
 			<td class="mess1" style="width: 120px;">联系人</td>
-			<td class="mess1" style="width: 120px;">联系人操作</td>
+			<td class="mess1" style="width: 120px;">添加</td>
 			<td class="mess1" style="width: 120px;">操作栏</td>
 		</tr>
 		<c:forEach var="client" items="${list }">
@@ -51,7 +51,7 @@
 						</div>
 					</c:forEach></td>
 				<td class="mess2"><a class="addCC" addId="${client.clientId }"
-					addName="${client.clientName }">增加</a></td>
+					addName="${client.clientName }">添加联系人</a></td>
 				<td class="mess2"><a class="updateClient"
 					updateId="${client.clientId }">修改</a>&nbsp;&nbsp;<a class="delclient" modifyId="${client.clientId }">删除</a></td>
 			</tr>
@@ -98,7 +98,7 @@
 									+ "&currentpage=" + curpage);
 				})
 		//分页
-		$("#prePage").click(function() {
+		$("#clientUpdate").on("click", "#prePage", function() {
 			var curpage = ${curpage - 1};
 			if(curpage==0){
 				$(".homeTip").text("已经是第一页了");
@@ -115,8 +115,8 @@
 				}
 			
 			}
-		})
-		$("#nextPage").click(function() {
+		});
+		$("#clientUpdate").on("click", "#nextPage", function() {
 			var curpage = ${curpage + 1};
 			var totalPage = ${totalPage }+1;
 			if(totalPage==curpage){
@@ -133,8 +133,8 @@
 					$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
 				}
 			}
-		})
-		$("#firstPage").click(function() {
+		});
+		$("#clientUpdate").on("click", "#firstPage", function() {
 			var curpage = 1;
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
@@ -142,8 +142,8 @@
 			}else{
 				$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
 			}
-		})
-		$("#lastPage").click(function() {
+		});
+		$("#clientUpdate").on("click", "#lastPage", function() {
 			var curpage = ${totalPage};
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){

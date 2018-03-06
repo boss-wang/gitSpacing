@@ -14,7 +14,7 @@
                 <hr class="whiter"/>
                 <input type="hidden" value="user" class="searchPage" />
             <!-- 表单内容 -->
-        <table   border="1"  id="del" style="width:750px;"  >
+        <table   border="1"  id="del" style="width:700px;"  >
             	<tr id="" class="tit-mess1">
             		<td class="mess1" >员工账号</td>
             		<td class="mess1" >员工姓名</td>
@@ -48,7 +48,7 @@
 			$("#home").load("user.do?mn=goUpdateRole&userId="+userId+"&curpage="+curpage);
 		})
 		//分页
-		$("#prePage").click(function(){
+		$("#del").on("click","#prePage",function(){
 			var curpage = ${curpage-1 };
 			if(curpage==0){
 				$(".homeTip").text("已经是第一页了");
@@ -64,8 +64,8 @@
 					$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 				}
 			}
-		})
-		$("#nextPage").click(function(){
+		});
+		$("#del").on("click","#nextPage",function(){
 			var curpage = ${curpage+1 };
 			var totalPage = ${totalPage }+1;
 			if(totalPage==curpage){
@@ -82,8 +82,8 @@
 					$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 				}
 			}
-		})
-		$("#firstPage").click(function(){
+		});
+		$("#del").on("click","#firstPage",function(){
 			var curpage = 1;
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
@@ -91,8 +91,8 @@
 			}else{
 				$("#home").load("user.do?mn=showUser&currentpage="+curpage);
 			}
-		})
-		$("#lastPage").click(function(){
+		});
+		$("#del").on("click","#lastPage",function(){
 			var curpage = ${totalPage};
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){

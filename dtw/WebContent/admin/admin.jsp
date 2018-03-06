@@ -38,7 +38,7 @@
 </head>
 
 
-<body id="skin-blur-blue">
+<body id="skin-blur-blue" style="margin-top:-10px;">
 		<div id="newOrderTip"></div>
 		<header id="header" class="media">
 			<a id="menu-toggle"></a>
@@ -282,7 +282,10 @@
 		       	var serchContent = $(this).val();
 		     	if(serchContent!=""&&serchContent!=null){
 		     		var serchPage = $(".searchPage").val();
-			     	if(serchPage=='client'){
+		     		$("#home").load("search.do","mn=defaultSearch&serchContent="+serchContent);
+		     		
+		     		//以下代码按页面精确搜索
+			     	/* if(serchPage=='client'){
 			     		$("#home").load("client.do","mn=searchClient&serchContent="+serchContent);
 			     	}
 			     	if(serchPage=='supplier'){
@@ -299,11 +302,16 @@
 			     	}
 			     	if(serchPage=='customerApplication'){
 			     		$("#home").load("customer.do","mn=searchCustomerApplication&serchContent="+serchContent);
-			     	}
+			     	} */
+			     	setTimeout(function(){
+			     	 	var reg = RegExp(serchContent,"g"); 
+	                        $("td").each(function() {  
+	                         var bb = $(this).html();  
+	                         var cc = bb.replace(reg, "<font style='color:red;background:yellow;'>" + serchContent + "</font>");  
+	                         $(this).html(cc);  
+                    	});  
+					}, 300);
 			     	
-			     	/* var htmlc = $("body").html();
-			     	htmlc = htmlc.replace(serchContent,"<font style='color:red'>" + serchContent + "</font>")
-			     	$("body").html(htmlc); */
 		     	}
 		     }
 		});

@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
-	.messdiv input{
-		background-color:rgba(0,0,0,0.7);
-		display:inline-block;
-		border:none;
-	}
+
 	.messdiv{
 		overflow-y:scroll; 
 		left:100px;
-		background-color: rgba(50,83,100,0.9);
+		background-color: rgba(0,0,0,0.8);
+		padding:10px;
+		line-height: 25px;
 	}
 </style>
 <body>
@@ -24,7 +23,7 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
-        <table   border="1" id="clientUpdate" style="width: 600px; height: 330px"  >
+        <table   border="1" id="clientUpdate" style="width: 700px; height: 330px"  >
             	<tr id="" class="tit-mess3" >
             		<td class="mess1"  style="width:100px; height:10px">姓名</td>
             		<td   style="width:70px; height:10px ;padding:10px;" >手机</td>
@@ -41,11 +40,11 @@
             			<td>
             			<div class="ccName">
             			<a class="nameContent" >留言详情</a>
-            			<div class="messdiv">${leavemessage.message } </div>
+            			<div class="messdiv" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${leavemessage.message } </div>
             			</div>
             			</td>
             			
-            			<td>${leavemessage.messageTime}</td>
+            			<td>${fn:substring(leavemessage.messageTime,0,16) }</td>
             			<td><a id="delmessage" modifyId="${leavemessage.id }">删除</a></td>
             		</tr>
             		 

@@ -20,13 +20,13 @@
                 <hr class="whiter"/>
                 <input type="hidden" value="customerApplication" class="searchPage" />
             <!-- 表单内容 -->
-        <table   border="1" id="clientUpdate" style="width: 850px; height: 350px"  >
+        <table   border="1" id="clientUpdate" style="width: 700px;"  >
             	<tr id="" class="tit-mess3">
-            		<td class="mess1"  style="width:150px;">账号</td>
-            		<td class="mess1"  style="width:160px;" >申请公司</td>
-            		<td class="mess1" style="width:120px;">申请地址</td>
-            		<td class="mess1" style="width:160px;">公司是否存在</td>
-            		<td class="mess1" style="width:160px;">是否同意审核</td>
+            		<td class="mess1">账号</td>
+            		<td class="mess1">申请公司</td>
+            		<td class="mess1">申请地址</td>
+            		<td class="mess1" style="width:115px;">公司存在</td>
+            		<td class="mess1" style="width:150px;">审核状态</td>
             	</tr> 
             	<c:forEach var="customer" items="${customerList }">
             		<tr  class="tit-mess3">
@@ -43,12 +43,12 @@
 	            		<td class="mess2">${customer.clientTemp.clientAddress}</td>
 	            		
 	            		<td class="mess2">
-	           	 			<c:if test="${customer.statusId==1}">
+	           	 			<c:if test="${customer.statusId!=2}">
 	            				<c:if test="${customer.clientExists==0}">
-	            					不存在
+	            					否
 	            				</c:if>
 	            				<c:if test="${customer.clientExists==1}">
-	            					已存在
+	            					是
 	            				</c:if>
 	            			</c:if>
 	            		</td>
@@ -57,11 +57,11 @@
 	            				<a class="noApp">未申请</a>
 	            			</c:if>
 	            			<c:if test="${customer.statusId==1}">
-	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}" customerId="${customer.id }">是&nbsp;&nbsp;</a>/
-	            				<a class="refuse" customerId="${customer.id }">&nbsp;否</a> 
+	            				<a class="pass" clientExists="${customer.clientExists}" tempClientId="${customer.clientTemp.clientId }" clientName="${customer.clientTemp.clientName }" clientAddress="${customer.clientTemp.clientAddress}" customerId="${customer.id }">同意&nbsp;&nbsp;</a>/
+	            				<a class="refuse" customerId="${customer.id }">&nbsp;不同意</a> 
 	            			</c:if>
 	            			<c:if test="${customer.statusId==3}">
-	            				已审核
+	            				审核通过
 	            			</c:if>
 	            			<c:if test="${customer.statusId==4}">
 	            			审核未通过
@@ -86,7 +86,7 @@
 			$(this).find(".nameContent").css("color","white");
 		});
 		//分页
-		$("#firstPage").click(function(){
+		$("#clientUpdate").on("click","#firstPage",function(){
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
 				$("#home").load("customer.do","mn=searchCustomerApplication&currentPage=1&serchContent="+serchContent);
@@ -94,8 +94,8 @@
 				$("#home").load("customer.do?mn=showCustomerApplication&currentPage=1");
 			}
 			
-		})
-		$("#lastPage").click(function(){
+		});
+		$("#clientUpdate").on("click","#lastPage",function(){
 			var totalPage = ${totalPage };
 			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
@@ -103,8 +103,8 @@
 			}else{
 				$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+totalPage);
 			}
-		})
-		$("#prePage").click(function(){
+		});
+		$("#clientUpdate").on("click","#prePage",function(){
 			var currentPage = ${currentPage }-1;
 			if(currentPage==0){
 				$(".homeTip").text("已经是第一页了");
@@ -120,8 +120,8 @@
 					$("#home").load("customer.do?mn=showCustomerApplication&currentPage="+currentPage);
 				}
 			}
-		})
-		$("#nextPage").click(function(){
+		});
+		$("#clientUpdate").on("click","#nextPage",function(){
 			var totalPage = ${totalPage }+1;
 			var currentPage = ${currentPage }+1;
 			if(totalPage==currentPage){

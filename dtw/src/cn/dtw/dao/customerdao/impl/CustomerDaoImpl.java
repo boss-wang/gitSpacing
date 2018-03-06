@@ -124,7 +124,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	//搜索的客户总条数
 	@Override
 	public int searchCustomerCount(String searchContent) {
-		String sql = "select count(1) as count from customer where loginName=? or tel=? or email=? or realName=?";
+		String sql = "select count(1) as count from customer where loginName like concat('%',?,'%') or tel like concat('%',?,'%') or email like concat('%',?,'%') or realName like concat('%',?,'%')";
 		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContent,searchContent,searchContent,searchContent);
 		return rs.intValue();
 	}

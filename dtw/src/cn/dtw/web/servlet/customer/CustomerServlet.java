@@ -64,7 +64,7 @@ public class CustomerServlet extends BaseServlet {
 		String curPage = req.getParameter("currentPage");
 		int currentPage;
 		int totalRow = customerService.getCustomerCount();
-		int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+		int totalPage = totalRow%5==0?totalRow/5:totalRow/5+1;
 		if(curPage==null) {
 			currentPage = 1;
 		}else {
@@ -72,7 +72,7 @@ public class CustomerServlet extends BaseServlet {
 			currentPage = currentPage<1?1:currentPage;
 			currentPage = currentPage>totalPage?totalPage:currentPage;
 		}
-		List<Customer> customerList = customerService.getCustomerList(currentPage, 10);
+		List<Customer> customerList = customerService.getCustomerList(currentPage, 5);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("customerList", customerList);

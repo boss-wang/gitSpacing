@@ -111,9 +111,10 @@
          padding:8px 10px;
          left: -250px; 
          top: 0px; 
+         border-radius:10px;
          width:260px;
          height:210px; 
-       	 background-color:rgba(50,83,100,0.7);
+       	 background-color:rgba(0,0,0,0.7);
 	}
 	.suMessdiv p{
          line-height:13px;
@@ -346,6 +347,8 @@
 						setTimeout(function(){
 							$(".homeTip").fadeOut(1000);
 						},1000);
+					}else{
+						alert("失败")
 					}
 				}
 			});
@@ -371,7 +374,7 @@
 		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showOrders");
 	});
 	//分页
-	$("#firstPage").click(function(){
+	$("#selorder").on("click","#firstPage",function(){
 		var serchContent = "${param.serchContent }";
 		if(serchContent!=null&&serchContent!=""){
 			$("#home").load("order.do","mn=searchOrder&currentPage=1&serchContent="+serchContent);
@@ -379,7 +382,7 @@
 			$("#home").load("order.do?mn=showOrders&currentPage=1");
 		}
 	});
-	$("#lastPage").click(function(){
+	$("#selorder").on("click","#lastPage",function(){
 		var totalPage = ${totalPage };
 		var serchContent = "${param.serchContent }";
 		if(serchContent!=null&&serchContent!=""){
@@ -388,7 +391,7 @@
 			$("#home").load("order.do?mn=showOrders&currentPage="+totalPage);
 		}
 	});
-	$("#prePage").click(function(){
+	$("#selorder").on("click","#prePage",function(){
 		var currentPage = ${currentPage }-1;
 		if(currentPage==0){
 			$(".homeTip").text("已经是第一页了");
@@ -405,7 +408,7 @@
 			}
 		}
 	});
-	$("#nextPage").click(function(){
+	$("#selorder").on("click","#nextPage",function(){
 		var totalPage = ${totalPage }+1;
 		var currentPage = ${currentPage }+1;
 		if(totalPage==currentPage){
