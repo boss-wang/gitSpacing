@@ -64,6 +64,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = formater.format(date);
+		order.setUpdateTime(now);
 		String orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
 		order.setOrderNo(orderNo);
 		while(orderService.getOrderByOrderNo(order)!=null) {

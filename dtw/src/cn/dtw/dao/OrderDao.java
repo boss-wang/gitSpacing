@@ -20,4 +20,6 @@ public interface OrderDao {
 	public Order getOrderByOrderNo(Order order);
 	//修改订单状态
 	public boolean updateOrderStatus(Order order,int statusId);
+	//删除订单
+	public boolean delOrder(Order order);
 }

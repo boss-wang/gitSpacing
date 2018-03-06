@@ -15,6 +15,8 @@ public interface Order_costDao {
 	public boolean updateCost(Order_cost orderCost);
 	//删除应收
 	public boolean delCost(Order_cost orderCost);
+	//根据订单号删除应收
+	public int delCostByOrder(Order order);
 	//根据订单id 和公司id 查询
 	List<Order_cost> getOrder_CostByOrderIdAndClientId(Client client,Order order);
 	//根据公司Id查询

@@ -79,9 +79,9 @@ position: absolute;
 			<div class="cont">
 				<form action="" method="">
 					<div class="tit-mess">
-						<span class="mess">发货时间</span>
+						<span class="mess">航班日期</span>
 						<input class="inpu Wdate" id="departDate" required="required" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" />
-						<span class="mess">发货地点</span> <input class="inpu" id="loadingPort"  required="required"
+						<span class="mess">起&nbsp;&nbsp;运&nbsp;&nbsp;港</span> <input class="inpu" id="loadingPort"  required="required"
 							placeholder="发货地点" />
 					</div>
 					<div class="tit-mess" >

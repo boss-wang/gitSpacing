@@ -174,4 +174,24 @@ public class ClientServlet extends BaseServlet {
 		resp.getWriter().flush();
 		resp.getWriter().close();
 	}
+	//搜索客户
+	protected void searchClient(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String currentpage=req.getParameter("currentpage");
+		String serchContent = req.getParameter("serchContent");
+		int rowsize = 3;
+		int totalPage=clientserv.getSearchTotalPage(rowsize, serchContent);
+		Integer curpage;
+		if(currentpage!=""&&currentpage!=null) {
+			curpage=Integer.parseInt(currentpage)>totalPage?totalPage:Integer.parseInt(currentpage);
+			curpage=Integer.parseInt(currentpage)<=0?1:curpage;
+		}else {
+			curpage=new Integer(1);
+		}
+		System.out.println(serchContent);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("curpage", curpage);
+		 List<Client> list=clientserv.searchClient(serchContent, curpage, rowsize);
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("admin/updateClient.jsp").forward(req, resp);
+	}
 }

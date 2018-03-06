@@ -15,6 +15,8 @@ public interface ClientService {
 		public List<Client> getAllClient(int currentPage,int rowsize);
 	//总页数	
 		public int getAllTotalPage(int rowsize);
+	//搜索总页数	
+		public int getSearchTotalPage(int rowsize,String serchContent);
 	//添加客户(返回0 有重名)
 		int addClient(Client client);
 	//模糊查询客户公司名
@@ -23,4 +25,6 @@ public interface ClientService {
 		int deleClient(Client client);
 	//根据公司名查询客户信息
 		public Client getClientByName(Client client);
+	//搜索客户
+		public List<Client> searchClient(String searchContent,int startPage,int rowsize);
 }

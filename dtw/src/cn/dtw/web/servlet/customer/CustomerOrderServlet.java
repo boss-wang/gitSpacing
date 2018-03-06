@@ -12,15 +12,12 @@ import cn.dtw.entity.Client;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Clienttemp;
 import cn.dtw.entity.Clienttemp_customer;
-import cn.dtw.entity.CostStatus;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.OrderStatus;
 import cn.dtw.entity.Order_cost;
 import cn.dtw.entity.Terms;
-import cn.dtw.entity.User;
-import cn.dtw.service.CostStatusService;
 import cn.dtw.service.OrderService;
 import cn.dtw.service.customerservice.ClienttempService;
 import cn.dtw.service.customerservice.CustomerCostService;
@@ -30,7 +27,6 @@ import cn.dtw.service.customerservice.impl.ClientTempServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerCostServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.customerservice.impl.CustomerServiceImpl;
-import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
 import cn.dtw.util.phone.SDKDemo;
 import cn.dtw.web.servlet.BaseServlet;
@@ -40,7 +36,7 @@ public class CustomerOrderServlet extends BaseServlet {
 	private static final long serialVersionUID = 1841587775305891652L;
 	private CustomerOrderService customerOrderService = new CustomerOrderServiceImpl();
 	private CustomerService customerService = new CustomerServiceImpl();
-	private CostStatusService costStatusService = new CostStatusServiceImpl();
+	
 	private OrderService orderService = new OrderServiceImpl();
 	private ClienttempService clientTempService = new  ClientTempServiceImpl();
 	private CustomerCostService customerCostService= new CustomerCostServiceImpl();
@@ -80,30 +76,7 @@ public class CustomerOrderServlet extends BaseServlet {
 		};
 		resp.getWriter().close();
 	}
-	//显示客户自助下单的列表（员工可查看）
-	protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		this.getServletContext().setAttribute("newOrder",0);
-		String curPage = req.getParameter("currentPage");
-		int currentPage;
-		User user = new User();
-		user.setUserId(0);
-		int totalRow = customerOrderService.getOrderCount(user);
-		int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
-		if(curPage==null) {
-			currentPage = 1;
-		}else {
-			currentPage = Integer.parseInt(curPage);
-			currentPage = currentPage<1?1:currentPage;
-			currentPage = currentPage>totalPage?totalPage:currentPage;
-		}
-		List<Order> orderList = customerOrderService.getOrderList(user, currentPage, 10);
-		List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
-		req.setAttribute("currentPage", currentPage);
-		req.setAttribute("totalPage", totalPage);
-		req.setAttribute("orderList", orderList);
-		req.setAttribute("costStatusList", costStatusList);
-		req.getRequestDispatcher("/admin/showCustomerOrder.jsp").forward(req, resp);
-	}
+	
 	//跳转客户下单页面
 	protected void goAddCustomerOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Customer customer = (Customer)req.getSession().getAttribute("customer");

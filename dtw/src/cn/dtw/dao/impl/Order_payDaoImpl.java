@@ -41,5 +41,17 @@ public class Order_payDaoImpl extends BaseDao implements Order_payDao {
 		String sql = "delete from order_pay where id=?";
 		return super.executeUpdate(sql, orderPay.getId())>0?true:false;
 	}
+	//修改应付
+	@Override
+	public boolean updatePay(Order_pay orderPay) {
+		String sql = "update order_pay set unitPrice=?,otherPrice=?,totalPrice=?,invoiceNo=?,payStatus=? where id=?";
+		return super.executeUpdate(sql, orderPay.getUnitPrice(),orderPay.getOtherPrice(),orderPay.getTotalPrice(),orderPay.getInvoiceNo(),orderPay.getPayStatus(),orderPay.getId())>0?true:false;
+	}
+	//根据订单号删除应付
+	@Override
+	public int delPayByOrder(Order order) {
+		String sql = "delete from order_pay where orderId=?";
+		return super.executeUpdate(sql, order.getOrderId());
+	}
 
 }

@@ -1,24 +1,35 @@
 package cn.dtw.dao.customerdao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
+import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.customerdao.CustomerOrderDao;
+import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.entity.Client;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Order;
 
 public class CustomerOrderImpl extends BaseDao implements CustomerOrderDao {
-	
+	private ClientContactDao clientContactDao = new ClientContactDaoImpl();
 	//通过公司id查询订单信息(orderNo,mawbNo,hawbNo,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId)
 	@Override
 	public List<Order> getOrderListByClientId(Client client, int starPage, int pageSize) {
-		String sql="SELECT orderNo,mawbNo,hawbNo,termsId,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId,loadingPort FROM `order` WHERE clientId=? order by departDate desc limit ?,?";
+		String sql="SELECT updateTime,orderClientContactId,orderNo,mawbNo,hawbNo,termsId,departDate,arriveDate,	destination,customsStatus,cargoPiece,cargoWeight,cargoVolume,statusId,loadingPort FROM `order` WHERE clientId=? order by statusId, updateTime desc limit ?,?";
 		Object[] params= {client.getClientId(),starPage,pageSize};
-		return super.executeQuery(new BeanListHandler<Order>(Order.class), sql, params);
+		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql, params);
+		List<Order> listGet = new ArrayList<Order>();
+		for(Order order:list) {
+			Clientcontact cc = clientContactDao.getClientContactById(order.getOrderClientContactId());
+			order.setClientcontact(cc);
+			listGet.add(order);
+		}
+		return listGet;
 	}
 	//通过订单id查询订单信息(orderNo,mawbNo,hawbNo,cargoPiece,cargoWeight,cargoVolume,destination)
 	@Override

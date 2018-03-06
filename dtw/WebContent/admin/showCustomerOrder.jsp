@@ -8,6 +8,11 @@
 		display:inline-block;
 		border:none;
 	}
+	.suMessdiv input{
+		background-color:rgba(0,0,0,0.7);
+		display:inline-block;
+		border:none;
+	}
 	.costSta{
 		background: rgba(0,0,0,0.7);
    		margin-left: 0px;
@@ -38,6 +43,30 @@
 		background:rgba(233,104,107,0.6); 
 		position:absolute; 
 		top:9px;
+		left:130px;
+	}
+	.payTip{
+		display:none; 
+		text-align:center;
+		border-radius:25px;
+		line-height:20px;
+		height:20px;
+		width:130px;
+		background:rgba(233,104,107,0.6); 
+		position:absolute; 
+		top:71px;
+		left:130px;
+	}
+	.payInvoiceTip{
+		display:none; 
+		text-align:center;
+		border-radius:25px;
+		line-height:20px;
+		height:20px;
+		width:130px;
+		background:rgba(233,104,107,0.6); 
+		position:absolute; 
+		top:102px;
 		left:130px;
 	}
 	.contactDiv{
@@ -82,7 +111,7 @@
          left: -250px; 
          top: 0px; 
          width:260px;
-         height:200px; 
+         height:210px; 
        	 background-color:rgba(50,83,100,0.7);
 	}
 	.suMessdiv p{
@@ -107,7 +136,6 @@
 		<table border="1" id="selorder" >
 		 	<tr >
 		 		<td>客户名</td>
-		 		<td>订单状态</td>
 		 		<td>业务编号</td>
 		 		<td>联系人</td>
 		 		<td>系统号</td>
@@ -131,12 +159,12 @@
 		 		<td>新增收入</td>
 		 		<td>支出</td>
 		 		<td>新增支出</td>
+		 		<td>订单状态</td>
 		 		<td>操作栏</td>
 		 	</tr>
 		 	<c:forEach var="order" items="${orderList }">
 		 		<tr>
 			 		<td>${order.client.clientName }</td>
-			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>${order.orderNo }</td>
 			 		<td>
 			 			<div class="ccName">
@@ -177,17 +205,19 @@
 											<c:if test="${costStatus.id==orderCost.costStatus }">${costStatus.name }</c:if>
 										</c:forEach>
 									</p>
-									<p>
-										<c:if test="${orderCost.costStatus!=3 }">
-											<a class="ccOperation modifyCost" cost="${orderCost.cost}" invoiceNo="${orderCost.invoiceNo}" costStatus="${orderCost.costStatus }" >修 改</a> 
-											<c:if test="${orderCost.costStatus==1 }">
-												<a class="ccOperation delCost">删 除</a>	
+									<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+										<p>
+											<c:if test="${orderCost.costStatus!=3 }">
+												<a class="ccOperation modifyCost" cost="${orderCost.cost}" invoiceNo="${orderCost.invoiceNo}" costStatus="${orderCost.costStatus }" >修 改</a> 
+												<c:if test="${orderCost.costStatus==1 }">
+													<a class="ccOperation delCost">删 除</a>	
+												</c:if>
+												<c:if test="${orderCost.costStatus==2 }">
+													<a class="ccOperation">催 款</a>	
+												</c:if>
 											</c:if>
-											<c:if test="${orderCost.costStatus==2 }">
-												<a class="ccOperation">催 款</a>	
-											</c:if>
-										</c:if>
-									</p>
+										</p>
+									</c:if>
 								</div>
 								
 	            				<div class="contactDiv">
@@ -222,17 +252,19 @@
 											<c:if test="${costStatus.id==orderPay.payStatus }">${costStatus.name }</c:if>
 										</c:forEach>
 									</p>
-									<p>
-										<c:if test="${orderPay.payStatus!=3 }">
-											<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a>  
-											<c:if test="${orderPay.payStatus==1 }">
-												<a class="ccOperation delPay">删除</a>	
+									<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
+										<p>
+											<c:if test="${orderPay.payStatus!=3 }">
+												<a class="ccOperation modifyPay" unitPrice="${orderPay.unitPrice}" otherPrice="${orderPay.otherPrice }" totalPrice="${orderPay.totalPrice }" invoiceNo="${orderPay.invoiceNo}" payStatus="${orderPay.payStatus }" >修改</a>  
+												<c:if test="${orderPay.payStatus==1 }">
+													<a class="ccOperation delPay">删除</a>	
+												</c:if>
+												<c:if test="${orderPay.payStatus==2 }">
+													<a class="ccOperation">付 款</a>	
+												</c:if>
 											</c:if>
-											<c:if test="${orderPay.payStatus==2 }">
-												<a class="ccOperation">付 款</a>	
-											</c:if>
-										</c:if>
-									</p>
+										</p>
+									</c:if>
 								</div>
 								
 	            				<div class="contactDiv">
@@ -253,6 +285,7 @@
 			 				<a class="addPay" orderId="${order.orderId }">添加</a>
 			 			</c:if>
 			 		</td>
+			 		<td>${order.orderStatus.statusDescription }</td>
 			 		<td>
 			 			<c:if test="${order.orderStatus.statusId!=6&&order.orderStatus.statusId!=7&&order.orderStatus.statusId!=8 }">
 			 				<a class="updateOrder" modifyId="${order.orderId }">修改</a>&nbsp;&nbsp;<a class="cancel" orderId="${order.orderId }">取消</a>
@@ -261,7 +294,7 @@
 			 				<a class="takeOrder" orderId="${order.orderId }" contactTel="${order.clientcontact.clientContactTel}" orderNo="${order.orderNo }">接单</a>&nbsp;&nbsp;<a class="refuse" orderId="${order.orderId }" orderNo="${order.orderNo }" contactTel="${order.clientcontact.clientContactTel}">取消</a>
 			 			</c:if>
 			 			<c:if test="${order.orderStatus.statusId==7||order.orderStatus.statusId==8}">
-			 				<a>删除</a>
+			 				<a class="delOrder" orderId="${order.orderId }">删除</a>
 			 			</c:if>
 			 		</td>
 		 		</tr>
@@ -273,6 +306,28 @@
 		 </table>
 	</div>
 	<script>
+	//删除订单
+	$("#selorder").on("click",".delOrder",function(){
+		if(confirm("确认删除订单？")){
+			var currentPage = ${currentPage };
+			var orderId = $(this).attr("orderId");
+			$.ajax({
+				url:"order.do",
+				type:"post",
+				data:"mn=delOrder&orderId="+orderId,
+				success:function(res){
+					if(res==1){
+						$(".homeTip").text("已删除！");
+						$(".homeTip").show(200);
+						$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
+						setTimeout(function(){
+							$(".homeTip").fadeOut(1000);
+						},1000);
+					}
+				}
+			});
+		}
+	});
 	//通过审核
 	$("#selorder").on("click",".takeOrder",function(){
 		var orderId = $(this).attr("orderId");
@@ -288,7 +343,7 @@
 					if(res==1){
 						$(".homeTip").text("接单成功！");
 						$(".homeTip").show(200);
-						$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
+						$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
 						setTimeout(function(){
 							$(".homeTip").fadeOut(1000);
 						},1000);
@@ -312,7 +367,7 @@
 					if(res==1){
 						$(".homeTip").text("已取消接单");
 						$(".homeTip").show(200);
-						$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
+						$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
 						setTimeout(function(){
 							$(".homeTip").fadeOut(1000);
 						},1000);
@@ -334,7 +389,7 @@
 					if(res==1){
 						$(".homeTip").text("此票订单已取消");
 						$(".homeTip").show(200);
-						$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
+						$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
 						setTimeout(function(){
 							$(".homeTip").fadeOut(1000);
 						},1000);
@@ -347,28 +402,28 @@
 	$("#selorder").on("click",".updateOrder",function(){
 		var orderId = $(this).attr("modifyId");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
+		$("#home").load("order.do?mn=goUpdateOrder&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showCustomerOrders");
 	});
 	//添加应收
 	$("#selorder").on("click",".addCost",function(){
 		var orderId = $(this).attr("orderId");
 		var clientName = $(this).attr("clientName");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders&clientName="+clientName);
+		$("#home").load("order.do?mn=goAddCost&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showCustomerOrders&clientName="+clientName);
 	});
 	//添加应付
 	$("#selorder").on("click",".addPay",function(){
 		var orderId = $(this).attr("orderId");
 		var currentPage = ${currentPage };
-		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=custorder.do&backmn=showCustomerOrders");
+		$("#home").load("order.do?mn=goAddPay&currentPage="+currentPage+"&orderId="+orderId+"&backdo=order.do&backmn=showCustomerOrders");
 	});
 	//分页
 	$("#firstPage").click(function(){
-		$("#home").load("custorder.do?mn=showCustomerOrders&currentPage=1");
+		$("#home").load("order.do?mn=showCustomerOrders&currentPage=1");
 	});
 	$("#lastPage").click(function(){
 		var totalPage = ${totalPage };
-		$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+totalPage);
+		$("#home").load("order.do?mn=showCustomerOrders&currentPage="+totalPage);
 	});
 	$("#prePage").click(function(){
 		var currentPage = ${currentPage }-1;
@@ -379,7 +434,7 @@
 				$(".homeTip").fadeOut(1000);
 			},1000);
 		}else{
-			$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
+			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
 		}
 	});
 	$("#nextPage").click(function(){
@@ -392,7 +447,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 		}else{
-			$("#home").load("custorder.do?mn=showCustomerOrders&currentPage="+currentPage);
+			$("#home").load("order.do?mn=showCustomerOrders&currentPage="+currentPage);
 		}
 
 	});
@@ -484,6 +539,79 @@
 			});
 		}
 	});
+	//修改应付 
+	$("#selorder").on("click",".modifyPay",function(){
+		if($("#selorder").find("input").length>1){
+			$(".homeTip").text("正在修改其他记录");
+			$(".homeTip").show(200);
+			setTimeout(function(){
+				$(".homeTip").fadeOut(1500);
+			},1000);
+		}else{
+			var messdiv = $(this).parents(".suMessdiv");
+			var oldContent = messdiv.children();
+			
+			var unitPrice = $(this).attr("unitPrice");
+			var otherPrice = $(this).attr("otherPrice");
+			var totalPrice = $(this).attr("totalPrice");
+			var invoiceNo = $(this).attr("invoiceNo");
+			var payStatus = $(this).attr("payStatus");
+			var newContent = $('<p>单  价：<input class="unitPrice" value='+unitPrice+'></p><p>杂  费：<input class="otherPrice" value='+otherPrice+'></p><p>总  价：<input class="totalPrice" value='+totalPrice+'></p><p>发 票：<input class="invNo" value='+invoiceNo+'></p><p>状 态：<select  class="costSta"><c:forEach var="costStatus" items="${costStatusList }"><option value="${costStatus.id }">${costStatus.name }</option></c:forEach></select></p><p><a class="ccOperation savePay"}">保存</a><a class="ccOperation giveUp">取消</a></p><div class="payTip"></div><div class="payInvoiceTip"></div>');
+			messdiv.empty();
+			messdiv.append(newContent);
+			var options = messdiv.find("option"); //获取select下拉框的所有值
+			for (var j = 1; j < options.length; j++) {
+				if ($(options[j]).val() == payStatus) {
+				$(options[j]).attr("selected", "selected");
+				}
+			}
+			$(".suMessdiv").on("click",".giveUp",function(){
+				messdiv.empty();
+				messdiv.append(oldContent);
+			});
+		}
+	});
+	//保存应付修改
+	$("#selorder").on("click",".savePay",function(){
+		var parent = $(this).parents(".ssName");
+		var payId = parent.find(".nameContent").attr("payId");
+		var unitPrice = parent.find("input").eq(0).val();
+		var otherPrice = parent.find("input").eq(1).val();
+		var totalPrice = parent.find("input").eq(2).val();
+		var invoiceNo = parent.find("input").eq(3).val();
+		var payStatus = parent.find("select").val();
+		
+		if(totalPrice==""||totalPrice==null){
+			$(".payTip").text("请输入总金额");
+			$(".payTip").fadeIn(200);
+			$(".totalPrice").focus();
+			setTimeout(function(){
+				$(".payTip").fadeOut(2000);
+			},1000);
+		}else if(invoiceNo!=""&&invoiceNo!=null&&isNaN(invoiceNo)){
+			$(".payInvoiceTip").text("请输入正确的发票号");
+			$(".payInvoiceTip").fadeIn(200);
+			$(".invNo").focus();
+			setTimeout(function(){
+				$(".payInvoiceTip").fadeOut(2000);
+			},1000);
+		}else{
+			$.ajax({
+				type:"post",
+				url:"order.do",
+				data:"mn=updatePay&payId="+payId+"&unitPrice="+unitPrice+"&otherPrice="+otherPrice+"&totalPrice="+totalPrice+"&invoiceNo="+invoiceNo+"&payStatus="+payStatus,
+				success:function(res){
+					if(res==1){
+						var currentPage = ${currentPage };
+						$("#home").load("order.do","mn=showOrders&currentPage="+currentPage);
+					}else{
+						alert("修改失败");
+					}
+				}
+			});
+		}
+		
+	});
 	//修改应收
 	$("#selorder").on("click",".modifyCost",function(){
 		if($("#selorder").find("input").length>1){
@@ -543,7 +671,7 @@
 				success:function(res){
 					if(res==1){
 						var currentPage = ${currentPage };
-						$("#home").load("custorder.do","mn=showCustomerOrders&currentPage="+currentPage);
+						$("#home").load("order.do","mn=showCustomerOrders&currentPage="+currentPage);
 					}else{
 						alert("修改失败");
 					}

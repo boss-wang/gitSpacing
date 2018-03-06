@@ -27,10 +27,12 @@ public interface ClientDao {
 	
 	//分页数据
 	public List<Client> getAllClient(int startPage,int rowsize);
-	
+	//搜索客户
+	public List<Client> searchClient(String searchContent,int startPage,int rowsize);
 	//客户总数
 	public int getAllTotalClient();
-	
+	//搜索总数
+	public int getSearchTotalClient(String serchContent);
 	//模糊查询客户公司名
 	public List<Client> getClientByName(String clientName);
 	//删除客户

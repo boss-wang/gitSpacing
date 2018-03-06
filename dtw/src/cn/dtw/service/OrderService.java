@@ -19,6 +19,8 @@ public interface OrderService {
 	public List<Terms> getAllTerms();
 	//添加订单
 	public boolean addOrder(Order order);
+	//删除订单
+	public boolean delOrder(Order order);
 	//查询订单列表
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
 	//查询订单数量
@@ -39,6 +41,8 @@ public interface OrderService {
 	public boolean addOrderPay(Order_pay orderPay);
 	//删除应付
 	public boolean delPay(Order_pay orderPay);
+	//修改应付
+	public boolean updatePay(Order_pay orderPay);
 	//修改订单状态
 	public boolean updateOrderStatus(Order order,int statusId);
 }

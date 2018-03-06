@@ -19,6 +19,7 @@
 		</div>
 	</div>
 	<hr class="whiter" />
+	<input type="hidden" value="client" class="searchPage" />
 	<!-- 表单内容 -->
 	<table border="1" id="clientUpdate" style="width: 970px; height: 350px">
 
@@ -96,6 +97,7 @@
 									+ clientId + "&clientName=" + clientName
 									+ "&currentpage=" + curpage);
 				})
+		//分页
 		$("#prePage").click(function() {
 			var curpage = ${curpage - 1};
 			if(curpage==0){
@@ -105,7 +107,13 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+				var serchContent = ${param.serchContent };
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+				}
+			
 			}
 		})
 		$("#nextPage").click(function() {
@@ -118,16 +126,31 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+				var serchContent = ${param.serchContent };
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+				}
 			}
 		})
 		$("#firstPage").click(function() {
 			var curpage = 1;
-			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			var serchContent = ${param.serchContent };
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			}
 		})
 		$("#lastPage").click(function() {
 			var curpage = ${totalPage};
-			$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			var serchContent = ${param.serchContent };
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("/dtw/client.do?mn=showClient&currentpage=" + curpage);
+			}
 		})
 		//修改联系人
 		var modeName;

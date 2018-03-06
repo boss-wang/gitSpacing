@@ -21,6 +21,8 @@ import cn.dtw.entity.Terms;
 import cn.dtw.entity.User;
 import cn.dtw.service.CostStatusService;
 import cn.dtw.service.OrderService;
+import cn.dtw.service.customerservice.CustomerOrderService;
+import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
 
@@ -30,6 +32,7 @@ public class OrderServlet extends BaseServlet {
 	private static final long serialVersionUID = 5444940774766260440L;
 	private OrderService orderService = new OrderServiceImpl();
 	private CostStatusService costStatusService = new CostStatusServiceImpl();
+	private CustomerOrderService customerOrderService = new CustomerOrderServiceImpl();
 	//跳转添加订单页面
 	protected void goAddOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<OrderStatus> statusList = orderService.getAllStatus();
@@ -156,6 +159,8 @@ public class OrderServlet extends BaseServlet {
 			orderNo = "YAP"+now.substring(2, 4)+now.substring(5,7)+"C"+(int)(Math.random()*500);
 			order.setOrderNo(orderNo);
 		}
+		String contactName = req.getParameter("contactName");
+		int orderClientContactId = contactName==""?0:Integer.parseInt(contactName);
 		String loadingPort = req.getParameter("loadingPort");
 		int userId = Integer.parseInt(req.getParameter("userId"));
 		String clientIdStr = req.getParameter("clientId");
@@ -203,6 +208,7 @@ public class OrderServlet extends BaseServlet {
 		order.setUpdateTime(now);
 		order.setUserId(userId);
 		order.setLoadingPort(loadingPort);
+		order.setOrderClientContactId(orderClientContactId);
 
 		PrintWriter out = resp.getWriter();
 		if(orderService.addOrder(order)) {
@@ -267,6 +273,28 @@ public class OrderServlet extends BaseServlet {
 		};
 		out.close();
 	}
+	//修改应付
+	protected void updatePay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int payId = Integer.parseInt(req.getParameter("payId"));
+		Double unitPrice = Double.parseDouble(req.getParameter("unitPrice"));
+		Double otherPrice = Double.parseDouble(req.getParameter("otherPrice"));
+		Double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
+		int payStatus = Integer.parseInt(req.getParameter("payStatus"));
+		String invoiceNo = req.getParameter("invoiceNo");
+		Order_pay orderPay = new Order_pay();
+		orderPay.setId(payId);
+		orderPay.setInvoiceNo(invoiceNo);
+		orderPay.setOtherPrice(otherPrice);
+		orderPay.setPayStatus(payStatus);
+		orderPay.setTotalPrice(totalPrice);
+		orderPay.setUnitPrice(unitPrice);
+		if(orderService.updatePay(orderPay)) {
+			resp.getWriter().print(1);
+		}else {
+			resp.getWriter().print(0);
+		}
+		resp.getWriter().close();
+	}
 	//修改应收
 	protected void updateCost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int costId = Integer.parseInt(req.getParameter("costId"));
@@ -309,4 +337,40 @@ public class OrderServlet extends BaseServlet {
 		}
 		resp.getWriter().close();
 	}
+	//删除订单
+	protected void delOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		Order order = new Order();
+		order.setOrderId(orderId);
+		if(orderService.delOrder(order)) {
+			resp.getWriter().print(1);
+		}else {
+			resp.getWriter().print(0);
+		}
+		resp.getWriter().close();
+	}
+	//显示客户自助下单的列表（员工可查看）
+		protected void showCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+			this.getServletContext().setAttribute("newOrder",0);
+			String curPage = req.getParameter("currentPage");
+			int currentPage;
+			User user = new User();
+			user.setUserId(0);
+			int totalRow = customerOrderService.getOrderCount(user);
+			int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Order> orderList = customerOrderService.getOrderList(user, currentPage, 10);
+			List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("totalPage", totalPage);
+			req.setAttribute("orderList", orderList);
+			req.setAttribute("costStatusList", costStatusList);
+			req.getRequestDispatcher("/admin/showCustomerOrder.jsp").forward(req, resp);
+		}
 }

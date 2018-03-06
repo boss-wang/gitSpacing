@@ -76,5 +76,11 @@ public class Order_costDaoImpl extends BaseDao implements Order_costDao {
 		Long m = (Long)obj;
 		return m.intValue();
 	}
+	//根据订单号删除应收
+	@Override
+	public int delCostByOrder(Order order) {
+		String sql = "delete from order_cost where orderId=?";
+		return super.executeUpdate(sql, order.getOrderId());
+	}
 
 }

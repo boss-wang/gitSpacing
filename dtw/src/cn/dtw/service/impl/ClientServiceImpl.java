@@ -68,5 +68,22 @@ public class ClientServiceImpl implements ClientService {
 	public Client getClientByName(Client client) {
 		return clientDao.getClientByName(client);
 	}
+	//搜索客户信息
+	@Override
+	public List<Client> searchClient(String searchContent, int startPage, int rowsize) {
+		return clientDao.searchClient(searchContent, startPage, rowsize);
+	}
+	//搜索的页数
+	@Override
+	public int getSearchTotalPage(int rowsize,String serchContent) {
+		int totalPage=0;
+		int alltotal=clientDao.getSearchTotalClient(serchContent);
+		if((alltotal%rowsize)==0) {
+			totalPage=(alltotal/rowsize);
+		}else if(alltotal%rowsize!=0) {
+			totalPage=(alltotal/rowsize)+1;
+		}
+		return totalPage;
+	}
 
 }

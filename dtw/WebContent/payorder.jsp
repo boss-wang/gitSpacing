@@ -47,10 +47,10 @@
 							<th><span>业务编号</span></th>
 							<th><span>下单人</span></th>
 							<th><span>主单号</span></th>
-							<th><span>发货日期</span></th>
+							<th><span>航班日期</span></th>
 							<th><span>目的地</span></th>
 							<th><span>件数</span></th>
-							<th><span>重量</span></th>
+							<th><span>重量(KG)</span></th>
 							<th><span>应付金额</span></th>
 							<th><span>发票号</span></th>
 							<th><span>付款状态</span></th>

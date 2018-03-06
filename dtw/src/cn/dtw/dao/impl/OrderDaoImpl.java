@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.dtw.dao.BaseDao;
+import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.ClientDao;
 import cn.dtw.dao.CustomsStatusDao;
 import cn.dtw.dao.OrderDao;
@@ -15,6 +16,7 @@ import cn.dtw.dao.OrderStatusDao;
 import cn.dtw.dao.Order_costDao;
 import cn.dtw.dao.Order_payDao;
 import cn.dtw.dao.TermsDao;
+import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Order;
 import cn.dtw.entity.User;
 
@@ -25,6 +27,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	private TermsDao termsDao = new TermsDaoImpl();
 	private Order_costDao orderCostDao = new Order_costDaoImpl();
 	private Order_payDao orderPayDao = new Order_payDaoImpl();
+	private ClientContactDao clientContactDao = new ClientContactDaoImpl();
 	//添加订单
 	@Override
 	public boolean addOrder(Order order) {
@@ -37,7 +40,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	//查询订单列表
 	@Override
 	public List<Order> getOrderList(User user,int startRow,int pageSize) {
-		String sql = "select * from `order` where userId=? order by orderId desc limit ?,?";
+		String sql = "select * from `order` where userId=? order by statusId, updateTime desc limit ?,?";
 		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql, user.getUserId(),startRow,pageSize);
 		List<Order> orderList = new ArrayList<Order>();
 		for(Order order:list) {
@@ -47,6 +50,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 			order.setTerms(termsDao.getTermsById(order));
 			order.setOrderCostList(orderCostDao.getCostByOrderId(order));
 			order.setOrderPayList(orderPayDao.getPayByOrderId(order));
+			order.setClientcontact(clientContactDao.getClientContactById(order.getOrderClientContactId()));
 			orderList.add(order);
 		}
 		return orderList;
@@ -63,11 +67,14 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	public Order getOrderById(int id) {
 		String sql = "select * from `order` where orderId=?";
 		Order order = super.executeOneRow(new BeanHandler<Order>(Order.class), sql, id);
-		order.setClient(clientDao.getClient(order));
-		order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
-		order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
-		order.setTerms(termsDao.getTermsById(order));
-		order.setOrderCostList(orderCostDao.getCostByOrderId(order));
+		if(order!=null) {
+			order.setClient(clientDao.getClient(order));
+			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
+			order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
+			order.setTerms(termsDao.getTermsById(order));
+			order.setOrderCostList(orderCostDao.getCostByOrderId(order));
+			order.setClientcontact(clientContactDao.getClientContactById(order.getOrderClientContactId()));
+		}
 		return order;
 	}
 	//修改订单
@@ -92,6 +99,12 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	public boolean updateOrderStatus(Order order, int statusId) {
 		String sql = "update `order` set statusId=? where orderId=?";
 		return super.executeUpdate(sql, statusId,order.getOrderId())>0?true:false;
+	}
+	//删除订单
+	@Override
+	public boolean delOrder(Order order) {
+		String sql = "delete from `order` where orderId=?";
+		return super.executeUpdate(sql, order.getOrderId())>0?true:false;
 	}
 
 }

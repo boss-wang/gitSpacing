@@ -144,4 +144,28 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 		}
 		return clientGet;
 	}
+
+	//搜索客户
+	@Override
+	public List<Client> searchClient(String searchContent, int startPage, int rowsize) {
+		String sql ="select * from client where clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%') limit ?,?";
+		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,searchContent,searchContent,startPage,rowsize);
+		List<Client> clientList = new ArrayList<Client>();
+		for(Client client:list) {
+			//添加客户联系人信息
+			List<Clientcontact> clientContactList = new ArrayList<Clientcontact>();
+			clientContactList=this.getClientcontact(client);
+			client.setClientContactlist(clientContactList);
+			clientList.add(client);
+		}
+		return clientList;
+	}
+
+	//搜索的总条数
+	@Override
+	public int getSearchTotalClient(String serchContent) {
+		String sql ="select count(1) as count from client where clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%') ";
+		Long total = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,serchContent,serchContent);
+		return total.intValue();
+	}
 }

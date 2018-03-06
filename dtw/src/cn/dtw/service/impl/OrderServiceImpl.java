@@ -106,5 +106,17 @@ public class OrderServiceImpl implements OrderService {
 	public boolean updateOrderStatus(Order order, int statusId) {
 		return orderDao.updateOrderStatus(order, statusId);
 	}
+	//修改应付
+	@Override
+	public boolean updatePay(Order_pay orderPay) {
+		return orderPayDao.updatePay(orderPay);
+	}
+	//删除订单
+	@Override
+	public boolean delOrder(Order order) {
+		orderPayDao.delPayByOrder(order);
+		orderCostDao.delCostByOrder(order);
+		return orderDao.delOrder(order);
+	}
 
 }

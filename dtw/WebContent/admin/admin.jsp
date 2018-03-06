@@ -242,7 +242,7 @@
 			$("#home").load("order.do","mn=showOrders");
 		});
 		$("#showCustomerOrder").click(function(){
-			$("#home").load("custorder.do","mn=showCustomerOrders");
+			$("#home").load("order.do","mn=showCustomerOrders");
 		});
 		$("#customerApplication").click(function(){
 			$("#home").load("customer.do","mn=showCustomerApplication");	
@@ -275,9 +275,19 @@
 		}, 10000);
 		$("#newOrderTip").click(function(){
 			$(this).hide();
-			$("#home").load("custorder.do","mn=showCustomerOrders");
+			$("#home").load("order.do","mn=showCustomerOrders");
 		});
-
+		$(".main-search").keydown(function() {
+		     if (event.keyCode == "13") {//keyCode=13是回车键
+		       	var serchContent = $(this).val();
+		     	if(serchContent!=""&&serchContent!=null){
+		     		var serchPage = $(".searchPage").val();
+			     	if(serchPage=='client'){
+			     		$("#home").load("client.do","mn=searchClient&serchContent="+serchContent);
+			     	}
+		     	}
+		     }
+		});
 	</script>
 	
 </html>
