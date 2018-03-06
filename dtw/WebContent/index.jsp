@@ -150,7 +150,7 @@
 			<div class="container clearfix">
 				<div class="cont">
 					<div class="pic">
-						<a href="tradeNews.jsp" title="行业新闻">
+						<a id="tradeNew" title="行业新闻">
 							<IMG src="images/homepage/index-pic1.jpg">
 						</a>
 					</div>
@@ -165,7 +165,7 @@
 				</div>
 				<div class="cont">
 					<div class="pic">
-						<a href="" title="服务项目">
+						<a href="index.jsp"     title="服务项目">
 							<IMG src="images/homepage/index-pic2.jpg">
 						</a>
 					</div>
@@ -177,7 +177,7 @@
 				</div>
 				<div class="cont last">
 					<div class="pic">
-						<a href="serviceTerms.jsp" title="帮助支持">
+						<a id="serviceTerm" title="帮助支持">
 							<IMG src="images/homepage/index-pic3.jpg">
 						</a>
 					</div>
@@ -250,8 +250,15 @@
 				window.location.href="#abstract";
 				$("#homeDiv").load("tradeNews.jsp");
 			});
-			
+			$("#tradeNew").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("tradeNews.jsp");
+			});
 			$("#serviceTerms").click(function(){
+				window.location.href="#abstract";
+				$("#homeDiv").load("serviceTerms.jsp");
+			});
+			$("#serviceTerm").click(function(){
 				window.location.href="#abstract";
 				$("#homeDiv").load("serviceTerms.jsp");
 			});
