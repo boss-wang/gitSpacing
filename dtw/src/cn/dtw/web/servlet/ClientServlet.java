@@ -187,7 +187,6 @@ public class ClientServlet extends BaseServlet {
 		}else {
 			curpage=new Integer(1);
 		}
-		System.out.println(serchContent);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("curpage", curpage);
 		 List<Client> list=clientserv.searchClient(serchContent, curpage, rowsize);
