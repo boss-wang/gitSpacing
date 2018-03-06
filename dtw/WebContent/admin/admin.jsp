@@ -291,6 +291,14 @@
 			     	if(serchPage=='order'){
 			     		$("#home").load("order.do","mn=searchOrder&serchContent="+serchContent);
 			     	}
+			     	if(serchPage=='customerOrder'){
+			     		$("#home").load("order.do","mn=searchCustomerOrders&serchContent="+serchContent);
+			     	}
+			     	
+			     	
+			     	/* var htmlc = $("body").html();
+			     	htmlc = htmlc.replace(serchContent,"<font style='color:red'>" + serchContent + "</font>")
+			     	$("body").html(htmlc); */
 		     	}
 		     }
 		});

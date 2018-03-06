@@ -376,10 +376,10 @@ public class OrderServlet extends BaseServlet {
 		//搜索订单
 		protected void searchOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String curPage = req.getParameter("currentPage");
-			String serchContent = req.getParameter("serchContent");
+			String searchContent = req.getParameter("serchContent");
 			int currentPage;
 			User user = (User)req.getSession().getAttribute("user");
-			int totalRow = orderService.getOrderCount(user);
+			int totalRow = orderService.searchOrderCount(searchContent, user);
 			int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
 			if(curPage==null) {
 				currentPage = 1;
@@ -388,12 +388,36 @@ public class OrderServlet extends BaseServlet {
 				currentPage = currentPage<1?1:currentPage;
 				currentPage = currentPage>totalPage?totalPage:currentPage;
 			}
-			List<Order> orderList = orderService.getOrderList(user, currentPage, 10);
+			List<Order> orderList = orderService.searchOrderList(searchContent, user, currentPage, 10);
 			List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("totalPage", totalPage);
 			req.setAttribute("orderList", orderList);
 			req.setAttribute("costStatusList", costStatusList);
 			req.getRequestDispatcher("/admin/showOrder.jsp").forward(req, resp);
+		}
+		//搜索客户自助下单的列表（员工可查看）
+		protected void searchCustomerOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+			String searchContent = req.getParameter("serchContent");
+			String curPage = req.getParameter("currentPage");
+			int currentPage;
+			User user = new User();
+			user.setUserId(0);
+			int totalRow = orderService.searchOrderCount(searchContent, user);
+			int totalPage = totalRow%10==0?totalRow/10:totalRow/10+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Order> orderList = orderService.searchOrderList(searchContent,user, currentPage, 10);
+			List<CostStatus> costStatusList = costStatusService.getAllCostStatus();
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("totalPage", totalPage);
+			req.setAttribute("orderList", orderList);
+			req.setAttribute("costStatusList", costStatusList);
+			req.getRequestDispatcher("/admin/showCustomerOrder.jsp").forward(req, resp);
 		}
 }

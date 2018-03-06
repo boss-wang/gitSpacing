@@ -23,6 +23,8 @@ public interface OrderService {
 	public boolean delOrder(Order order);
 	//查询订单列表
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
+	//搜索订单列表
+	public List<Order> searchOrderList(String searchContent,User user,int curPage,int pageSize);
 	//查询订单数量
 	public int getOrderCount(User user);
 	//查询搜索的订单数量
