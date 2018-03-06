@@ -106,5 +106,13 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		String sql = "delete from `order` where orderId=?";
 		return super.executeUpdate(sql, order.getOrderId())>0?true:false;
 	}
+	@Override
+	public int searchOrderCount(String searchContent, User user) {
+		String sql = "select count(1) as count from `order` where (orderNo like concat('%',?,'%') or systemNo like concat('%',?,'%') or mawbNo like concat('%',?,'%') or "
+				+ "hawbNo like concat('%',?,'%') or destination like concat('%',?,'%') or "
+				+ "customsNo like concat('%',?,'%') or remarks like concat('%',?,'%') or loadingPort like concat('%',?,'%')) and userId=?";
+		Long rs = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,searchContent,user.getUserId());
+		return rs.intValue();
+	}
 
 }

@@ -11,8 +11,12 @@ public interface SupplierService {
 	public boolean addSupplier(Supplier supplier);
 	//查询分页供应商
 	public List<Supplier> getPageSupplier(int page,int pageSize);
+	//搜索供应商
+	public List<Supplier> searchSupplier(String searchContent,int page,int pageSize);
 	//获得总记录条数
 	public int getTotalRowOfSupplier();
+	//获得搜索记录条数
+	public int getSearchRowOfSupplier(String searchContent);
 	//通过id获得供应商信息
 	public Supplier getSupplierById(Supplier supplier);
 	//修改供应商,若公司名存在则返回0，若修改失败返回2，修改成功返回1

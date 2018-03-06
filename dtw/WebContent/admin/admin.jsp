@@ -285,6 +285,12 @@
 			     	if(serchPage=='client'){
 			     		$("#home").load("client.do","mn=searchClient&serchContent="+serchContent);
 			     	}
+			     	if(serchPage=='supplier'){
+			     		$("#home").load("supplier.do","mn=searchSupplier&serchContent="+serchContent);
+			     	}
+			     	if(serchPage=='order'){
+			     		$("#home").load("order.do","mn=searchOrder&serchContent="+serchContent);
+			     	}
 		     	}
 		     }
 		});

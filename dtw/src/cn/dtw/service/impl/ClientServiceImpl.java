@@ -70,7 +70,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 	//搜索客户信息
 	@Override
-	public List<Client> searchClient(String searchContent, int startPage, int rowsize) {
+	public List<Client> searchClient(String searchContent, int currentPage, int rowsize) {
+		int startPage = (currentPage-1)*rowsize;
 		return clientDao.searchClient(searchContent, startPage, rowsize);
 	}
 	//搜索的页数

@@ -165,4 +165,24 @@ public class SupplierServlet extends BaseServlet {
 				resp.getWriter().print(supplierGet.getSupplierId());
 			};
 		}
+		//搜索供应商
+		protected void searchSupplier(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String curPage = req.getParameter("currentPage");
+			String searchContent = req.getParameter("serchContent");
+			int currentPage;
+			int totalRow = suService.getSearchRowOfSupplier(searchContent);
+			int totalPage = totalRow%3==0?totalRow/3:totalRow/3+1;
+			if(curPage==null) {
+				currentPage = 1;
+			}else {
+				currentPage = Integer.parseInt(curPage);
+				currentPage = currentPage<1?1:currentPage;
+				currentPage = currentPage>totalPage?totalPage:currentPage;
+			}
+			List<Supplier> supplierList = suService.searchSupplier(searchContent,currentPage, 3);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("supplierList", supplierList);
+			req.setAttribute("totalPage", totalPage);
+			req.getRequestDispatcher("/admin/updateSupplier.jsp").forward(req, resp);
+		}
 }

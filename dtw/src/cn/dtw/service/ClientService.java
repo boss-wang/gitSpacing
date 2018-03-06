@@ -26,5 +26,5 @@ public interface ClientService {
 	//根据公司名查询客户信息
 		public Client getClientByName(Client client);
 	//搜索客户
-		public List<Client> searchClient(String searchContent,int startPage,int rowsize);
+		public List<Client> searchClient(String searchContent,int currentPage,int rowsize);
 }

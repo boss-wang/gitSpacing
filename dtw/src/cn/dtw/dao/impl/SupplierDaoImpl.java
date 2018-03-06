@@ -74,5 +74,18 @@ public class SupplierDaoImpl extends BaseDao implements SupplierDao {
 		String sql = "select * from supplier where supplierName like concat('%',?,'%')";
 		return super.executeQuery(new BeanListHandler<Supplier>(Supplier.class), sql, SupplierName);
 	}
+	//搜索供应商
+	@Override
+	public List<Supplier> searchSupplier(String searchContent, int startRow, int pageSize) {
+		String sql = "select * from supplier where supplierName like concat('%',?,'%') or supplierAddress like concat('%',?,'%') order by supplierId desc limit ?,?";
+		return super.executeQuery(new BeanListHandler<Supplier>(Supplier.class), sql,searchContent,searchContent, startRow,pageSize);
+	}
+	//查询搜索的记录条数
+	@Override
+	public int getSearchRowOfSupplier(String searchContent) {
+		String sql = "select count(1) as count from supplier where supplierName like concat('%',?,'%') or supplierAddress like concat('%',?,'%')";
+		Long rs =  (Long)super.executeOneColumn(new ScalarHandler("count"), sql,searchContent,searchContent);
+		return rs.intValue();
+	}
 
 }

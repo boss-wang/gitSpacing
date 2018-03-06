@@ -133,7 +133,7 @@
            	</div>
         
             <hr class="whiter"/>
-              
+            <input type="hidden" value="order" class="searchPage" />
 		<table border="1" id="selorder" >
 		 	<tr >
 		 		<td>客户名</td>

@@ -82,5 +82,24 @@ public class SupplierServiceImpl implements SupplierService {
 	public List<Supplier> getSupplierByName(String SupplierName) {
 		return suDao.getSupplierByName(SupplierName);
 	}
+	//搜索供应商
+	@Override
+	public List<Supplier> searchSupplier(String searchContent, int page, int pageSize) {
+		int startRow = (page-1)*pageSize;
+		List<Supplier> list = suDao.searchSupplier(searchContent, startRow, pageSize);
+		List<Supplier> supplierList = new ArrayList<Supplier>();
+		//添加联系人信息
+		for(Supplier supplier:list) {
+			List<Suppliercontact> contacts = su_contDao.getSupplierContactBySupplierId(supplier);
+			supplier.setSupplierContacts(contacts);
+			supplierList.add(supplier);
+		}
+		return supplierList;
+	}
+	//搜索的条数
+	@Override
+	public int getSearchRowOfSupplier(String searchContent) {
+		return suDao.getSearchRowOfSupplier(searchContent);
+	}
 
 }

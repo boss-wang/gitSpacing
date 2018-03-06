@@ -19,6 +19,7 @@
                 </div>
                 <hr class="whiter"/>
             <!-- 表单内容 -->
+            <input type="hidden" value="supplier" class="searchPage" />
         <table   border="1"  id="clientUpdate"  >
             	<tr id="" class="tit-mess3">
             		<td class="mess1"  style="width:150px;">供应商公司抬头</td>
@@ -188,11 +189,23 @@
 		});
 		//分页
 		$("#firstPage").click(function(){
-			$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("supplier.do","mn=searchSupplier&currentPage=1&serchContent="+serchContent);
+			}else{
+				$("#home").load("supplier.do?mn=showSupplier&currentPage=1");
+			}
+			
 		})
 		$("#lastPage").click(function(){
 			var totalPage = ${totalPage };
-			$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
+			var serchContent = "${param.serchContent }";
+			if(serchContent!=null&&serchContent!=""){
+				$("#home").load("supplier.do","mn=searchSupplier&currentPage="+totalPage+"&serchContent="+serchContent);
+			}else{
+				$("#home").load("supplier.do?mn=showSupplier&currentPage="+totalPage);
+			}
+			
 		})
 		$("#prePage").click(function(){
 			var currentPage = ${currentPage }-1;
@@ -203,7 +216,12 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				var serchContent = "${param.serchContent }";
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("supplier.do","mn=searchSupplier&currentPage="+currentPage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				}
 			}
 		})
 		$("#nextPage").click(function(){
@@ -216,7 +234,13 @@
 						$(".homeTip").fadeOut(1000);
 					},1000);
 			}else{
-				$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				var serchContent = "${param.serchContent }";
+				if(serchContent!=null&&serchContent!=""){
+					$("#home").load("supplier.do","mn=searchSupplier&currentPage="+currentPage+"&serchContent="+serchContent);
+				}else{
+					$("#home").load("supplier.do?mn=showSupplier&currentPage="+currentPage);
+				}
+				
 			}
 
 		})

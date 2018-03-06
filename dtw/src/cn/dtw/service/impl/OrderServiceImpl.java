@@ -118,5 +118,11 @@ public class OrderServiceImpl implements OrderService {
 		orderCostDao.delCostByOrder(order);
 		return orderDao.delOrder(order);
 	}
+	//搜索订单的条数
+	@Override
+	public int searchOrderCount(String searchContent, User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

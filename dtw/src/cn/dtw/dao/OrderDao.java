@@ -12,6 +12,8 @@ public interface OrderDao {
 	public boolean updateOrder(Order order);
 	//查询订单条数
 	public int getOrderCount(User user);
+	//查询搜索的订单数量
+	public int searchOrderCount(String searchContent,User user);
 	//查询订单列表
 	public List<Order> getOrderList(User user,int startRow,int pageSize);
 	//通过id查询订单信息
