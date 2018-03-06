@@ -107,7 +107,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				var serchContent = ${param.serchContent };
+				var serchContent = "${param.serchContent }";
 				if(serchContent!=null&&serchContent!=""){
 					$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
 				}else{
@@ -126,7 +126,7 @@
 					$(".homeTip").fadeOut(1000);
 				},1000);
 			}else{
-				var serchContent = ${param.serchContent };
+				var serchContent = "${param.serchContent }";
 				if(serchContent!=null&&serchContent!=""){
 					$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
 				}else{
@@ -136,7 +136,7 @@
 		})
 		$("#firstPage").click(function() {
 			var curpage = 1;
-			var serchContent = ${param.serchContent };
+			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
 				$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
 			}else{
@@ -145,7 +145,7 @@
 		})
 		$("#lastPage").click(function() {
 			var curpage = ${totalPage};
-			var serchContent = ${param.serchContent };
+			var serchContent = "${param.serchContent }";
 			if(serchContent!=null&&serchContent!=""){
 				$("#home").load("/dtw/client.do?mn=searchClient&currentpage=" + curpage+"&serchContent="+serchContent);
 			}else{

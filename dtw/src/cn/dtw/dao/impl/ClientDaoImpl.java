@@ -148,8 +148,10 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//搜索客户
 	@Override
 	public List<Client> searchClient(String searchContent, int startPage, int rowsize) {
-		String sql ="select * from client where clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%') limit ?,?";
-		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,searchContent,searchContent,startPage,rowsize);
+		String sql ="select * from client where clientName like '%"+searchContent+"%' limit ?,?";
+		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,startPage,rowsize);
+		System.out.println(sql);
+		System.out.println(list.size());
 		List<Client> clientList = new ArrayList<Client>();
 		for(Client client:list) {
 			//添加客户联系人信息

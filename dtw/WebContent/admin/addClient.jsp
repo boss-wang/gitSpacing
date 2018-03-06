@@ -66,7 +66,7 @@
 						}else if(res==1){
 							$(".homeTip").text("添加成功");
 							$(".homeTip").show(200);
-							var currentPage = ${param.currentPage };
+							var currentPage = "${param.currentPage }";
 							if(currentPage==null||currentPage==""){
 								$("#home").load("client.do?mn=showClient");
 							}else{
