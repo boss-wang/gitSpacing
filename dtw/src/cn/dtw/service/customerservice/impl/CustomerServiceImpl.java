@@ -3,8 +3,10 @@ package cn.dtw.service.customerservice.impl;
 
 import java.util.List;
 
+import cn.dtw.dao.ClientContactDao;
 import cn.dtw.dao.customerdao.CustomerDao;
 import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
+import cn.dtw.dao.impl.ClientContactDaoImpl;
 import cn.dtw.entity.Clientcontact;
 import cn.dtw.entity.Customer;
 import cn.dtw.entity.Customer_client;
@@ -12,6 +14,7 @@ import cn.dtw.service.customerservice.CustomerService;
 
 public class CustomerServiceImpl implements CustomerService {
 	CustomerDao customerDao = new CustomerDaoImpl();
+	ClientContactDao clientContactDao  = new ClientContactDaoImpl();
 	//注册
 	@Override
 	public int addCustomer(Customer customer) {
@@ -89,11 +92,20 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean updateCustomerStatus(Customer customer, int statusId) {
 		return customerDao.updateCustomerStatus(customer, statusId);
 	}
-	//根据下单人id更新真实姓名
+	//根据下单人id更新手机号
 	@Override
-	public int updateRealNameByCustomer(Customer customer) {
-		
-		return customerDao.updateRealNameByCustomer(customer);
+	public int updateCustomerPhoneByCustomer(Customer newcustomer, Customer oldcustomer) {
+		customerDao.updateTeleByCustomerId(newcustomer);
+		clientContactDao.updateClientcontactByCustomer(newcustomer, oldcustomer);
+		return 1;
 	}
+	//根据下单人id更新真实姓名
+		@Override
+		public int updateRealNameByCustomer(Customer customer) {
+			
+			return customerDao.updateRealNameByCustomer(customer);
+		}
+
+	
 
 }

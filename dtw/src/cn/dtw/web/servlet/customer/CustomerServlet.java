@@ -130,6 +130,21 @@ public class CustomerServlet extends BaseServlet {
 		}
 		//修改个人手机号
 		protected void updatePhoneNumber(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-			
+			String phonecode=req.getParameter("phonecode");
+			String oldphone=req.getParameter("oldphone");
+			String newphone=req.getParameter("newphone");
+			String customerId=req.getParameter("customerId");
+			if(phonecode.equals(req.getSession().getAttribute("contentCode"))) {
+				Customer newcustomer = new Customer();
+				newcustomer.setId(Integer.parseInt(customerId));
+				newcustomer.setTel(newphone);
+				Customer oldcustomer = new Customer();
+				oldcustomer.setId(Integer.parseInt(customerId));
+				oldcustomer.setTel(oldphone);
+				customerService.updateCustomerPhoneByCustomer(newcustomer, oldcustomer);
+				resp.getWriter().print(1);
+			}else {
+				resp.getWriter().print(0);
+			}
 		}
 }

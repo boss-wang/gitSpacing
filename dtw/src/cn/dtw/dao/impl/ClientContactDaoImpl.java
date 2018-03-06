@@ -10,6 +10,7 @@ import cn.dtw.dao.ClientContactDao;
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Client_clientcontact;
 import cn.dtw.entity.Clientcontact;
+import cn.dtw.entity.Customer;
 
 public class ClientContactDaoImpl extends BaseDao implements ClientContactDao {
 
@@ -56,6 +57,12 @@ public class ClientContactDaoImpl extends BaseDao implements ClientContactDao {
 	public Clientcontact getClientContactById(int id) {
 		String sql = "select * from clientcontact where clientContactId=?";
 		return super.executeOneRow(new BeanHandler<Clientcontact>(Clientcontact.class), sql, id);
+	}
+	//通过下单人手机号更新联系人手机号
+	@Override
+	public int updateClientcontactByCustomer(Customer newCustomer,Customer oldCustomer) {
+		String sql="update clientcontact set ClientContactTel=? where ClientContactTel=? ";
+		return super.executeUpdate(sql, newCustomer.getTel(),oldCustomer.getTel());
 	}
 	
 }

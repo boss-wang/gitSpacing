@@ -205,7 +205,7 @@ table tr {
 			success:function(res){
 				m = 60;
 				flag=setInterval(getdate,1000);
-				setTimeout(removeSession,60*1000);
+				setTimeout(removeSession,6000*1000);
 			}
 		})
 		
@@ -231,35 +231,34 @@ table tr {
 
 	$("form").submit(function(){
 		var phonecode= $("#phoneCode").val();
+		var newphone=$("#form-phone").val();
 		if(isright4==true){
 			$.ajax({
 				url:"customer.do?mn=updatePhoneNumber",
-				data:"phonecode="+phonecode+"&oldphone="+${customer.tel}+"$newphone="+$("#form-phone").val()+"&customerId="+${customer.id},
+				data:"phonecode="+phonecode+"&oldphone="+'${customer.tel}'+"&newphone="+newphone+"&customerId="+'${customer.id}',
 				type:"post",
 				success:function(res){
 					if(res==1){
 						$.ajax({
-							url:"custlogin.do?mn=customerlogin",//修改session
-							data:"",
+							url:"custlogin.do?mn=customerlogin",
+							data:"loginName="+'${customer.loginName}'+"&paswd="+'${customer.loginPwd}',
 							type:"post",
 							success:function(res){
-									window.location.href="index.jsp";
+								$("#personCenter").click();
 							}
-						})
+						});
 						
 					}else{
 						$("#form-phone").siblings(".input-tip").text("验证码错误");
 					}
 				}
-			})
-		
-			
+			});
 			return false;
 		}else{
 			return false;
 		}
 		
 		
-	})
+	});
 </script>
 </html>

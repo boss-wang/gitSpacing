@@ -30,4 +30,6 @@ public interface CustomerDao {
 	public boolean updateCustomerStatus(Customer customer,int statusId);
 	//根据下单人id更新真实姓名
 	int updateRealNameByCustomer(Customer customer);
+	//根据下单人id更新手机号
+	int updateTeleByCustomerId(Customer customer);
 }
