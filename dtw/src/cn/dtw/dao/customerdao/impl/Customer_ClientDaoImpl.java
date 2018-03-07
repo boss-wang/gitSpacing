@@ -21,5 +21,11 @@ public class Customer_ClientDaoImpl extends BaseDao implements Customer_ClientDa
 		String sql="select * from clienttemp_customer where customerId=?";
 		return super.executeOneRow(new BeanHandler<Customer_client>(Customer_client.class), sql, customer.getId());
 	}
+	//删除绑定的公司
+	@Override
+	public boolean delCustomer_client(Customer customer) {
+		String sql = "delete from customer_client where customerId=?";
+		return super.executeUpdate(sql, customer.getId())>0?true:false;
+	}
 
 }

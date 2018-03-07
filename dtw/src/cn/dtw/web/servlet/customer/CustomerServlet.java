@@ -184,6 +184,10 @@ public class CustomerServlet extends BaseServlet {
 				Customer customer = new Customer();
 				customer.setId(Integer.parseInt(customerId));
 				int back= clienttempService.unbindingClientByCustomerId(customer);
+				if(back==1) {
+					Customer cust = customerService.getCustomerByid(customer.getId());
+					req.getSession().setAttribute("customer",cust);
+				}
 				resp.getWriter().print(back);
 		}
 }

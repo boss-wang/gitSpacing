@@ -276,8 +276,10 @@ public class OrderServlet extends BaseServlet {
 	//修改应付
 	protected void updatePay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int payId = Integer.parseInt(req.getParameter("payId"));
-		Double unitPrice = Double.parseDouble(req.getParameter("unitPrice"));
-		Double otherPrice = Double.parseDouble(req.getParameter("otherPrice"));
+		String unitPriceStr = req.getParameter("unitPrice");
+		String otherPriceStr = req.getParameter("otherPrice");
+		Double unitPrice = unitPriceStr==""?null:Double.parseDouble(unitPriceStr);
+		Double otherPrice = otherPriceStr==""?null:Double.parseDouble(otherPriceStr);
 		Double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
 		int payStatus = Integer.parseInt(req.getParameter("payStatus"));
 		String invoiceNo = req.getParameter("invoiceNo");

@@ -252,7 +252,7 @@
 		});
 		$("#profile-menu").click(function(){
 			var userid = ${user.userId};
-			$("#headpics").show();
+			$("#headpics").toggle();
 			$("#headpics").load("user.do?mn=showAllHeadPic&userid="+userid);
 			$("#headpics").on("click","#backhide",function(){
 				$("#headpics").hide();

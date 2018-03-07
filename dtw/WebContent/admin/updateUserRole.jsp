@@ -5,7 +5,6 @@
             .updt{
             		font-size: 18px; 
             		line-height: 30px;
-            		height: 30px;
             		width: 173px;
             	}
             .sele{
@@ -14,7 +13,7 @@
             	margin:0px;
             	padding:2px;
             	width:170px;
-            	height:78px;
+            	height:55px;
             }	
             </style>
 <body>

@@ -9,4 +9,6 @@ public interface Customer_ClientDao {
 	public boolean addCustomer_client(Customer customer,Client client);
 	//查询绑定的公司id
 	Customer_client getClientIdByCustomer(Customer customer);
+	//删除一个用户绑定的公司
+	public boolean delCustomer_client(Customer customer);
 }

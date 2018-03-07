@@ -3,8 +3,10 @@ package cn.dtw.service.customerservice.impl;
 import cn.dtw.dao.ClientDao;
 import cn.dtw.dao.customerdao.ClienttempDao;
 import cn.dtw.dao.customerdao.CustomerDao;
+import cn.dtw.dao.customerdao.Customer_ClientDao;
 import cn.dtw.dao.customerdao.impl.ClienttempDaoImpl;
 import cn.dtw.dao.customerdao.impl.CustomerDaoImpl;
+import cn.dtw.dao.customerdao.impl.Customer_ClientDaoImpl;
 import cn.dtw.dao.impl.ClientDaoImpl;
 import cn.dtw.entity.Client;
 import cn.dtw.entity.Clienttemp;
@@ -17,6 +19,7 @@ public class ClientTempServiceImpl implements ClienttempService {
 	private CustomerDao customerDao = new CustomerDaoImpl();
 	private ClientDao clientDao = new ClientDaoImpl();
 	private ClienttempDao clienttempDao = new ClienttempDaoImpl();
+	private Customer_ClientDao customerClientDao = new Customer_ClientDaoImpl();
 	//申请绑定公司
 	@Override
 	public int addClienttemp_customer(Clienttemp_customer clienttemp_customer, Clienttemp clienttemp) {
@@ -61,8 +64,12 @@ public class ClientTempServiceImpl implements ClienttempService {
 	@Override
 	public int unbindingClientByCustomerId(Customer customer) {
 		if( clienttempDao.delClienttempByCustomer(customer)) {
-			customerDao.updateCustomerStatus(customer, 2);
-			return 1;
+			if(customerClientDao.delCustomer_client(customer)) {
+				customerDao.updateCustomerStatus(customer, 2);
+				return 1;	//解绑成功
+			}else {
+				return 2;	//临时公司删除成功，绑定公司未能删除
+			}
 		}else{
 			return 0;
 		}

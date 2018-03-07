@@ -25,7 +25,7 @@
             		margin: 20px auto 20px 315px ;
             	}
             	.tit-mess{
-            		height: 80px;
+            		height: 55px;
             	}
             	#addSub{
             		background: rgba(0,0,0,0.1);
@@ -231,7 +231,8 @@
 		left:230px;
 		right:150px;
 		 z-index:10;
-		 background-color:rgba(29,54,73,0.8); 	 
+		 border-radius:15px;
+		 background:rgba(0,0,0,0.9);	 
 		}
 		#headpics input{
 			    background: rgba(6,10,27,0.8);
@@ -247,11 +248,11 @@
 		}
 		
 		#headpics img{
-		margin:10px;
-		position:relative;
-		width:100px;
-		height:80px
-		
+			border-radius:50%;
+			margin:10px;
+			position:relative;
+			width:100px;
+			height:100px
 		}
 		
 		#headpics img:hover {
@@ -266,26 +267,55 @@
 		#homesection tr td{
 		display:inline-block;
 		margin:20px;
-		border-radius:70px;
-		background-color:#DADADA;
-		
 		}
 		
 	
 		#homesection img{
-		margin:10px;
+			margin:10px;
 			display:inline-block;
-			border-radius:50px;
-			width:100px;
-			
-			transition:all 200;
-			
+			border-radius:50%;
+			border:10px solid rgba(255,255,255,0.2);
+			width:125px;
 		}
-		#homesection tr td:hover{
-		
-		
-		}
+
 		#homesection img:hover{
-		cursor:pointer;
-		transform: scale(1.1);
-		}		
+			cursor:pointer;
+			animation: mymove 1s;
+		}	
+		
+		@keyframes mymove{
+			0%{
+				transform:scale(0.8);
+			}
+			10%{
+				transform: rotate(10deg);
+			}
+			20% {
+				transform: rotate(20deg) scale(1.1);
+			}
+			30%{
+				transform: rotate(-20deg) scale(1.1);
+			}
+			40%{
+				transform: rotate(10deg) scale(1.1);
+			}
+			50%{
+				transform: rotate(-10deg) scale(1.1);
+				
+				}
+			60%{
+				transform: rotate(5deg) scale(1.1);
+			}
+			70%{
+				transform: rotate(-5deg) scale(1.1);
+			}
+			80%{
+				transform: rotate(3deg);
+			}
+			90%{
+				transform: rotate(-3deg);
+			}
+			100%{
+				transform: rotate(0deg);
+			}
+		}

@@ -174,7 +174,7 @@ table tr {
 						type:"post",
 						success:function(res){
 							alert("解绑成功");
-							$("#personCenter").click();
+							window.location.reload();
 						}
 					});
 				}else{

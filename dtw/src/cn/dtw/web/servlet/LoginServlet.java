@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.dtw.entity.User;
 import cn.dtw.service.UserService;
 import cn.dtw.service.impl.UserServiceImpl;
+import cn.dtw.util.MD5;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		if(userDB==null) {
 			//没有找到此账号，返回0
 			resp.getWriter().print(0);
-		}else if(!userDB.getUserPwd().equals(userLogin.getUserPwd())) {
+		}else if(!MD5.KL(userDB.getUserPwd()).equals(MD5.toMD5(userLogin.getUserPwd()))) {
 			//找到用户，但密码不正确，返回1
 			resp.getWriter().print(1);
 		}else {

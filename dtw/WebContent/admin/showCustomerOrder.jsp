@@ -77,7 +77,8 @@
         left: 150px; 
         top: 0px; 
         width:260px;
-        background-color:rgba(50,83,100,0.7);
+        border-radius:10px;
+        background-color:rgba(0,0,0,0.7);
 	}
 	.contactDiv p{
 		margin:0px;
@@ -95,9 +96,12 @@
         left: 0px; 
         top: -30px; 
         width:200px;
-        height:25px;
-        line-height:25px;
-        background-color:rgba(0,0,0,0.5);
+        height:30px;
+        line-height:24px;
+        border:3px solid gray;
+        border-radius:15px;
+        background-color:rgba(255,255,255,0.6);
+        color:black;
 	}
 	.ssName{
 		display:block;
@@ -112,7 +116,8 @@
          top: 0px; 
          width:260px;
          height:210px; 
-       	 background-color:rgba(50,83,100,0.7);
+         border-radius:10px;
+       	 background-color:rgba(0,0,0,0.7);
 	}
 	.suMessdiv p{
          line-height:13px;
@@ -481,7 +486,7 @@
 		conTip.show();
 		setTimeout(function() {
 			conTip.hide(800);
-		}, 200);
+		}, 500);
 	});
 	$("#selorder").on("mouseout", ".ssName", function() {
 		$(this).find(".nameContent").css("color", "white");
@@ -497,7 +502,7 @@
 		conTip.show();
 		setTimeout(function() {
 			conTip.hide(800);
-		}, 200);
+		}, 500);
 	});
 	$("#selorder").on("mouseout", ".ccName", function() {
 		$(this).find(".nameContent").css("color", "white");
