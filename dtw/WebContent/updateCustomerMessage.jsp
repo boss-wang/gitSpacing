@@ -26,9 +26,6 @@
  color: #3a6691;
 }
 
-td input{
-	width:90px;
-}
 .inpu {
 	background: rgba(0, 0, 0, 0.2);
 	margin-left: 0px;
