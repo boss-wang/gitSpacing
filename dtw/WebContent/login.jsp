@@ -102,9 +102,39 @@
 	</main>
 </body>
 <script>
+	<%
+	Cookie[] cookies= request.getCookies();
+	if(cookies!=null){
+		String paswd=null;
+		String loginName=null;
+		for(Cookie cookie :cookies){
+			if(cookie.getName().equals("loginName")){
+				 loginName=cookie.getValue();
+			}else if(cookie.getName().equals("paswd")){
+				 paswd=cookie.getValue();
+			}
+		}
+		%>
+	$.ajax({
+		url:"custlogin.do?mn=customerlogin",
+		data:"loginName=<%=loginName%>&paswd=<%=paswd%>",
+		type:"post",
+		success:function(res){
+			var resJson = JSON.parse(res);
+			if(resJson.back==1){
+				window.location.href="<%=basePath%>index.jsp";
+			}
+		}
+	})
+
+	<%
+}
 	
+	%>
 	var testRight = true;
 	$("form").submit(function(){
+		var  ischecked=$("input[type='checkbox']").is(':checked');
+		
 		//还原验证区
 		 var el = $(".inner"),os = el.offset(),dx,$span=$(".outer>span"),$filter=$(".filter-box"),_differ=$(".outer").width()-el.width();
 		 dx=0;
@@ -134,6 +164,17 @@
 							 testRight = false;
 						}
 						if(resJson.back==1){
+							if(ischecked){
+								$.ajax({
+									url:"custlogin.do?mn=autoPass",
+									data:"loginName="+loginName+"&paswd="+paswd,
+									type:"post",
+									success:function(res){
+										
+									}
+								})
+
+							}
 							window.location.href="<%=basePath%>index.jsp";
 						} else if (resJson.back == 2) {
 							$("#prompt").text("密码错误");

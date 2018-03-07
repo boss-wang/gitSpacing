@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -77,6 +78,7 @@ public class CustomerLoginServlet extends BaseServlet {
 	
 	//登录
 	protected void customerlogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		
 		Integer loginTimes = (Integer)req.getSession().getAttribute("loginTimes");
 		loginTimes = loginTimes==null?0:loginTimes;
 		String loginName=req.getParameter("loginName");
@@ -101,5 +103,16 @@ public class CustomerLoginServlet extends BaseServlet {
 	protected void deleSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().invalidate();
 		
+	}
+	//自动登录
+	protected void autoPass(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String loginName=req.getParameter("loginName");
+		String paswd=req.getParameter("paswd");
+		Cookie cookie1 = new Cookie("loginName",loginName);
+		Cookie cookie2 = new Cookie("paswd",paswd);
+		cookie1.setMaxAge(60*60*24);
+		 cookie2.setMaxAge(60*60*24);
+		resp.addCookie(cookie1);
+		resp.addCookie(cookie2);
 	}
 }

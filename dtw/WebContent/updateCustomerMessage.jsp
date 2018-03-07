@@ -255,7 +255,7 @@ table tr {
 			success:function(res){
 				m = 60;
 				flag=setInterval(getdate,1000);
-				setTimeout(removeSession,6000*1000);
+				setTimeout(removeSession,60*1000);
 			}
 		})
 		
