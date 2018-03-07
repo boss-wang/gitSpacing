@@ -102,6 +102,7 @@
 	</main>
 </body>
 <script>
+	
 	var testRight = true;
 	$("form").submit(function(){
 		//还原验证区
