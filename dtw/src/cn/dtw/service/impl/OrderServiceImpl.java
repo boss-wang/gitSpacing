@@ -129,5 +129,10 @@ public class OrderServiceImpl implements OrderService {
 		int startRow = (curPage-1)*pageSize;
 		return orderDao.searchOrderList(searchContent,user, startRow, pageSize);
 	}
+	//根据用户id获得所有订单
+	@Override
+	public List<Order> getOrderList(User user) {
+		return orderDao.getOrderList(user);
+	}
 
 }

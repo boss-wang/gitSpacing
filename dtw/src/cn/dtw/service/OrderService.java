@@ -21,6 +21,8 @@ public interface OrderService {
 	public boolean addOrder(Order order);
 	//删除订单
 	public boolean delOrder(Order order);
+	//根据用户id获得所有订单
+	public List<Order> getOrderList(User user);
 	//查询订单列表
 	public List<Order> getOrderList(User user,int curPage,int pageSize);
 	//搜索订单列表

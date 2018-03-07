@@ -63,6 +63,8 @@ public class SearchServlet extends BaseServlet {
 							totalRow = userDao.searchAllTotal(searchContent);
 							if(totalRow>0) {
 								req.getRequestDispatcher("/user.do?mn=searchUser").forward(req, resp);
+							}else {
+								req.getRequestDispatcher("/admin/noresult.jsp").forward(req, resp);
 							}
 						}
 					}

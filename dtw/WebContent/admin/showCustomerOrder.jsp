@@ -124,6 +124,9 @@
          text-align:left;
          text-indent: 5px;
     }
+    #downloadCustomerOrder:hover{
+    	background-color:rgba(0,0,0,0.7);
+    }
 </style>
 <!-- 订单管理 -->
 
@@ -135,7 +138,9 @@
                   	</div>
 				</div>
            	</div>
-        
+        	<div style="position:absolute;left:758px; top:150px; ">
+                  		<input id="downloadCustomerOrder" type="button" class="inpu" style="width:150px;border-radius: 15px;" value="导出excel" />
+            </div>
             <hr class="whiter"/>
             <input type="hidden" value="customerOrder" class="searchPage" />
 		<table border="1" id="selorder" >
@@ -705,5 +710,8 @@
 		}
 		
 	});
-
+	$("#downloadCustomerOrder").click(function(){
+		window.location.href="order.do?mn=downloadCustomerOrderExcel";
+	});
+	
 	</script>

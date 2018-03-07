@@ -25,6 +25,7 @@ import cn.dtw.service.customerservice.CustomerOrderService;
 import cn.dtw.service.customerservice.impl.CustomerOrderServiceImpl;
 import cn.dtw.service.impl.CostStatusServiceImpl;
 import cn.dtw.service.impl.OrderServiceImpl;
+import cn.dtw.util.POI;
 
 @WebServlet("/order.do")
 public class OrderServlet extends BaseServlet {
@@ -421,5 +422,18 @@ public class OrderServlet extends BaseServlet {
 			req.setAttribute("orderList", orderList);
 			req.setAttribute("costStatusList", costStatusList);
 			req.getRequestDispatcher("/admin/showCustomerOrder.jsp").forward(req, resp);
+		}
+		//下载员工所有订单
+		protected void downloadOrderExcel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+			User user = (User)req.getSession().getAttribute("user");
+			List<Order> orderList = orderService.getOrderList(user);
+			POI.outputOrderExcel(orderList, resp);
+		}
+		//下载散客订单文件
+		protected void downloadCustomerOrderExcel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+			User user = new User();
+			user.setUserId(0);
+			List<Order> orderList = orderService.getOrderList(user);
+			POI.outputOrderExcel(orderList, resp);
 		}
 }

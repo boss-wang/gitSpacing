@@ -124,6 +124,9 @@
          text-align:left;
          text-indent: 5px;
     }
+    #downloadOrder:hover{
+    	background-color:rgba(0,0,0,0.7);
+    }
 </style>
 <!-- 订单管理 -->
 
@@ -135,7 +138,9 @@
                   	</div>
 				</div>
            	</div>
-        
+        	<div style="position:absolute;left:758px; top:150px; ">
+                  		<input id="downloadOrder" type="button" class="inpu" style="width:150px;border-radius: 15px;" value="导出excel" />
+            </div>
             <hr class="whiter"/>
             <input type="hidden" value="order" class="searchPage" />
 		<table border="1" id="selorder" >
@@ -659,5 +664,29 @@
 			});
 		}
 		
+	});
+	function browseFolder(path) {
+	    try {
+	        var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
+	        var Shell = new ActiveXObject("Shell.Application");
+	        var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
+	        //var Folder = Shell.BrowseForFolder(0, Message, 0); //起始目录为：桌面
+	        if (Folder != null) {
+	            Folder = Folder.items(); // 返回 FolderItems 对象
+	            Folder = Folder.item(); // 返回 Folderitem 对象
+	            Folder = Folder.Path; // 返回路径
+	            if (Folder.charAt(Folder.length - 1) != "\\") {
+	                Folder = Folder + "\\";
+	            }
+	            document.getElementById(path).value = Folder;
+	            return Folder;
+	        }
+	    }
+	    catch (e) {
+	        alert(e.message);
+	    }
+	}
+	$("#downloadOrder").click(function(){
+		window.location.href="order.do?mn=downloadOrderExcel";
 	});
 	</script>

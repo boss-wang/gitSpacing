@@ -14,6 +14,8 @@ public interface OrderDao {
 	public int getOrderCount(User user);
 	//查询搜索的订单数量
 	public int searchOrderCount(String searchContent,User user);
+	//根据用户id获得所有订单
+	public List<Order> getOrderList(User user);
 	//查询订单列表
 	public List<Order> getOrderList(User user,int startRow,int pageSize);
 	//搜索订单列表

@@ -133,5 +133,23 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 		}
 		return orderList;
 	}
+	//根据用id查询所有订单
+	@Override
+	public List<Order> getOrderList(User user) {
+		String sql = "select * from `order` where userId=? order by statusId, updateTime desc";
+		List<Order> list = super.executeQuery(new BeanListHandler<Order>(Order.class), sql, user.getUserId());
+		List<Order> orderList = new ArrayList<Order>();
+		for(Order order:list) {
+			order.setClient(clientDao.getClient(order));
+			order.setCusStatus(cusStatusDao.getCustomsStatusById(order));
+			order.setOrderStatus(orderStatusDao.getOrderStatusById(order));
+			order.setTerms(termsDao.getTermsById(order));
+			order.setOrderCostList(orderCostDao.getCostByOrderId(order));
+			order.setOrderPayList(orderPayDao.getPayByOrderId(order));
+			order.setClientcontact(clientContactDao.getClientContactById(order.getOrderClientContactId()));
+			orderList.add(order);
+		}
+		return orderList;
+	}
 
 }
