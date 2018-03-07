@@ -14,6 +14,7 @@
 	}
 
 </style>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <head>
 		<title>大田物流集团</title>
 		<meta charset="utf-8">
@@ -76,13 +77,13 @@
 						<li class="mainlevel">
 							<a  id="personCenter" class="menu">个人中心</a>
 						</li>
-						<li class="mainlevel">
+						<li class="mainlevel" >
 							<a title="联系我们" id="contactUs" class="menu">联系我们</a>
 						</li>
 						
-								<c:if test="${customer==null }">
-									<li class="mainlevel">
-										<a title="登陆" href="login.jsp" class="menu">登陆</a>
+								<c:if test="${customer==null }" >
+									<li class="mainlevel" id="lastli" >
+										<a title="登陆" href="login.jsp" id="denglu" class="menu">登陆</a>
 										<a title="" href="register.jsp">/注册</a>
 									</li>
 								</c:if>
@@ -234,7 +235,7 @@
 	</body>
 	
 		<!-- 自定义javascript框架区 starts -->
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	
 		<script type="text/javascript" src="js/full.js"></script>
 		<script type="text/javascript" src="js/banner.js"></script>
 		<script type="text/javascript" src="js/slide.js"></script>
@@ -397,5 +398,8 @@
 					
 				}
 			})
+			
+			
+	
 		</script>
 </html>
