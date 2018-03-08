@@ -63,15 +63,12 @@ public class ClientTempServiceImpl implements ClienttempService {
 	//解绑公司
 	@Override
 	public int unbindingClientByCustomerId(Customer customer) {
-		if( clienttempDao.delClienttempByCustomer(customer)) {
-			if(customerClientDao.delCustomer_client(customer)) {
-				customerDao.updateCustomerStatus(customer, 2);
-				return 1;	//解绑成功
-			}else {
-				return 2;	//临时公司删除成功，绑定公司未能删除
-			}
-		}else{
-			return 0;
+		clienttempDao.delClienttempByCustomer(customer);
+		if(customerClientDao.delCustomer_client(customer)) {
+			customerDao.updateCustomerStatus(customer, 2);
+			return 1;	//解绑成功
+		}else {
+			return 0;	//解绑失败
 		}
 	}
 	

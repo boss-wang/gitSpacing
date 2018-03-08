@@ -92,7 +92,7 @@
 					     <div class="inner">&gt;&gt;</div>
 				    </div>
 				</li>
-				<li><input type="checkbox"> 自动登录 <a href="">忘记密码?</a></li>
+				<li><input type="checkbox"> 自动登录 </li>
 				<li><input type="submit" id="" value="登 录"></li>
 			</ul>
 		</form>

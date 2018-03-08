@@ -35,7 +35,7 @@ public class ClientContactDaoImpl extends BaseDao implements ClientContactDao {
 
 	@Override
 	public int deleClientContact(Client_clientcontact client_clientcontact) {
-		String sql = "delete from clientcontact where clientContactId=?";
+		String sql = "update clientcontact set clientContactStatus=0 where clientContactId=?";
 		return super.executeUpdate(sql, client_clientcontact.getClientContactId());
 		
 	}

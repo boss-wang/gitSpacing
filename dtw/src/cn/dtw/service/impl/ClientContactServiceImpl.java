@@ -30,8 +30,8 @@ public class ClientContactServiceImpl implements ClientContactService {
 	@Override
 	public int deleClientContact(Client_clientcontact client_clientcontact) {
 		int m= clientContact.deleClientContact(client_clientcontact);
-		int n=clientContact.deleClientIdAndClientContactId(client_clientcontact);
-		if(m==1&&n==1) {
+//		int n=clientContact.deleClientIdAndClientContactId(client_clientcontact);
+		if(m>0) {
 			return 1;
 		}else {
 			return 0;

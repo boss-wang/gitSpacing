@@ -90,6 +90,7 @@ public class CustomerLoginServlet extends BaseServlet {
 		customer.setLoginPwd(paswd);
 		int back= cusService.loginCustomer(customer);
 		if(back==1) {
+			req.getSession().removeAttribute("customer");
 			Customer cust = cusService.getCustomer(customer);
 			req.getSession().setAttribute("customer",cust);
 		}else {

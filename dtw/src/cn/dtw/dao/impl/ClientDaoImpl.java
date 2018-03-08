@@ -34,7 +34,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//根据客户id查询客户的联系人信息
 	@Override
 	public List<Clientcontact> getClientcontact(Client client) {
-		String sql = "select client_clientcontact.clientContactId,clientContactName,ClientContactTel,ClientContactEmail,ClientContactQQ FROM client_clientcontact,clientcontact WHERE  client_clientcontact.clientContactId=clientcontact.clientContactId AND client_clientcontact.clientId=? ";
+		String sql = "select client_clientcontact.clientContactId,clientContactName,ClientContactTel,ClientContactEmail,ClientContactQQ FROM client_clientcontact,clientcontact WHERE  client_clientcontact.clientContactId=clientcontact.clientContactId AND clientContactStatus=1 AND client_clientcontact.clientId=? ";
 		return super.executeQuery(new BeanListHandler<Clientcontact>(Clientcontact.class), sql, client.getClientId());
 	}
 
@@ -42,7 +42,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//分页查询客户信息
 	@Override
 	public List<Client> getAllClient(int startPage, int rowsize) {
-		String sql ="select * from client order by clientId desc limit ?,?";
+		String sql ="select * from client where clientStatus=1 order by clientId desc limit ?,?";
 		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,startPage,rowsize);
 		List<Client> clientList = new ArrayList<Client>();
 		if(list!=null) {
@@ -101,21 +101,21 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//模糊查询客户公司名
 	@Override
 	public List<Client> getClientByName(String clientName) {
-		String sql = "select * from client where clientName like concat('%',?,'%')";
+		String sql = "select * from client where clientName like concat('%',?,'%') and clientStatus=1";
 		return super.executeQuery(new BeanListHandler<Client>(Client.class), sql, clientName);
 	}
 
 	//删除客户
 	@Override
 	public int deleClientById(Client client) {
-		String sql  ="delete from client where clientId = ?";
+		String sql  ="update client set clientStatus=0 where clientId = ?";
 		return super.executeUpdate(sql, client.getClientId());
 	}
 
 	//根据公司名查询客户信息
 	@Override
 	public Client getClientByName(Client client) {
-		String  sql="select * from client where clientName=? ";
+		String  sql="select * from client where clientName=? and clientStatus=1";
 		Client clientGet = super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
 		if(clientGet!=null) {
 			//添加客户联系人信息
@@ -148,7 +148,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//搜索客户
 	@Override
 	public List<Client> searchClient(String searchContent, int startPage, int rowsize) {
-		String sql ="select * from client where clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%') limit ?,?";
+		String sql ="select * from client where clientStatus=1 and (clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%')) limit ?,?";
 		List<Client> list = super.executeQuery(new BeanListHandler<Client>(Client.class), sql,searchContent,searchContent,startPage,rowsize);
 		List<Client> clientList = new ArrayList<Client>();
 		for(Client client:list) {

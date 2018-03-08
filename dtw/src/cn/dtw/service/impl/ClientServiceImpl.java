@@ -74,8 +74,8 @@ public class ClientServiceImpl implements ClientService {
 		List<Client_clientcontact> list= clientContact.getAllContactIdByClientId(client);
 		for(Client_clientcontact contactId:list) {
 			clientContact.deleClientContact(contactId);
-			contactId.setClientId(client.getClientId());
-			clientContact.deleClientIdAndClientContactId(contactId);
+//			contactId.setClientId(client.getClientId());
+//			clientContact.deleClientIdAndClientContactId(contactId);
 		}
 		
 		return m;
