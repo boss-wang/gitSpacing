@@ -61,7 +61,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//查询所有客户记录条数
 	@Override
 	public int getAllTotalClient() {
-		String sql ="select count(1) as count from client ";
+		String sql ="select count(1) as count from client where clientStatus=1 ";
 		Long total = (Long)super.executeOneColumn(new ScalarHandler("count"), sql);
 		return total.intValue();
 	}
@@ -87,7 +87,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//添加客户
 	@Override
 	public int addClient(Client client) {
-		String  sql="select * from client where clientName=? ";
+		String  sql="select * from client where clientName=? and clientStatus=1 ";
 		Client clien= super.executeOneRow(new BeanHandler<Client>(Client.class), sql, client.getClientName());
 		if(clien==null) {
 			String insertsql = "insert into client (clientName,clientAddress)values(?,?)";
@@ -164,7 +164,7 @@ public class ClientDaoImpl extends BaseDao implements ClientDao {
 	//搜索的总条数
 	@Override
 	public int getSearchTotalClient(String serchContent) {
-		String sql ="select count(1) as count from client where clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%') ";
+		String sql ="select count(1) as count from client where clientStatus=1 and (clientName like concat('%',?,'%') or clientAddress like concat('%',?,'%')) ";
 		Long total = (Long)super.executeOneColumn(new ScalarHandler("count"), sql,serchContent,serchContent);
 		return total.intValue();
 	}
