@@ -1,6 +1,9 @@
 package cn.dtw.dao.customerdao.impl;
 
+import java.util.List;
+
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.dtw.dao.BaseDao;
 import cn.dtw.dao.customerdao.Customer_ClientDao;
@@ -26,6 +29,12 @@ public class Customer_ClientDaoImpl extends BaseDao implements Customer_ClientDa
 	public boolean delCustomer_client(Customer customer) {
 		String sql = "delete from customer_client where customerId=?";
 		return super.executeUpdate(sql, customer.getId())>0?true:false;
+	}
+	//根据客户公司id查询对应客户
+	@Override
+	public List<Customer_client> getCustomerIdByClient(Client client) {
+		String sql="select * from customer_client where clientId=?";
+		return super.executeQuery(new BeanListHandler<Customer_client>(Customer_client.class), sql, client.getClientId());
 	}
 
 }
