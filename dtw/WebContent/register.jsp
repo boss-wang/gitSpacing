@@ -59,7 +59,7 @@
 				<div class="item-email-wrap" style="display: none;">
 					<div class="form-item">
 						<label>邮 箱 验 证</label> <input name="email" id="form-email"
-							class="field ignore" placeholder="建议使用常用邮箱" type="text">
+							class="field ignore" placeholder="建议使用常用邮箱" type="email">
 						<img class="i-status" src="img/right.png">
 						<div class="input-tip">
 							<span></span>
